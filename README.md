@@ -1,6 +1,3 @@
-# this is develope branch
-merge other feature branches and managed develope version
-
 # bitcamp-semi-project
 bitcamp semi project (Hospital Comprehensive Service)
 
