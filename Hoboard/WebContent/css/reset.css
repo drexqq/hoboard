@@ -127,3 +127,36 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* add by drexpp 2020/08/10 */
+a,
+a:hover {
+  text-decoration: none;
+  color: #333333;
+}
+ul,
+ol,
+dl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* clearfix */
+.clearfix:after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+/* edit bootstrap grid.css */
+* {
+  font-family: "NanumSquare", sans-serif !important;
+  color: #333333;
+}
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+  max-width: 1200px !important;
+}

@@ -1,0 +1,59 @@
+/* body */
+body {
+  background-color: #fbfcfd;
+}
+/* main */
+.card-wrap {
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+.health-wrap {
+  background-color: #ffffff;
+  position: relative;
+  height: 300px;
+}
+.health-wrap .title {
+  padding-top: 80px;
+  font-size: 32px;
+  font-weight: 700;
+}
+.health-wrap .desc {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 60px;
+}
+.health-wrap .img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+  height: 300px;
+  background-image: url("../img/info01.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.review-wrap {
+  padding: 80px 0;
+}
+.review-wrap .title {
+  font-size: 36px;
+  font-weight: 700;
+  padding-bottom: 50px;
+}
+.review-wrap .list-wrap {
+}
+.review-wrap .go-review {
+  padding-top: 50px;
+  text-align: center;
+}
+.review-wrap .go-review a {
+  color: #999999;
+  font-size: 20px;
+  transition: all 0.25s ease;
+}
+.review-wrap .go-review a:hover {
+  color: #222222;
+}

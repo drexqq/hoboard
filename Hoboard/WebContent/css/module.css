@@ -1,0 +1,88 @@
+/* header */
+.header {
+  position: relative;
+  height: 80px;
+}
+.header .logo-wrap {
+  float: left;
+}
+.header .logo-wrap .logo {
+  display: block;
+  width: 160px;
+  height: 80px;
+}
+.header .logo-wrap .logo img {
+  display: block;
+  width: 100%;
+}
+.header .menu-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+.header .menu-wrap .menu {
+}
+.header .menu-wrap .menu .menu-item {
+  float: left;
+  padding: 0 20px;
+}
+.header .menu-wrap .menu .menu-item a {
+}
+.header .util-wrap {
+  float: right;
+  font-size: 20px;
+}
+.header .util-wrap .util {
+}
+.header .util-wrap .util.after-login {
+  display: none;
+}
+.header .util-wrap .util .util-item {
+  line-height: 80px;
+  padding: 0 20px;
+  float: left;
+}
+
+/* footer */
+footer {
+  background-color: #2c3744;
+}
+.footer {
+  padding-top: 40px;
+}
+.footer .logo-wrap {
+  float: left;
+}
+.footer .logo-wrap .logo {
+}
+.footer .logo-wrap .logo img {
+}
+.footer .logo-wrap .title {
+  padding-top: 30px;
+  color: #ffffff;
+  font-size: 26px;
+}
+.footer .menu-wrap {
+  float: right;
+  padding-top: 30px;
+}
+.footer .menu-wrap .menu {
+}
+.footer .menu-wrap .menu .menu-item {
+  padding-bottom: 10px;
+}
+.footer .menu-wrap .menu .menu-item:last-child {
+  padding-bottom: 0;
+}
+.footer .menu-wrap .menu .menu-item a {
+  color: #80878f;
+}
+footer .copyright {
+  text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+}

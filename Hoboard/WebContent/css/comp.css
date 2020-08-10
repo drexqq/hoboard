@@ -1,0 +1,73 @@
+/* card */
+.card {
+  min-height: 270px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+.card:hover {
+  transform: translate(-10px, -10px);
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+}
+.card .icon {
+  max-width: 120px;
+}
+.card .icon img {
+  display: block;
+  width: 100%;
+}
+.card .text {
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* list */
+.list {
+  background-color: #fff;
+  position: relative;
+  display: block;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  transition: all 0.25s ease;
+  margin-bottom: 15px;
+}
+.list:last-child {
+  margin-bottom: 0;
+}
+.list:hover {
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+}
+.list .name {
+  color: #222222;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 26px;
+  padding-bottom: 15px;
+}
+.list .name .grade {
+  padding-left: 20px;
+}
+.list .name .grade i {
+  padding-right: 5px;
+  line-height: 26px;
+  vertical-align: middle;
+  color: #ffed49;
+}
+.list .content {
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 20%;
+}
+.list .date {
+  font-size: 20px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
