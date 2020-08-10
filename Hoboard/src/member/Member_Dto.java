@@ -12,11 +12,15 @@ public class Member_Dto {
 	private String address;
 	private String d_Address;
 	
+	//test
+	private String test;
 	
 	public Member_Dto() {
-		
 	}
-
+	
+	public Member_Dto(String test) {
+		this.test = test;
+	}
 
 	public Member_Dto(int auth, String name, String id, String pw, String email, String tel, String post_Num,
 			String address, String d_Address) {

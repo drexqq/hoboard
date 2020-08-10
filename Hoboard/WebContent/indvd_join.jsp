@@ -11,7 +11,8 @@
 </head>
 <body>
 
-<form action= "INDVD_Join.do" method="post">
+<form action= "MEMBER" method="post">
+<input type="hidden" name="auth" value="1">
 이름 	<input type="text" name="name">
 <br><br>
 아이디 <input type="text" name="id"><button type="button" id="joinBtn">중복확인</button>

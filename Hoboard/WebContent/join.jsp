@@ -15,11 +15,11 @@
 
 $("#i_JoinBtn").click(function() {
 	//alert('click');
-	location.href = "indvd_Join.jsp";
+	location.href = "INDVD_JOIN";
 });
 $("#b_Joinbtn").click(function() {
 	//alert('click2');
-	location.href = "bisi_Join.jsp"
+	location.href = "BUSI_JOIN"
 });	
 
 </script>

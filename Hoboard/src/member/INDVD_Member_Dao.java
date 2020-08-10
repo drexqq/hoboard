@@ -16,37 +16,9 @@ public class INDVD_Member_Dao {
 		return dao;
 	}
 	
-	public boolean addINDVD_Member(INDVD_Member_Dto dto) {
-		// 회원가입의 데이터 -> DB
-		String sql = " INSERT INTO INDVD_MEMBER "
-				+ "	( ID ) "
-				+ " VALUES(?) ";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;		
-		int count = 0;
-		
-		try {
-			conn = DBConnection.getConnection();
-			System.out.println("1/6 addMember success");
-				
-			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 addMember success");
-			
-			psmt.setString(1, dto.getId());
-			
-			count = psmt.executeUpdate();
-			System.out.println("3/6 addMember success");
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("addMember fail");
-		} finally {
-			DBClose.close(psmt, conn, null);			
-		}
-		
-		return count>0?true:false;
+	public boolean addINDVD_Member(String id) {
+		System.out.println("개인 회원가입");
+		return true;
 	}
 	
 }
