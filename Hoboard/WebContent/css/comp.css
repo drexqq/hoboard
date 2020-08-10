@@ -8,6 +8,7 @@
   transition: all 0.25s ease;
 }
 .card:hover {
+  background-color: #349bd5;
   transform: translate(-10px, -10px);
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
 }
@@ -18,12 +19,17 @@
   display: block;
   width: 100%;
 }
+.card:hover .icon img {
+  filter: invert(1);
+}
 .card .text {
   font-size: 24px;
   margin-top: 20px;
   font-weight: 600;
 }
-
+.card:hover .text {
+  color: #ffffff;
+}
 /* list */
 .list {
   background-color: #fff;
