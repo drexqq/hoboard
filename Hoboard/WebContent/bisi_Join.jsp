@@ -35,13 +35,23 @@
 홈페이지  <input type="text" name="homepage">
 <br><br>
 진료시간<br>
-<button type="button" id="mon" >월</button>
+<!-- <button type="button" id="mon" >월</button>
 <button type="button" id="tue" >화</button>
 <button type="button" id="wed" >수</button>
 <button type="button" id="thu" >목</button>
 <button type="button" id="fri" >금</button>
 <button type="button" id="sat" >토</button>
-<button type="button" id="sun" >일</button>
+<button type="button" id="sun" >일</button> -->
+
+<input type='checkbox' id = "time" name="time" value="mon"/>월
+<input type='checkbox' name="tue" value="tue" />화
+<input type='checkbox' name="wed" value="wed" />수
+<input type='checkbox' name="thu" value="thu" />목
+<input type='checkbox' name="fri" value="fri" />금
+<input type='checkbox' name="sat" value="sat" />토
+<input type='checkbox' name="sun" value="sun" />일
+
+
 <br>
 <textarea name="r_Time"></textarea>
 <br><br>

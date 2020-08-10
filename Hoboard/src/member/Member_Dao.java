@@ -17,17 +17,17 @@ public class Member_Dao {
 	}
 	
 	
-	public Member_Dto login(String id, String pw) {
+	public String login(String id, String pw) {
 		
 		String sql = " SELECT * "
 					+ "	FROM MEMBER "
 					+ " WHERE ID=? AND PW =? ";
 		
+		String name = null;
+		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		
-		Member_Dto dto = null;
 		
 		try {
 			conn = DBConnection.getConnection();
@@ -42,17 +42,8 @@ public class Member_Dao {
 			System.out.println("3/6 login success");
 			
 			if(rs.next()) {
-				int auth = rs.getInt(1);
-				String name = rs.getString(2);
-				String m_id = rs.getString(3);
-				String m_pw = rs.getString(4);
-				String tel = rs.getString(5);
-				String email = rs.getString(6);
-				String post_Num = rs.getString(7);
-				String address = rs.getString(8);
-				String d_Address = rs.getString(9);
-				
-				dto = new Member_Dto();				
+
+				name = rs.getString("name");	
 			}
 			System.out.println("4/6 login success");
 			
@@ -62,7 +53,7 @@ public class Member_Dao {
 			DBClose.close(psmt, conn, rs);			
 		}
 		
-		return dto;
+		return name;
 	}
 	
 	public boolean addMember(Member_Dto dto) {

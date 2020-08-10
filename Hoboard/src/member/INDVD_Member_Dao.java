@@ -19,8 +19,8 @@ public class INDVD_Member_Dao {
 	public boolean addINDVD_Member(INDVD_Member_Dto dto) {
 		// 회원가입의 데이터 -> DB
 		String sql = " INSERT INTO INDVD_MEMBER "
-				+ "	( ID ) " // LOGO 포함
-				+ " VALUES(?) "; // LOGO 포함
+				+ "	( ID ) "
+				+ " VALUES(?) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;		
