@@ -27,7 +27,7 @@ private static Review_Dao dao = new Review_Dao();
 		String sql = " SELECT REVIEW_SEQ, BUSI_ID, INDVD_ID, "
 			       + " TITLE, CONTENT, VIEWCOUNT, SCORE, W_DATE, REF, STEP, DEPTH "
 			       + " FROM REVIEW "
-			       + "ORDER BY REF DESC, STEP ASC ";
+			       + " ORDER BY REF DESC, STEP ASC ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
