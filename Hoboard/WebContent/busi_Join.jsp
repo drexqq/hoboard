@@ -123,12 +123,6 @@
     });
   // submit
   $("#joinBtn").on("click", function () {
-    $("input:checkbox[name=time]").each(function () {
-      if (!$(this).is(":checked")) {
-        $(this).val() == "null";
-      }
-    });
-
     $("form").submit();
   });
 </script>

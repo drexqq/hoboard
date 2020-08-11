@@ -48,14 +48,20 @@ public class MemberController extends HttpServlet {
 											req.getParameter("homepage"),
 											req.getParameter("logo")
 											);
+			// BUSI_TIME TABLE
 			// 월~금, 점심
 			String time[] = new String[8];
 			// 공휴일, 야간, 응급실
 			int extra[] = new int[3];
+			
+			// BUSI_CATE TABLE
 			// 과목
 			int cate[] = new int[16];
+			
+			// BUSI_AMENITY TABLE
 			// 편의
 			int amenity[] = new int[5];
+			
 			for (int i = 0; i < time.length; i++) {
 				time[i] = "휴무";
 				if (req.getParameter("time"+i) != null || !req.getParameter("time"+i).equals("")) time[i] = req.getParameter("time"+i);

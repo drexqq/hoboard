@@ -40,8 +40,8 @@ public class BUSI_Join_Controller extends HttpServlet {
 		for (int i = 0; i < time_e.length; i++) time.put(time_e[i].toLowerCase(), time_k[i]);
 		
 		req.setAttribute("busiTime", time);
-		req.setAttribute("busiAmenity", amenity);
 		req.setAttribute("busiCate", cate);
+		req.setAttribute("busiAmenity", amenity);
 		UtilEx.forward("busi_Join.jsp", req, resp);	
 	}
 

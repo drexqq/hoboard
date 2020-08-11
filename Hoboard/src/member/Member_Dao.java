@@ -50,12 +50,13 @@ public class Member_Dao {
 		} catch (Exception e) {			
 			e.printStackTrace();
 		} finally {
-			DBClose.close(psmt, conn, rs);			
+			DBClose.close(psmt, conn, rs);
+			System.out.println("login done");
 		}
 		
 		return name;
 	}
-	
+	// INSERT INTO MEMBER TABLE
 	public boolean addMember(Member_Dto dto) {
 		System.out.println("MEMBER TABLE INSERT");
 		// 회원가입의 데이터 -> DB
@@ -91,7 +92,8 @@ public class Member_Dao {
 			e.printStackTrace();
 			System.out.println("addMember fail");
 		} finally {
-			DBClose.close(psmt, conn, null);			
+			DBClose.close(psmt, conn, null);	
+			System.out.println("addMember done");
 		}
 		
 		return count>0?true:false;

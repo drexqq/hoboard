@@ -20,7 +20,6 @@ public class BUSI_Member_Dao{
 	
 	public boolean addBUSI_Member(BUSI_Member_Dto b_dto, String id) {
 		System.out.println("BUSI_MEMBER TABLE INSERT");
-		System.out.println(b_dto.toString());
 		String query = " INSERT INTO BUSI_MEMBER "
 					+ " VALUES "
 					+ " ('"+id+"', ?, ? ) ";
@@ -47,12 +46,6 @@ public class BUSI_Member_Dao{
 	
 	public boolean addBUSI_Extra(String id, String time[], int extra[], int cate[], int amenity[]) {
 		System.out.println("BUSI_... TABLES INSERT");
-		System.out.println(id);
-		System.out.println(java.util.Arrays.toString(time));
-		System.out.println(java.util.Arrays.toString(extra));
-		System.out.println(java.util.Arrays.toString(cate));
-		System.out.println(java.util.Arrays.toString(amenity));
-		
 		String time_query = " INSERT INTO BUSI_TIME "
 						+ " VALUES "
 						+ " ('"+id+"',"
@@ -75,24 +68,18 @@ public class BUSI_Member_Dao{
 			// BUSI_TIME TABLE INSERT
 			psmt = conn.prepareStatement(time_query);
 			int j = 0;
-			System.out.println(time.length);
-			System.out.println(extra.length);
-			for (int i = 0; i < time.length; i++) {
-				psmt.setString((i+1), time[i]);
-				System.out.println(i);
-			}
-			for (int i = 8; i < time.length + extra.length; i++) {
-				System.out.println(i);
-				psmt.setInt((i+1), extra[j++]);
-			}
+			for (int i = 0; i < time.length; i++) psmt.setString((i+1), time[i]);
+			for (int i = 8; i < time.length + extra.length; i++) psmt.setInt((i+1), extra[j++]);
 			psmt.executeUpdate();
 			psmt.clearParameters();
 			
+			// BUSI_CATE TABLE INSERT
 			psmt = conn.prepareStatement(cate_query);
 			for (int i = 0; i < cate.length; i++) psmt.setInt((i+1), cate[i]);
 			psmt.executeUpdate();
 			psmt.clearParameters();
 			
+			// BUSI_AMENITY TABLE INSERT
 			psmt = conn.prepareStatement(amenity_query);
 			for (int i = 0; i < amenity.length; i++) psmt.setInt((i+1), amenity[i]);
 			psmt.executeUpdate();
@@ -114,7 +101,7 @@ public class BUSI_Member_Dao{
 			DBClose.close(psmt, conn, null);
 			System.out.println("BUSI_... TABLES INSERT DONE");
 		}
-		return false;
+		return c>0?true:false;
 	}
 	
 	
