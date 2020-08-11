@@ -41,7 +41,7 @@ public class BUSI_Member_Dao{
 			DBClose.close(psmt, conn, null);
 		}
 		System.out.println("BUSI_MEMBER INSERT DONE");
-		return true;
+		return count > 0 ? true : false;
 	}
 	
 	public boolean addBUSI_Extra(String id, String time[], int extra[], int cate[], int amenity[]) {

@@ -17,8 +17,27 @@ public class INDVD_Member_Dao {
 	}
 	
 	public boolean addINDVD_Member(String id) {
-		System.out.println("개인 회원가입");
-		return true;
+		System.out.println("INDVD_MEMBER TABLE INSERT");
+		String query = " INSERT INTO INDVD_MEMBER "
+					+ " VALUES "
+					+ " ('"+id+"') ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			count = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		System.out.println("INDVD_MEMBER INSERT DONE");
+		return count > 0 ? true : false;
 	}
 	
 }

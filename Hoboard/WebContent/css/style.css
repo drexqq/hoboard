@@ -81,6 +81,7 @@ body {
   width: 150px;
 }
 .join-wrap .input-wrap input {
+  padding: 0 10px;
   float: left;
   height: 30px;
   width: calc(100% - 150px);
@@ -93,6 +94,14 @@ body {
   line-height: 30px;
   padding-top: 15px;
   padding-bottom: 20px;
+}
+.join-wrap .input-wrap small {
+  display: block;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.join-wrap .input-wrap small:last-of-type {
+  padding-bottom: 30px;
 }
 /* exception */
 .join-wrap .input-wrap.btn-added {
@@ -139,13 +148,18 @@ body {
   margin-left: 10px;
 }
 .join-wrap .input-wrap .time-wrap {
+  float: left;
+  width: 50%;
   margin-bottom: 15px;
+  padding: 0 10px;
+  position: relative;
 }
 .join-wrap .input-wrap .time-wrap:last-child {
   margin-bottom: 0;
 }
 .join-wrap .input-wrap .time-wrap label {
   cursor: pointer;
+  width: 110px;
   line-height: 30px;
   transition: all 0.25s ease;
 }
@@ -158,8 +172,28 @@ body {
   vertical-align: middle;
 }
 .join-wrap .input-wrap .time-wrap label span {
+  display: inline-block;
+  line-height: 30px;
 }
 .join-wrap .input-wrap .time-wrap input {
+  width: 0;
+  opacity: 0;
+  padding-left: 10px;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+.join-wrap .input-wrap .time-wrap input.show {
+  opacity: 1;
+  visibility: visible;
+  width: calc(100% - 110px);
+}
+.join-wrap .input-wrap .time-wrap .default-text {
+  position: absolute;
+  left: 155px;
+  top: 0;
+  line-height: 30px;
+  font-size: 20px;
+  display: inline-block;
 }
 
 .join-wrap .input-wrap .check-wrap {

@@ -2,18 +2,29 @@ package member;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 @WebServlet("/MEMBER")
 public class MemberController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		String id = req.getParameter("id");
+		System.out.println(id);
+		Member_Dao dao = Member_Dao.getInstance();
+		JSONObject jsonData = new JSONObject();
+		jsonData.put("chk", dao.chkId(id));
+		
+		System.out.println(dao.chkId(id));
+		resp.setContentType("application/x-json; charset=UTF-8");
+		resp.getWriter().print(jsonData);
 	}
 
 	@Override
@@ -36,9 +47,8 @@ public class MemberController extends HttpServlet {
 		if (auth == 1) {
 			System.out.println("개인회원가입하기 member controller");
 			INDVD_Member_Dao i_dao = INDVD_Member_Dao.getInstance();
-			INDVD_Member_Dto i_dto = new INDVD_Member_Dto();
 			
-			//i_dao.addINDVD_Member();
+			i_dao.addINDVD_Member(req.getParameter("id"));
 		}
 		else if (auth == 2) {
 			System.out.println("병원회원가입하기 member controller");

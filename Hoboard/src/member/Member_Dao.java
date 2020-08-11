@@ -18,7 +18,6 @@ public class Member_Dao {
 	}
 	
 	public String login(String id, String pw) {
-		
 		String sql = " SELECT * "
 					+ "	FROM MEMBER "
 					+ " WHERE ID=? AND PW =? ";
@@ -42,7 +41,6 @@ public class Member_Dao {
 			System.out.println("3/6 login success");
 			
 			if(rs.next()) {
-
 				name = rs.getString("name");	
 			}
 			System.out.println("4/6 login success");
@@ -56,6 +54,7 @@ public class Member_Dao {
 		
 		return name;
 	}
+	
 	// INSERT INTO MEMBER TABLE
 	public boolean addMember(Member_Dto dto) {
 		System.out.println("MEMBER TABLE INSERT");
@@ -98,6 +97,33 @@ public class Member_Dao {
 		
 		return count>0?true:false;
 	}
+	
+	// GET IDS MEMBER
+	public boolean chkId(String id) {
+		String query = " SELECT ID"
+					+ " FROM MEMBER"
+					+ " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		boolean exist = false;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) exist = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return exist;
+	}
+	
 	// GET BUSI_CATE COLUMN
 	public String[] getBusiCate() {
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_CATE' AND COLUMN_NAME != 'ID' ";
@@ -121,6 +147,7 @@ public class Member_Dao {
 		}
 		return cate;
 	}
+	
 	// GET BUSI_TIME TABLE COLUMN
 	public String[] getBusiTime() {
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_TIME' AND COLUMN_NAME != 'ID' ";
@@ -144,6 +171,7 @@ public class Member_Dao {
 		}
 		return time;
 	}
+	
 	// GET BUSI_AMENITY TABLE COLUMN
 	public String[] getAmenity() {
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_AMENITY' AND COLUMN_NAME != 'ID' ";
