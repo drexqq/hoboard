@@ -37,6 +37,7 @@ public class INDVD_Member_Dao {
 			DBClose.close(psmt, conn, null);
 		}
 		System.out.println("INDVD_MEMBER INSERT DONE");
+		System.out.println(count);
 		return count > 0 ? true : false;
 	}
 	

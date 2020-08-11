@@ -94,8 +94,8 @@ public class Member_Dao {
 			DBClose.close(psmt, conn, null);	
 			System.out.println("addMember done");
 		}
-		
-		return count>0?true:false;
+		System.out.println(count);
+		return count > 0 ? true : false;
 	}
 	
 	// GET IDS MEMBER

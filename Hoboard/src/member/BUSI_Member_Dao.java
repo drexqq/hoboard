@@ -41,6 +41,7 @@ public class BUSI_Member_Dao{
 			DBClose.close(psmt, conn, null);
 		}
 		System.out.println("BUSI_MEMBER INSERT DONE");
+		System.out.println(count);
 		return count > 0 ? true : false;
 	}
 	
@@ -60,7 +61,7 @@ public class BUSI_Member_Dao{
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
-		int c = 0;
+		int count = 0;
 		try {
 			conn = DBConnection.getConnection();
 			conn.setAutoCommit(false);
@@ -82,7 +83,7 @@ public class BUSI_Member_Dao{
 			// BUSI_AMENITY TABLE INSERT
 			psmt = conn.prepareStatement(amenity_query);
 			for (int i = 0; i < amenity.length; i++) psmt.setInt((i+1), amenity[i]);
-			psmt.executeUpdate();
+			count = psmt.executeUpdate();
 			conn.commit();
 			
 		} catch (Exception e) {
@@ -101,7 +102,7 @@ public class BUSI_Member_Dao{
 			DBClose.close(psmt, conn, null);
 			System.out.println("BUSI_... TABLES INSERT DONE");
 		}
-		return c>0?true:false;
+		return count > 0 ? true : false;
 	}
 	
 	

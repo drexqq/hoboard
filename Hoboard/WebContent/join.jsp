@@ -12,7 +12,6 @@
 <button type="button" id="b_Joinbtn">병원</button>
 
 <script type="text/javascript">
-
 $("#i_JoinBtn").click(function() {
 	//alert('click');
 	location.href = "INDVD_JOIN";
@@ -21,7 +20,11 @@ $("#b_Joinbtn").click(function() {
 	//alert('click2');
 	location.href = "BUSI_JOIN"
 });	
-
+var join = "${ join }";
+if(join == "true") {
+	alert("회원가입 성공 !");
+	location.href = "login.jsp";
+}
 </script>
 
 </body>

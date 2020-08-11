@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Util.UtilEx;
 import net.sf.json.JSONObject;
 
 @WebServlet("/MEMBER")
@@ -31,6 +32,8 @@ public class MemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		int auth = Integer.parseInt(req.getParameter("auth"));
+		boolean done = false;
+		
 		Member_Dao dao = Member_Dao.getInstance();
 		Member_Dto dto = new Member_Dto(
 									auth,
@@ -48,7 +51,7 @@ public class MemberController extends HttpServlet {
 			System.out.println("개인회원가입하기 member controller");
 			INDVD_Member_Dao i_dao = INDVD_Member_Dao.getInstance();
 			
-			i_dao.addINDVD_Member(req.getParameter("id"));
+			done = i_dao.addINDVD_Member(req.getParameter("id"));
 		}
 		else if (auth == 2) {
 			System.out.println("병원회원가입하기 member controller");
@@ -89,9 +92,13 @@ public class MemberController extends HttpServlet {
 				if (req.getParameter("cate"+i) != null) cate[i] = 1;
 			}
 			
-			b_dao.addBUSI_Member(b_dto, b_dto.getId());
-			b_dao.addBUSI_Extra(b_dto.getId(), time, extra, cate, amenity);
+			done = b_dao.addBUSI_Member(b_dto, b_dto.getId());
+			if(done) done = b_dao.addBUSI_Extra(b_dto.getId(), time, extra, cate, amenity);
+			
 		}
+		
+		req.setAttribute("join", done);
+		UtilEx.forward("join.jsp", req, resp);
 	}
 	
 	
