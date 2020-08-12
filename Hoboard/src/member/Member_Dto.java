@@ -36,7 +36,6 @@ public class Member_Dto {
 		this.d_Address = d_Address;
 	}
 
-
 	public int getAuth() {
 		return auth;
 	}

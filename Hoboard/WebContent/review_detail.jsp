@@ -30,8 +30,15 @@
 </tr>
 </table>
 
-<button type="button" onclick="updateBbs(<%-- <%=dao.getSeq() %> --%>)">수정</button>
-<button type="button" onclick="deleteBbs(<%-- <%=dao.getSeq() %> --%>)">삭제</button>
+<%-- <%
+if(dto.getId().equals(mem.getId())){
+	%>	
+	<button type="button" onclick="updateBbs(<%=dto.getSeq() %>)">수정</button>
+	<button type="button" onclick="deleteBbs(<%=dto.getSeq() %>)">삭제</button>
+	<%
+}
+%> --%>
+
 
 <script type="text/javascript">
 function updateBbs(seq) {
