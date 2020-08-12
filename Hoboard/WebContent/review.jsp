@@ -1,16 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@page import="review.Review_Dto"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
 
-<%-- //¼¼¼Ç·Î±×ÀÎ
+<%@ include file="module/header.jsp"%>
+<%-- //ï¿½ï¿½ï¿½Ç·Î±ï¿½ï¿½ï¿½
 <%
 Object ologin = session.getAttribute("login");
 MemberDto mem = null;
 if(ologin == null){
 	%>
 	<script type="text/javascript">
-	alert("·Î±×ÀÎ ÇØ ÁÖ½Ê½Ã¿À");
+	alert("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½Ê½Ã¿ï¿½");
 	location.href = "login.jsp";
 	</script>	
 	<%
@@ -29,7 +31,7 @@ System.out.println(list);
 
 
 
-<%-- //°Ë»ö
+<%-- //ï¿½Ë»ï¿½
 <%
 
 String searchWord = request.getParameter("searchWord");
@@ -38,7 +40,7 @@ String choice = request.getParameter("choice");
 if(choice == null || choice.equals("")){
 	choice = "sel";
 }
-// °Ë»ö¾î¸¦ ÁöÁ¤ÇÏÁö ¾Ê°í Choice°¡ ³Ñ¾î ¿ÔÀ» ¶§
+// ï¿½Ë»ï¿½ï¿½î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ Choiceï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 if(choice.equals("sel")){
 	searchWord = "";
 }
@@ -48,26 +50,20 @@ if(searchWord == null){
 }
 
 %> --%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>ÈÄ±â ÀÛ¼º °Ô½ÃÆÇ</title>
-</head>
-<body>
-<input type="text" name="text"><button>°Ë»ö</button> 
+
+<input type="text" name="text"><button>ï¿½Ë»ï¿½</button> 
 &nbsp;&nbsp;&nbsp;
 <select id="sel">
-	<option value="1" selected="selected">¼±ÅÃ</option>
-	<option value="2">Á¦¸ñ</option>
-	<option value="3">º´¿øÀÌ¸§</option>
-	<option value="4">ÀÛ¼ºÀÚ</option>
-	<option value="5">³»¿ë</option>	
-	<option value="6">ÆòÁ¡</option>
+	<option value="1" selected="selected">ï¿½ï¿½ï¿½ï¿½</option>
+	<option value="2">ï¿½ï¿½ï¿½ï¿½</option>
+	<option value="3">ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½</option>
+	<option value="4">ï¿½Û¼ï¿½ï¿½ï¿½</option>
+	<option value="5">ï¿½ï¿½ï¿½ï¿½</option>	
+	<option value="6">ï¿½ï¿½ï¿½ï¿½</option>
 </select>
 <br><br>
 
-¸®½ºÆ® È®ÀÎ
+ï¿½ï¿½ï¿½ï¿½Æ® È®ï¿½ï¿½
 <table border="1">
 <%-- <%
 for(int i=0; i<5; i++){
@@ -75,13 +71,13 @@ for(int i=0; i<5; i++){
 <table border="1">
 <col width="70"><col width="70"><col width="70">
 <tr>
-	<th>[=busi_name%>º´¿øÀÌ¸§]</th><th>TITLE</th><td><a href="review_detail.jsp">º£Áö¹ÐÇÑ³¢µÎÀ¯</a></td>
+	<th>[=busi_name%>ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½]</th><th>TITLE</th><td><a href="review_detail.jsp">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ³ï¿½ï¿½ï¿½ï¿½ï¿½</a></td>
 </tr>
 <tr>	
-	<!-- INDVD_NAME --> <th>name</th><td>È«±æ..</td>
+	<!-- INDVD_NAME --> <th>name</th><td>È«ï¿½ï¿½..</td>
 	<!-- W_DATE     --> <td>17:00</td>
 	<!-- VIEW COUNT --> <td>5È¸</td>
-	<!-- SCORE      --> <td>4.5ÆòÁ¡</td>
+	<!-- SCORE      --> <td>4.5ï¿½ï¿½ï¿½ï¿½</td>
 </tr>	
 
 <%
@@ -92,7 +88,7 @@ for(int i=0; i<5; i++){
 if(list.size() == 0){
 	%>
 	<tr>
-		<td colspan = "3" align="center">ÀÛ¼ºµÈ ÈÄ±â°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.</td>
+		<td colspan = "3" align="center">ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ä±â°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.</td>
 	</tr>
 <%
 }else{
@@ -118,15 +114,13 @@ if(list.size() == 0){
 </table>
 
 <!-- TODO -->
-<button type="button" onclick="writeBbs(<%-- <%=dao.getSeq() %> --%>)">±Û¾²±â</button>
+<button type="button" onclick="writeBbs(<%-- <%=dao.getSeq() %> --%>)">ï¿½Û¾ï¿½ï¿½ï¿½</button>
 
 <script type="text/javascript">
-function writeBbs() {
-	location.href = "REVIEW?review=writeView";
+window.onload = function() {
+	location.href = "REVIEW";
 }
 
 </script>
-	
 
-</body>
-</html>
+<%@ include file="module/footer.jsp"%>

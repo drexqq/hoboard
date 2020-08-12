@@ -57,3 +57,172 @@ body {
 .review-wrap .go-review a:hover {
   color: #222222;
 }
+
+/* join */
+.form-wrap {
+  width: 700px;
+  padding: 40px 60px;
+  border: 1px solid rgba(38, 38, 38, 0.2);
+  border-radius: 5px;
+}
+.join-wrap {
+  padding: 80px 0;
+}
+.join-wrap .input-wrap {
+  padding-bottom: 15px;
+}
+.join-wrap .input-wrap:last-child {
+  padding-bottom: 0;
+}
+.join-wrap .input-wrap label {
+  float: left;
+  font-size: 20px;
+  line-height: 30px;
+  width: 150px;
+}
+.join-wrap .input-wrap input {
+  padding: 0 10px;
+  float: left;
+  height: 30px;
+  width: calc(100% - 150px);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.join-wrap .input-wrap p {
+  font-size: 24px;
+  line-height: 30px;
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+.join-wrap .input-wrap small {
+  display: block;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.join-wrap .input-wrap small:last-of-type {
+  padding-bottom: 30px;
+}
+/* exception */
+.join-wrap .input-wrap.btn-added {
+}
+.join-wrap .input-wrap.btn-added input {
+  width: calc(100% - 250px);
+}
+.join-wrap .input-wrap.btn-added button {
+  border: 1px solid #ccc;
+  padding: 2px 0;
+  float: left;
+  margin-left: 20px;
+  width: 80px;
+  transition: all 0.25s ease;
+}
+.join-wrap .input-wrap.btn-added button:hover {
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+}
+.join-wrap .input-wrap.address-wrap {
+}
+.join-wrap .input-wrap.address-wrap label {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.join-wrap .input-wrap.address-wrap input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.join-wrap .input-wrap.address-wrap input:last-child {
+  margin-bottom: 0;
+}
+.join-wrap .input-wrap.address-wrap input#post_Num {
+  display: inline-block;
+  width: 150px;
+  margin-right: 20px;
+}
+.join-wrap .input-wrap.address-wrap input#address {
+  display: inline-block;
+  width: calc(100% - 300px);
+}
+.join-wrap .input-wrap.address-wrap .find {
+  padding: 2px 0;
+  width: 120px;
+  margin-left: 10px;
+}
+.join-wrap .input-wrap .time-wrap {
+  float: left;
+  width: 50%;
+  margin-bottom: 15px;
+  padding: 0 10px;
+  position: relative;
+}
+.join-wrap .input-wrap .time-wrap:last-child {
+  margin-bottom: 0;
+}
+.join-wrap .input-wrap .time-wrap label {
+  cursor: pointer;
+  width: 110px;
+  line-height: 30px;
+  transition: all 0.25s ease;
+}
+.join-wrap .input-wrap .time-wrap label.on * {
+  color: #007bff;
+  transition: all 0.25s ease;
+}
+.join-wrap .input-wrap .time-wrap label i {
+  line-height: 30px;
+  vertical-align: middle;
+}
+.join-wrap .input-wrap .time-wrap label span {
+  display: inline-block;
+  line-height: 30px;
+}
+.join-wrap .input-wrap .time-wrap input {
+  width: 0;
+  opacity: 0;
+  padding-left: 10px;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+.join-wrap .input-wrap .time-wrap input.show {
+  opacity: 1;
+  visibility: visible;
+  width: calc(100% - 110px);
+}
+.join-wrap .input-wrap .time-wrap .default-text {
+  position: absolute;
+  left: 155px;
+  top: 0;
+  line-height: 30px;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.join-wrap .input-wrap .check-wrap {
+}
+.join-wrap .input-wrap .check-wrap .check {
+  float: left;
+  margin-right: 20px;
+  width: calc(20% + 55px);
+}
+.join-wrap .input-wrap .check-wrap .check * {
+  cursor: pointer;
+}
+.join-wrap .input-wrap .check-wrap .check:last-child {
+  margin-right: 0;
+}
+.join-wrap .input-wrap .check-wrap .check label {
+  float: left;
+  width: auto;
+  margin-left: 10px;
+}
+.join-wrap .input-wrap .check-wrap .check input {
+  float: left;
+  width: 20px;
+}
+.join-wrap .btn-wrap {
+  width: 100%;
+  text-align: center;
+  padding-top: 40px;
+}
+.join-wrap .btn-wrap button {
+  width: 150px;
+}

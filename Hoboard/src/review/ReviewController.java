@@ -21,7 +21,7 @@ public class ReviewController extends HttpServlet {
 		if(review.equals("writeView")) {
 			resp.sendRedirect("review_write.jsp");
 		}
-		else if(review.equals("¾÷µ¥ÀÌÆ®")) {
+		else if(review.equals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®")) {
 			
 		}
 	

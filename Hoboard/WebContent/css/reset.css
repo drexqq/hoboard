@@ -160,3 +160,7 @@ dl {
 .container-xl {
   max-width: 1200px !important;
 }
+/* input type password dots disappear */
+input[type="password"] {
+  font-family: Arial, Helvetica, sans-serif !important;
+}

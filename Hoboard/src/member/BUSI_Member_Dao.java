@@ -2,9 +2,11 @@ package member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import db.DBClose;
 import db.DBConnection;
+import oracle.jdbc.proxy.annotation.Pre;
 
 public class BUSI_Member_Dao{
 	
@@ -16,43 +18,93 @@ public class BUSI_Member_Dao{
 		return dao;
 	}
 	
-	public boolean addBUSI_Member(BUSI_Member_Dto dto) {
-		// 회원가입의 데이터 -> DB
-		String sql = " INSERT INTO BUSI_MEMBER "
-				+ "	( ID, TIME, HOMEPAGE ) " // LOGO 포함해야함!
-				+ " VALUES(?, ?, ?) "; // LOGO 포함해야함!
+	public boolean addBUSI_Member(BUSI_Member_Dto b_dto, String id) {
+		System.out.println("BUSI_MEMBER TABLE INSERT");
+		String query = " INSERT INTO BUSI_MEMBER "
+					+ " VALUES "
+					+ " ('"+id+"', ?, ? ) ";
 		
 		Connection conn = null;
-		PreparedStatement psmt = null;		
+		PreparedStatement psmt = null;
 		int count = 0;
 		
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 addMember success");
-				
-			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 addMember success");
-			
-			psmt.setString(1, dto.getId());
-			psmt.setString(2, dto.getTime());
-			psmt.setString(3, dto.getHomepage()); //LOGO 포함해야함
-			
-			System.out.println(dto.getId());	// 일단 값은 넘어 오고 있음
-			
-			
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, b_dto.getHomepage());
+			psmt.setString(2, b_dto.getLogo());
 			count = psmt.executeUpdate();
-			System.out.println("3/6 addMember success");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("addMember fail");
 		} finally {
-			DBClose.close(psmt, conn, null);			
+			DBClose.close(psmt, conn, null);
 		}
-		
-		return count>0?true:false;
+		System.out.println("BUSI_MEMBER INSERT DONE");
+		System.out.println(count);
+		return count > 0 ? true : false;
 	}
+	
+	public boolean addBUSI_Extra(String id, String time[], int extra[], int cate[], int amenity[]) {
+		System.out.println("BUSI_... TABLES INSERT");
+		String time_query = " INSERT INTO BUSI_TIME "
+						+ " VALUES "
+						+ " ('"+id+"',"
+						+ " ?, ?, ?, ?, ?, ?, ?, ?, "
+						+ " ?, ?, ? ) ";
+		String cate_query = " INSERT INTO BUSI_CATE "
+						+ " VALUES "
+						+ " ('"+id+"', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		String amenity_query = " INSERT INTO BUSI_AMENITY "
+						+ " VALUES "
+						+ " ('"+id+"', ?, ?, ?, ?, ?) ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+			conn.setAutoCommit(false);
+			
+			// BUSI_TIME TABLE INSERT
+			psmt = conn.prepareStatement(time_query);
+			int j = 0;
+			for (int i = 0; i < time.length; i++) psmt.setString((i+1), time[i]);
+			for (int i = 8; i < time.length + extra.length; i++) psmt.setInt((i+1), extra[j++]);
+			psmt.executeUpdate();
+			psmt.clearParameters();
+			
+			// BUSI_CATE TABLE INSERT
+			psmt = conn.prepareStatement(cate_query);
+			for (int i = 0; i < cate.length; i++) psmt.setInt((i+1), cate[i]);
+			psmt.executeUpdate();
+			psmt.clearParameters();
+			
+			// BUSI_AMENITY TABLE INSERT
+			psmt = conn.prepareStatement(amenity_query);
+			for (int i = 0; i < amenity.length; i++) psmt.setInt((i+1), amenity[i]);
+			count = psmt.executeUpdate();
+			conn.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+			}
+			DBClose.close(psmt, conn, null);
+			System.out.println("BUSI_... TABLES INSERT DONE");
+		}
+		return count > 0 ? true : false;
+	}
+	
 	
 	
 }

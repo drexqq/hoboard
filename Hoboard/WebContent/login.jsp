@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- 
+String id = (String) session.getAttribute("sessionID");
+
+if(id == null){
+	%>
+	<script type="text/javascript">
+	alert("로그인 해 주십시오");
+	location.href = "login.jsp";
+	</script>	
+	<%
+}
+--%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,15 +28,41 @@
 <br><br>
 비밀 번호 <input type="password" name="pw" id="pw">
 <br><br>
-<input type='checkbox' name="save_Id" id="save_Id" value="save_Id"/>아이디 저장
+<input type='checkbox' name="save_id" id="save_id" value="save_id"/>아이디 저장
 <br><br>
-<input type="submit" value="로그인">
 <br><br>
-<button type="button" id="joinBtn">회원 가입</button>
-<button type="button" id="searchBtn">아이디/비밀번호 찾기</button>
+
+<button id="login_btn" value="login">로그인</button>
+<button onclick="location.href='join.jsp';">회원 가입</button>
+<button onclick="location.href='#';">아이디/비밀번호 찾기</button>
 
 </form>
-
 </body>
+
+<script type="text/javascript">
+var name = "${ name }";
+if(name != null && name != "") {
+	alert(name+"님 ㅎㅇ");
+	location.href = "index.jsp";
+}
+
+/* $("#login_btn").click(function() {
+//	alert('click');
+	if( $("#id").val().trim() == "" ){
+		alert("id를 입력해 주십시오");
+		$("#id").focus();
+	}
+	else if( $("#pw").val().trim() == "" ){
+		alert("password를 입력해 주십시오");
+		$("#pw").focus();
+	}
+	else{
+		$("#frm").attr("action", "index.jsp").submit();
+	}
+	
+}); */
+
+</script>
+
 
 </html>

@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="css/style.css" />
     <!-- layout.css -->
     <link rel="stylesheet" href="css/comp.css" />
+    <!-- jqeuryCDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   </head>
   <body>
   <!-- header -->
@@ -42,7 +44,7 @@
             <div class="header clearfix">
               <!-- logo -->
               <div class="logo-wrap">
-                <a href="/" class="logo">
+                <a href="index.jsp" class="logo">
                   <img src="" alt="Logo" />
                 </a>
               </div>

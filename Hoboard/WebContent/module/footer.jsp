@@ -5,7 +5,7 @@
           <div class="col-12">
             <div class="footer clearfix">
               <div class="logo-wrap">
-                <a href="#" class="logo"><img src="" alt="Logo" /></a>
+                <a href="index.jsp" class="logo"><img src="" alt="Logo" /></a>
                 <div class="title">Hoboard Project by BITCAMP</div>
               </div>
               <div class="menu-wrap">
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="copyright clearfix">
-          Copyright © Hoboard. All rights reserved.
+          Copyright Â© Hoboard. All rights reserved.
         </div>
       </div>
     </footer>

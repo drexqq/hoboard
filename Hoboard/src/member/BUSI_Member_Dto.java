@@ -15,24 +15,18 @@ public class BUSI_Member_Dto extends Member_Dto implements Serializable {
 	private String homepage;
 	private String logo;
 	 // 진료 시간
-	public BUSI_Member_Dto(String id, String time, String homepage, String logo) {
+	public BUSI_Member_Dto(String id, String homepage, String logo) {
 		super();
 		this.id = id;
-		this.time = time;
 		this.homepage = homepage;
 		this.logo = logo;
 	}
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
 	}
 	public String getHomepage() {
 		return homepage;
@@ -48,7 +42,7 @@ public class BUSI_Member_Dto extends Member_Dto implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "BUSI_Member_Dto [id=" + id + ", time=" + time + ", homepage=" + homepage + ", logo=" + logo + "]";
+		return "BUSI_Member_Dto [id=" + id + ", homepage=" + homepage + ", logo=" + logo + "]";
 	}
 	
 	
