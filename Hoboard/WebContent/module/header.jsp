@@ -46,7 +46,7 @@
               <!-- logo -->
               <div class="logo-wrap">
                 <a href="index.jsp" class="logo">
-                  <img src="img/logo_t.png" alt="Logo" />
+                  <img src="" alt="Logo" />
                 </a>
               </div>
               <!-- //logo -->
@@ -68,20 +68,14 @@
 			    <c:choose>
 			    	<c:when test="${ login eq 1 }">
 			    	<!-- after login -->
-			    		<li class="util-item mypage">
-			    			<a href="mypage.jsp">마이페이지<i class="ri-user-settings-line"></i></a>
-		    			</li>
+			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
               	 	    <li class="util-item logout"><a href="logout.do">로그아웃</a></li>
 			    	</c:when>
 			    	
 			    	<c:otherwise>
 	                <!-- before login -->
+			    		<li class="util-item login"><a href="login.jsp">로그인</a></li>
               		    <li class="util-item join"><a href="join.jsp">회원가입</a></li>
-			    		<li class="util-item login">
-			    			<a href="login.jsp">로그인
-			    			<!-- <i class="ri-login-circle-line"></i> -->
-			    			</a>
-		    			</li>
 			    	</c:otherwise>
 			    </c:choose>
 			    </ul>

@@ -1,6 +1,6 @@
 /* body */
 body {
-  background-color: rgb(250, 250, 250);
+  background-color: #fbfcfd;
 }
 /* main */
 .card-wrap {
@@ -62,7 +62,7 @@ body {
 .form-wrap {
   width: 700px;
   padding: 40px 60px;
-  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  border: 1px solid rgba(38, 38, 38, 0.2);
   border-radius: 5px;
 }
 .join-wrap {
@@ -103,6 +103,7 @@ body {
 .join-wrap .input-wrap small:last-of-type {
   padding-bottom: 30px;
 }
+/* exception */
 .join-wrap .input-wrap.btn-added {
 }
 .join-wrap .input-wrap.btn-added input {
@@ -115,10 +116,6 @@ body {
   margin-left: 20px;
   width: 80px;
   transition: all 0.25s ease;
-}
-.join-wrap .input-wrap.btn-added button.done {
-  opacity: 1;
-  background-color: #349bd5;
 }
 .join-wrap .input-wrap.btn-added button:hover {
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
@@ -228,145 +225,4 @@ body {
 }
 .join-wrap .btn-wrap button {
   width: 150px;
-}
-
-.join-wrap .link-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.join-wrap .link-wrap .wrap {
-  width: calc(50% - 30px);
-  text-align: center;
-}
-.join-wrap .link-wrap .wrap .box {
-  border-top: 3px solid #4e8dc9;
-  border-bottom: 1px solid rgb(235, 235, 235);
-  background-color: rgb(249, 249, 249);
-  width: 100%;
-  padding: 60px 20px;
-  margin-bottom: 40px;
-}
-.join-wrap .link-wrap .wrap .box .icon {
-  margin: 0 auto;
-  margin-bottom: 40px;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 2px solid #4e8dc9;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.join-wrap .link-wrap .wrap .box .icon img {
-  display: block;
-  width: 120px;
-}
-.join-wrap .link-wrap .wrap .box .text {
-  position: relative;
-  font-size: 26px;
-  font-weight: 600;
-  color: #222222;
-  padding-bottom: 15px;
-}
-.join-wrap .link-wrap .wrap .box .text:before {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  content: "";
-  width: 30px;
-  height: 2px;
-  background-color: #4e8dc9;
-}
-.join-wrap .link-wrap .wrap .box .desc {
-  padding-top: 15px;
-  color: #333333;
-  font-size: 20px;
-}
-.join-wrap .link-wrap .wrap .link {
-  width: 150px;
-  border-radius: 5px;
-  background-color: #349bd5;
-  color: #ffffff;
-  font-size: 20px;
-  transition: all 0.25s ease;
-}
-.join-wrap .link-wrap .wrap .link:hover {
-  background-color: #4ba6da;
-}
-
-/* login */
-.login-wrap {
-  min-height: calc(100vh - 365px);
-  position: relative;
-}
-.login-wrap .login-form {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
-  padding: 50px;
-}
-.login-wrap .login-form .login-head {
-  font-weight: 600;
-  font-size: 18px;
-  padding-bottom: 40px;
-}
-.login-wrap .login-form .title {
-  text-align: center;
-  font-size: 30px;
-  font-weight: 600;
-}
-.login-wrap .input-wrap {
-  padding-bottom: 15px;
-}
-.login-wrap .input-wrap label {
-  color: #000;
-  font-size: 18px;
-  line-height: 30px;
-  padding-bottom: 5px;
-}
-.login-wrap .input-wrap input {
-  padding: 0 10px;
-  height: 30px;
-  width: 100%;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.login-wrap .check-wrap {
-}
-.login-wrap .check-wrap * {
-  cursor: pointer;
-}
-.login-wrap .btn-wrap {
-  margin-top: 40px;
-}
-.login-wrap .btn-wrap button {
-  background-color: #349bd5;
-  display: block;
-  width: 100%;
-  color: #fff;
-  font-size: 20px;
-  transition: all 0.25s ease;
-}
-.login-wrap .btn-wrap button:hover {
-  background-color: #4ba6da;
-}
-.login-wrap .util-wrap {
-  margin-top: 40px;
-  text-align: center;
-  font-size: 16px;
-  color: #888888;
-}
-.login-wrap .util-wrap .join {
-  float: left;
-}
-.login-wrap .util-wrap .find {
-  float: right;
 }

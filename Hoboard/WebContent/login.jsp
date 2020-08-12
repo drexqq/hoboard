@@ -1,32 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
+    pageEncoding="UTF-8"%>
+<%@ include file="module/header.jsp"%>
 
-<div class="login-wrap">
-  <div class="login-form">
-    <p class="login-head">&lt;Hoboard /&gt;</p>
-    <p class="title">Log in</p>
-    <form action="login.do" method="post">
-      <div class="input-wrap">
-        <label for="id">ID</label>
-        <input type="text" name="id" id="id" />
-      </div>
-      <div class="input-wrap">
-        <label for="pw">Password</label>
-        <input type="password" name="pw" id="pw" />
-      </div>
-      <div class="check-wrap">
-        <input type="checkbox" name="save_id" id="save_id" value="save_id" />
-        <label for="save_id">아이디 저장</label>
-      </div>
-      <div class="btn-wrap">
-        <button class="btn" id="login_btn" value="login">로그인</button>
-      </div>
-      <div class="util-wrap clearfix">
-        <a class="join" href="join.jsp">회원가입</a>
-        <a class="find" href="#">아이디 / 비밀번호 찾기</a>
-      </div>
-    </form>
-  </div>
-</div>
+<form action="login.do" method="post">
+
+아이디 <input type="text" name="id" id="id">
+<br><br>
+비밀 번호 <input type="password" name="pw" id="pw">
+<br><br>
+<input type='checkbox' name="save_id" id="save_id" value="save_id"/>아이디 저장
+<br><br>
+<br><br>
+
+<button id="login_btn" value="login">로그인</button>
+<button onclick="location.href='join.jsp';">회원 가입</button>
+<button onclick="location.href='#';">아이디/비밀번호 찾기</button>
+
+</form>
+
+<script type="text/javascript">
+/* $("#login_btn").click(function() {
+//	alert('click');
+	if( $("#id").val().trim() == "" ){
+		alert("id를 입력해 주십시오");
+		$("#id").focus();
+	}
+	else if( $("#pw").val().trim() == "" ){
+		alert("password를 입력해 주십시오");
+		$("#pw").focus();
+	}
+	else{
+		$("#frm").attr("action", "index.jsp").submit();
+	}
+	
+}); */
+
+</script>
+
 
 <%@ include file="module/footer.jsp"%>
