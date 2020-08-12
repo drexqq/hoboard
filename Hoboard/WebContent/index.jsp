@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="module/header.jsp"%>
-
 <!-- card-wrap -->
 <div class="card-wrap">
 	<div class="container">

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -45,7 +46,7 @@
               <!-- logo -->
               <div class="logo-wrap">
                 <a href="index.jsp" class="logo">
-                  <img src="" alt="Logo" />
+                  <img src="img/logo_t.png" alt="Logo" />
                 </a>
               </div>
               <!-- //logo -->
@@ -60,19 +61,24 @@
                 </ul>
               </div>
               <!-- //menu -->
-
               <!-- util -->
               <div class="util-wrap">
-                <!-- before login -->
-                <ul class="util before-login clearfix">
-                  <li class="util-item login"><a href="login.jsp">로그인</a></li>
-                  <li class="util-item join"><a href="join.jsp">회원가입</a></li>
-                </ul>
-                <!-- after login -->
-                <ul class="util after-login clearfix">
-                  <li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
-                  <li class="util-item logout"><a href="">로그아웃</a></li>
-                </ul>
+                <ul class="util clearfix">
+                <c:set var="login" scope="session" value="${ login }"/>
+			    <c:choose>
+			    	<c:when test="${ login eq 1 }">
+			    	<!-- after login -->
+			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
+              	 	    <li class="util-item logout"><a href="logout.do">로그아웃</a></li>
+			    	</c:when>
+			    	
+			    	<c:otherwise>
+	                <!-- before login -->
+			    		<li class="util-item login"><a href="login.jsp">로그인</a></li>
+              		    <li class="util-item join"><a href="join.jsp">회원가입</a></li>
+			    	</c:otherwise>
+			    </c:choose>
+			    </ul>
               </div>
               <!-- //util -->
             </div>
