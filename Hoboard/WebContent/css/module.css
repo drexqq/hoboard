@@ -36,9 +36,6 @@
 }
 .header .util-wrap .util {
 }
-.header .util-wrap .util.after-login {
-  display: none;
-}
 .header .util-wrap .util .util-item {
   line-height: 80px;
   padding: 0 20px;
