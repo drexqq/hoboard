@@ -18,6 +18,10 @@ public class Member_Dao {
 	}
 	
 	public String login(String id, String pw) {
+<<<<<<< HEAD
+=======
+		
+>>>>>>> login_f
 		String sql = " SELECT * "
 					+ "	FROM MEMBER "
 					+ " WHERE ID=? AND PW =? ";
@@ -41,7 +45,12 @@ public class Member_Dao {
 			System.out.println("3/6 login success");
 			
 			if(rs.next()) {
+<<<<<<< HEAD
 				name = rs.getString("name");	
+=======
+
+				name = rs.getString("NAME");	
+>>>>>>> login_f
 			}
 			System.out.println("4/6 login success");
 			
@@ -55,6 +64,10 @@ public class Member_Dao {
 		return name;
 	}
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> login_f
 	// INSERT INTO MEMBER TABLE
 	public boolean addMember(Member_Dto dto) {
 		System.out.println("MEMBER TABLE INSERT");
@@ -93,6 +106,7 @@ public class Member_Dao {
 		} finally {
 			DBClose.close(psmt, conn, null);	
 			System.out.println("addMember done");
+<<<<<<< HEAD
 		}
 		System.out.println(count);
 		return count > 0 ? true : false;
@@ -120,6 +134,8 @@ public class Member_Dao {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
+=======
+>>>>>>> login_f
 		}
 		return exist;
 	}
@@ -147,6 +163,76 @@ public class Member_Dao {
 		}
 		return cate;
 	}
+	// GET BUSI_CATE COLUMN
+	public String[] getBusiCate() {
+		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_CATE' AND COLUMN_NAME != 'ID' ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String cate[] = new String[16];
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+		
+			int i = 0;
+			while(rs.next()) {
+				cate[i++] = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cate;
+	}
+	// GET BUSI_TIME TABLE COLUMN
+	public String[] getBusiTime() {
+		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_TIME' AND COLUMN_NAME != 'ID' ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String time[] = new String[11];
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+		
+			int i = 0;
+			while(rs.next()) {
+				time[i++] = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return time;
+	}
+	// GET BUSI_AMENITY TABLE COLUMN
+	public String[] getAmenity() {
+		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_AMENITY' AND COLUMN_NAME != 'ID' ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String amenity[] = new String[5];
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+		
+			int i = 0;
+			while(rs.next()) {
+				amenity[i++] = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return amenity;
+	}
+	
 	
 	// GET BUSI_TIME TABLE COLUMN
 	public String[] getBusiTime() {
