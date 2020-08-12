@@ -370,3 +370,39 @@ body {
 .login-wrap .util-wrap .find {
   float: right;
 }
+
+/* mypage */
+
+.mypage-wrap {
+  min-height: calc(100vh - 365px);
+  padding: 80px 0;
+}
+.mypage-wrap .page-title {
+  padding-bottom: 100px;
+  font-size: 34px;
+  font-weight: 600;
+}
+.mypage-wrap .box-wrap {
+}
+.mypage-wrap .box-wrap .row:first-child {
+  margin-bottom: 30px;
+}
+.mypage-wrap .box-wrap .box {
+  padding: 30px;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  transition: all 0.25s ease;
+}
+.mypage-wrap .box-wrap .box:hover {
+  transform: translate(-5px, -5px);
+  border: 1px solid #ff8c37;
+}
+.mypage-wrap .box-wrap .box .title {
+  font-size: 24px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+.mypage-wrap .box-wrap .box .icon {
+}
+.mypage-wrap .box-wrap .box .icon img {
+  float: right;
+}

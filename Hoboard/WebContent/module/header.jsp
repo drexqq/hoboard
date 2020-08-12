@@ -74,8 +74,8 @@
 			    	
 			    	<c:otherwise>
 	                <!-- before login -->
-			    		<li class="util-item login"><a href="login.jsp">로그인</a></li>
               		    <li class="util-item join"><a href="join.jsp">회원가입</a></li>
+			    		<li class="util-item login"><a href="login.jsp">로그인</a></li>
 			    	</c:otherwise>
 			    </c:choose>
 			    </ul>

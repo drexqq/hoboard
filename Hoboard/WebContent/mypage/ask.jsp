@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-alert("아이디와 패스워드 확인");
 
-location.href = "login.jsp";
-</script>
 </body>
 </html>
