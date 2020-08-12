@@ -1,20 +1,15 @@
 package member;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-<<<<<<< HEAD
-=======
 
 import Util.UtilEx;
->>>>>>> login_f
 
 @WebServlet("/login.do")
 public class login_Controller extends HttpServlet {
@@ -31,8 +26,6 @@ public class login_Controller extends HttpServlet {
 		 * 
 		 * }
 		 */
-		
-<<<<<<< HEAD
 		String name = null;
 		
 		HttpSession session = req.getSession();
@@ -42,27 +35,14 @@ public class login_Controller extends HttpServlet {
 		Member_Dao mdao = new Member_Dao();
 		Member_Dto mdto = new Member_Dto();
 		
-=======
 		String url = req.getRequestURL().toString();
 		
-		String name = null;
-		
-		HttpSession session = req.getSession();
-		String context= req.getContextPath();
-		System.out.println(context);
-		req.setCharacterEncoding("UTF-8");
-		
-		Member_Dao mdao = new Member_Dao();
-		Member_Dto mdto = new Member_Dto();
-		
->>>>>>> login_f
 		String id = req.getParameter("id");
 	    String pw = req.getParameter("pw");
 	    System.out.println(id + "," + pw);
 	    
 	    name = mdao.login(id,pw);
 	    
-<<<<<<< HEAD
 	    System.out.println(name);
 	    
 	      if( name != null){
@@ -78,7 +58,6 @@ public class login_Controller extends HttpServlet {
 	           resp.sendRedirect(context+"/memList.do?msg=login failed");
 	      }
 	       
-=======
 	    String message = new String();
 	    
 	    if(name != null) {
@@ -101,7 +80,6 @@ public class login_Controller extends HttpServlet {
 	    //message = "로그아웃 됏습니다.";
 	   // resp.sendRedirect(req.getContextPath()+"login.jsp?message="+URLEncoder.encode(message, "utf-8"));
 	  
->>>>>>> login_f
 	}
 	
 	
