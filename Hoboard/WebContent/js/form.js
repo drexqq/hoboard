@@ -40,9 +40,7 @@ $("#id_Check").on("click", function () {
         } else {
           alert("확인되었습니다 !");
           $("#id").attr("readonly", "readonly");
-          $("#id_Check")
-            .addClass("btn-primary done")
-            .attr("disabled", "disabled");
+          $("#id_Check").addClass("done").attr("disabled", "disabled");
         }
       },
       error: function (e) {

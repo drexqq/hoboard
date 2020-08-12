@@ -1,31 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ex_Join</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
-<body>
-<button type="button" id="i_JoinBtn">개인</button>
-<button type="button" id="b_Joinbtn">병원</button>
+pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
+<div class="join-wrap">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="link-wrap wrap">
+          <div class="indvd-link wrap">
+            <div class="box">
+              <div class="icon">
+                <img src="img/indvd_join.png" alt="INDVD" />
+              </div>
+              <div class="text">개인 회원</div>
+              <div class="desc">
+                Hoboard에 등록된 병원에<br />
+                예약할 수 있는 개인 회원으로 가입합니다.
+              </div>
+            </div>
+            <a class="link btn" href="INDVD_JOIN">개인 회원 가입</a>
+          </div>
+          <div class="busi-link wrap">
+            <div class="box">
+              <div class="icon">
+                <img src="img/busi_join.png" alt="BUSI" />
+              </div>
+              <div class="text">병원 회원</div>
+              <div class="desc">
+                Hoboard에 병원을 등록합니다.<br />
+                회원들로부터 예약을 받을 수 있습니다.
+              </div>
+            </div>
+            <a class="link btn" href="BUSI_JOIN">병원 회원 가입</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<script type="text/javascript">
-$("#i_JoinBtn").click(function() {
-	//alert('click');
-	location.href = "INDVD_JOIN";
-});
-$("#b_Joinbtn").click(function() {
-	//alert('click2');
-	location.href = "BUSI_JOIN"
-});	
-var join = "${ join }";
-if(join == "true") {
-	alert("회원가입 성공 !");
-	location.href = "login.jsp";
-}
-</script>
-
-</body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%@ include file="module/footer.jsp"%>

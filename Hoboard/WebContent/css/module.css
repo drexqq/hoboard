@@ -1,4 +1,7 @@
 /* header */
+header {
+  box-shadow: 0px 2px 4px rgba(38, 38, 38, 0.1);
+}
 .header {
   position: relative;
   height: 80px;
@@ -8,11 +11,12 @@
 }
 .header .logo-wrap .logo {
   display: block;
-  width: 160px;
+  width: 200px;
   height: 80px;
+  line-height: 80px;
 }
 .header .logo-wrap .logo img {
-  display: block;
+  vertical-align: middle;
   width: 100%;
 }
 .header .menu-wrap {
@@ -41,9 +45,14 @@
   padding: 0 20px;
   float: left;
 }
+.header .util-wrap .util .util-item i {
+  vertical-align: middle;
+  padding-left: 5px;
+}
 
 /* footer */
 footer {
+  min-height: 285px;
   background-color: #2c3744;
 }
 .footer {
@@ -53,8 +62,13 @@ footer {
   float: left;
 }
 .footer .logo-wrap .logo {
+  width: 250px;
+  display: inline-block;
+  line-height: 48px;
 }
 .footer .logo-wrap .logo img {
+  width: 100%;
+  vertical-align: middle;
 }
 .footer .logo-wrap .title {
   padding-top: 30px;
