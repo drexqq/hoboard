@@ -15,15 +15,18 @@ public class Review_Dto implements Serializable {
 	private int viewcount;	 // 조회수
 	private int score;		 // 평점
 	
-	private String w_date;	 // 작성일
+	private String wdate;	 // 작성일
 	
 	private int ref;		 // 그룹번호		 
 	private int step;		 // 행(row)번호
 	private int depth;		 // ㄴ> 깊이(depth)
 	
+	public Review_Dto() {
+	}
+	
 	
 	public Review_Dto(int review_seq, String busi_id, String indvd_id, String title, String content, int viewcount,
-			int score, String w_date, int ref, int step, int depth) {
+			int score, String wdate, int ref, int step, int depth) {
 		super();
 		this.review_seq = review_seq;
 		this.busi_id = busi_id;
@@ -32,7 +35,7 @@ public class Review_Dto implements Serializable {
 		this.content = content;
 		this.viewcount = viewcount;
 		this.score = score;
-		this.w_date = w_date;
+		this.wdate = wdate;
 		this.ref = ref;
 		this.step = step;
 		this.depth = depth;
@@ -126,12 +129,12 @@ public class Review_Dto implements Serializable {
 
 
 	public String getW_date() {
-		return w_date;
+		return wdate;
 	}
 
 
-	public void setW_date(String w_date) {
-		this.w_date = w_date;
+	public void setW_date(String wdate) {
+		this.wdate = wdate;
 	}
 
 
@@ -168,9 +171,12 @@ public class Review_Dto implements Serializable {
 	@Override
 	public String toString() {
 		return "Review_Dto [review_seq=" + review_seq + ", busi_id=" + busi_id + ", indvd_id=" + indvd_id + ", title="
-				+ title + ", content=" + content + ", viewcount=" + viewcount + ", score=" + score + ", w_date="
-				+ w_date + ", ref=" + ref + ", step=" + step + ", depth=" + depth + "]";
+				+ title + ", content=" + content + ", viewcount=" + viewcount + ", score=" + score + ", wdate=" + wdate
+				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth + "]";
 	}
+
+
+	
 	
 	
 	
