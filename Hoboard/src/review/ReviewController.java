@@ -1,52 +1,87 @@
 package review;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.SendResult;
 
-import org.apache.commons.fileupload.FileItem;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import Reserve.Reserve_Dto;
 import Util.UtilEx;
-import member.Member_Dto;
 
-@WebServlet("/REVIEW")
+@WebServlet("/review")
 public class ReviewController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		
-		String review = req.getParameter("review");
 		Review_Dao dao = Review_Dao.getInstance();
-
-		// TODO review_Main not using
-		if(review.equals("reviewlist")) {
-			System.out.println("---review list---");
-
-			List<Review_Dto> list = dao.getReviewList();
-
-			req.setAttribute("reviewlist", list);
-			UtilEx.forward("	", req, resp);
-
-			// review_WriteView
-		} else if (review.equals("writeview")) {
+		List<Review_Dto> list = null;
+		String sW = (String)req.getParameter("searchWord");
+		String c = (String)req.getParameter("choice");
+		
+		int limit = 5;
+		int pageNumber = 0;
+		
+		if(req.getParameter("page") == null) pageNumber = 0;
+		else pageNumber = Integer.parseInt((String)req.getParameter("page"));
+		
+		int len = dao.getsearch(c, sW);
+		int page = len / limit;		// 예: 12개 -> 2page
+		if(len % limit > 0) page = page + 1;	// -> 2
+		System.out.println("page = " + page);
+		// 처음 들어왔을때
+		if(sW == null && c == null && pageNumber == 0) list = dao.getReview_PagingList("", "", limit, pageNumber);
+		// 페이지만 바뀔때
+		else if (sW == null && c == null && req.getParameter("page") != null) list = dao.getReview_PagingList("", "", limit, pageNumber);
+		// 다 바뀔때
+		else {
+			if (sW == null) sW = "";
+			list = dao.getReview_PagingList(c, sW, limit, pageNumber);
+			req.setAttribute("choice", c);
+			req.setAttribute("searchWord", sW);
+		}
+		req.setAttribute("len", len);
+		req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
+		req.setAttribute("page", page-1);	// 총 페이지수
+		req.setAttribute("reviewlist", list);	// 실제 데이터
+		
+		UtilEx.forward("review.jsp", req, resp);
+		/*
+		else {
+			System.out.println("여기가 페이징 or 검색");
+			
+			System.out.println(c);
+			System.out.println(sW);
+			System.out.println(limit);
+			System.out.println(pageNumber);
+			// 글의 총 갯수
+			list = dao.getReview_PagingList(c, sW, limit, pageNumber);
+			
+			System.out.println("-카테고리선택- choice :" + c);
+			System.out.println("-검색어- searchWord :" + sW);
+			System.out.println("-페이지번호- pageNumber :" + pageNumber);
+			System.out.println("-페이지- page :" + page);
+			
+			req.setAttribute("choice", c);
+			req.setAttribute("searchWord", sW);
+			req.setAttribute("page", pageNumber);
+			req.setAttribute("limit", limit);	// 한 페이지당 리스트 갯수
+			req.setAttribute("page", page-1);	// 총 페이지수
+			req.setAttribute("reviewlist", list);	// 실제 데이터
+			
+			UtilEx.forward("review.jsp", req, resp);
+		}
+		 */
+		
+		
+		
+		/* 
+		String review = req.getParameter("review");
+		else if (review.equals("writeview")) {
 			System.out.println("---review writeView ---");
 
 			// dummy RESERVE DATA -> REVIEW
@@ -151,66 +186,11 @@ public class ReviewController extends HttpServlet {
 			UtilEx.forward("review_answer.jsp", req, resp);
 		
 		//TODO paging main now using
-		}else if(review.equals("main")) {
-			//검색어
-			String searchWord = req.getParameter("searchWord");
-			//셀렉트박스
-			String choice = req.getParameter("choice");
-			//페이지넘버
-			String spageNumber = req.getParameter("pageNumber");
-			
-			if(choice == null || choice.equals("")){
-				choice = "sel";
-			}
-
-			if(choice.equals("sel")){
-				searchWord = "";
-			}
-			if(searchWord == null){
-				searchWord = "";
-				choice = "sel";
-			}
-			
-			//현재 페이지
-			int pageNumber = 0; 
-			if(spageNumber != null && !spageNumber.equals("")){
-				pageNumber = Integer.parseInt(spageNumber);
-			}
-			
-			int len = dao.getsearch(choice, searchWord);
-			
-			System.out.println("-전체 컬럼 숫자-len:" + len);
-			
-	
-			int Page = len / 10;		// 예: 12개 -> 2page
-			if(len % 10 > 0){
-				Page = Page + 1;	// -> 2
-			}
-		
-			
-			List<Review_Dto> list = dao.getReview_PagingList(choice, searchWord, pageNumber);
-			
-			int P_pageNumber = pageNumber;
-			int P_paging = Page;
-			//String P_pageNumber = Integer.toString(pageNumber);
-			//String P_paging =  Integer.toString(Page);
-			
-			
-			System.out.println("-카테고리선택- choice :" + choice);
-			System.out.println("-검색어- searchWord :" + searchWord);
-			System.out.println("-페이지번호- pageNumber :" + P_pageNumber);
-			System.out.println("-페이지- page :" + P_paging);
-			
-			
-			
-			
-			req.setAttribute("choice", choice);
-			req.setAttribute("searchWord", searchWord);
-			req.setAttribute("pageNumber", P_pageNumber);
-			req.setAttribute("page", P_paging);
-			req.setAttribute("paginglist", list);
-			UtilEx.forward("review.jsp", req, resp);
 		}
+		if(review.equals("") || review == null) {
+			
+		}
+		*/
 		
 		
 }

@@ -4,60 +4,72 @@
 <%@page import="review.Review_Dto"%>
 <%@page import="java.util.List"%>
 
-<%@ include file="module/header.jsp"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ include file="module/header.jsp"%>
+<h1>리뷰리스트임</h1>
+<div>
+<input type="text" id="search" value=""><button onclick="searchBbs()">검색</button>
+<select id="choice">
+	<option value="id" selected="selected">작성자</option>
+	<option value="busi_name">병원이름</option>
+	<option value="title">제목</option>
+	<option value="content">내용</option>	
+	<option value="score">평점</option>
+</select>
+</div>
+<div>${ page } = page</div>
+<div>${ pageNumber } = pageNumber</div>
+<div>${ limit } = limit</div>
+<div>${ pageNumber * limit } = pageNumber * limit</div>
+<br><br>
+<c:choose>
+ 
+    <c:when test="${len eq 0}">
+       <div>검색 결과가 없습니다.</div>
+    </c:when>
+ 
+    <c:otherwise>
+    
+    <c:forEach items="${ reviewlist }" var="list" varStatus="status" begin="0" end="4">
+		<div>
+			<div>${ list.title }</div>
+			<div>${ list.content }</div>
+			<div>${ list.viewcount }</div>
+			<div>${ list.score }</div>
+		</div>
+		</c:forEach>
+        <c:forEach items="${ reviewlist }" var="page" varStatus="status" begin="0" end="${ page }">
+			<a onclick="goPage(${ status.index })">${ status.index }</a>
+		</c:forEach>
+    </c:otherwise>
+ 
+</c:choose>
 
+<!-- 검색버튼  -->
+<script type="text/javascript">
+function searchBbs() {
+	var choice = document.getElementById("choice").value;
+	var word = document.getElementById("search").value;
 
+    if(word == ""){
+		document.getElementById("search").value = "";
+	}
+    
+	location.href = "review?searchWord=" + word + "&choice=" + choice;
+}
 
+function goPage( pageNum ) {	
+	
+	var choice = document.getElementById("choice").value;
+	var word = document.getElementById("search").value;
+	
+	location.href = "review?page=" + pageNum;
+}
 
-<%
-
-%>
-
-
-
-<%
-
-System.out.println("넘어가주세요");
-
-String searchWord = (String)request.getAttribute("searchWord");
-String choice = (String)request.getAttribute("choice");
-System.out.println("searchWord 확인 : " + "[" + searchWord + "] " + "choice 확인 :" + " " + "["+ choice + "]");
-//int P_pageNumber = (int)request.getParameter("pageNumber");
-//int P_page = (int)request.getParameter("page");
-String P_pageNumber = String.valueOf(request.getAttribute("pageNumber"));
-String P_Review_Page = String.valueOf(request.getAttribute("page"));
-
-System.out.println(request.getAttribute("pageNumber"));
-System.out.println(request.getAttribute("page"));
-
-int pageNumber = Integer.parseInt(P_pageNumber);
-int Review_Page = Integer.parseInt(P_Review_Page);
-
-
-
-
-
-//int pageNumber = Integer.parseInt("P_pageNumber");
-//int Review_Page = Integer.parseInt("P_page");
-
-
-//List<Review_Dto> list = (List<Review_Dto>)request.getAttribute("reviewlist");
-List<Review_Dto> list = (List<Review_Dto>)request.getAttribute("paginglist");
-
-%>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">	
-<title>후기 게시판</title>
-</head>
-<body>
+</script>
+<%-- 
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -70,16 +82,7 @@ $(document).ready(function() {
 });
 </script>
 
-<input type="text" id="search" value="<%-- <%=searchWord%> --%>"><button onclick="searchBbs()">검색</button>
-&nbsp;&nbsp;&nbsp;
-<select id="choice">
-	<option value="sel" selected="selected">선택</option>
-	<option value="indvd_id">작성자</option>
-	<option value="busi_cate">병원이름</option>
-	<option value="title">제목</option>
-	<option value="content">내용</option>	
-	<option value="score">평점</option>
-</select>
+
 <br><br>
 
 
@@ -114,7 +117,6 @@ if(list == null || list.size() == 0){
 if(rev.getDel() == 0){
 %>
 <tr>
-	<%-- <%=arrow( rev.getDepth() ) %> --%>			
 	<th>[<%=rev.getBusi_cate()%>]</th>	
 	<th><%=rev.getTitle()%></th>
 	<td><a href="REVIEW?review=detail&seq=<%=rev.getReview_seq()%>"><%=rev.getContent()%></a></td>
@@ -153,7 +155,7 @@ for(int i = 0;i < Review_Page; i++){
 	else{	// 그외 페이지
 		%>
 		<a href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)" 
-			style="font-size: 15pt; color: #000; font-weight:bold;  text-decoration: none">
+			style="font-size: 15pt; color: #000; font-weight:bold;  text-decoration none">
 			[<%=i+1 %>]
 		</a>&nbsp;		
 		<%
@@ -189,32 +191,6 @@ function writeBtn(){
 
 
 </script>
-
-<!-- 검색버튼  -->
-<script type="text/javascript">
-function searchBbs() {
-	var choice = document.getElementById("choice").value;
-	var word = document.getElementById("search").value;
-
-
-    if(word == ""){
-		document.getElementById("search").value = "";
-		document.getElementById("choice").value = 'sel';
-	} 
-	
-	location.href = "REVIEW?review=main&searchWord=" + word + "&choice=" + choice;
-}
-
-function goPage( pageNum ) {	
-	
-	var choice = document.getElementById("choice").value;
-	var word = document.getElementById("search").value;
-	
-	location.href = "REVIEW?review=main&searchWord=" + word + "&choice=" + choice + "&pageNumber=" + pageNum;
-}
-
-
-
-</script>
+ --%>
 
 <%@ include file="module/footer.jsp"%>

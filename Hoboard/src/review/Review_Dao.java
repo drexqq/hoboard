@@ -236,8 +236,6 @@ private static Review_Dao dao = new Review_Dao();
 				int i = 1;
 				dto = new Member_Dto();
 				dto.setName(rs.getString(i));
-				
-				
 			}
 			System.out.println("4/6 getReserveData success");
 			
@@ -448,18 +446,19 @@ private static Review_Dao dao = new Review_Dao();
 		
 		String sql = " SELECT COUNT(*) FROM REVIEW ";
 		
-		String sqlWord = ""; 
-		
-		if(choice.equals("indvd_id")) {
-			sqlWord = " WHERE INDVD_ID='" + searchWord.trim() + "'";
-		}else if (choice.equals("busi_cate")) {
-			sqlWord = " WHERE BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
-		}else if (choice.equals("title")) {
-			sqlWord = " WHERE TITLE LIKE '%" + searchWord.trim() + "%' ";
-		}else if (choice.equals("content")) {
-			sqlWord = " WHERE CONTENT LIKE '%" + searchWord.trim() + "%' ";
-		}else if (choice.equals("score")) {
-			sqlWord = " WHERE SCORE='" + searchWord.trim() + "'";
+		String sqlWord = "";
+		if(choice != null || searchWord != null) {
+			if(choice.equals("id")) {
+				sqlWord = " WHERE INDVD_ID='" + searchWord.trim() + "'";
+			}else if (choice.equals("busi_name")) {
+				sqlWord = " WHERE BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+			}else if (choice.equals("title")) {
+				sqlWord = " WHERE TITLE LIKE '%" + searchWord.trim() + "%' ";
+			}else if (choice.equals("content")) {
+				sqlWord = " WHERE CONTENT LIKE '%" + searchWord.trim() + "%' ";
+			}else if (choice.equals("score")) {
+				sqlWord = " WHERE SCORE='" + searchWord.trim() + "'";
+			}
 		}
 
 		sql += sqlWord;
@@ -471,27 +470,25 @@ private static Review_Dao dao = new Review_Dao();
 		
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 getsearch success");
 			
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getsearch success");
 			
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				len = rs.getInt(1);
 			}
-			System.out.println("3/6 getsearch success");
 		} catch (Exception e) {
 			System.out.println("getsearch fail");
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);			
 		}
+		System.out.println("search done");
 		return len;	
 	}
 	
 	//TODO Paging NERMU URYUWAR
-	public List<Review_Dto> getReview_PagingList(String choice, String searchWord, int page) {
+	public List<Review_Dto> getReview_PagingList(String choice, String searchWord, int limit, int page) {
 					
 		String sql = " SELECT REVIEW_SEQ, BUSI_ID, INDVD_ID, "
 				+ " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, REF, "
@@ -504,9 +501,9 @@ private static Review_Dao dao = new Review_Dao();
 			+  " FROM REVIEW ";
 		
 		String sqlWord = "";
-		if(choice.equals("indvd_id")) {
+		if(choice.equals("id")) {
 			sqlWord = " WHERE INDVD_ID='" + searchWord.trim() + "'";
-		}else if (choice.equals("busi_cate")) {
+		}else if (choice.equals("busi_name")) {
 			sqlWord = " WHERE BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 		}else if (choice.equals("title")) {
 			sqlWord = " WHERE TITLE LIKE '%" + searchWord.trim() + "%' ";
@@ -523,8 +520,11 @@ private static Review_Dao dao = new Review_Dao();
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
 		
 		int start, end;
-		start = 1 + 10 * page;	// 시작 글의 번호
-		end = 10 + 10 * page;	// 끝 글의 번호
+		start = 1 + limit * page;	// 시작 글의 번호
+		end = limit + limit * page;	// 끝 글의 번호
+		
+		System.out.println(start + "start");
+		System.out.println(end + "end");
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -534,15 +534,12 @@ private static Review_Dao dao = new Review_Dao();
 		
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 getReview_PagingList success");
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, start);
 			psmt.setInt(2, end);
-			System.out.println("2/6 getReview_PagingList success");
 			
 			rs = psmt.executeQuery();
-			System.out.println("3/6 getReview_PagingList success");
 			
 			while(rs.next()) {
 				int i = 1;
@@ -562,14 +559,14 @@ private static Review_Dao dao = new Review_Dao();
 												rs.getInt(i++));				
 				list.add(dto);
 			}
-			System.out.println(list.toString());
-			System.out.println("4/6 getReview_PagingList success");
+//			System.out.println(list.toString());
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);			
 		}
+		System.out.println("get list done");
 		return list;
 	}
 	
