@@ -45,7 +45,7 @@
             <div class="header clearfix">
               <!-- logo -->
               <div class="logo-wrap">
-                <a href="index.jsp" class="logo">
+                <a href="/Hoboard" class="logo">
                   <img src="img/logo_t.png" alt="Logo" />
                 </a>
               </div>
@@ -68,8 +68,8 @@
 			    <c:choose>
 			    	<c:when test="${ login eq 1 }">
 			    	<!-- after login -->
-			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
               	 	    <li class="util-item logout"><a href="logout.do">로그아웃</a></li>
+			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
 			    	</c:when>
 			    	
 			    	<c:otherwise>

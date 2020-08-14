@@ -36,6 +36,15 @@ public class Member_Dto {
 		this.d_Address = d_Address;
 	}
 
+	public Member_Dto(String id, String pw, String tel, String post_Num, String address, String d_Address) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.tel = tel;
+		this.post_Num = post_Num;
+		this.address = address;
+		this.d_Address = d_Address;
+	}
 
 	public int getAuth() {
 		return auth;

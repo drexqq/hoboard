@@ -46,7 +46,7 @@ public class login_Controller extends HttpServlet {
 			session.setAttribute("sessionID", id);
 			session.setAttribute("name", name);
 			
-			resp.sendRedirect(context + "/index.jsp");
+			resp.sendRedirect(context + "/");
 		} else {
 			System.out.println("아이디 혹은 비밀번호를 다시 확인해주세요.");
 			session.setAttribute("login", 0);

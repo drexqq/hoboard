@@ -5,7 +5,7 @@
           <div class="col-12">
             <div class="footer clearfix">
               <div class="logo-wrap">
-                <a href="index.jsp" class="logo"><img src="img/logo_t.png" alt="Logo" /></a>
+                <a href="/Hoboard" class="logo"><img src="img/logo_t.png" alt="Logo" /></a>
                 <div class="title">Hoboard Project by BITCAMP</div>
               </div>
               <div class="menu-wrap">

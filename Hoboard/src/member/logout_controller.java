@@ -22,7 +22,7 @@ public class logout_controller extends HttpServlet {
 //		RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 //		rd.forward(req, resp);
 		
-		resp.sendRedirect("index.jsp");
+		resp.sendRedirect("/Hoboard");
 		
 	}
 
