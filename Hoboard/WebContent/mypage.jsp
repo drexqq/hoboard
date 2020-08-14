@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
     <div class="box-wrap">
       <div class="row">
         <div class="col-3">
-          <a href="mypage/setting.jsp">
+          <a href="mypage?c=setting">
             <div class="box">
               <div class="title">개인정보관리</div>
               <div class="icon clearfix">
@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
           </a>
         </div>
         <div class="col-3">
-          <a href="mypage/ask.jsp">
+          <a href="my_ask.jsp">
             <div class="box">
               <div class="title">1:1 문의하기</div>
               <div class="icon clearfix">
@@ -54,5 +54,14 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
     </div>
   </div>
 </div>
-
+<script>
+$(document).ready(function(){
+  var session = "<c:out value='${ sessionID }'/>";
+  if(session == null || session == "") {
+    alert("로그인이 종료되었습니다. 다시 로그인 해주세요 !");
+    location.href = "login.jsp";
+  }
+})
+</script>
+<script src="js/mypage.js"></script>
 <%@ include file="module/footer.jsp"%>

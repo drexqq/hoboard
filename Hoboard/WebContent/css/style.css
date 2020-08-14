@@ -13,16 +13,37 @@ body {
   position: relative;
   height: 300px;
 }
+
 .health-wrap .title {
   padding-top: 80px;
   font-size: 32px;
   font-weight: 700;
 }
+
 .health-wrap .desc {
   font-size: 20px;
   font-weight: 500;
   margin-top: 60px;
 }
+
+.health-wrap .desc a {
+  transition: all 0.25s ease;
+}
+
+.health-wrap .desc a:hover {
+  color: #ff8c37;
+}
+
+.health-wrap .desc a i {
+  vertical-align: middle;
+  transition: all 0.25s ease;
+}
+
+.health-wrap .desc a:hover i {
+  padding-left: 5px;
+  color: #ff8c37;
+}
+
 .health-wrap .img {
   position: absolute;
   right: 0;
@@ -38,22 +59,27 @@ body {
 .review-wrap {
   padding: 80px 0;
 }
+
 .review-wrap .title {
   font-size: 36px;
   font-weight: 700;
   padding-bottom: 50px;
 }
+
 .review-wrap .list-wrap {
 }
+
 .review-wrap .go-review {
   padding-top: 50px;
   text-align: center;
 }
+
 .review-wrap .go-review a {
   color: #999999;
   font-size: 20px;
   transition: all 0.25s ease;
 }
+
 .review-wrap .go-review a:hover {
   color: #222222;
 }
@@ -65,21 +91,26 @@ body {
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
   border-radius: 5px;
 }
+
 .join-wrap {
   padding: 80px 0;
 }
+
 .join-wrap .input-wrap {
   padding-bottom: 15px;
 }
+
 .join-wrap .input-wrap:last-child {
   padding-bottom: 0;
 }
+
 .join-wrap .input-wrap label {
   float: left;
   font-size: 20px;
   line-height: 30px;
   width: 150px;
 }
+
 .join-wrap .input-wrap input {
   padding: 0 10px;
   float: left;
@@ -89,25 +120,31 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
 .join-wrap .input-wrap p {
   font-size: 24px;
   line-height: 30px;
   padding-top: 15px;
   padding-bottom: 20px;
 }
+
 .join-wrap .input-wrap small {
   display: block;
   font-size: 16px;
   padding-bottom: 5px;
 }
+
 .join-wrap .input-wrap small:last-of-type {
   padding-bottom: 30px;
 }
+
 .join-wrap .input-wrap.btn-added {
 }
+
 .join-wrap .input-wrap.btn-added input {
   width: calc(100% - 250px);
 }
+
 .join-wrap .input-wrap.btn-added button {
   border: 1px solid #ccc;
   padding: 2px 0;
@@ -116,40 +153,51 @@ body {
   width: 80px;
   transition: all 0.25s ease;
 }
+
 .join-wrap .input-wrap.btn-added button.done {
   opacity: 1;
   background-color: #349bd5;
+  color: #ffffff;
 }
+
 .join-wrap .input-wrap.btn-added button:hover {
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
 }
+
 .join-wrap .input-wrap.address-wrap {
 }
+
 .join-wrap .input-wrap.address-wrap label {
   width: 100%;
   margin-bottom: 15px;
 }
+
 .join-wrap .input-wrap.address-wrap input {
   width: 100%;
   margin-bottom: 15px;
 }
+
 .join-wrap .input-wrap.address-wrap input:last-child {
   margin-bottom: 0;
 }
+
 .join-wrap .input-wrap.address-wrap input#post_Num {
   display: inline-block;
   width: 150px;
   margin-right: 20px;
 }
+
 .join-wrap .input-wrap.address-wrap input#address {
   display: inline-block;
   width: calc(100% - 300px);
 }
+
 .join-wrap .input-wrap.address-wrap .find {
   padding: 2px 0;
   width: 120px;
   margin-left: 10px;
 }
+
 .join-wrap .input-wrap .time-wrap {
   float: left;
   width: 50%;
@@ -157,27 +205,33 @@ body {
   padding: 0 10px;
   position: relative;
 }
+
 .join-wrap .input-wrap .time-wrap:last-child {
   margin-bottom: 0;
 }
+
 .join-wrap .input-wrap .time-wrap label {
   cursor: pointer;
   width: 110px;
   line-height: 30px;
   transition: all 0.25s ease;
 }
+
 .join-wrap .input-wrap .time-wrap label.on * {
   color: #007bff;
   transition: all 0.25s ease;
 }
+
 .join-wrap .input-wrap .time-wrap label i {
   line-height: 30px;
   vertical-align: middle;
 }
+
 .join-wrap .input-wrap .time-wrap label span {
   display: inline-block;
   line-height: 30px;
 }
+
 .join-wrap .input-wrap .time-wrap input {
   width: 0;
   opacity: 0;
@@ -185,11 +239,13 @@ body {
   visibility: hidden;
   transition: all 0.25s ease;
 }
+
 .join-wrap .input-wrap .time-wrap input.show {
   opacity: 1;
   visibility: visible;
   width: calc(100% - 110px);
 }
+
 .join-wrap .input-wrap .time-wrap .default-text {
   position: absolute;
   left: 155px;
@@ -201,33 +257,42 @@ body {
 
 .join-wrap .input-wrap .check-wrap {
 }
+
 .join-wrap .input-wrap .check-wrap .check {
   float: left;
   margin-right: 20px;
   width: calc(20% + 55px);
 }
+
 .join-wrap .input-wrap .check-wrap .check * {
   cursor: pointer;
 }
+
 .join-wrap .input-wrap .check-wrap .check:last-child {
   margin-right: 0;
 }
+
 .join-wrap .input-wrap .check-wrap .check label {
   float: left;
   width: auto;
   margin-left: 10px;
 }
+
 .join-wrap .input-wrap .check-wrap .check input {
   float: left;
   width: 20px;
 }
+
 .join-wrap .btn-wrap {
   width: 100%;
   text-align: center;
   padding-top: 40px;
 }
+
 .join-wrap .btn-wrap button {
   width: 150px;
+  background-color: #3da0d7;
+  color: #ffffff;
 }
 
 .join-wrap .link-wrap {
@@ -235,10 +300,12 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 .join-wrap .link-wrap .wrap {
   width: calc(50% - 30px);
   text-align: center;
 }
+
 .join-wrap .link-wrap .wrap .box {
   border-top: 3px solid #4e8dc9;
   border-bottom: 1px solid rgb(235, 235, 235);
@@ -247,6 +314,7 @@ body {
   padding: 60px 20px;
   margin-bottom: 40px;
 }
+
 .join-wrap .link-wrap .wrap .box .icon {
   margin: 0 auto;
   margin-bottom: 40px;
@@ -259,10 +327,12 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .join-wrap .link-wrap .wrap .box .icon img {
   display: block;
   width: 120px;
 }
+
 .join-wrap .link-wrap .wrap .box .text {
   position: relative;
   font-size: 26px;
@@ -270,6 +340,7 @@ body {
   color: #222222;
   padding-bottom: 15px;
 }
+
 .join-wrap .link-wrap .wrap .box .text:before {
   position: absolute;
   left: 50%;
@@ -280,11 +351,13 @@ body {
   height: 2px;
   background-color: #4e8dc9;
 }
+
 .join-wrap .link-wrap .wrap .box .desc {
   padding-top: 15px;
   color: #333333;
   font-size: 20px;
 }
+
 .join-wrap .link-wrap .wrap .link {
   width: 150px;
   border-radius: 5px;
@@ -293,6 +366,7 @@ body {
   font-size: 20px;
   transition: all 0.25s ease;
 }
+
 .join-wrap .link-wrap .wrap .link:hover {
   background-color: #4ba6da;
 }
@@ -302,6 +376,7 @@ body {
   min-height: calc(100vh - 365px);
   position: relative;
 }
+
 .login-wrap .login-form {
   position: absolute;
   left: 50%;
@@ -312,25 +387,30 @@ body {
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
   padding: 50px;
 }
+
 .login-wrap .login-form .login-head {
   font-weight: 600;
   font-size: 18px;
   padding-bottom: 40px;
 }
+
 .login-wrap .login-form .title {
   text-align: center;
   font-size: 30px;
   font-weight: 600;
 }
+
 .login-wrap .input-wrap {
   padding-bottom: 15px;
 }
+
 .login-wrap .input-wrap label {
   color: #000;
   font-size: 18px;
   line-height: 30px;
   padding-bottom: 5px;
 }
+
 .login-wrap .input-wrap input {
   padding: 0 10px;
   height: 30px;
@@ -339,14 +419,18 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
 .login-wrap .check-wrap {
 }
+
 .login-wrap .check-wrap * {
   cursor: pointer;
 }
+
 .login-wrap .btn-wrap {
   margin-top: 40px;
 }
+
 .login-wrap .btn-wrap button {
   background-color: #349bd5;
   display: block;
@@ -355,54 +439,69 @@ body {
   font-size: 20px;
   transition: all 0.25s ease;
 }
+
 .login-wrap .btn-wrap button:hover {
   background-color: #4ba6da;
 }
+
 .login-wrap .util-wrap {
   margin-top: 40px;
   text-align: center;
   font-size: 16px;
   color: #888888;
 }
+
 .login-wrap .util-wrap .join {
   float: left;
 }
+
 .login-wrap .util-wrap .find {
   float: right;
 }
 
 /* mypage */
-
 .mypage-wrap {
   min-height: calc(100vh - 365px);
   padding: 80px 0;
 }
+
 .mypage-wrap .page-title {
   padding-bottom: 100px;
   font-size: 34px;
   font-weight: 600;
 }
+
 .mypage-wrap .box-wrap {
 }
+
 .mypage-wrap .box-wrap .row:first-child {
   margin-bottom: 30px;
 }
+
 .mypage-wrap .box-wrap .box {
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
   transition: all 0.25s ease;
 }
+
 .mypage-wrap .box-wrap .box:hover {
   transform: translate(-5px, -5px);
   border: 1px solid #ff8c37;
 }
+
 .mypage-wrap .box-wrap .box .title {
   font-size: 24px;
   font-weight: 600;
   padding-bottom: 20px;
 }
+
 .mypage-wrap .box-wrap .box .icon {
 }
+
 .mypage-wrap .box-wrap .box .icon img {
   float: right;
+}
+
+.mypage-wrap .join-wrap {
+  padding: 0;
 }

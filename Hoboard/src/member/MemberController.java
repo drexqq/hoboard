@@ -17,13 +17,21 @@ public class MemberController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String id = req.getParameter("id");
-		System.out.println(id);
+		String chk = req.getParameter("chk");
+		String id = "";
+		String email = "";
 		Member_Dao dao = Member_Dao.getInstance();
 		JSONObject jsonData = new JSONObject();
-		jsonData.put("chk", dao.chkId(id));
-		
-		System.out.println(dao.chkId(id));
+		if("id".equals(chk)) {
+			System.out.println("id chk");
+			id = req.getParameter("id");
+			jsonData.put("chk", dao.chkId(id));
+		}
+		else if ("email".equals(chk)) {
+			System.out.println("email chk");
+			email = req.getParameter("email");
+			jsonData.put("chk", dao.chkEmail(email));
+		}
 		resp.setContentType("application/x-json; charset=UTF-8");
 		resp.getWriter().print(jsonData);
 	}
@@ -76,29 +84,33 @@ public class MemberController extends HttpServlet {
 			int amenity[] = new int[5];
 			
 			for (int i = 0; i < time.length; i++) {
-				time[i] = "휴무";
-				if (req.getParameter("time"+i) != null || !req.getParameter("time"+i).equals("")) time[i] = req.getParameter("time"+i);
+				System.out.println("init time"+i+" = "+time[i]);
+				if (req.getParameter("time"+i+"") == null || req.getParameter("time"+i+"").equals("") || req.getParameter("time"+i+"").equals("null")) time[i] = "휴무";
+				else time[i] = req.getParameter("time"+i);
+				System.out.println("time"+i+" = "+time[i]);
 			}
 			for (int i = 0; i < extra.length; i++) {
 				extra[i] = 0;
 				if (req.getParameter("time"+(i+8)) != null) extra[i] = 1;
+				System.out.println("extra"+i+" = "+extra[i]);
 			}
 			for (int i = 0; i < amenity.length; i++) {
-				cate[i] = 0;
+				amenity[i] = 0;
 				if (req.getParameter("amenity"+i) != null) amenity[i] = 1;
+				System.out.println("amenity"+i+" = "+amenity[i]);
 			}
 			for (int i = 0; i < cate.length; i++) {
 				cate[i] = 0;
 				if (req.getParameter("cate"+i) != null) cate[i] = 1;
+				System.out.println("cate"+i+" = "+cate[i]);
 			}
 			
 			done = b_dao.addBUSI_Member(b_dto, b_dto.getId());
 			if(done) done = b_dao.addBUSI_Extra(b_dto.getId(), time, extra, cate, amenity);
 			
 		}
-		
-		req.setAttribute("join", done);
-		UtilEx.forward("join.jsp", req, resp);
+		if(done) resp.sendRedirect("/Hoboard");
+		else return;
 	}
 	
 	

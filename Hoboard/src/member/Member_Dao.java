@@ -91,6 +91,11 @@ public class Member_Dao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("addMember fail");
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			DBClose.close(psmt, conn, null);	
 			System.out.println("addMember done");
@@ -99,7 +104,42 @@ public class Member_Dao {
 		return count > 0 ? true : false;
 	}
 	
-	// GET IDS MEMBER
+	// UPDATE USER MEMBER TABLE
+	public boolean updateMember(Member_Dto dto) {
+		// 비밀번호 전화번호 주소
+		System.out.println("UPDATE USER MEMBER TABLE");
+		String query = " UPDATE MEMBER"
+					+ " SET"
+					+ " PW = ?, "
+					+ " TEL = ?, "
+					+ " ADDRESS = ?,"
+					+ " D_ADDRESS = ? "
+					+ " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, dto.getPw());
+			psmt.setString(2, dto.getTel());
+			psmt.setString(3, dto.getAddress());
+			psmt.setString(4, dto.getD_Address());
+			psmt.setString(5, dto.getId());
+			
+			count = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		System.out.println("UPDATE USER MEMBER DONE");
+		return count > 0 ? true : false;
+	}
+	
+	// GET ID MEMBER
 	public boolean chkId(String id) {
 		String query = " SELECT ID"
 					+ " FROM MEMBER"
@@ -125,8 +165,34 @@ public class Member_Dao {
 		return exist;
 	}
 	
+	// GET EMAIL MEMBER
+	public boolean chkEmail(String email) {
+		String query = " SELECT EMAIL"
+					+ " FROM MEMBER"
+					+ " WHERE EMAIL = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		boolean exist = false;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, email);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) exist = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return exist;
+	}
+	
 	// GET BUSI_CATE COLUMN
-	public String[] getBusiCate() {
+	public String[] getBusiCateList() {
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_CATE' AND COLUMN_NAME != 'ID' ";
 		
 		Connection conn = null;
@@ -148,8 +214,35 @@ public class Member_Dao {
 		}
 		return cate;
 	}
+	// GET BUSI CATE
+	public String[] getBusiCate(String id) {
+		String query = " SELECT * FROM BUSI_CATE WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String cate[] = new String[16];
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			int j = 2;
+			while(rs.next()) {
+				for (int i = 0; i < cate.length; i++) {
+					cate[i] = rs.getString(j++);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cate;
+	}
+	
 	// GET BUSI_TIME TABLE COLUMN
-	public String[] getBusiTime() {
+	public String[] getBusiTimeList() {
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_TIME' AND COLUMN_NAME != 'ID' ";
 		
 		Connection conn = null;
@@ -171,8 +264,9 @@ public class Member_Dao {
 		}
 		return time;
 	}
+	
 	// GET BUSI_AMENITY TABLE COLUMN
-	public String[] getAmenity() {
+	public String[] getAmenityList() {
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_AMENITY' AND COLUMN_NAME != 'ID' ";
 		
 		Connection conn = null;
@@ -195,6 +289,44 @@ public class Member_Dao {
 		return amenity;
 	}
 	
-	
+	// GET USER INFO
+	public Member_Dto getUser(String id) {
+		String query = " SELECT * FROM MEMBER"
+					+ " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		Member_Dto dto = null;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+			
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				int i = 1;
+				dto = new Member_Dto(
+							rs.getInt(i++),
+							rs.getString(i++),
+							rs.getString(i++),
+							rs.getString(i++),
+							rs.getString(i++),
+							rs.getString(i++),
+							rs.getString(i++),
+							rs.getString(i++),
+							rs.getString(i++)
+						);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return dto;
+	}
+
 	
 }

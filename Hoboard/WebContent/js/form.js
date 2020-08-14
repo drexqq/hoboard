@@ -1,11 +1,9 @@
 // checkSpace
 function checkSpace(str) {
-  if (str.search(/\s/) != -1) {
-    return true;
-  } else {
-    return false;
-  }
+  if (str.search(/\s/) != -1) return true;
+  else return false;
 }
+
 // toggle check box color
 $(".time-wrap")
   .find("label")
@@ -16,31 +14,41 @@ $(".time-wrap")
       $(this).siblings(".default-text").toggle();
     });
   });
-// id_check
-$("#id_Check").on("click", function () {
-  console.log($("#id").val());
-  if ($("#id").val() == "") {
-    alert("아이디를 입력해주세요 !");
+// check email, id
+$(".check_dup").on("click", function () {
+  var check_eng = $(this).data("name");
+  var check_kor = check_eng == "id" ? "아이디" : "이메일";
+  if ($("#" + check_eng).val() == "") {
+    alert(check_kor + "을 입력해주세요 !");
     return false;
-  } else if (checkSpace($("#id").val())) {
+  } else if (checkSpace($("#" + check_eng).val())) {
     alert("잘못된 입력입니다. 띄어쓰기를 사용할 수 없습니다.");
-    $("#id").val("");
+    $(this).val("");
     return false;
   } else {
-    console.log("ajax start");
     $.ajax({
       type: "GET",
-      url: "MEMBER",
+      url: "MEMBER?chk=" + check_eng,
       datatype: "json",
-      data: { id: $("#id").val() },
+      data: { check_kor: $("#" + check_eng).val() },
       success: function (json) {
         if (json.chk) {
-          alert("중복된 아이디입니다. 다른 아이디를 입력해주세요 !");
-          $("#id").val("").focus();
+          alert(
+            "중복된 " +
+              check_kor +
+              "입니다. 다른 " +
+              check_kor +
+              "를 입력해주세요 !"
+          );
+          $("#" + check_eng)
+            .val("")
+            .focus();
         } else {
-          alert("확인되었습니다 !");
-          $("#id").attr("readonly", "readonly");
-          $("#id_Check").addClass("done").attr("disabled", "disabled");
+          alert("사용할 수 있는 " + check_kor + "입니다 !");
+          $("#" + check_eng).attr("readonly", "readonly");
+          $(".check_dup[data-name=" + check_eng + "]")
+            .addClass("done")
+            .attr("disabled", "disabled");
         }
       },
       error: function (e) {
@@ -49,13 +57,10 @@ $("#id_Check").on("click", function () {
     });
   }
 });
-
 // before form submit input value check
 $("#joinBtn").on("click", function () {
   // auth 1 - INDVD / 2 - BUSI
   const auth = $("input[name=auth]").val();
-
-  // member default info chk
 
   // member default info check
   var exit = false;

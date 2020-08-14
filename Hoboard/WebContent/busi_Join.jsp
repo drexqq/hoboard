@@ -10,10 +10,10 @@
             <label for="name">병원 이름</label>
             <input type="text" id="name" name="name" class="textChk" />
           </div>
-          <div class="input-wrap btn-added clearfix">
+          <div class="input-wrap clearfix">
             <label for="id">아이디</label>
             <input type="text" id="id" name="id" class="textChk" />
-            <button type="button" class="btn" id="id_Check">check</button>
+            <button type="button" class="btn check_dup" data-name="id">check</button>
           </div>
           <div class="input-wrap clearfix">
             <label for="pw">비밀 번호</label>
@@ -31,6 +31,7 @@
           <div class="input-wrap clearfix">
             <label for="email">이메일</label>
             <input type="text" id="email" name="email" class="textChk" />
+            <button type="button" class="btn check_dup" data-name="email">check</button>
           </div>
           <div class="input-wrap clearfix">
             <label for="tel">전화 번호</label>
@@ -147,7 +148,7 @@
                     name="amenity${ status.index }"
                     value="${ amenity.key }"
                   />
-                  <label for="parking">${ amenity.value }</label>
+                  <label for="${ amenity.key }">${ amenity.value }</label>
                 </div>
               </c:forEach>
             </div>
