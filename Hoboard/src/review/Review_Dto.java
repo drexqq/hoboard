@@ -6,27 +6,39 @@ public class Review_Dto implements Serializable {
 	
 	private int review_seq;	 // sequence
 	
-	private String busi_id;	 // 병원측 조회 아이디
-	private String indvd_id; // 작성자
+	private String busi_id;	 
+	private String indvd_id; 
 	
-	private String title;	 // 타이틀
-	private String content;  // 내용
+	private String title;	 
+	private String content;  
 	
-	private int viewcount;	 // 조회수
-	private int score;		 // 평점
+	private int viewcount;	 
+	private int score;		 
 	
-	private String wdate;	 // 작성일
+	private String wdate;	 
 	
-	private int ref;		 // 그룹번호		 
-	private int step;		 // 행(row)번호
-	private int depth;		 // ㄴ> 깊이(depth)
+	private int ref;		 // ref	 
+	private int step;		 // (row)
+	private int depth;		 // (depth)
+	
+	private String filename;
+	private String busi_cate;
+	
+	private int del;
 	
 	public Review_Dto() {
 	}
 	
 	
+	
+
+	
+
+
+
+
 	public Review_Dto(int review_seq, String busi_id, String indvd_id, String title, String content, int viewcount,
-			int score, String wdate, int ref, int step, int depth) {
+			int score, String wdate, int ref, int step, int depth, String filename, String busi_cate, int del) {
 		super();
 		this.review_seq = review_seq;
 		this.busi_id = busi_id;
@@ -39,19 +51,28 @@ public class Review_Dto implements Serializable {
 		this.ref = ref;
 		this.step = step;
 		this.depth = depth;
+		this.filename = filename;
+		this.busi_cate = busi_cate;
+		this.del = del;
 	}
 
 
-	
 
 
-	public Review_Dto(String busi_id, String indvd_id, String title, String content, int score) {
+
+
+
+
+
+	public Review_Dto(String busi_id, String indvd_id, String title, String content, int score, String filename, String busi_cate) {
 		super();
 		this.busi_id = busi_id;
 		this.indvd_id = indvd_id;
 		this.title = title;
 		this.content = content;
 		this.score = score;
+		this.filename = filename;
+		this.busi_cate = busi_cate;
 	}
 
 
@@ -128,12 +149,12 @@ public class Review_Dto implements Serializable {
 	}
 
 
-	public String getW_date() {
+	public String getWdate() {
 		return wdate;
 	}
 
 
-	public void setW_date(String wdate) {
+	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
 
@@ -166,14 +187,60 @@ public class Review_Dto implements Serializable {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	
+	public String getFilename() {
+		return filename;
+	}
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+	public String getBusi_cate() {
+		return busi_cate;
+	}
+
+
+	public void setBusi_cate(String busi_cate) {
+		this.busi_cate = busi_cate;
+	}
+	
+	
+
+
+	public int getDel() {
+		return del;
+	}
+
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
 
 
 	@Override
 	public String toString() {
 		return "Review_Dto [review_seq=" + review_seq + ", busi_id=" + busi_id + ", indvd_id=" + indvd_id + ", title="
 				+ title + ", content=" + content + ", viewcount=" + viewcount + ", score=" + score + ", wdate=" + wdate
-				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth + "]";
+				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", filename=" + filename + ", busi_cate="
+				+ busi_cate + ", del=" + del + "]";
 	}
+
+
+
+
+
+
+
+
+
+	
+
+
+	
 
 
 	

@@ -35,7 +35,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
             <div class="box">
               <div class="title">후기 관리</div>
               <div class="icon clearfix">
-                <img src="img/mypage_review.svg" alt="" />
+                <a href="REVIEW?review=main&id=fff"><img src="img/mypage_review.svg" alt="" /></a>
               </div>
             </div>
           </a>

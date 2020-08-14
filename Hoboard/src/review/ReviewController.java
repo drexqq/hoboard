@@ -16,207 +16,264 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.SendResult;
 
+import org.apache.commons.fileupload.FileItem;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import Reserve.Reserve_Dto;
 import Util.UtilEx;
 import member.Member_Dto;
 
 @WebServlet("/REVIEW")
 public class ReviewController extends HttpServlet {
-	
-	ServletConfig mConfig = null;
-	final int BUFFER_SIZE = 8192;
-	
-	//TODO file download
-	/*
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		
-		super.init(config);
-		mConfig = config;		// file upload load
-	}*/
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String review = req.getParameter("review");
-		Review_Dao dao = Review_Dao.getInstance(); 
+		req.setCharacterEncoding("UTF-8");
 		
-		//review_Main
+		
+		String review = req.getParameter("review");
+		Review_Dao dao = Review_Dao.getInstance();
+
+		// TODO review_Main not using
 		if(review.equals("reviewlist")) {
 			System.out.println("---review list---");
-			
+
 			List<Review_Dto> list = dao.getReviewList();
-			
+
 			req.setAttribute("reviewlist", list);
-			UtilEx.forward("review.jsp", req, resp);
-		
-		
-		//review_WriteView
-		}else if(review.equals("writeView")) {
+			UtilEx.forward("	", req, resp);
+
+			// review_WriteView
+		} else if (review.equals("writeview")) {
 			System.out.println("---review writeView ---");
-			
-			
-			//dummy RESERVE DATA -> REVIEW 
-			//getSession ID
+
+			// dummy RESERVE DATA -> REVIEW
+			// getSession ID
 			String id = req.getParameter("id");
-			//getBusi_ID
+			// getBusi_ID
 			String busi = req.getParameter("busi");
-			//getSeq
+			// getSeq
 			int seq = Integer.parseInt(req.getParameter("seq"));
-			
-			//check
+
+			// check
 			System.out.println("id check :" + id);
 			System.out.println("busi check :" + busi);
 			System.out.println("seq check :" + seq);
-			
-			//status lookup method
-			String check = dao.checkStatus(id ,seq);
-			
-			//status check
+
+			// status lookup method
+			String check = dao.checkStatus(id, seq);
+
+			// status check
 			System.out.println(check);
-			
-			
-			//reserve MEMBER - NAME
+
+			// reserve MEMBER - NAME
 			Member_Dto N_list = dao.getBusi_Name(busi, seq);
-			
-			//reserve MEMBER - NAME check
+
+			// reserve MEMBER - NAME check
 			System.out.println(N_list.toString());
-			
-			//reserve CATE
+
+			// reserve CATE
 			Reserve_Dto C_list = dao.getReserve_Cate(id, seq);
-			
-			//reserve CATE check
+
+			// reserve CATE check
 			System.out.println(C_list.toString());
-			
-			//reserve all data Transfer
+
+			// reserve all data Transfer
 			Reserve_Dto R_list = dao.getReserve_Data(id, seq);
-			
-			//reserve list check
+
+			// reserve list check
 			System.out.println(R_list.toString());
 			
+			if (check.equals("3")) {
 
-			
-			if(check.equals("3")) {
-				
-				
 				req.setAttribute("businame", N_list);
 				req.setAttribute("reservecate", C_list);
 				req.setAttribute("reservelist", R_list);
-				
+
 				UtilEx.forward("review_write.jsp", req, resp);
 				
-			}else {
+			} else {
 				resp.sendRedirect("review.jsp");
 			}
-	    }
-		else if(review.equals("æ˜µ•¿Ã∆Æ")) {
+			
+		// -> detail list
+		}else if (review.equals("detail")) {
+			
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			
+			// seq check
+			System.out.println("seq:" + seq);
+			
+			Review_Dto dto = dao.getDetail_list(seq);
+			
+			//view count
+			dao.viewcount(seq);
+			
+			req.setAttribute("detaillist", dto);
+			UtilEx.forward("review_detail.jsp", req, resp);
+			
+		}else if (review.equals("updateview")) {
+			
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			
+			Review_Dto dto = dao.getDetail_list(seq);
+			
+			
+			
+			req.setAttribute("detaillist", dto);
+			UtilEx.forward("review_update.jsp", req, resp);
+			
+		}else if(review.equals("delete")) {
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			
+			// seq check
+			System.out.println("seq:" + seq);
+			
+			boolean delete = dao.Review_delete(seq);
+			
+			if(delete) {
+				System.out.println("Í∏Ä ÏÇ≠Ï†ú ÏÑ±Í≥µ");
+				resp.sendRedirect("REVIEW?review=main");
+				
+			}else {
+				System.out.println("Í∏Ä ÏÇ≠Ï†ú Ïã§Ìå®");
+				resp.sendRedirect("REVIEW?review=main");
+			}
+			
+		}else if(review.equals("answer")) {
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			
+			Review_Dto dto = dao.getDetail_list(seq);
+			
+			req.setAttribute("detaillist", dto);
+			UtilEx.forward("review_answer.jsp", req, resp);
+		
+		//TODO paging main now using
+		}else if(review.equals("main")) {
+			//Í≤ÄÏÉâÏñ¥
+			String searchWord = req.getParameter("searchWord");
+			//ÏÖÄÎ†âÌä∏Î∞ïÏä§
+			String choice = req.getParameter("choice");
+			//ÌéòÏù¥ÏßÄÎÑòÎ≤Ñ
+			String spageNumber = req.getParameter("pageNumber");
+			
+			if(choice == null || choice.equals("")){
+				choice = "sel";
+			}
+
+			if(choice.equals("sel")){
+				searchWord = "";
+			}
+			if(searchWord == null){
+				searchWord = "";
+				choice = "sel";
+			}
+			
+			//ÌòÑÏû¨ ÌéòÏù¥ÏßÄ
+			int pageNumber = 0; 
+			if(spageNumber != null && !spageNumber.equals("")){
+				pageNumber = Integer.parseInt(spageNumber);
+			}
+			
+			int len = dao.getsearch(choice, searchWord);
+			
+			System.out.println("-Ï†ÑÏ≤¥ Ïª¨Îüº Ïà´Ïûê-len:" + len);
+			
+	
+			int Page = len / 10;		// Ïòà: 12Í∞ú -> 2page
+			if(len % 10 > 0){
+				Page = Page + 1;	// -> 2
+			}
+		
+			
+			List<Review_Dto> list = dao.getReview_PagingList(choice, searchWord, pageNumber);
+			
+			int P_pageNumber = pageNumber;
+			int P_paging = Page;
+			//String P_pageNumber = Integer.toString(pageNumber);
+			//String P_paging =  Integer.toString(Page);
+			
+			
+			System.out.println("-Ïπ¥ÌÖåÍ≥†Î¶¨ÏÑ†ÌÉù- choice :" + choice);
+			System.out.println("-Í≤ÄÏÉâÏñ¥- searchWord :" + searchWord);
+			System.out.println("-ÌéòÏù¥ÏßÄÎ≤àÌò∏- pageNumber :" + P_pageNumber);
+			System.out.println("-ÌéòÏù¥ÏßÄ- page :" + P_paging);
+			
+			
+			
+			
+			req.setAttribute("choice", choice);
+			req.setAttribute("searchWord", searchWord);
+			req.setAttribute("pageNumber", P_pageNumber);
+			req.setAttribute("page", P_paging);
+			req.setAttribute("paginglist", list);
+			UtilEx.forward("review.jsp", req, resp);
 		}
-	}
+		
+		
+}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
 		String review = req.getParameter("review");
-		
-		
 		Review_Dao dao = Review_Dao.getInstance();
-		
-
-	
-		
+			
 		if(review.equals("writecomplete")) {
 			
 			String indvd_id = req.getParameter("indvd_id");
 			String busi_id = req.getParameter("busi_id");
-			//TODO LIST ∫¥ø¯ ¿Ã∏ß
-			String cate = req.getParameter("cate");
-			
-			String id = req.getParameter("id");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-			String score = req.getParameter("score");
+			String filename = req.getParameter("filename");
+			int score = Integer.parseInt(req.getParameter("score"));
 			String fileupload = req.getParameter("fileupload");
+			String busi_cate = req.getParameter("cate");
 			
 			//Parameter check
 			System.out.println("indvd_id: " + indvd_id);
 			System.out.println("busi_id: " + busi_id);
-			System.out.println("cate: " + cate);
-			System.out.println("id: " + id);
 			System.out.println("title: " + title);
 			System.out.println("content: " + content);
+			
 			System.out.println("score: " + content);
-			System.out.println("fileupload: " + fileupload);
+			System.out.println("fileupload: " + fileupload);	
+			System.out.println("cate: " + busi_cate);
 			
+			boolean write = dao.writeReview(new Review_Dto(busi_id,indvd_id,title,content,score,filename,busi_cate));
 			
-			
-			//dao.processUploadFile(fileItem, dir);
-			
-			
-			
-			
-			
-			//TODO FileDownload
-			/*
-			String filename = req.getParameter("filename");
-			String sseq = req.getParameter("seq");
-			int seq = Integer.parseInt(sseq);
-			System.out.println("seq:" + seq);
-			
-			// download »Ωºˆ ¡ı∞°(DB)
-			Review_Dao dao = Review_Dao.getInstance();
-			dao.downcount(seq);
-			
-			//System.out.println(filename);
-			//System.out.println(seq);
-			BufferedOutputStream out = new BufferedOutputStream(resp.getOutputStream());
-			
-			
-			
-			
-			String filePath = "";
-			
-			// tomcat(server)
-			filePath = mConfig.getServletContext().getRealPath("/upload");
-			
-			
-			// ∆˙¥ı(client)
-			// filePath = "d:\\tmp";
-			
-			filePath = filePath + "\\" + filename;
-			System.out.println("filePath: " + filePath);
-			
-			File f = new File(filePath);
-			
-			if( f.exists() && f.canRead() ) {
+			if(write) {
+				System.out.println("Í∏Ä ÏûëÏÑ± ÏÑ±Í≥µ");
+				resp.sendRedirect("REVIEW?review=main");
 				
-				// download window set
-				resp.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\";");
-				resp.setHeader("Content-Transfer-Encoding", "binary;");
-				resp.setHeader("Content-Length", "" + f.length());
-				resp.setHeader("Pragma", "no-cache;"); 
-				resp.setHeader("Expires", "-1;");
-				
-				// ∆ƒ¿œ ª˝º∫, ±‚¿‘
-				BufferedInputStream fileInput = new BufferedInputStream(new FileInputStream(f));
-				
-				byte buffer[] = new byte[BUFFER_SIZE];
-				
-				int read = 0;
-				
-				while((read = fileInput.read(buffer)) != -1) {
-					out.write(buffer, 0, read);		// Ω«¡¶ ¥ŸøÓ∑ŒµÂ
-				}
-				//≤¿ ±‚¿‘«“ ∞Õ
-				fileInput.close();
-				out.flush();
+			}else {
+				System.out.println("Í∏Ä ÏûëÏÑ± Ïã§Ìå®");
+				resp.sendRedirect("REVIEW?review=main");
+			}
+		}else if(review.equals("update")) {
 			
-		//getParameter session ID
-		String id = req.getParameter("id");
-		
-		*/
-		
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			
+			System.out.println("seq: " + seq);
+			System.out.println("title: " + title);
+			System.out.println("content: " + content);
+			
+			boolean update = dao.getReview_update(seq, title, content);
+			
+			if(update) {
+				System.out.println("Í∏Ä ÏàòÏ†ï ÏÑ±Í≥µ");
+				resp.sendRedirect("review.jsp");
+				
+			}else {
+				System.out.println("Í∏Ä ÏàòÏ†ï Ïã§Ìå®");
+				resp.sendRedirect("review.jsp");
+			}
+			
 		}
-	
 	}
 }
