@@ -57,8 +57,9 @@
 								<button type="button" class="btn" id="dayBtn">파일첨부</button>
 							</div>
 							<div class="input-wrap clearfix">
-								<label for="homepage">홈페이지</label> <input type="text"
-									id="homepage" name="homepage" />
+								<label for="homepage">홈페이지</label>
+								<input type="text"
+									id="homepage" name="homepage" value="${ user.address }" />
 							</div>
 
 							<div class="input-wrap clearfix">
