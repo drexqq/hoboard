@@ -17,8 +17,8 @@ Review_Dto dto =(Review_Dto)request.getAttribute("detaillist");
 </head>
 <body>
 <h1>후기수정</h1>
-<form action="REVIEW" method="post">
-<input type="hidden" name="review" value="update">
+<form action="review" method="post">
+<input type="hidden" name="key" value="update">
 <input type="hidden" name="seq" value="<%=dto.getReview_seq() %>">
 <table style="width:600" border="1" align="center">
 <col width="300"><col width="500">

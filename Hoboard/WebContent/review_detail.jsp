@@ -49,7 +49,7 @@ function onDownload(id) {
 </tr>
 <tr>
 	<th>파일다운로드</th>
-		<td><input type="button" name="btndown" value="파일"onclick="location.href='filedown?filename=<%=dto.getFilename() %>&seq=<%=dto.getReview_seq() %>'"></td>
+		<td><input type="button" name="btndown" value="파일"onclick="location.href='file?filename=<%=dto.getFilename() %>&seq=<%=dto.getReview_seq() %>'"></td>
 </tr>
 <tr>
 	<th>작성일</th>
@@ -95,11 +95,11 @@ if(dto.getIndvd_id().equals(mem.getId())){
 
 <script type="text/javascript">
 function updateBbs(seq) {
-	location.href = "REVIEW?review=updateview&seq=" + seq;
+	location.href = "review?key=updateview&seq=" + seq;
 }
 
 function deleteBbs(seq) {
-	location.href = "REVIEW?review=delete&seq=" + seq;
+	location.href = "review?key=delete&seq=" + seq;
 }
 
 

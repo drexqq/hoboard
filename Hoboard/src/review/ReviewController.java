@@ -9,201 +9,198 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Reserve.Reserve_Dto;
 import Util.UtilEx;
+import member.Member_Dto;
 
 @WebServlet("/review")
 public class ReviewController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		req.setCharacterEncoding("UTF-8");
-		
 		Review_Dao dao = Review_Dao.getInstance();
-		List<Review_Dto> list = null;
-		String sW = (String)req.getParameter("searchWord");
-		String c = (String)req.getParameter("choice");
-		
-		int limit = 5;
-		int pageNumber = 0;
-		
-		if(req.getParameter("page") == null) pageNumber = 0;
-		else pageNumber = Integer.parseInt((String)req.getParameter("page"));
-		
-		int len = dao.getsearch(c, sW);
-		int page = len / limit;		// 예: 12개 -> 2page
-		if(len % limit > 0) page = page + 1;	// -> 2
-		System.out.println("page = " + page);
-		// 처음 들어왔을때
-		if(sW == null && c == null && pageNumber == 0) list = dao.getReview_PagingList("", "", limit, pageNumber);
-		// 페이지만 바뀔때
-		else if (sW == null && c == null && req.getParameter("page") != null) list = dao.getReview_PagingList("", "", limit, pageNumber);
-		// 다 바뀔때
-		else {
-			if (sW == null) sW = "";
-			list = dao.getReview_PagingList(c, sW, limit, pageNumber);
-			req.setAttribute("choice", c);
-			req.setAttribute("searchWord", sW);
-		}
-		req.setAttribute("len", len);
-		req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
-		req.setAttribute("page", page-1);	// 총 페이지수
-		req.setAttribute("reviewlist", list);	// 실제 데이터
-		
-		UtilEx.forward("review.jsp", req, resp);
-		/*
-		else {
-			System.out.println("여기가 페이징 or 검색");
-			
-			System.out.println(c);
-			System.out.println(sW);
-			System.out.println(limit);
-			System.out.println(pageNumber);
-			// 글의 총 갯수
-			list = dao.getReview_PagingList(c, sW, limit, pageNumber);
-			
-			System.out.println("-카테고리선택- choice :" + c);
-			System.out.println("-검색어- searchWord :" + sW);
-			System.out.println("-페이지번호- pageNumber :" + pageNumber);
-			System.out.println("-페이지- page :" + page);
-			
-			req.setAttribute("choice", c);
-			req.setAttribute("searchWord", sW);
-			req.setAttribute("page", pageNumber);
-			req.setAttribute("limit", limit);	// 한 페이지당 리스트 갯수
-			req.setAttribute("page", page-1);	// 총 페이지수
-			req.setAttribute("reviewlist", list);	// 실제 데이터
-			
+		String key = req.getParameter("key");
+
+		if (key.equals("main")) {
+			List<Review_Dto> list = null;
+			String sW = (String) req.getParameter("searchWord");
+			String c = (String) req.getParameter("choice");
+
+			int limit = 5;
+			int pageNumber = 0;
+
+			if (req.getParameter("page") == null)
+				pageNumber = 0;
+			else
+				pageNumber = Integer.parseInt((String) req.getParameter("page"));
+
+			int len = dao.getsearch(c, sW);
+			int page = len / limit; // 예: 12개 -> 2page
+			if (len % limit > 0)
+				page = page + 1; // -> 2
+			System.out.println("page = " + page);
+			// 처음 들어왔을때
+			if (sW == null && c == null && pageNumber == 0)
+				list = dao.getReview_PagingList("", "", limit, pageNumber);
+			// 페이지만 바뀔때
+			else if (sW == null && c == null && req.getParameter("page") != null)
+				list = dao.getReview_PagingList("", "", limit, pageNumber);
+			// 다 바뀔때
+			else {
+				if (sW == null)
+					sW = "";
+				list = dao.getReview_PagingList(c, sW, limit, pageNumber);
+				req.setAttribute("choice", c);
+				req.setAttribute("searchWord", sW);
+			}
+			req.setAttribute("len", len);
+			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
+			req.setAttribute("page", page - 1); // 총 페이지수
+			req.setAttribute("reviewlist", list); // 실제 데이터
+
 			UtilEx.forward("review.jsp", req, resp);
+
+			// -> review_ list
+		}else if (key.equals("writeview")) {
+				System.out.println("---review writeView ---");
+
+				// dummy RESERVE DATA -> REVIEW
+				// getSession ID
+				String id = req.getParameter("id");
+				// getBusi_ID
+				String busi = req.getParameter("busi");
+				// getSeq
+				int seq = Integer.parseInt(req.getParameter("seq"));
+
+				// check
+				System.out.println("id check :" + id);
+				System.out.println("busi check :" + busi);
+				System.out.println("seq check :" + seq);
+
+				// status lookup method
+				String check = dao.checkStatus(id, seq);
+
+				// status check
+				System.out.println(check);
+
+				// reserve MEMBER - NAME
+				Member_Dto N_list = dao.getBusi_Name(busi, seq);
+
+				// reserve MEMBER - NAME check
+				System.out.println(N_list.toString());
+
+				// reserve CATE
+				Reserve_Dto C_list = dao.getReserve_Cate(id, seq);
+
+				// reserve CATE check
+				System.out.println(C_list.toString());
+
+				// reserve all data Transfer
+				Reserve_Dto R_list = dao.getReserve_Data(id, seq);
+
+				// reserve list check
+				System.out.println(R_list.toString());
+
+				if (check.equals("3")) {
+					req.setAttribute("businame", N_list);
+					req.setAttribute("reservecate", C_list);
+					req.setAttribute("reservelist", R_list);
+
+					UtilEx.forward("review_write.jsp", req, resp);
+
+				} /*
+					 * else if (!check.equals("3")) { System.out.println("글쓰기 이동 실패");
+					 * resp.sendRedirect("review.jsp"); return; } else {
+					 * System.out.println("글쓰기 이동 실패2"); resp.sendRedirect("review.jsp"); return; }
+					 */
+
+			} else if (key.equals("detail")) {
+
+				int seq = Integer.parseInt(req.getParameter("seq"));
+
+				// seq check
+				System.out.println("seq:" + seq);
+
+				Review_Dto dto = dao.getDetail_list(seq);
+
+				// view count
+				dao.viewcount(seq);
+
+				req.setAttribute("detaillist", dto);
+				UtilEx.forward("review_detail.jsp", req, resp);
+
+			} else if (key.equals("updateview")) {
+
+				int seq = Integer.parseInt(req.getParameter("seq"));
+
+				Review_Dto dto = dao.getDetail_list(seq);
+
+				req.setAttribute("detaillist", dto);
+				UtilEx.forward("review_update.jsp", req, resp);
+
+			} else if (key.equals("delete")) {
+				int seq = Integer.parseInt(req.getParameter("seq"));
+
+				// seq check
+				System.out.println("seq:" + seq);
+
+				boolean delete = dao.Review_delete(seq);
+
+				if (delete) {
+					System.out.println("글 삭제 성공");
+					resp.sendRedirect("review.jsp");
+
+				} else {
+					System.out.println("글 삭제 실패");
+					resp.sendRedirect("review.jsp");
+				}
+
+			}
 		}
+
+		/*
+		 * else { System.out.println("여기가 페이징 or 검색");
+		 * 
+		 * System.out.println(c); System.out.println(sW); System.out.println(limit);
+		 * System.out.println(pageNumber); // 글의 총 갯수 list = dao.getReview_PagingList(c,
+		 * sW, limit, pageNumber);
+		 * 
+		 * System.out.println("-카테고리선택- choice :" + c);
+		 * System.out.println("-검색어- searchWord :" + sW);
+		 * System.out.println("-페이지번호- pageNumber :" + pageNumber);
+		 * System.out.println("-페이지- page :" + page);
+		 * 
+		 * req.setAttribute("choice", c); req.setAttribute("searchWord", sW);
+		 * req.setAttribute("page", pageNumber); req.setAttribute("limit", limit); // 한
+		 * 페이지당 리스트 갯수 req.setAttribute("page", page-1); // 총 페이지수
+		 * req.setAttribute("reviewlist", list); // 실제 데이터
+		 * 
+		 * UtilEx.forward("review.jsp", req, resp); }
 		 */
-		
-		
-		
-		/* 
-		String review = req.getParameter("review");
-		else if (review.equals("writeview")) {
-			System.out.println("---review writeView ---");
 
-			// dummy RESERVE DATA -> REVIEW
-			// getSession ID
-			String id = req.getParameter("id");
-			// getBusi_ID
-			String busi = req.getParameter("busi");
-			// getSeq
-			int seq = Integer.parseInt(req.getParameter("seq"));
-
-			// check
-			System.out.println("id check :" + id);
-			System.out.println("busi check :" + busi);
-			System.out.println("seq check :" + seq);
-
-			// status lookup method
-			String check = dao.checkStatus(id, seq);
-
-			// status check
-			System.out.println(check);
-
-			// reserve MEMBER - NAME
-			Member_Dto N_list = dao.getBusi_Name(busi, seq);
-
-			// reserve MEMBER - NAME check
-			System.out.println(N_list.toString());
-
-			// reserve CATE
-			Reserve_Dto C_list = dao.getReserve_Cate(id, seq);
-
-			// reserve CATE check
-			System.out.println(C_list.toString());
-
-			// reserve all data Transfer
-			Reserve_Dto R_list = dao.getReserve_Data(id, seq);
-
-			// reserve list check
-			System.out.println(R_list.toString());
-			
-			if (check.equals("3")) {
-
-				req.setAttribute("businame", N_list);
-				req.setAttribute("reservecate", C_list);
-				req.setAttribute("reservelist", R_list);
-
-				UtilEx.forward("review_write.jsp", req, resp);
-				
-			} else {
-				resp.sendRedirect("review.jsp");
-			}
-			
-		// -> detail list
-		}else if (review.equals("detail")) {
-			
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			
-			// seq check
-			System.out.println("seq:" + seq);
-			
-			Review_Dto dto = dao.getDetail_list(seq);
-			
-			//view count
-			dao.viewcount(seq);
-			
-			req.setAttribute("detaillist", dto);
-			UtilEx.forward("review_detail.jsp", req, resp);
-			
-		}else if (review.equals("updateview")) {
-			
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			
-			Review_Dto dto = dao.getDetail_list(seq);
-			
-			
-			
-			req.setAttribute("detaillist", dto);
-			UtilEx.forward("review_update.jsp", req, resp);
-			
-		}else if(review.equals("delete")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			
-			// seq check
-			System.out.println("seq:" + seq);
-			
-			boolean delete = dao.Review_delete(seq);
-			
-			if(delete) {
-				System.out.println("글 삭제 성공");
-				resp.sendRedirect("REVIEW?review=main");
-				
-			}else {
-				System.out.println("글 삭제 실패");
-				resp.sendRedirect("REVIEW?review=main");
-			}
-			
-		}else if(review.equals("answer")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			
-			Review_Dto dto = dao.getDetail_list(seq);
-			
-			req.setAttribute("detaillist", dto);
-			UtilEx.forward("review_answer.jsp", req, resp);
-		
-		//TODO paging main now using
-		}
-		if(review.equals("") || review == null) {
-			
-		}
-		*/
-		
-		
-}
-
+		/*
+		 * String review = req.getParameter("review"); else if(review.equals("answer"))
+		 * { int seq = Integer.parseInt(req.getParameter("seq"));
+		 * 
+		 * Review_Dto dto = dao.getDetail_list(seq);
+		 * 
+		 * req.setAttribute("detaillist", dto); UtilEx.forward("review_answer.jsp", req,
+		 * resp);
+		 * 
+		 * //TODO paging main now using } if(review.equals("") || review == null) {
+		 * 
+		 * }
+		 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		
-		String review = req.getParameter("review");
+
+		String key = req.getParameter("key");
 		Review_Dao dao = Review_Dao.getInstance();
-			
-		if(review.equals("writecomplete")) {
-			
+
+		if (key.equals("writecomplete")) {
 			String indvd_id = req.getParameter("indvd_id");
 			String busi_id = req.getParameter("busi_id");
 			String title = req.getParameter("title");
@@ -212,48 +209,49 @@ public class ReviewController extends HttpServlet {
 			int score = Integer.parseInt(req.getParameter("score"));
 			String fileupload = req.getParameter("fileupload");
 			String busi_cate = req.getParameter("cate");
-			
-			//Parameter check
+
+			// Parameter check
 			System.out.println("indvd_id: " + indvd_id);
 			System.out.println("busi_id: " + busi_id);
 			System.out.println("title: " + title);
 			System.out.println("content: " + content);
-			
+
 			System.out.println("score: " + content);
-			System.out.println("fileupload: " + fileupload);	
+			System.out.println("fileupload: " + fileupload);
 			System.out.println("cate: " + busi_cate);
-			
-			boolean write = dao.writeReview(new Review_Dto(busi_id,indvd_id,title,content,score,filename,busi_cate));
-			
-			if(write) {
+
+			boolean write = dao
+					.writeReview(new Review_Dto(busi_id, indvd_id, title, content, score, filename, busi_cate));
+
+			if (write) {
 				System.out.println("글 작성 성공");
-				resp.sendRedirect("REVIEW?review=main");
-				
-			}else {
+				resp.sendRedirect("review?key=main");
+
+			} else {
 				System.out.println("글 작성 실패");
-				resp.sendRedirect("REVIEW?review=main");
+				resp.sendRedirect("review?key=main");
 			}
-		}else if(review.equals("update")) {
-			
+		} else if (key.equals("update")) {
+
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-			
+
 			System.out.println("seq: " + seq);
 			System.out.println("title: " + title);
 			System.out.println("content: " + content);
-			
+
 			boolean update = dao.getReview_update(seq, title, content);
-			
-			if(update) {
+
+			if (update) {
 				System.out.println("글 수정 성공");
-				resp.sendRedirect("review.jsp");
-				
-			}else {
+				resp.sendRedirect("review?key=main");
+
+			} else {
 				System.out.println("글 수정 실패");
-				resp.sendRedirect("review.jsp");
+				resp.sendRedirect("review?key=main");
 			}
-			
+
 		}
 	}
 }
