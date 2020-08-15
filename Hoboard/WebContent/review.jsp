@@ -8,7 +8,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="module/header.jsp"%>
-<h1>리뷰리스트임</h1>
+<h1>리뷰리스트</h1>
 <div>
 <input type="text" id="search" value=""><button onclick="searchBbs()">검색</button>
 <select id="choice">
