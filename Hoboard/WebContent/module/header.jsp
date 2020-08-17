@@ -57,7 +57,7 @@
                   <li class="menu-item"><a href="map.jsp">근처 병원 찾기</a></li>
                   <li class="menu-item"><a href="res_list.jsp">예약하기</a></li>
                   <li class="menu-item"><a href="review">후기보기</a></li>
-                  <li class="menu-item"><a href="news.jsp">건강정보</a></li>
+                  <li class="menu-item"><a href="news_list.do?work=move">건강정보</a></li>
                 </ul>
               </div>
               <!-- //menu -->
