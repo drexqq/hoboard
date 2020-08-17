@@ -25,19 +25,20 @@ public class BUSI_Join_Controller extends HttpServlet {
 		Member_Dao dao = Member_Dao.getInstance();
 		
 		String cate_e[] = dao.getBusiCateList();
-		String cate_k[] = {"내과", "마취통증학과", "산부인과", "소아청소년과", "신경과", "신경외과", "심장내과", "영상의학과", "외과", "응급의학과", "정형외과", "재활의학과", "흉부심장혈관과", "피부비뇨기과", "치과", "안과"};
+		String cate_k[] = BUSI_Member_Dao.cate;
 		LinkedHashMap<String, String> cate = new LinkedHashMap<String, String>();
 		for (int i = 0; i < cate_e.length; i++) cate.put(cate_e[i].toLowerCase(), cate_k[i]);
+
+		String time_e[] = dao.getBusiTimeList();
+		String time_k[] = BUSI_Member_Dao.time;
+		LinkedHashMap<String, String> time = new LinkedHashMap<String, String>();
+		for (int i = 0; i < time_e.length; i++) time.put(time_e[i].toLowerCase(), time_k[i]);
 		
 		String amenity_e[] = dao.getAmenityList();
-		String amenity_k[] = {"주차장", "편의점", "ATM,은행", "약국", "대중 교통"};
+		String amenity_k[] = BUSI_Member_Dao.amenity;
 		LinkedHashMap<String, String> amenity = new LinkedHashMap<String, String>();
 		for (int i = 0; i < amenity_e.length; i++) amenity.put(amenity_e[i].toLowerCase(), amenity_k[i]);
 		
-		String time_e[] = dao.getBusiTimeList();
-		String time_k[] = {"월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "점심시간", "공휴일", "야간진료", "응급실"};
-		LinkedHashMap<String, String> time = new LinkedHashMap<String, String>();
-		for (int i = 0; i < time_e.length; i++) time.put(time_e[i].toLowerCase(), time_k[i]);
 		
 		req.setAttribute("busiTime", time);
 		req.setAttribute("busiCate", cate);

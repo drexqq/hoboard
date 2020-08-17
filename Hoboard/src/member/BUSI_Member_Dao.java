@@ -9,7 +9,9 @@ import db.DBConnection;
 import oracle.jdbc.proxy.annotation.Pre;
 
 public class BUSI_Member_Dao{
-	
+	public static String[] cate = {"내과", "마취통증학과", "산부인과", "소아청소년과", "신경과", "신경외과", "심장내과", "영상의학과", "외과", "응급의학과", "정형외과", "재활의학과", "흉부심장혈관과", "피부비뇨기과", "치과", "안과"};
+	public static String[] time = {"월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "점심시간", "공휴일", "야간진료", "응급실"};
+	public static String[] amenity = {"주차장", "편의점", "ATM,은행", "약국", "대중 교통"};
 	private static BUSI_Member_Dao dao = new BUSI_Member_Dao();
 	
 	private BUSI_Member_Dao() {		
