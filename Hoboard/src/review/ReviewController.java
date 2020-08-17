@@ -1,6 +1,10 @@
 package review;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import Reserve.Reserve_Dto;
 import Util.UtilEx;
 import member.Member_Dto;
+import net.sf.json.JSONObject;
 
 @WebServlet("/review")
 public class ReviewController extends HttpServlet {
@@ -20,11 +25,14 @@ public class ReviewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+
 		Review_Dao dao = Review_Dao.getInstance();
 		String key = req.getParameter("key");
 
 		if (key.equals("main")) {
 			List<Review_Dto> list = null;
+			
 			String sW = (String) req.getParameter("searchWord");
 			String c = (String) req.getParameter("choice");
 
@@ -110,35 +118,33 @@ public class ReviewController extends HttpServlet {
 
 					UtilEx.forward("review_write.jsp", req, resp);
 
-				} /*
-					 * else if (!check.equals("3")) { System.out.println("글쓰기 이동 실패");
-					 * resp.sendRedirect("review.jsp"); return; } else {
-					 * System.out.println("글쓰기 이동 실패2"); resp.sendRedirect("review.jsp"); return; }
-					 */
+				}
 
 			} else if (key.equals("detail")) {
 
 				int seq = Integer.parseInt(req.getParameter("seq"));
-
+				 //ArrayList<Review_COMM_Dto> comments = null;
 				// seq check
 				System.out.println("seq:" + seq);
 
 				Review_Dto dto = dao.getDetail_list(seq);
-
+						
 				// view count
 				dao.viewcount(seq);
-
+				
+				
 				req.setAttribute("detaillist", dto);
 				UtilEx.forward("review_detail.jsp", req, resp);
-
+					
 			} else if (key.equals("updateview")) {
 
 				int seq = Integer.parseInt(req.getParameter("seq"));
 
 				Review_Dto dto = dao.getDetail_list(seq);
-
+				
 				req.setAttribute("detaillist", dto);
 				UtilEx.forward("review_update.jsp", req, resp);
+
 
 			} else if (key.equals("delete")) {
 				int seq = Integer.parseInt(req.getParameter("seq"));
@@ -157,42 +163,30 @@ public class ReviewController extends HttpServlet {
 					resp.sendRedirect("review.jsp");
 				}
 
-			}
-		}
+			} else if (key.equals("commentwrite")) {
+					
+					Review_COMM_Dao cdao = Review_COMM_Dao.getInstance();
+					Review_COMM_Dto comment = new Review_COMM_Dto();
+					
+					String comment_seq = req.getParameter("comment_seq");
+					String comment_id = req.getParameter("comment_id");
+					String comment_content = req.getParameter("comment_content");
+					
+					
+					comment.setId("comment_id");
+					comment.setContent("comment_content");
+					
+					boolean result = cdao.insertComment(comment);
 
-		/*
-		 * else { System.out.println("여기가 페이징 or 검색");
-		 * 
-		 * System.out.println(c); System.out.println(sW); System.out.println(limit);
-		 * System.out.println(pageNumber); // 글의 총 갯수 list = dao.getReview_PagingList(c,
-		 * sW, limit, pageNumber);
-		 * 
-		 * System.out.println("-카테고리선택- choice :" + c);
-		 * System.out.println("-검색어- searchWord :" + sW);
-		 * System.out.println("-페이지번호- pageNumber :" + pageNumber);
-		 * System.out.println("-페이지- page :" + page);
-		 * 
-		 * req.setAttribute("choice", c); req.setAttribute("searchWord", sW);
-		 * req.setAttribute("page", pageNumber); req.setAttribute("limit", limit); // 한
-		 * 페이지당 리스트 갯수 req.setAttribute("page", page-1); // 총 페이지수
-		 * req.setAttribute("reviewlist", list); // 실제 데이터
-		 * 
-		 * UtilEx.forward("review.jsp", req, resp); }
-		 */
-
-		/*
-		 * String review = req.getParameter("review"); else if(review.equals("answer"))
-		 * { int seq = Integer.parseInt(req.getParameter("seq"));
-		 * 
-		 * Review_Dto dto = dao.getDetail_list(seq);
-		 * 
-		 * req.setAttribute("detaillist", dto); UtilEx.forward("review_answer.jsp", req,
-		 * resp);
-		 * 
-		 * //TODO paging main now using } if(review.equals("") || review == null) {
-		 * 
-		 * }
-		 */
+					if (result) {
+						resp.setContentType("text/html; charset=utf-8");
+						PrintWriter out = resp.getWriter();
+						out.print("complete reply");
+						out.close();
+					}
+					
+				}
+	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");

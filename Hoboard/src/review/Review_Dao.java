@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ private static Review_Dao dao = new Review_Dao();
 	public List<Review_Dto> getReviewList() {
 		
 		String sql = " SELECT REVIEW_SEQ, BUSI_ID, "
-			       + " INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, REF, STEP, DEPTH, FILENAME, BUSI_CATE, DEL "
+			       + " INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, FILENAME, BUSI_CATE, DEL "
 			       + " FROM REVIEW "
 			       + " ORDER BY REF DESC, STEP ASC ";
 		
@@ -62,9 +63,6 @@ private static Review_Dao dao = new Review_Dao();
 												rs.getInt(i++), 
 												rs.getInt(i++), 
 												rs.getString(i++),
-												rs.getInt(i++), 
-												rs.getInt(i++), 
-												rs.getInt(i++),
 												rs.getString(i++),
 												rs.getString(i++),
 												rs.getInt(i++));				
@@ -85,9 +83,9 @@ private static Review_Dao dao = new Review_Dao();
 		
 		String sql = "INSERT INTO REVIEW "
 				   + " ( REVIEW_SEQ, BUSI_ID, INDVD_ID, "
-				   + " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, REF, STEP, DEPTH, FILENAME, BUSI_CATE, DEL ) "
+				   + " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, FILENAME, BUSI_CATE, DEL ) "
 				   + " VALUES( SEQ_REVIEW.NEXTVAL, ?, ?, "
-				   + " ?, ?, 0, ?, SYSDATE, (SELECT NVL(MAX(REF), 0)+1 FROM REVIEW), 0, 0, ?, ?, 0 )";
+				   + " ?, ?, 0, ?, SYSDATE, ?, ?, 0 )";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -296,16 +294,74 @@ private static Review_Dao dao = new Review_Dao();
 			
 			return dto;
 		}
+		
 		//TODO Detail list
 		public Review_Dto getDetail_list(int seq) {
+					String sql = " SELECT * "
+							+ " FROM REVIEW "
+							+ " WHERE REVIEW_SEQ = ? ";
+
+					Connection conn = null;
+					PreparedStatement psmt = null;
+					ResultSet rs = null;
+					
+					Review_Dto dto = null;
+					
+					try {
+						conn = DBConnection.getConnection();
+						System.out.println("1/6 getDetail_list success");
+					
+						psmt = conn.prepareStatement(sql);
+						System.out.println("2/6 getDetail_list success");
+						
+						psmt.setInt(1, seq);
+						
+						rs = psmt.executeQuery();
+						System.out.println("3/6 getDetail_list success");
+						
+						if(rs.next()) {
+							int i = 1;
+							dto = new Review_Dto(rs.getInt(i++), 
+												rs.getString(i++), 
+												rs.getString(i++), 
+												rs.getString(i++), 
+												rs.getString(i++), 
+												rs.getInt(i++), 
+												rs.getInt(i++), 
+												rs.getString(i++),
+												rs.getString(i++),
+												rs.getString(i++),
+												rs.getInt(i++));
+						}
+						System.out.println("4/6 getDetail_list success");
+						
+					} catch (Exception e) {
+						System.out.println("getBbs fail");
+						e.printStackTrace();
+					} finally {
+						DBClose.close(psmt, conn, rs);			
+					}
+					return dto;
+					
+				}
+		
+		
+		/*
+		//TODO Detail/Comment list (selectArticle)
+		public Review_Dto getDetail_list(int seq) throws  ClassNotFoundException, SQLException {
+			
+			//SELECT detail list
 			String sql = " SELECT * "
 					+ " FROM REVIEW "
+					+ " WHERE REVIEW_SEQ = ? ";
+			
+			//SELECT Comment Counting
+			String sql2 = "SELECT COUNT(*) FROM REVIEW_COMM "
 					+ " WHERE REVIEW_SEQ = ? ";
 
 			Connection conn = null;
 			PreparedStatement psmt = null;
 			ResultSet rs = null;
-			
 			Review_Dto dto = null;
 			
 			try {
@@ -330,24 +386,137 @@ private static Review_Dao dao = new Review_Dao();
 										rs.getInt(i++), 
 										rs.getInt(i++), 
 										rs.getString(i++),
-										rs.getInt(i++), 
-										rs.getInt(i++), 
-										rs.getInt(i++),
 										rs.getString(i++),
 										rs.getString(i++),
 										rs.getInt(i++));
 				}
+				
+				psmt.clearParameters();
+				
+				psmt = conn.prepareStatement(sql2);
+				psmt.setLong(1, seq);
 				System.out.println("4/6 getDetail_list success");
 				
+				rs = psmt.executeQuery();
+				
+				if(rs.next()) {
+					dto.setCommentCount(rs.getLong(1));
+				}
+				
+				System.out.println("5/6 getDetail_list success");
+				
+				conn.commit();
+				
 			} catch (Exception e) {
-				System.out.println("getBbs fail");
+				System.out.println("getDetail_list fail");
 				e.printStackTrace();
-			} finally {
-				DBClose.close(psmt, conn, rs);			
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {				
+					e1.printStackTrace();
+				}
+			} finally {			
+				try {
+					conn.setAutoCommit(true);
+				} catch (SQLException e) {				
+					e.printStackTrace();
+				}
+				DBClose.close(psmt, conn, null);
+				System.out.println("6/6 getDetail_list success");
 			}
 			return dto;
 			
 		}
+		
+		
+		//TODO SELECT COMMENT LOOKUP
+		//commPageSize reply size
+		public ArrayList<Review_COMM_Dto> selectComments(int seq, int commPageSize) throws ClassNotFoundException {
+			
+			String sql = " SELECT * "
+					   + " FROM ( SELECT SEQ, ID, CONTENT, DATE "
+					   + " FROM REVIEW_COMM "
+					   + " WHERE SEQ =? "
+					   + " ORDER BY SEQ DESC) REVIEW_COMM "
+					   + " WHERE ROWNUM BETWEEN 1 AND ? ";
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+			
+			ArrayList<Review_COMM_Dto> list = new ArrayList<Review_COMM_Dto>();
+			
+			
+			try {
+				conn = DBConnection.getConnection();
+				System.out.println("1/6 selectComments success");
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, seq);
+				psmt.setInt(2, commPageSize);
+				System.out.println("2/6 selectComments success");
+				
+				rs = psmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					Review_COMM_Dto dto = new Review_COMM_Dto();
+					dto.setSeq(rs.getInt("seq"));
+					dto.setId(rs.getString("id"));
+					dto.setContent(rs.getString("content"));
+					dto.setDate(rs.getString("date"));
+					list.add(dto);
+				}
+				System.out.println("3/6 selectComments success");
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
+		
+		//TODO insert comment
+		public synchronized HashMap<String, Object> insertComment(int seq, String id, String content) throws ClassNotFoundException {
+			
+			String sql = " INSERT INTO REVIEW_COMM "
+					+ " VALUES(REVIEW_COMM_SEQ.NEXTVAL, ?, ?, SYSDATE) ";
+		
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			
+			HashMap<String, Object> hm = null;
+			
+			try {
+				conn = DBConnection.getConnection();
+				System.out.println("1/6 insertComment success");
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, id);
+				psmt.setString(2, content);
+				
+				System.out.println("2/6 insertComment success");
+				
+				int result = psmt.executeUpdate();
+				
+				List<Review_COMM_Dto> comments = selectComments(seq, 20);
+				
+				hm = new HashMap<>();
+				hm.put("result", result);
+				hm.put("comments", comments);
+				
+				
+				System.out.println("3/6 insertComment success");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBClose.close(psmt, conn, null);
+			}
+			
+			return hm;
+		}
+		*/
+		
+		
 		
 		//TODO update
 		public boolean getReview_update(int seq, String title, String content) {
@@ -491,13 +660,13 @@ private static Review_Dao dao = new Review_Dao();
 	public List<Review_Dto> getReview_PagingList(String choice, String searchWord, int limit, int page) {
 					
 		String sql = " SELECT REVIEW_SEQ, BUSI_ID, INDVD_ID, "
-				+ " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, REF, "
-				+ " STEP, DEPTH, FILENAME, BUSI_CATE, DEL "
+				+ " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
+				+ " FILENAME, BUSI_CATE, DEL "
 				+ " FROM ";
 		
-		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY REF DESC, STEP ASC) AS RNUM, "
-			+  " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, REF, "
-			+  " STEP, DEPTH, FILENAME, BUSI_CATE, DEL "
+		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY REVIEW_SEQ DESC) AS RNUM, "
+			+  " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
+			+  " FILENAME, BUSI_CATE, DEL "
 			+  " FROM REVIEW ";
 		
 		String sqlWord = "";
@@ -516,7 +685,7 @@ private static Review_Dao dao = new Review_Dao();
 		}
 		sql = sql + sqlWord;
 		
-		sql += " ORDER BY REF DESC, STEP ASC) ";
+		sql += " ORDER BY REVIEW_SEQ DESC) ";
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
 		
 		int start, end;
@@ -551,15 +720,11 @@ private static Review_Dao dao = new Review_Dao();
 												rs.getInt(i++), 
 												rs.getInt(i++), 
 												rs.getString(i++),
-												rs.getInt(i++), 
-												rs.getInt(i++), 
-												rs.getInt(i++),
 												rs.getString(i++),
 												rs.getString(i++),
 												rs.getInt(i++));				
 				list.add(dto);
 			}
-//			System.out.println(list.toString());
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
@@ -569,4 +734,5 @@ private static Review_Dao dao = new Review_Dao();
 		System.out.println("get list done");
 		return list;
 	}
+	
 }

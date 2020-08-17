@@ -58,14 +58,13 @@ public class Review_File_Controller extends HttpServlet {
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
 		super.init(config);
 		mConfig = config;
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("FileDownLoader doGet()");
+		System.out.println("--FileDownLoad start--");
 
 		String filename = req.getParameter("filename");
 		String sseq = req.getParameter("seq");

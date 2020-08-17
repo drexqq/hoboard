@@ -13,32 +13,22 @@ public class Review_Dto implements Serializable {
 	private String content;  
 	
 	private int viewcount;	 
-	private int score;		 
+	private int score;		  //starpoint ★★★★★
 	
-	private String wdate;	 
+	private String wdate;	  //date
 	
-	private int ref;		 // ref	 
-	private int step;		 // (row)
-	private int depth;		 // (depth)
-	
-	private String filename;
-	private String busi_cate;
+	private String filename;  //fileupload
+	private String busi_cate; //[hospital-obj]
 	
 	private int del;
+
 	
 	public Review_Dto() {
 	}
-	
-	
-	
-
-	
-
-
 
 
 	public Review_Dto(int review_seq, String busi_id, String indvd_id, String title, String content, int viewcount,
-			int score, String wdate, int ref, int step, int depth, String filename, String busi_cate, int del) {
+			int score, String wdate, String filename, String busi_cate, int del) {
 		super();
 		this.review_seq = review_seq;
 		this.busi_id = busi_id;
@@ -48,21 +38,10 @@ public class Review_Dto implements Serializable {
 		this.viewcount = viewcount;
 		this.score = score;
 		this.wdate = wdate;
-		this.ref = ref;
-		this.step = step;
-		this.depth = depth;
 		this.filename = filename;
 		this.busi_cate = busi_cate;
 		this.del = del;
 	}
-
-
-
-
-
-
-
-
 
 	public Review_Dto(String busi_id, String indvd_id, String title, String content, int score, String filename, String busi_cate) {
 		super();
@@ -158,35 +137,6 @@ public class Review_Dto implements Serializable {
 		this.wdate = wdate;
 	}
 
-
-	public int getRef() {
-		return ref;
-	}
-
-
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-
-
-	public int getStep() {
-		return step;
-	}
-
-
-	public void setStep(int step) {
-		this.step = step;
-	}
-
-
-	public int getDepth() {
-		return depth;
-	}
-
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
 	
 	public String getFilename() {
 		return filename;
@@ -220,14 +170,23 @@ public class Review_Dto implements Serializable {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "Review_Dto [review_seq=" + review_seq + ", busi_id=" + busi_id + ", indvd_id=" + indvd_id + ", title="
 				+ title + ", content=" + content + ", viewcount=" + viewcount + ", score=" + score + ", wdate=" + wdate
-				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", filename=" + filename + ", busi_cate="
-				+ busi_cate + ", del=" + del + "]";
+				+ ", filename=" + filename + ", busi_cate=" + busi_cate + ", del=" + del + "]";
 	}
+
+
+	
+
+	
+	
+	
+	
+
+
+	
 
 
 

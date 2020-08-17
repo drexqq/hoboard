@@ -59,7 +59,7 @@ function searchBbs() {
 		document.getElementById("search").value = "";
 	}
     
-	location.href = "reivew?searchWord=" + word + "&choice=" + choice;
+	location.href = "review?key=main&searchWord=" + word + "&choice=" + choice;
 }
 
 function goPage( pageNum ) {	
@@ -67,7 +67,7 @@ function goPage( pageNum ) {
 	var choice = document.getElementById("choice").value;
 	var word = document.getElementById("search").value;
 	
-	location.href = "reivew?page=" + pageNum;
+	location.href = "review?key=main&page=" + pageNum;
 }
 
 </script>
@@ -90,109 +90,6 @@ function writeBtn(){
 	//after id , busi_id , seq must
 	location.href="review?key=writeview&id=" + ID + "&busi=" + BUSI_ID + "&seq=" + seq;
 }
-
-
-<%-- 
-
-<script type="text/javascript">
-$(document).ready(function() {
-	let searchWord = "<%=searchWord%>";
-	if(searchWord == "") return;
-		
-	let obj = document.getElementById("choice");
-	obj.value = "<%=choice%>";
-	obj.setAttribute("selected", "selected");	
-});
-</script>
-
-
-<br><br>
-
-
-
-<table style="width:700">
-<col width="300"><col width="300"><col width="350">
-<tr>
-	<td height="2" bgcolor="#0000ff" colspan="3"></td>
-</tr>
-<tr>
-	<th>ID</th>
-	<th>CONTENT</th>
-</tr>
-<tr>
-	<td height="2" bgcolor="#0000ff" colspan="3"></td>
-</tr>
-<%
-if(list == null || list.size() == 0){
-	%>
-	<tr>
-		<td colspan = "3" align="center">작성된 후기가 없습니다.</td>
-	</tr>
-<%
-}else{
-	for(int i=0; i < list.size(); i++){
-		Review_Dto rev = list.get(i);
-	%>
-
-
-
-<%
-if(rev.getDel() == 0){
-%>
-<tr>
-	<th>[<%=rev.getBusi_cate()%>]</th>	
-	<th><%=rev.getTitle()%></th>
-	<td><a href="REVIEW?review=detail&seq=<%=rev.getReview_seq()%>"><%=rev.getContent()%></a></td>
-</tr>
-<tr>	
-	<!-- INDVD_NAME --> <th>작성자</th><td><%=rev.getIndvd_id()%></td>
-	<!-- WDATE     -->  <th>작성일</th><td><%=rev.getWdate() %></td>
-	<!-- VIEW COUNT --> <th>조회수</th><td><%=rev.getViewcount() %></td>
-	<!-- SCORE      --> <th>평점</th><td><%=rev.getScore() %></td>
-</tr>	
-	
-<%
-}else{
-%>	
-<%
-}
-%>
-<tr>
-	<td height="2" bgcolor="#000fff" colspan="3"></td>
-</tr>
-	<%
-	}
-}
-%>
-</table>
-
-<%
-for(int i = 0;i < Review_Page; i++){
-	if(pageNumber == i){	// 1 [2] [3] 
-		%>
-		<span style="font-size: 15pt; color: #0000ff; font-weight: bold;">
-			<%=i+1 %>
-		</span>&nbsp;
-		<%
-	}
-	else{	// 그외 페이지
-		%>
-		<a href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)" 
-			style="font-size: 15pt; color: #000; font-weight:bold;  text-decoration none">
-			[<%=i+1 %>]
-		</a>&nbsp;		
-		<%
-	}	
-}
-%>
-
- --%>
-
-
-
-
-
-
 </script>
 
 
