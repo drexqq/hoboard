@@ -25,7 +25,7 @@
       <div class="col-12">
         <div class="title">건강에 대한 다양한 정보를 알아보세요 !</div>
         <div class="desc">
-          <a href="news.jsp"
+          <a href="news_list.do"
             >건강정보 보러가기 <i class="ri-arrow-right-line"></i
           ></a>
         </div>
