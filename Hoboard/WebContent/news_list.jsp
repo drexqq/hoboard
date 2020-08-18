@@ -151,8 +151,8 @@ function searchNews() {
 	var choice = document.getElementById("choice").value;
 	var word = document.getElementById("search").value;
 	
-	location.href = "news_list.jsp?pageNumber=" + pageNum;
-	location.href = "news_list.do?work=move&searchWord=" + word + "&choice=" + choice + "&pageNumber=" + pageNum;
+	//location.href = "news_list.jsp?pageNumber=" + pageNum;
+	location.href = "news?work=move&searchWord=" + word + "&choice=" + choice + "&pageNumber=" + pageNum;
 } 
 
 <%-- function goPage(obj) {
