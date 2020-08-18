@@ -1,33 +1,34 @@
-<%@page import="Ask.Ask_Dto"%>
+<%@page import="news.News_Dao"%>
+<%@page import="news.News_Dto"%>
 <%@page import="java.util.List"%>
 <%@page import="member.Member_Dto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  	
 <%
-//Ask_Dao dao = Ask_Dao.getInstance();
-List<Ask_Dto> list = (List<Ask_Dto>)request.getAttribute("list");
+//News_Dao dao = News_Dao.getInstance();
+List<News_Dto> list = (List<News_Dto>)request.getAttribute("list");
 
 int len = (int)request.getAttribute("len");
 String searchWord = (String)request.getAttribute("searchWord");
 String choice = (String)request.getAttribute("choice");
 int pageNumber = (Integer)request.getAttribute("pageNumber");
 
-	//System.out.println("Asklist = "+list.toString());
-	System.out.println("Asklen = "+len+" s"+searchWord+" c="+choice+" page "+pageNumber );
+	System.out.println("nlist = "+list.toString());
+	System.out.println("len = "+len+" s"+searchWord+" c="+choice+" page "+pageNumber );
 
 %>
 
 <% 	
-	System.out.println("AskpageNumber:"+pageNumber);
+	System.out.println("pageNumber:"+pageNumber);
 %>	
 
 <%
 //목록 리스트를 검색한것만 가져옴
 //10개씩 넘김 
-	int AskPage = len/10;
+	int NewsPage = len/10;
 	if(len % 10 > 0){	
-		AskPage = AskPage + 1;
+		NewsPage = NewsPage + 1;
 	}
 %>
 
@@ -35,7 +36,7 @@ int pageNumber = (Integer)request.getAttribute("pageNumber");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>my_ask.jsp</title>
+<title>news_list.jsp</title>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -50,17 +51,17 @@ $(document).ready(function() {
 
 </head>
 <body>
-<!-- <form action="Ask_list.jsp" method="get">
+<!-- <form action="news_list.jsp" method="get">
 <input type="hidden" name="work" value="move">  -->
 
-<h1>Q&A 게시판</h1>
-<h4>고객님의 소중한 의견 <%=len%> 건이 등록 돼 있습니다.</h4>
+<h1>요즘 많이 찾는 건강 정보</h1>
+<h4>건강 정보 총 <%=len%> 건이 등록 돼 있습니다.</h4>
 
 <table border="1">
 <col width="70"><col width="600"><col width="150"><col width="150"><col width="150">
 
 <tr>
-	<th>번호</th><th>제목</th><th>댓글 수</th><th>작성일자</th>
+	<th>번호</th><th>제목</th><th>조회수</th><th>작성일자</th>
 </tr>
 
 <%
@@ -73,19 +74,19 @@ if(list.size() == 0){
 	<%
 }else{
 	for(int i = 0;i < list.size(); i++){
-		Ask_Dto dto = list.get(i);
+		News_Dto ndto = list.get(i);
 		%>
 		<tr class="table-row">
 			<th><%=i+1 %></th>
 			<td>
-			<a href="ask.do?one=detail&seq=<%=dto.getSeq()%>">
-				<%=dto.getTitle()%>
+			<a href="news_detail.do?nseq=<%=ndto.getNews_seq() %>">
+				<%=ndto.getTitle()%>
 			</td>
 			<td>
-				<%=dto.getId()%>
+				<%=ndto.getViewcount()%>
 			</td>
 			<td>
-				<%=dto.getWdate()%>
+				<%=ndto.getDate()%>
 			</td>
 		</tr>	
 		<%
@@ -96,11 +97,11 @@ if(list.size() == 0){
 </table>
 
 <br><br>
-<a href="ask_write.jsp">글쓰기</a>
+<a href="news_write.jsp">글쓰기</a>
 <br><br>
 
 <%
-for(int i = 0;i < AskPage; i++){
+for(int i = 0;i < NewsPage; i++){
 	if(pageNumber == i){	// 1 [2] [3] 
 		%>
 		<span style="font-size: 15pt; color: #0000ff; font-weight: bold;">
@@ -129,10 +130,10 @@ for(int i = 0;i < AskPage; i++){
 
 	<input type="text" id="search" placeholder="검색어를 입력해주세요"
 		value="<%=searchWord%>">
-	<button class="btn" onclick="searchAsk()" value="<%=searchWord%>">검색</button>
+	<button class="btn" onclick="searchNews()" value="<%=searchWord%>">검색</button>
 
 	<script type="text/javascript">
-function searchAsk() {
+function searchNews() {
 	let choice = document.getElementById("choice").value;
 	let word = document.getElementById("search").value;
 //	alert(choice);
@@ -143,15 +144,15 @@ function searchAsk() {
 		document.getElementById("choice").value = 'sel';
 	} */
 	
-	location.href = "ask.do?one=search&searchWord="+word+"&choice="+choice;
+	location.href = "news_list.do?work=search&searchWord="+word+"&choice="+choice;
 }
  function goPage( pageNum ) {	
 	
 	var choice = document.getElementById("choice").value;
 	var word = document.getElementById("search").value;
 	
-	location.href = "my_ask.jsp?pageNumber=" + pageNum;
-	location.href = "ask.do?one=move&searchWord=" + word + "&choice=" + choice + "&pageNumber=" + pageNum;
+	location.href = "news_list.jsp?pageNumber=" + pageNum;
+	location.href = "news_list.do?work=move&searchWord=" + word + "&choice=" + choice + "&pageNumber=" + pageNum;
 } 
 
 <%-- function goPage(obj) {
@@ -160,7 +161,7 @@ function searchAsk() {
 	let choice = $("#choice").val();
 	let search = $("#search").val();
 	$.ajax({
-		url:"Ask_list.do",
+		url:"news_list.do",
 		type:"get",
 		datatype:"text",
 		data:"work=pageList&pageNumber="+clickPage+"&choice='<%=choice%>'&search='<%=searchWord%>'",
@@ -180,7 +181,7 @@ function searchAsk() {
 				for (var i = 0; i < list.length; i++) {
 					liststr +="<tr class='table-row'>";
 					liststr +="<th>"+(i+1)+"</th>";
-					liststr +="<td>"+"<a href='Ask_list.do?work=Ask.detail.do&seq="+list[i].seq+"'>"+list[i].title+"</a></td>";
+					liststr +="<td>"+"<a href='news_list.do?work=news.detail.do&seq="+list[i].seq+"'>"+list[i].title+"</a></td>";
 					liststr +="<td align='center'>"+list[i].id+"</td>";
 					liststr +="<td align='center'>"+list[i].wdate+"</td>";
 					liststr +="</tr>";
