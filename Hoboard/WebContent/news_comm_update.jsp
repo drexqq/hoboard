@@ -17,12 +17,6 @@ News_Dao ndao = News_Dao.getInstance();
 News_Dto ndto = (News_Dto)request.getAttribute("ndto");
 %>
 
-<% 
-news_comm_dao dao = news_comm_dao.getInstance();
-news_comm_dto dto = (news_comm_dto)request.getAttribute("dto");
-System.out.println("news comm dto" +dto);
-%> 
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,14 +70,31 @@ $(document).ready(function () {
 
 </script>
 
+	<h1>[나의 댓글수정]</h1>
 
+	<form action="ask.do?two=ask_update" method="post">
+		<input type="hidden" name="key" value="updatecomplete"> <input
+			type="hidden" name="seq" value="${commentlist.getSeq()}"> <input
+			type="hidden" name="boardnum" value="${detaillist.getReview_seq()}">
 
-
-
-
-
-
+		<table border="1">
+			<tr>
+				<th>ID:</th>
+				<td><%=ndto.getId()%></td>
+				<th>작성일:</th>
+				<td><%=ndto.getDate() %></td>
+				<td><input type="submit" value="수정완료">
+				<td>
+			<tr>
+				<th>내용:</th>
+				<td><input type="text" name="content" placeholder="<%=ndto.getContent()%>"></td>
+			</tr>
+		</table>
+	</form>
+	
+	</script>
 
 
 </body>
 </html>
+	

@@ -1,3 +1,5 @@
+<%@page import="Ask.Ask_Comm_Dto"%>
+<%@page import="Ask.Ask_Comm_Dao"%>
 <%@page import="Ask.Ask_Dto"%>
 <%@page import="Ask.Ask_Dao"%>
 <%@page import="java.util.List"%>
@@ -11,10 +13,16 @@ System.out.println("ask_detail"+seq);
 
 <% 
 Ask_Dao dao = Ask_Dao.getInstance();
-//dao.readcount(seq);
-System.out.println("!!!!!!!!!!!!!!!!!!!!!");
 Ask_Dto dto = (Ask_Dto)request.getAttribute("dto");
-%>  
+%> 
+
+<%
+Ask_Comm_Dao dao2 = Ask_Comm_Dao.getInstance();
+Ask_Comm_Dto dto2 = (Ask_Comm_Dto)request.getAttribute("dto2");
+
+System.out.println("A_C_D = "+ dto2);
+
+%> 
     
 <!DOCTYPE html>
 <html>
@@ -68,9 +76,22 @@ $(document).ready(function () {
 
 </script>
 
+<h1>댓글을 입력하세요</h1>
+<form action="ask.do?two=c_write&seq=<%=nseq%>" method="post">
+ <input type="hidden" name="two" value="c_updateAf"> 
+ <input type="hidden" name="nseq" value="<%=dto2.getC_seq()%>">
+
+<table border="1">
+	<tr>
+		<th>제목</th>
+			<td><input type="text" name="title" size="50px" value="<%=dto2.getContent()%>"></td></tr>	
+	<tr>	
+		<th>내용</th>
+			<td><input type="text" name="content" cols="50px" value="<%=dto2.getContent()%>"></td></tr>
+
+</table>
 
 
-
-
+</form>
 </body>
 </html>
