@@ -1,11 +1,7 @@
-<%@page import="review.Review_Dto"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-
-<%
-	Review_Dto dto = (Review_Dto) request.getAttribute("detaillist");
-%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 
 
 <!DOCTYPE html>
@@ -18,94 +14,125 @@
 </head>
 <body>
 
-
-	<h1>ÈÄ±âÁ¤º¸</h1>
-
+	<h1>í›„ê¸°ì •ë³´</h1>
+	<a href="review?key=main">ê¸€ ëª©ë¡ìœ¼ë¡œ</a>
 
 	<table style="width: 600" border="1">
 		<col width="300">
 		<col width="500">
 		<tr>
-			<th>º´¿ø Ä«Å×°í¸®</th>
-			<td><%=dto.getBusi_cate()%></td>
+			<th>ë³‘ì› ì¹´í…Œê³ ë¦¬</th>
+			<td>${detaillist.getBusi_cate()}</td>
 		</tr>
 		<tr>
-			<th>Á¦¸ñ</th>
-			<td><%=dto.getTitle()%></td>
+			<th>ì œëª©</th>
+			<td>${detaillist.getTitle()}</td>
 		</tr>
 		<tr>
-			<th>ÀÛ¼ºÀÚ</th>
-			<td><%=dto.getIndvd_id()%></td>
+			<th>ì‘ì„±ì</th>
+			<td>${detaillist.getIndvd_id()}</td>
 		</tr>
 		<tr>
-			<th>ÆÄÀÏ´Ù¿î·Îµå</th>
-			<td><input type="button" name="btndown" value="ÆÄÀÏ"
-				onclick="location.href='file?filename=<%=dto.getFilename()%>&seq=<%=dto.getReview_seq()%>'"></td>
+			<th>íŒŒì¼ë‹¤ìš´ë¡œë“œ</th>
+			<td><input type="button" name="btndown" value="íŒŒì¼"
+				onclick="location.href='file?filename=${detaillist.getFilename()}&seq=${detaillist.getReview_seq()}'"></td>
 		</tr>
 		<tr>
-			<th>ÀÛ¼ºÀÏ</th>
-			<td><%=dto.getWdate()%></td>
+			<th>ì‘ì„±ì¼</th>
+			<td>${detaillist.getWdate()}</td>
 		</tr>
 		<tr>
-			<th>Á¶È¸¼ö</th>
-			<td><%=dto.getViewcount()%></td>
+			<th>ì¡°íšŒìˆ˜</th>
+			<td>${detaillist.getViewcount()}</td>
 		</tr>
 		<tr>
 			<td><textarea rows="20px" cols="70px" name="content"
-					readonly="readonly"><%=dto.getContent()%></textarea></td>
+					readonly="readonly">${detaillist.getContent()}</textarea></td>
 		</tr>
-
-
-
-
 	</table>
-	
-<div class="w3-border w3-padding">´ñ±Û</div>
-			<div class="w3-border w3-padding">
-				<c:if test="${ sessionScope.sessionID == null }">
-					<textarea rows="5" cols="50" class="w3-input w3-border newLogin" readonly>·Î±×ÀÎ ÈÄ ´ñ±Û ´Ş±â</textarea>
-				</c:if>
-				<c:if test="${ sessionScope.sessionID != null }">
-					<i class="fa fa-user w3-padding-16"></i>
-					<form>
-						<input type="hidden" name="no" id="no" value="<%=dto.getReview_seq()%>"> 
-						<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
-						<textarea rows="5" cols="50" class="w3-input w3-border" placeholder="´ñ±Û ÀÛ¼º" name="reply_content" id="reply_content"></textarea>
-						<input type="button" class="w3-button w3-border" id="reply_btn" onclick="replybtn()" value="´ñ±Û µî·Ï">
-					</form>
-				</c:if>
-			</div>
-
-<%-- 
-<div class="w3-border w3-padding">´ñ±Û</div>
-			<div class="w3-border w3-padding">
-				<c:if test="${ sessionScope.sessionID == null }">
-					<textarea rows="5" cols="50" class="w3-input w3-border newLogin" readonly>·Î±×ÀÎ ÈÄ ´ñ±Û ´Ş±â</textarea>
-				</c:if>
-				<c:if test="${ sessionScope.sessionID != null }">
-					<i class="fa fa-user w3-padding-16"></i> ${ content.id }
-					<form>
-						<input type="hidden" name="no" id="no" value="${ dto.review_seq }"> 
-						<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
-						<textarea rows="5" cols="50" class="w3-input w3-border" placeholder="´ñ±Û ÀÛ¼º" name="reply_content" id="reply_content"></textarea>
-						<input type="button" class="w3-button w3-border" id="reply_btn" value="´ñ±Û µî·Ï">
-					</form>
-				</c:if>
-			</div>
-	 --%>
-<br>
-<br>
-
-
 <!--TODO Connect session ID -->
+	<c:choose>
+		<c:when test="${ sessionScope.sessionID == detaillist.indvd_id }">
+			<div align="center">
+				<button type="button"
+					onclick="updateBbs(${detaillist.getReview_seq()})">ìˆ˜ì •</button>
+				<button type="button"
+					onclick="deleteBbs(${detaillist.getReview_seq()})">ì‚­ì œ</button>
+			</div>
+		</c:when>
+		<c:when test="${ sessionScope.sessionID != detaillist.indvd_id }">
+			<div></div>
+		</c:when>
+	</c:choose>
 
-	
-<c:if test="${ sessionScope.sessionID == dto.indvd_id }">	
-	<div align="center">
-		<button type="button" onclick="updateBbs(<%=dto.getReview_seq()%>)">¼öÁ¤</button>
-		<button type="button" onclick="deleteBbs(<%=dto.getReview_seq()%>)">»èÁ¦</button>
+	ì•„ì´ë”” :
+	<c:out value="${sessionScope.sessionID}"></c:out>
+	<div class="w3-border w3-padding">ëŒ“ê¸€</div>
+	<div class="w3-border w3-padding">
+		<c:if test="${ sessionScope.sessionID == null }">
+			<textarea rows="5" cols="50" class="w3-input w3-border newLogin"
+				readonly>ë¡œê·¸ì¸ í›„ ëŒ“ê¸€ ë‹¬ê¸°</textarea>
+		</c:if>
+		<c:if test="${ sessionScope.sessionID != null }">
+			<i class="fa fa-user w3-padding-16"></i>
+			<form action="COMM" method="post">
+				<input type="hidden" name="seq" id="seq" value="${detaillist.getReview_seq()}"> 
+				<input type="hidden" name="no" id="no" value="${detaillist.getReview_seq()}"> 
+				<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
+					<textarea rows="5" cols="50" class="w3-input w3-border" placeholder="ëŒ“ê¸€ ì‘ì„±" name="reply_content" id="reply_content"></textarea>
+				<input type="submit" value="ëŒ“ê¸€ë“±ë¡">
+			</form>
+		</c:if>
 	</div>
-</c:if>
+
+
+	<table border="1">
+		<c:forEach items="${ commentlist }" var="list" varStatus="status"
+			begin="0" end="10">
+			${ fn:length(commentlist) }
+			<c:choose>
+					<%-- test="${ list.board_no == seq && fn:length(commentlist) == 0 || list == null}" --%>
+				<%-- <c:when 
+					test="${ fn:length(commentlist) eq 0 }"
+					>
+					<tr>
+						<td colspan="3" align="center">ì‘ì„±ëœ ë§ê¸€ì´ ì—†ìŠµë‹ˆë‹¤.</td>
+					</tr> 
+				</c:when> --%>
+				<c:when
+					test="${ list.board_no == seq && sessionScope.sessionID == list.id}">
+					<tr>
+						<th>ID111:</th>
+						<td>${list.id}</td>
+						<th>ì‘ì„±ì¼:</th>
+						<td>${list.date}</td>
+						<td>
+						<input type="button" onclick="cupdateBbs(${list.seq});" value="ìˆ˜ì •">
+						<input type="button" onclick="cdeleteBbs(${list.seq});" value="ì‚­ì œ">
+						</td>
+					</tr>
+					<tr>
+						<th>ë‚´ìš©:</th>
+						<td>${list.content}</td>
+					</tr>
+				</c:when>
+				<c:when
+					test="${ list.board_no == seq && sessionScope.sessionID != list.id}">
+					<tr>
+						<th>ID:</th>
+						<td>${list.id}</td>
+						<th>ì‘ì„±ì¼:</th>
+						<td>${list.date}</td>
+					<tr>
+						<th>ë‚´ìš©:</th>
+						<td>${list.content}</td>
+					</tr>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+	</table>
+	<br>
+	<br>
 
 
 <script type="text/javascript">
@@ -117,35 +144,13 @@ function deleteBbs(seq) {
 	location.href = "review?key=delete&seq=" + seq;
 }
 
-function 
+function cupdateBbs(seq) {
+	location.href = "COMM?key=updatecomment&seq=" + seq + "&boardnum=" + ${detaillist.getReview_seq()};
+}
 
-
-/* 
-$("#reply_btn").click(function(){
-	if($("#reply_content").val().trim() === ""){
-		alert("´ñ±ÛÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
-		$("#reply_content").val("").focus();
-	}else{
-		$.ajax({
-			url: "/COMM/write",
-            type: "POST",
-            data: {
-                no : $("#no").val(),
-                id : $("#id").val(),
-                reply_content : $("#reply_content").val()
-            },
-            success: function () {
-            	alert("´ñ±Û µî·Ï ¿Ï·á");
-            	$("#reply_content").val("");
-            	getReply();
-            },
-		})
-	}
-})
- */
-
-
-
+function cdeleteBbs(seq) {
+	location.href = "COMM?key=deletecomment&seq=" + seq + "&boardnum=" + ${detaillist.getReview_seq()};
+}
 
 
 </script>

@@ -336,7 +336,7 @@ private static Review_Dao dao = new Review_Dao();
 						System.out.println("4/6 getDetail_list success");
 						
 					} catch (Exception e) {
-						System.out.println("getBbs fail");
+						System.out.println("getDetail_list fail");
 						e.printStackTrace();
 					} finally {
 						DBClose.close(psmt, conn, rs);			

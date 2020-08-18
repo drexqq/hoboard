@@ -23,6 +23,16 @@ public class Review_COMM_Dto implements Serializable {
 		this.date = date;
 	}
 
+	
+	
+
+	public Review_COMM_Dto(int board_no, String id, String content) {
+		super();
+		this.board_no = board_no;
+		this.id = id;
+		this.content = content;
+	}
+
 
 	public int getSeq() {
 		return seq;

@@ -52,6 +52,7 @@ public class login_Controller extends HttpServlet {
 			session.setAttribute("login", 0);
 			resp.sendRedirect(context + "/login.jsp");
 		}
+		
 
 	}
 

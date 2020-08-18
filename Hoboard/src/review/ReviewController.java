@@ -2,9 +2,6 @@ package review;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,11 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Reserve.Reserve_Dto;
 import Util.UtilEx;
 import member.Member_Dto;
-import net.sf.json.JSONObject;
 
 @WebServlet("/review")
 public class ReviewController extends HttpServlet {
@@ -27,6 +24,10 @@ public class ReviewController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
+		//HttpSession session = req.getSession();
+		//String idx = (String)session.getAttribute("sessionID");
+			
+		
 		Review_Dao dao = Review_Dao.getInstance();
 		String key = req.getParameter("key");
 
@@ -121,9 +122,8 @@ public class ReviewController extends HttpServlet {
 				}
 
 			} else if (key.equals("detail")) {
-
+				
 				int seq = Integer.parseInt(req.getParameter("seq"));
-				 //ArrayList<Review_COMM_Dto> comments = null;
 				// seq check
 				System.out.println("seq:" + seq);
 
@@ -132,8 +132,14 @@ public class ReviewController extends HttpServlet {
 				// view count
 				dao.viewcount(seq);
 				
+				Review_COMM_Dao Cdao = Review_COMM_Dao.getInstance();
 				
+				// comment
+				List<Review_COMM_Dto> Clist = Cdao.getComments(seq);
+				
+				req.setAttribute("seq", seq);
 				req.setAttribute("detaillist", dto);
+				req.setAttribute("commentlist", Clist);
 				UtilEx.forward("review_detail.jsp", req, resp);
 					
 			} else if (key.equals("updateview")) {
@@ -145,7 +151,6 @@ public class ReviewController extends HttpServlet {
 				req.setAttribute("detaillist", dto);
 				UtilEx.forward("review_update.jsp", req, resp);
 
-
 			} else if (key.equals("delete")) {
 				int seq = Integer.parseInt(req.getParameter("seq"));
 
@@ -156,11 +161,11 @@ public class ReviewController extends HttpServlet {
 
 				if (delete) {
 					System.out.println("글 삭제 성공");
-					resp.sendRedirect("review.jsp");
+					resp.sendRedirect("review?key=main");
 
 				} else {
 					System.out.println("글 삭제 실패");
-					resp.sendRedirect("review.jsp");
+					resp.sendRedirect("review?key=main");
 				}
 
 			} else if (key.equals("commentwrite")) {

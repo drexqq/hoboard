@@ -33,6 +33,7 @@
     
     <c:forEach items="${ reviewlist }" var="list" varStatus="status" begin="0" end="4">
 		<div>
+		<hr>
 			<div>제목 : <a href="review?key=detail&seq=${ list.review_seq }">${ list.title }</a></div>
 			<div>내용 : ${ list.content }</div>
 			<div>뷰카운트 : ${ list.viewcount }</div>
@@ -43,7 +44,18 @@
 		<br>
 		</c:forEach>
         <c:forEach items="${ reviewlist }" var="page" varStatus="status" begin="0" end="${ page }">
-			<a onclick="goPage(${ status.index })">${ status.index }</a>
+			<%-- <c:set var="${ pageNumber }" value="${ status.index }">
+				<c:when test="${ pageNumber eq status.index }">
+					<a onclick="goPage(${ status.index })">${ status.index + 1 }</a>
+				</c:when>
+				<c:when test="${ pageNumber ne status.index }">
+					<a onclick="goPage(${ status.index })">[${ status.index + 1 }]</a>
+				</c:when>
+			</c:set> --%>
+			<%-- <c:if test="${ pageNumber eq status.index }">
+				<a onclick="goPage(${ status.index })">${ status.index + 1 }</a>
+			</c:if> --%>
+			<a onclick="goPage(${ status.index })">[${ status.index + 1 }]</a> 
 		</c:forEach>
     </c:otherwise>
  
