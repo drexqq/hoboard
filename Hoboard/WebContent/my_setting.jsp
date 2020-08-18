@@ -42,24 +42,24 @@
 						</div>
 						<div class="input-wrap address-wrap clearfix">
 							<label for="">주소</label>
-							<div class="btn btn-secondary find">우편번호 찾기</div>
-							<input type="text" id="post_Num" name="post_Num" class="textChk"
+							<div class="btn btn-secondary find" id="findPostCode">우편번호 찾기</div>
+							<input type="text" id="post_Num" name="post_Num" class="textChk address"
 								value="${ user.post_Num }" readonly="readonly" />
-							<input type="text" id="address" name="address" class="textChk"
+							<input type="text" id="address" name="address" class="textChk address"
 								value="${ user.address }" readonly="readonly" />
 							<input type="text" id="d_Address" name="d_Address"
-								class="textChk" value="${ user.d_Address }" />
+								class="textChk address" value="${ user.d_Address }" />
 						</div>
 						<c:if test="${ user.auth eq 2 }">
 							<div class="input-wrap btn-added clearfix">
-								<label for="logo">병원로고</label> <input type="text" id="logo"
-									name="logo" />
+								<label for="logo">병원로고</label>
+								<input type="text" id="logo" name="logo" value="${ b_user.logo }" />
 								<button type="button" class="btn" id="dayBtn">파일첨부</button>
 							</div>
 							<div class="input-wrap clearfix">
 								<label for="homepage">홈페이지</label>
 								<input type="text"
-									id="homepage" name="homepage" value="${ user.address }" />
+									id="homepage" name="homepage" value="${ b_user.homepage }" />
 							</div>
 
 							<div class="input-wrap clearfix">
@@ -70,14 +70,17 @@
 								<c:forEach items="${ busiTime }" var="time" varStatus="status"
 									begin="0" end="7">
 									<div class="time-wrap clearfix">
-										<label for="${ time.key }"> <i
-											class="ri-checkbox-line"></i> <span>${ time.value }</span>
-										</label> <span class="default-text"> <c:if
-												test="${ status.index != 7 }">휴무</c:if> <c:if
-												test="${ status.index == 7 }">없음</c:if>
-										</span> <input type="text" id="${ time.key }"
+										<label for="${ time.key[0] }"> <i
+											class="ri-checkbox-line"></i> <span>${ time.key[1] }</span>
+										</label>
+										<span class="default-text">
+											<c:if test="${ status.index != 7 }">
+												${ time.value }
+											</c:if>
+											<c:if test="${ status.index == 7 }">없음</c:if>
+										</span> <input type="text" id="${ time.key[0] }"
 											name="time${ status.index }" class="weekChk"
-											placeholder="09:00~18:00" value="" />
+											placeholder="09:00~18:00" value="${ time.value }" />
 									</div>
 								</c:forEach>
 							</div>
@@ -88,9 +91,9 @@
 									<c:forEach items="${ busiTime }" var="time" varStatus="status"
 										begin="8">
 										<div class="check clearfix">
-											<input type="checkbox" id="${ time.key }"
-												name="time${ status.index }" value="${ time.key }" />
-											<label for="${ time.key }">${ time.value }</label>
+											<input type="checkbox" id="${ time.key[0] }"
+												name="time${ status.index }" value="${ time.value }" />
+											<label for="${ time.key[0] }">${ time.key[1] }</label>
 										</div>
 									</c:forEach>
 								</div>
@@ -101,10 +104,10 @@
 								<div class="check-wrap clearfix">
 									<c:forEach items="${ busiCate }" var="cate" varStatus="status">
 										<div class="check clearfix">
-											<input type="checkbox" id="${ cate.key }"
-												name="cate${ status.index }" value="${ cate.key }"
-												class="cateChk" /> <label
-												for="${ cate.key }">${ cate.value }</label>
+											<input type="checkbox" id="${ cate.key[0] }"
+												name="cate${ status.index }" value="${ cate.value }"
+												class="cateChk" />
+												<label for="${ cate.key[0] }">${ cate.key[1] }</label>
 										</div>
 									</c:forEach>
 								</div>
@@ -116,9 +119,9 @@
 									<c:forEach items="${ busiAmenity }" var="amenity"
 										varStatus="status">
 										<div class="check clearfix">
-											<input type="checkbox" id="${ amenity.key }"
-												name="amenity${ status.index }" value="${ amenity.key }" />
-											<label for="${ amenity.key }">${ amenity.value }</label>
+											<input type="checkbox" id="${ amenity.key[0] }"
+												name="amenity${ status.index }" value="${ amenity.value }" />
+											<label for="${ amenity.key[0] }">${ amenity.key[1] }</label>
 										</div>
 									</c:forEach>
 								</div>
@@ -134,5 +137,7 @@
 		</div>
 	</div>
 </div>
+<script src="js/util.js"></script>
 <script src="js/mypage.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%@ include file="../module/footer.jsp"%>

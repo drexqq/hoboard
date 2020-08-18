@@ -10,7 +10,7 @@
             <label for="name">병원 이름</label>
             <input type="text" id="name" name="name" class="textChk" />
           </div>
-          <div class="input-wrap clearfix">
+          <div class="input-wrap btn-added clearfix">
             <label for="id">아이디</label>
             <input type="text" id="id" name="id" class="textChk" />
             <button type="button" class="btn check_dup" data-name="id">check</button>
@@ -28,7 +28,7 @@
               class="textChk"
             />
           </div>
-          <div class="input-wrap clearfix">
+          <div class="input-wrap btn-added clearfix">
             <label for="email">이메일</label>
             <input type="text" id="email" name="email" class="textChk" />
             <button type="button" class="btn check_dup" data-name="email">check</button>
@@ -39,14 +39,14 @@
           </div>
           <div class="input-wrap address-wrap clearfix">
             <label for="">주소</label>
-            <div class="btn btn-secondary find">우편번호 찾기</div>
-            <input type="text" id="post_Num" name="post_Num" class="textChk" />
-            <input type="text" id="address" name="address" class="textChk" />
+            <div class="btn btn-secondary find" id="findPostCode">우편번호 찾기</div>
+            <input type="text" id="post_Num" name="post_Num" class="textChk address" readonly="readonly" />
+            <input type="text" id="address" name="address" class="textChk address" readonly="readonly" />
             <input
               type="text"
               id="d_Address"
               name="d_Address"
-              class="textChk"
+              class="textChk address"
             />
           </div>
           <div class="input-wrap btn-added clearfix">
@@ -165,5 +165,8 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/util.js"></script>
 <script src="js/form.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <%@ include file="module/footer.jsp"%>

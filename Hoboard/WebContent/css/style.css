@@ -505,3 +505,143 @@ body {
 .mypage-wrap .join-wrap {
   padding: 0;
 }
+
+/* map */
+.nav {
+  padding: 65px 0;
+  position: relative;
+  z-index: 0;
+  background-color: #f4f8fc;
+}
+.nav .text-wrap {
+  text-align: center;
+}
+.nav .text-wrap .big {
+  font-size: 24px;
+  font-weight: 600;
+  color: #162a48;
+  line-height: 30px;
+}
+.nav .text-wrap .small {
+  font-size: 18px;
+  padding-top: 20px;
+  color: #646686;
+  line-height: 20px;
+}
+.nav .search-wrap {
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  bottom: -95px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.nav .search-wrap > div {
+  position: relative;
+  width: 30%;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  border-radius: 5px;
+  background-color: transparent;
+}
+.nav .search-wrap div.search {
+  width: 10%;
+}
+.nav .search-wrap div .arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav .search-wrap select {
+  appearance: none;
+  overflow: hidden;
+  padding: 0 10px;
+  height: 50px;
+  width: 100%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.nav .search-wrap input {
+  overflow: hidden;
+  padding: 0 10px;
+  height: 50px;
+  width: 100%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.nav .search-wrap button {
+  background-color: #349bd5;
+  border: 0;
+  border-radius: 5px;
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 20px;
+}
+.nav .search-wrap button i {
+  vertical-align: -4px;
+  color: #fff;
+  padding-left: 5px;
+}
+.map-wrap {
+  height: calc(100vh - 80px);
+}
+.map-wrap .side-list {
+  float: left;
+  width: 25%;
+  padding: 0 15px;
+}
+.map-wrap .side-list .title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #162a48;
+  padding: 20px;
+}
+.map-wrap .side-list .list-wrap {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.map-wrap .side-list .list-wrap .list:hover {
+  box-shadow: none;
+  border-color: #349bd5;
+}
+.map-wrap .side-list .list-wrap .list-upper {
+  font-size: 16px;
+}
+.map-wrap .side-list .list-wrap .list-upper .tit {
+  float: left;
+}
+.map-wrap .side-list .list-wrap .list-upper .tel {
+  float: right;
+}
+.map-wrap .side-list .list-wrap .list-upper .tel i {
+  vertical-align: -3px;
+  padding-right: 5px;
+}
+.map-wrap .side-list .list-wrap .list-down {
+  font-size: 16px;
+  padding-top: 10px;
+}
+.map-wrap .side-list .paging-wrap {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #162a48;
+}
+.map-wrap .side-list .paging-wrap a {
+  margin: 0 7px;
+  font-size: 20px;
+}
+.map-wrap .side-list .api-wrap .paging-wrap {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.map-wrap .map {
+  float: left;
+  width: 75%;
+  min-height: calc(100vh - 80px);
+}

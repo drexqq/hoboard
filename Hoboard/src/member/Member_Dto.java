@@ -22,15 +22,15 @@ public class Member_Dto {
 		this.test = test;
 	}
 
-	public Member_Dto(int auth, String name, String id, String pw, String email, String tel, String post_Num,
+	public Member_Dto(int auth, String name, String id, String pw, String tel, String email, String post_Num,
 			String address, String d_Address) {
 		super();
 		this.auth = auth;
 		this.name = name;
 		this.id = id;
 		this.pw = pw;
-		this.email = email;
 		this.tel = tel;
+		this.email = email;
 		this.post_Num = post_Num;
 		this.address = address;
 		this.d_Address = d_Address;

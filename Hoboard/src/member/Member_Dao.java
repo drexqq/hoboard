@@ -221,9 +221,8 @@ public class Member_Dao {
 
 			int j = 2;
 			while (rs.next()) {
-				for (int i = 0; i < cate.length; i++) {
+				for (int i = 0; i < cate.length; i++)
 					cate[i] = rs.getString(j++);
-				}
 			}
 
 		} catch (Exception e) {
@@ -258,6 +257,7 @@ public class Member_Dao {
 
 	// GET BUSI TIME
 	public String[] getBusiTime(String id) {
+		System.out.println("get Busi Time");
 		String query = " SELECT * FROM BUSI_TIME WHERE ID = ? ";
 
 		Connection conn = null;
@@ -272,9 +272,8 @@ public class Member_Dao {
 
 			int j = 2;
 			while (rs.next()) {
-				for (int i = 0; i < time.length; i++) {
+				for (int i = 0; i < time.length; i++)
 					time[i] = rs.getString(j++);
-				}
 			}
 
 		} catch (Exception e) {
@@ -323,9 +322,8 @@ public class Member_Dao {
 
 			int j = 2;
 			while (rs.next()) {
-				for (int i = 0; i < amenity.length; i++) {
+				for (int i = 0; i < amenity.length; i++)
 					amenity[i] = rs.getString(j++);
-				}
 			}
 
 		} catch (Exception e) {
