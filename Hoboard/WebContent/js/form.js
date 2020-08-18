@@ -1,19 +1,4 @@
-// checkSpace
-function checkSpace(str) {
-  if (str.search(/\s/) != -1) return true;
-  else return false;
-}
 
-// toggle check box color
-$(".time-wrap")
-  .find("label")
-  .each(function () {
-    $(this).on("click", function () {
-      $(this).toggleClass("on");
-      $(this).siblings("input").toggleClass("show").val("");
-      $(this).siblings(".default-text").toggle();
-    });
-  });
 // check email, id
 $(".check_dup").on("click", function () {
   var check_eng = $(this).data("name");
@@ -64,7 +49,7 @@ $("#joinBtn").on("click", function () {
 
   // member default info check
   var exit = false;
-  $("input.textChk").each(function () {
+  $("input.textChk").not(".address").each(function () {
     if ($(this).val().replace(/ /g, "") == "") {
       exit = true;
       alert($(this).siblings("label").text() + " 항목을 입력해주세요 !");
@@ -73,6 +58,7 @@ $("#joinBtn").on("click", function () {
     } else if (checkSpace($(this).val())) {
       exit = true;
       alert("잘못된 입력입니다. 띄어쓰기를 사용할 수 없습니다.");
+      $(this).focus();
       return false;
     }
   });
@@ -114,10 +100,7 @@ $("#joinBtn").on("click", function () {
     alert("잘못된 접근입니다 !");
     location.href = "index.jsp";
   }
-  if (!$("#id_Check").hasClass("done")) {
-    alert("아이디 체크를 해주세요 !");
-    return;
-  } else if ($("#pw").val() != $("#pw_Check").val()) {
+  if ($("#pw").val() != $("#pw_Check").val()) {
     alert("비밀번호를 확인해주세요 !");
     $("#pw").focus();
     return;
@@ -125,3 +108,5 @@ $("#joinBtn").on("click", function () {
     $("form").submit();
   }
 });
+
+

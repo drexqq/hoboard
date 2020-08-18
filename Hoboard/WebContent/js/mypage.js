@@ -13,7 +13,7 @@ $(document).ready(function () {
   $("#updateBtn").on("click", function () {
     // member default info check
     var exit = false;
-    $("input.textChk").each(function () {
+    $("input.textChk").not(".address").each(function () {
       if ($(this).val().replace(/ /g, "") == "") {
         exit = true;
         alert($(this).siblings("label").text() + " 항목을 입력해주세요 !");
@@ -22,6 +22,7 @@ $(document).ready(function () {
       } else if (checkSpace($(this).val())) {
         exit = true;
         alert("잘못된 입력입니다. 띄어쓰기를 사용할 수 없습니다.");
+        $(this).focus();
         return false;
       }
     });

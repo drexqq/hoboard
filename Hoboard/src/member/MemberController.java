@@ -48,8 +48,8 @@ public class MemberController extends HttpServlet {
 									req.getParameter("name"),
 									req.getParameter("id"),
 									req.getParameter("pw"),
-									req.getParameter("email"),
 									req.getParameter("tel"),
+									req.getParameter("email"),
 									req.getParameter("post_Num"),
 									req.getParameter("address"),
 									req.getParameter("d_Address")
@@ -84,25 +84,20 @@ public class MemberController extends HttpServlet {
 			int amenity[] = new int[5];
 			
 			for (int i = 0; i < time.length; i++) {
-				System.out.println("init time"+i+" = "+time[i]);
 				if (req.getParameter("time"+i+"") == null || req.getParameter("time"+i+"").equals("") || req.getParameter("time"+i+"").equals("null")) time[i] = "휴무";
 				else time[i] = req.getParameter("time"+i);
-				System.out.println("time"+i+" = "+time[i]);
 			}
 			for (int i = 0; i < extra.length; i++) {
 				extra[i] = 0;
 				if (req.getParameter("time"+(i+8)) != null) extra[i] = 1;
-				System.out.println("extra"+i+" = "+extra[i]);
 			}
 			for (int i = 0; i < amenity.length; i++) {
 				amenity[i] = 0;
 				if (req.getParameter("amenity"+i) != null) amenity[i] = 1;
-				System.out.println("amenity"+i+" = "+amenity[i]);
 			}
 			for (int i = 0; i < cate.length; i++) {
 				cate[i] = 0;
 				if (req.getParameter("cate"+i) != null) cate[i] = 1;
-				System.out.println("cate"+i+" = "+cate[i]);
 			}
 			
 			done = b_dao.addBUSI_Member(b_dto, b_dto.getId());

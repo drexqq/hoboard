@@ -26,10 +26,9 @@
 							id="pw_Check" name="pw_Check" class="textChk" />
 					</div>
 					<div class="input-wrap btn-added clearfix">
-						<label for="email">이메일</label>
-						<input type="text" id="email"
+						<label for="email">이메일</label> <input type="text" id="email"
 							name="email" class="textChk" />
-							<button type="button" class="btn check_dup" data-name="email">check</button>
+						<button type="button" class="btn check_dup" data-name="email">check</button>
 					</div>
 					<div class="input-wrap clearfix">
 						<label for="tel">전화 번호</label> <input type="text" id="tel"
@@ -37,22 +36,24 @@
 					</div>
 					<div class="input-wrap address-wrap clearfix">
 						<label for="">주소</label>
-						<div class="btn btn-secondary find">우편번호 찾기</div>
-						<input type="text" id="post_Num" name="post_Num" class="textChk" />
-						<input type="text" id="address" name="address" class="textChk" />
-						<input type="text" id="d_Address" name="d_Address" class="textChk" />
+						<div class="btn btn-secondary find" id="findPostCode">우편번호 찾기</div>
+						<input type="text" id="post_Num" name="post_Num" class="textChk address" readonly="readonly" />
+						<input type="text" id="address" name="address" class="textChk address" readonly="readonly" />
+						<input type="text" id="d_Address" name="d_Address" class="textChk address" />
 					</div>
 				</form>
 			</div>
 		</div>
 		<div class="btn-wrap">
-			<button type="button" class="btn btn-lg" id="joinBtn">
-				회원가입</button>
+			<button type="button" class="btn btn-lg" id="joinBtn">회원가입</button>
 		</div>
 	</div>
 </div>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/util.js"></script>
 <script src="js/form.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <%@ include file="module/footer.jsp"%>
