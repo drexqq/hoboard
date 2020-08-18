@@ -1,4 +1,3 @@
-
 // check email, id
 $(".check_dup").on("click", function () {
   var check_eng = $(this).data("name");
@@ -49,19 +48,21 @@ $("#joinBtn").on("click", function () {
 
   // member default info check
   var exit = false;
-  $("input.textChk").not(".address").each(function () {
-    if ($(this).val().replace(/ /g, "") == "") {
-      exit = true;
-      alert($(this).siblings("label").text() + " 항목을 입력해주세요 !");
-      $(this).focus();
-      return false;
-    } else if (checkSpace($(this).val())) {
-      exit = true;
-      alert("잘못된 입력입니다. 띄어쓰기를 사용할 수 없습니다.");
-      $(this).focus();
-      return false;
-    }
-  });
+  $("input.textChk")
+    .not(".address")
+    .each(function () {
+      if ($(this).val().replace(/ /g, "") == "") {
+        exit = true;
+        alert($(this).siblings("label").text() + " 항목을 입력해주세요 !");
+        $(this).focus();
+        return false;
+      } else if (checkSpace($(this).val())) {
+        exit = true;
+        alert("잘못된 입력입니다. 띄어쓰기를 사용할 수 없습니다.");
+        $(this).focus();
+        return false;
+      }
+    });
   if (exit) return false;
   // auth check
   if (auth == 1) {
@@ -108,5 +109,3 @@ $("#joinBtn").on("click", function () {
     $("form").submit();
   }
 });
-
-

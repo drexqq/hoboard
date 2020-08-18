@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,13 +56,8 @@
               <div class="menu-wrap">
                 <ul class="menu clearfix">
                   <li class="menu-item"><a href="map.jsp">근처 병원 찾기</a></li>
-                  <li class="menu-item"><a href="res_list.jsp">예약하기</a></li>
-<<<<<<< HEAD
-
-                  <li class="menu-item"><a href="review?key=main">후기보기</a></li>
-=======
+                  <li class="menu-item"><a href="reserve.jsp">예약하기</a></li>
                   <li class="menu-item"><a href="review">후기보기</a></li>
->>>>>>> 8fae94bc4d83012dbc0d5c8682d0dbd42299d435
                   <li class="menu-item"><a href="news_list.do?work=move">건강정보</a></li>
                 </ul>
               </div>

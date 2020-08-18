@@ -62,8 +62,9 @@ body {
 
 .review-wrap .title {
   font-size: 36px;
-  font-weight: 700;
   padding-bottom: 50px;
+  font-weight: 600;
+  color: #162a48;
 }
 
 .review-wrap .list-wrap {
@@ -507,6 +508,133 @@ body {
 }
 
 /* map */
+.map-wrap {
+  height: calc(100vh - 80px);
+}
+.map-wrap .side-list {
+  float: left;
+  width: 25%;
+  padding: 0 15px;
+}
+.map-wrap .side-list .title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #162a48;
+  padding: 20px;
+}
+.map-wrap .side-list .list-wrap {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.map-wrap .side-list .list-wrap .list:hover {
+  box-shadow: none;
+  border-color: #349bd5;
+}
+.map-wrap .side-list .list-wrap .list-upper {
+  font-size: 16px;
+}
+.map-wrap .side-list .list-wrap .list-upper .tit {
+  float: left;
+}
+.map-wrap .side-list .list-wrap .list-upper .tel {
+  float: right;
+}
+.map-wrap .side-list .list-wrap .list-upper .tel i {
+  vertical-align: -3px;
+  padding-right: 5px;
+}
+.map-wrap .side-list .list-wrap .list-down {
+  font-size: 16px;
+  padding-top: 10px;
+}
+.map-wrap .side-list .paging-wrap {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #162a48;
+}
+.map-wrap .side-list .paging-wrap a {
+  margin: 0 7px;
+  font-size: 20px;
+}
+.map-wrap .side-list .api-wrap .paging-wrap {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.map-wrap .map {
+  float: left;
+  width: 75%;
+  min-height: calc(100vh - 80px);
+}
+
+/* review */
+.review {
+  padding: 80px 0;
+}
+.review .title-wrap {
+  padding-bottom: 50px;
+}
+.review .title-wrap .title {
+  float: left;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 600;
+  color: #162a48;
+}
+.review .title-wrap .search-wrap {
+  float: right;
+  height: 30px;
+}
+.review .title-wrap .search-wrap .select-wrap {
+  float: left;
+  width: 100px;
+  position: relative;
+  margin-right: 15px;
+}
+.review .title-wrap .search-wrap .select-wrap select {
+  float: left;
+  appearance: none;
+  padding: 0 10px;
+  height: 30px;
+  width: 100%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.review .title-wrap .search-wrap .select-wrap .arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.review .title-wrap .search-wrap .input-wrap {
+  float: left;
+  position: relative;
+}
+.review .title-wrap .search-wrap .input-wrap input {
+  float: left;
+  width: 250px;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.review .title-wrap .search-wrap .input-wrap button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.review .title-wrap .search-wrap .input-wrap button i {
+  font-size: 18px;
+}
+
+/* reserve */
 .nav {
   padding: 65px 0;
   position: relative;
@@ -587,61 +715,4 @@ body {
   vertical-align: -4px;
   color: #fff;
   padding-left: 5px;
-}
-.map-wrap {
-  height: calc(100vh - 80px);
-}
-.map-wrap .side-list {
-  float: left;
-  width: 25%;
-  padding: 0 15px;
-}
-.map-wrap .side-list .title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #162a48;
-  padding: 20px;
-}
-.map-wrap .side-list .list-wrap {
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.map-wrap .side-list .list-wrap .list:hover {
-  box-shadow: none;
-  border-color: #349bd5;
-}
-.map-wrap .side-list .list-wrap .list-upper {
-  font-size: 16px;
-}
-.map-wrap .side-list .list-wrap .list-upper .tit {
-  float: left;
-}
-.map-wrap .side-list .list-wrap .list-upper .tel {
-  float: right;
-}
-.map-wrap .side-list .list-wrap .list-upper .tel i {
-  vertical-align: -3px;
-  padding-right: 5px;
-}
-.map-wrap .side-list .list-wrap .list-down {
-  font-size: 16px;
-  padding-top: 10px;
-}
-.map-wrap .side-list .paging-wrap {
-  text-align: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #162a48;
-}
-.map-wrap .side-list .paging-wrap a {
-  margin: 0 7px;
-  font-size: 20px;
-}
-.map-wrap .side-list .api-wrap .paging-wrap {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-.map-wrap .map {
-  float: left;
-  width: 75%;
-  min-height: calc(100vh - 80px);
 }

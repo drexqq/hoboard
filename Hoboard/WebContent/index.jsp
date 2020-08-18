@@ -42,61 +42,28 @@
       <div class="col-12">
         <div class="title">후기게시판</div>
         <div class="list-wrap">
-          <a href="" class="list">
-            <div class="name">
-              [분당재생병원 - 내과]
-              <span class="grade"><i class="ri-star-smile-line"></i>5</span>
-            </div>
-            <div class="content">
-              여기는 후기에 대한 내용을 미리볼수 있는 공간임둥여기는 후기에 대한
-              내용을 미리볼수 있는 공간임둥여기는 후기에 대한 내용을 미리볼수
-              있는 공간임둥여기는 후기에 대한 내용을 미리볼수 있는
-              공간임둥여기는 후기에 대한 내용을 미리볼수 있는 공간임둥
-            </div>
-            <div class="date">2020.xx.xx</div>
-          </a>
-          <a href="" class="list">
-            <div class="name">
-              [분당재생병원 - 내과]
-              <span class="grade"><i class="ri-star-smile-line"></i>5</span>
-            </div>
-            <div class="content">
-              여기는 후기에 대한 내용을 미리볼수 있는 공간임둥여기는 후기에 대한
-              내용을 미리볼수 있는 공간임둥여기는 후기에 대한 내용을 미리볼수
-              있는 공간임둥여기는 후기에 대한 내용을 미리볼수 있는
-              공간임둥여기는 후기에 대한 내용을 미리볼수 있는 공간임둥
-            </div>
-            <div class="date">2020.xx.xx</div>
-          </a>
-          <a href="" class="list">
-            <div class="name">
-              [분당재생병원 - 내과]
-              <span class="grade"><i class="ri-star-smile-line"></i>5</span>
-            </div>
-            <div class="content">
-              여기는 후기에 대한 내용을 미리볼수 있는 공간임둥여기는 후기에 대한
-              내용을 미리볼수 있는 공간임둥여기는 후기에 대한 내용을 미리볼수
-              있는 공간임둥여기는 후기에 대한 내용을 미리볼수 있는
-              공간임둥여기는 후기에 대한 내용을 미리볼수 있는 공간임둥
-            </div>
-            <div class="date">2020.xx.xx</div>
-          </a>
-          <a href="" class="list">
-            <div class="name">
-              [분당재생병원 - 내과]
-              <span class="grade"><i class="ri-star-smile-line"></i>5</span>
-            </div>
-            <div class="content">
-              여기는 후기에 대한 내용을 미리볼수 있는 공간임둥여기는 후기에 대한
-              내용을 미리볼수 있는 공간임둥여기는 후기에 대한 내용을 미리볼수
-              있는 공간임둥여기는 후기에 대한 내용을 미리볼수 있는
-              공간임둥여기는 후기에 대한 내용을 미리볼수 있는 공간임둥
-            </div>
-            <div class="date">2020.xx.xx</div>
-          </a>
+			<c:forEach items="${ reviewList }" var="list" varStatus="status" begin="0" end="2">
+				<a href="review?key=detail&seq=${ list.review_seq }" class="list">
+					<div class="name">${ list.title }</div>
+					<div class="content">${ list.content }</div>
+					<div class="util-wrap">
+						<div>
+							<span class="grade">
+								<i class="ri-star-smile-line"></i>
+								${ list.score } / 5
+							</span>
+							<span class="view">
+								<i class="ri-eye-line"></i>
+								${ list.viewcount }
+							</span>
+						</div>
+						<div class="date">${ list.wdate }</div>
+					</div>
+				</a>
+			</c:forEach>
         </div>
         <div class="go-review">
-          <a href="#">더 보기</a>
+          <a href="review">더 보기</a>
         </div>
       </div>
     </div>

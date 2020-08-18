@@ -20,18 +20,13 @@ public class ReviewController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
-
-		//HttpSession session = req.getSession();
-		//String idx = (String)session.getAttribute("sessionID");
-			
 		
 		Review_Dao dao = Review_Dao.getInstance();
 		String key = req.getParameter("key");
-
-		if (key.equals("main")) {
+		 
+		if (key == null || "".equals(key)) {
 			List<Review_Dto> list = null;
 			
 			String sW = (String) req.getParameter("searchWord");
@@ -46,6 +41,7 @@ public class ReviewController extends HttpServlet {
 				pageNumber = Integer.parseInt((String) req.getParameter("page"));
 
 			int len = dao.getsearch(c, sW);
+			System.out.println(len);
 			int page = len / limit; // 예: 12개 -> 2page
 			if (len % limit > 0)
 				page = page + 1; // -> 2

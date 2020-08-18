@@ -1,5 +1,7 @@
 /* header */
 header {
+  position: relative;
+  z-index: 9999;
   box-shadow: 0px 2px 4px rgba(38, 38, 38, 0.1);
 }
 .header {
