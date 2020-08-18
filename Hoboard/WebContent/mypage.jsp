@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
           </a>
         </div>
         <div class="col-3">
-          <a href="my_ask.jsp">
+          <a href="ask.do?one=move">
             <div class="box">
               <div class="title">1:1 문의하기</div>
               <div class="icon clearfix">
