@@ -1,138 +1,67 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>review_detail</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-
-	<h1>후기정보</h1>
-	<a href="review?key=main">글 목록으로</a>
-
-	<table style="width: 600" border="1">
-		<col width="300">
-		<col width="500">
-		<tr>
-			<th>병원 카테고리</th>
-			<td>${detaillist.getBusi_cate()}</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>${detaillist.getTitle()}</td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>${detaillist.getIndvd_id()}</td>
-		</tr>
-		<tr>
-			<th>파일다운로드</th>
-			<td><input type="button" name="btndown" value="파일"
-				onclick="location.href='file?filename=${detaillist.getFilename()}&seq=${detaillist.getReview_seq()}'"></td>
-		</tr>
-		<tr>
-			<th>작성일</th>
-			<td>${detaillist.getWdate()}</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${detaillist.getViewcount()}</td>
-		</tr>
-		<tr>
-			<td><textarea rows="20px" cols="70px" name="content"
-					readonly="readonly">${detaillist.getContent()}</textarea></td>
-		</tr>
-	</table>
-<!--TODO Connect session ID -->
-	<c:choose>
-		<c:when test="${ sessionScope.sessionID == detaillist.indvd_id }">
-			<div align="center">
-				<button type="button"
-					onclick="updateBbs(${detaillist.getReview_seq()})">수정</button>
-				<button type="button"
-					onclick="deleteBbs(${detaillist.getReview_seq()})">삭제</button>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="module/header.jsp"%>
+<!-- 
+	<th>파일다운로드</th>
+	<input type="button" name="btndown" value="파일" onclick="location.href='file?filename=${detaillist.getFilename()}&seq=${detaillist.getReview_seq()}'">
+ -->
+<div class="board-detail review-detail">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="title-wrap">
+					<div class="cate-name">${detaillist.getBusi_cate()}</div>
+					<div class="title">${detaillist.getTitle()}</div>
+					<div class="util-wrap clearfix">
+						<div class="author">${detaillist.getIndvd_id()}</div>
+						<div class="date">${detaillist.getWdate()}</div>
+						<div class="view"><i class="ri-eye-line"></i>${detaillist.getViewcount()}</div>
+					</div>
+				</div>
+				<div class="content-wrap">
+					${detaillist.getContent()}
+				</div>
+				<div class="goList">
+					<a href="review">글 목록으로</a>
+				</div>
+				<div class="reply-wrap">
+					<div class="reply-title">댓글 <span>${ fn:length(commentlist) }</span></div>
+					<c:choose>
+						<c:when test="${ sessionScope.sessionID == null }">
+							<div class="reply nologin-disabled">
+								<a href="login.jsp">로그인 후 이용하실 수 있습니다 !</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="reply clearfix">
+								<form action="COMM" method="post">
+									<input type="hidden" name="seq" id="seq" value="${detaillist.getReview_seq()}"> 
+									<input type="hidden" name="no" id="no" value="${detaillist.getReview_seq()}"> 
+									<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
+										<textarea placeholder="댓글 작성" name="reply_content" id="reply_content"></textarea>
+									<input class="submit" type="submit" value="댓글등록">
+								</form>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="reply-items">
+						<c:forEach items="${ commentlist }" var="list" varStatus="status" begin="0" end="10">
+							<div class="item">
+								<div class="upper clearfix">
+									<div class="id"><i class="ri-user-line"></i>${list.id}</div>
+									<div class="date"><i class="ri-calendar-line"></i>${list.date}</div>
+								</div>
+								<div class="down">${list.content}</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
-		</c:when>
-		<c:when test="${ sessionScope.sessionID != detaillist.indvd_id }">
-			<div></div>
-		</c:when>
-	</c:choose>
-
-	아이디 :
-	<c:out value="${sessionScope.sessionID}"></c:out>
-	<div class="w3-border w3-padding">댓글</div>
-	<div class="w3-border w3-padding">
-		<c:if test="${ sessionScope.sessionID == null }">
-			<textarea rows="5" cols="50" class="w3-input w3-border newLogin"
-				readonly>로그인 후 댓글 달기</textarea>
-		</c:if>
-		<c:if test="${ sessionScope.sessionID != null }">
-			<i class="fa fa-user w3-padding-16"></i>
-			<form action="COMM" method="post">
-				<input type="hidden" name="seq" id="seq" value="${detaillist.getReview_seq()}"> 
-				<input type="hidden" name="no" id="no" value="${detaillist.getReview_seq()}"> 
-				<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
-					<textarea rows="5" cols="50" class="w3-input w3-border" placeholder="댓글 작성" name="reply_content" id="reply_content"></textarea>
-				<input type="submit" value="댓글등록">
-			</form>
-		</c:if>
+		</div>
 	</div>
-
-
-	<table border="1">
-		<c:forEach items="${ commentlist }" var="list" varStatus="status"
-			begin="0" end="10">
-			${ fn:length(commentlist) }
-			<c:choose>
-					<%-- test="${ list.board_no == seq && fn:length(commentlist) == 0 || list == null}" --%>
-				<%-- <c:when 
-					test="${ fn:length(commentlist) eq 0 }"
-					>
-					<tr>
-						<td colspan="3" align="center">작성된 덧글이 없습니다.</td>
-					</tr> 
-				</c:when> --%>
-				<c:when
-					test="${ list.board_no == seq && sessionScope.sessionID == list.id}">
-					<tr>
-						<th>ID111:</th>
-						<td>${list.id}</td>
-						<th>작성일:</th>
-						<td>${list.date}</td>
-						<td>
-						<input type="button" onclick="cupdateBbs(${list.seq});" value="수정">
-						<input type="button" onclick="cdeleteBbs(${list.seq});" value="삭제">
-						</td>
-					</tr>
-					<tr>
-						<th>내용:</th>
-						<td>${list.content}</td>
-					</tr>
-				</c:when>
-				<c:when
-					test="${ list.board_no == seq && sessionScope.sessionID != list.id}">
-					<tr>
-						<th>ID:</th>
-						<td>${list.id}</td>
-						<th>작성일:</th>
-						<td>${list.date}</td>
-					<tr>
-						<th>내용:</th>
-						<td>${list.content}</td>
-					</tr>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-	</table>
-	<br>
-	<br>
+</div>
+	
+		
 
 
 <script type="text/javascript">
@@ -154,6 +83,19 @@ function cdeleteBbs(seq) {
 
 
 </script>
-
-</body>
-</html>
+<!--TODO Connect session ID -->
+<c:choose>
+	<c:when test="${ sessionScope.sessionID == detaillist.indvd_id }">
+		<div align="center">
+			<button type="button"
+				onclick="updateBbs(${detaillist.getReview_seq()})">수정</button>
+			<button type="button"
+				onclick="deleteBbs(${detaillist.getReview_seq()})">삭제</button>
+		</div>
+	</c:when>
+	<c:when test="${ sessionScope.sessionID != detaillist.indvd_id }">
+		<div></div>
+	</c:when>
+</c:choose>
+<!-- 수정삭제는 마이페이지에서만 가능하도록 !! -->
+<%@ include file="module/footer.jsp"%>

@@ -62,8 +62,9 @@ body {
 
 .review-wrap .title {
   font-size: 36px;
-  font-weight: 700;
   padding-bottom: 50px;
+  font-weight: 600;
+  color: #162a48;
 }
 
 .review-wrap .list-wrap {
@@ -644,4 +645,72 @@ body {
   float: left;
   width: 75%;
   min-height: calc(100vh - 80px);
+}
+
+/* review */
+.review {
+  padding: 80px 0;
+}
+.review .title-wrap {
+  padding-bottom: 50px;
+}
+.review .title-wrap .title {
+  float: left;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 600;
+  color: #162a48;
+}
+.review .title-wrap .search-wrap {
+  float: right;
+  height: 30px;
+}
+.review .title-wrap .search-wrap .select-wrap {
+  float: left;
+  width: 100px;
+  position: relative;
+  margin-right: 15px;
+}
+.review .title-wrap .search-wrap .select-wrap select {
+  float: left;
+  appearance: none;
+  padding: 0 10px;
+  height: 30px;
+  width: 100%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.review .title-wrap .search-wrap .select-wrap .arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.review .title-wrap .search-wrap .input-wrap {
+  float: left;
+  position: relative;
+}
+.review .title-wrap .search-wrap .input-wrap input {
+  float: left;
+  width: 250px;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.review .title-wrap .search-wrap .input-wrap button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.review .title-wrap .search-wrap .input-wrap button i {
+  font-size: 18px;
 }
