@@ -142,7 +142,6 @@ public class AskController extends HttpServlet {
 			//HttpSession session = req.getSession();
 			Ask_Dao dao = Ask_Dao.getInstance();
 			JSONObject obj = new JSONObject();
-			System.out.println("!!!!!!!!!!!!!!");
 			
 			//String id = "";
 			
@@ -172,6 +171,34 @@ public class AskController extends HttpServlet {
 					//resp.sendRedirect("news_detail.do");
 				}
 			}
+			
+			else if (two.equals("c_write")) {
+				System.out.println("comm post");
+				
+				String id = req.getParameter("id");
+				String content = req.getParameter("content");
+				int nseq = Integer.parseInt(req.getParameter("nseq"));
+				
+				System.out.println("id ="+id+", content= "+content);
+				
+				id="admin";
+				Ask_Comm_Dao dao2 = Ask_Comm_Dao.getInstance();
+				
+				Ask_Comm_Dto dto2 = new Ask_Comm_Dto ();
+				
+				boolean b = dao2.comm_write(dto2);
+				
+				if(b){ 
+					System.out.println("댓글쓰기 성공");
+					resp.sendRedirect("ask.do?one=detail&nseq="+nseq);
+				} else {
+					System.out.println("실패");
+					//resp.sendRedirect("news_detail.do");
+				}
+				
+				
+			}
+			
 	}
 
 }

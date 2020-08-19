@@ -354,7 +354,11 @@ private static News_Dao n_dao = new News_Dao();
 			  sql = sql + sqlWord; 
 			  */
 			  
+<<<<<<< HEAD
 			  sql += " ORDER BY NEWS_SEQ DESC) "; // 최신 날짜 순으로 정렬
+=======
+			  sql += " ORDER BY NEWS_SEQ DESC) "; 
+>>>>>>> news_f
 			  sql += " WHERE RNUM >=? AND RNUM <= ?";
 			  
 			 int start, end;
