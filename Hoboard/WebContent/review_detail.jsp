@@ -45,7 +45,7 @@
 						</c:otherwise>
 					</c:choose>
 					<div class="reply-items">
-						<c:forEach items="${ commentlist }" var="list" varStatus="status" begin="0" end="10">
+						<c:forEach items="${commentlist}" var="list" varStatus="status" begin="0" end="10">
 							<div class="item">
 								<div class="upper clearfix">
 									<div class="id"><i class="ri-user-line"></i>${list.id}</div>

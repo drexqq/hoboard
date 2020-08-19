@@ -6,7 +6,7 @@
     <div class="row">
     <c:forEach items="${ busiCate }" var="cate" varStatus="status">
 	    <div class="col-3">
-	        <a href="" class="card">
+	        <a href="reserve?cate=${ cate.key }&seq=1" class="card">
 	          <div class="icon">
 	            <img src="img/cate${ status.index+1 }.png" alt="${ cate.value }" />
 	          </div>

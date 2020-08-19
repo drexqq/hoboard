@@ -321,7 +321,6 @@ public class Review_Dao {
 			psmt.setString(1, title);
 			psmt.setString(2, content);
 			psmt.setInt(3, seq);
-
 			System.out.println("2/6 getReview_update updateBbs");
 
 			count = psmt.executeUpdate();
