@@ -114,7 +114,6 @@ public class AskController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-<<<<<<< HEAD
 			System.out.println("This is post");
 			
 			req.setCharacterEncoding("UTF-8");
@@ -123,7 +122,6 @@ public class AskController extends HttpServlet {
 			String two = req.getParameter("two");
 			//HttpSession session = req.getSession();
 			Ask_Dao dao = Ask_Dao.getInstance();
-			JSONObject obj = new JSONObject();
 			
 			//String id = "";
 			
@@ -181,45 +179,6 @@ public class AskController extends HttpServlet {
 				
 			}
 			
-=======
-		System.out.println("This is post");
-
-		req.setCharacterEncoding("UTF-8");
-		resp.setContentType("text/html;charset=utf-8");
-
-		String two = req.getParameter("two");
-		// HttpSession session = req.getSession();
-		Ask_Dao dao = Ask_Dao.getInstance();
-		System.out.println("!!!!!!!!!!!!!!");
-
-		// String id = "";
-
-		if (two.equals("write")) {
-			System.out.println(2222);
-
-			String id = req.getParameter("id");
-			// String title = URLEncoder.encode(req.getParameter("title"), "utf-8");
-
-			String title = req.getParameter("title");
-			String content = req.getParameter("content");
-
-			// String content = URLEncoder.encode(req.getParameter("content"), "utf-8");
-			System.out.println("title =" + title + ", content= " + content);
-
-			id = "admin";
-			dao = Ask_Dao.getInstance();
-			Ask_Dto dto = new Ask_Dto(id, title, content);
-			boolean b = dao.ask_write(dto);
-
-			if (b) {
-				System.out.println("글쓰기 성공");
-				resp.sendRedirect("ask.do?one=move");
-			} else {
-				System.out.println("실패");
-				// resp.sendRedirect("news_detail.do");
-			}
-		}
->>>>>>> 5c33b9fc7420f2884ec458355cc5ad91088fc9e7
 	}
 
 }
