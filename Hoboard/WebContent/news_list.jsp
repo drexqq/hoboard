@@ -1,5 +1,5 @@
-<%@page import="news.News_Dao"%>
 <%@page import="news.News_Dto"%>
+<%@page import="news.News_Dao"%>
 <%@page import="java.util.List"%>
 <%@page import="member.Member_Dto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

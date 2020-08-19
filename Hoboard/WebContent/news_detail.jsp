@@ -1,6 +1,6 @@
 <%@page import="news.News_Dao"%>
-<%@page import="java.util.List"%>
 <%@page import="news.News_Dto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
