@@ -70,7 +70,7 @@ public class Review_COMM_Dao {
 		
 		String sql = " SELECT B.SEQ , B.BOARD_NO , B.ID , B.CONTENT , B.COMM_DATE "
 				   + " FROM REVIEW A INNER JOIN REVIEW_COMM B "
-				   + " ON A.REVIEW_SEQ = ? "
+				   + " ON A.REVIEW_SEQ = ? AND B.BOARD_NO=A.REVIEW_SEQ "
 				   + " ORDER BY B.SEQ DESC ";
 
 		Connection conn = null;
