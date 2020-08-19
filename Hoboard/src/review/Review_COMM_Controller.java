@@ -62,8 +62,6 @@ public class Review_COMM_Controller extends HttpServlet {
 			System.out.println("seq:" + seq);
 			
 			boolean delete = dao.Comment_delete(seq);
-			
-			
 
 			if (delete) {
 				System.out.println("덧글 삭제 성공");
@@ -105,6 +103,7 @@ public class Review_COMM_Controller extends HttpServlet {
 		} else {
 				System.out.println("덧글 작성 실패");
 				resp.sendRedirect("review?key=detail&seq=" + seq );
+				
 		}
 	}
 }

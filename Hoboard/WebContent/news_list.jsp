@@ -6,21 +6,19 @@
     pageEncoding="UTF-8"%>
  	
 <%
-//News_Dao dao = News_Dao.getInstance();
 List<News_Dto> list = (List<News_Dto>)request.getAttribute("list");
 
 int len = (int)request.getAttribute("len");
 String searchWord = (String)request.getAttribute("searchWord");
 String choice = (String)request.getAttribute("choice");
+
 int pageNumber = (Integer)request.getAttribute("pageNumber");
 
-	System.out.println("nlist = "+list.toString());
 	System.out.println("len = "+len+" s"+searchWord+" c="+choice+" page "+pageNumber );
-
 %>
 
 <% 	
-	System.out.println("pageNumber:"+pageNumber);
+		System.out.println("NewspageNumber:"+pageNumber);
 %>	
 
 <%
@@ -36,7 +34,7 @@ int pageNumber = (Integer)request.getAttribute("pageNumber");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>news_list.jsp</title>
+<title>Hoboard 최신 건강 정보</title>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -55,6 +53,20 @@ $(document).ready(function() {
 <input type="hidden" name="work" value="move">  -->
 
 <h1>요즘 많이 찾는 건강 정보</h1>
+
+<br><br>
+
+<select id="choice">
+		<option value="sel">----------선택해주세요</option>
+		<option value="title">제목</option>
+		<option value="content">내용</option>
+</select>
+
+<input type="text" id="search" placeholder="검색어를 입력해주세요" value="<%=searchWord%>">
+<button class="btn" onclick="searchNews()" value="<%=searchWord%>">검색</button>
+
+<br>
+
 <h4>건강 정보 총 <%=len%> 건이 등록 돼 있습니다.</h4>
 
 <table border="1">
@@ -74,19 +86,19 @@ if(list.size() == 0){
 	<%
 }else{
 	for(int i = 0;i < list.size(); i++){
-		News_Dto ndto = list.get(i);
+		News_Dto dto = list.get(i);
 		%>
 		<tr class="table-row">
 			<th><%=i+1 %></th>
 			<td>
-			<a href="news_detail.do?nseq=<%=ndto.getNews_seq() %>">
-				<%=ndto.getTitle()%>
+			<a href="news?work=detail&seq=<%=dto.getNews_seq()%>">
+				<%=dto.getTitle()%></a>
 			</td>
 			<td>
-				<%=ndto.getViewcount()%>
+				<%=dto.getViewcount()%>
 			</td>
 			<td>
-				<%=ndto.getDate()%>
+				<%=dto.getDate()%>
 			</td>
 		</tr>	
 		<%
@@ -120,17 +132,7 @@ for(int i = 0;i < NewsPage; i++){
 }
 %>
 <br>
-	<br>
 
-	<select id="choice">
-		<option value="sel">----------선택해주세요</option>
-		<option value="title">제목</option>
-		<option value="content">내용</option>
-	</select>
-
-	<input type="text" id="search" placeholder="검색어를 입력해주세요"
-		value="<%=searchWord%>">
-	<button class="btn" onclick="searchNews()" value="<%=searchWord%>">검색</button>
 
 	<script type="text/javascript">
 function searchNews() {
@@ -144,7 +146,7 @@ function searchNews() {
 		document.getElementById("choice").value = 'sel';
 	} */
 	
-	location.href = "news_list.do?work=search&searchWord="+word+"&choice="+choice;
+	location.href = "news?work=move&search&searchWord="+word+"&choice="+choice;
 }
  function goPage( pageNum ) {	
 	

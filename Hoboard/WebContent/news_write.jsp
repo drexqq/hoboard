@@ -22,10 +22,12 @@ mem = (Member_Dto)ologin;
 <title>건강사항 글쓰기</title>
 </head>
 <body>
-<h1>글쓰기</h1>
+<h1>건강 정보 쓰기</h1>
 
-<form action="news_write.do" method="post">
-<input type="hidden" name="id" value="">
+<form action="news?work2=write" method="post">
+<input type="hidden" name="id" value="admin">
+<!-- <input type="hidden" name="work" value="move"> -->
+
 <table border="1">
 <col width="200"><col width="400">
 <tr>
@@ -34,12 +36,12 @@ mem = (Member_Dto)ologin;
 		<input type="text" name="title" size="50px">
 	</td>
 </tr>
-<!-- <tr>
+<tr>
 	<th>파일첨부</th>
 	<td>
-		<input type="text" name="title" size="50px">
+		<input type="text" name="file" size="50px">
 	</td>
-</tr> -->
+</tr>
 
 <tr>
 	<th>내용</th>
@@ -57,6 +59,6 @@ mem = (Member_Dto)ologin;
 
 </form>
 
-<a href="news_list.do?work=move">글목록</a>
+<a href="news?work=move">글목록</a>
 </body>
 </html>

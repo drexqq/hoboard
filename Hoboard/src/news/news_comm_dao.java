@@ -24,10 +24,10 @@ public class news_comm_dao {
 	}
 	
 	// TODO insert comment
-	public boolean comm_write(news_comm_dto dto) {
+	public boolean comm_write(news_comm_dto dto2) {
 
 		String sql = " INSERT INTO NEWS_COMM " 
-		+ " VALUES(?, ?, ?, ?, SYSDATE, SEQ_NEWS_COMM.NEXTVAL) ";
+		+ " VALUES( SEQ_NEWS_COMM.NEXTVAL, ?, 'admin', ?, SYSDATE ) ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -38,12 +38,10 @@ public class news_comm_dao {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 insertComment success");
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, dto.getB_seq());
-			psmt.setString(2, dto.getId());
-			psmt.setString(3, dto.getContent());
-			psmt.setString(4, dto.getWdate());
-			psmt.setInt(5, dto.getC_seq());
-
+			psmt.setInt(1, dto2.getB_seq());
+			//psmt.setString(2, dto.getId());
+			psmt.setString(2, dto2.getContent());
+			
 			System.out.println("2/6 insertComment success");
 
 			count = psmt.executeUpdate();

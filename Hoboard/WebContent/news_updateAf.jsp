@@ -19,14 +19,14 @@
 %>
 	<script type="text/javascript">
 		alert("글이 수정되었습니다");
-		location.href = "news_list.do?work=move";
+		location.href = "news?work=move";
 	</script>
 <%
 	}else{
 %>
 	<script type="text/javascript">
 		alert("수정되지 않았습니다");
-		location.href = "news_list.do?work=move";
+		location.href = "news?work=move";
 	</script>
 <%
 	}
