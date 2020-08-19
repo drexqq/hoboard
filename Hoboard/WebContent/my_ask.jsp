@@ -15,7 +15,7 @@
 							<div class="arrow"><i class="ri-arrow-down-s-line"></i></div>
 						</div>
 						<div class="input-wrap clearfix">
-						<input type="text" id="search" placeholder="검색어를 입력해주세요." value="${ searchWord }" onkeydown="enter('review')">
+						<input type="text" id="search" placeholder="검색어를 입력해주세요." value="${ searchWord }" onkeydown="enter('ask')">
 							<button class="btn" onclick="search('ask')"><i class="ri-search-line"></i></button>
 						</div>
 					</div>
