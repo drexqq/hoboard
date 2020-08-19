@@ -5,6 +5,7 @@
 <div class="join-wrap">
 	<div class="container">
 		<div class="row justify-content-center">
+				<div class="join-title">회원가입</div>
 			<div class="form-wrap">
 				<form action="MEMBER" method="post">
 					<input type="hidden" name="auth" value="1" />

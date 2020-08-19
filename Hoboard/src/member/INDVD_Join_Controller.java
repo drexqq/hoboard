@@ -13,7 +13,7 @@ import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 import Util.UtilEx;
 
-@WebServlet("/INDVD_JOIN")
+@WebServlet("/indvdjoin")
 public class INDVD_Join_Controller extends HttpServlet {
 
 	@Override

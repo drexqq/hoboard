@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="module/header.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
 <div class="join-wrap">
   <div class="container">
     <div class="row justify-content-center">
+        <div class="join-title">회원가입</div>
       <div class="form-wrap">
         <form action="MEMBER" method="post">
           <input type="hidden" name="auth" value="2" />
@@ -13,7 +14,9 @@
           <div class="input-wrap btn-added clearfix">
             <label for="id">아이디</label>
             <input type="text" id="id" name="id" class="textChk" />
-            <button type="button" class="btn check_dup" data-name="id">check</button>
+            <button type="button" class="btn check_dup" data-name="id">
+              check
+            </button>
           </div>
           <div class="input-wrap clearfix">
             <label for="pw">비밀 번호</label>
@@ -31,7 +34,9 @@
           <div class="input-wrap btn-added clearfix">
             <label for="email">이메일</label>
             <input type="text" id="email" name="email" class="textChk" />
-            <button type="button" class="btn check_dup" data-name="email">check</button>
+            <button type="button" class="btn check_dup" data-name="email">
+              check
+            </button>
           </div>
           <div class="input-wrap clearfix">
             <label for="tel">전화 번호</label>
@@ -39,9 +44,23 @@
           </div>
           <div class="input-wrap address-wrap clearfix">
             <label for="">주소</label>
-            <div class="btn btn-secondary find" id="findPostCode">우편번호 찾기</div>
-            <input type="text" id="post_Num" name="post_Num" class="textChk address" readonly="readonly" />
-            <input type="text" id="address" name="address" class="textChk address" readonly="readonly" />
+            <div class="btn btn-secondary find" id="findPostCode">
+              우편번호 찾기
+            </div>
+            <input
+              type="text"
+              id="post_Num"
+              name="post_Num"
+              class="textChk address"
+              readonly="readonly"
+            />
+            <input
+              type="text"
+              id="address"
+              name="address"
+              class="textChk address"
+              readonly="readonly"
+            />
             <input
               type="text"
               id="d_Address"
@@ -51,8 +70,15 @@
           </div>
           <div class="input-wrap btn-added clearfix">
             <label for="logo">병원로고</label>
-            <input type="text" id="logo" name="logo" />
-            <button type="button" class="btn" id="dayBtn">파일첨부</button>
+            <input type="text" id="logo" name="logo" readonly />
+            <input
+              type="file"
+              class="hidden"
+              name="file"
+              id="fileAdd"
+              accept="image/*"
+            />
+            <button type="button" class="btn" id="fileBtn">파일첨부</button>
           </div>
           <div class="input-wrap clearfix">
             <label for="homepage">홈페이지</label>

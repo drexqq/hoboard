@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.DBClose;
@@ -16,7 +17,7 @@ public class Member_Dao {
 	public static Member_Dao getInstance() {
 		return dao;
 	}
-
+	
 	public String login(String id, String pw) {
 		String sql = " SELECT * " + "	FROM MEMBER " + " WHERE ID=? AND PW =? ";
 
@@ -362,4 +363,33 @@ public class Member_Dao {
 		return dto;
 	}
 
+	// GET MEMBER WHERE AUTH = 2
+	public List<Member_Dto> getBusiMember() {
+		String query = " SELECT NAME, TEL, ADDRESS, D_ADDRESS FROM MEMBER WHERE AUTH = 2 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				Member_Dto dto = new Member_Dto(
+								rs.getString(1),
+								rs.getString(2),
+								rs.getString(3),
+								rs.getString(4)
+							);
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("get busimember from member table done");
+		return list;
+	}
 }
