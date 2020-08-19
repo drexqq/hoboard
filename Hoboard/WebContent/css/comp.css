@@ -53,15 +53,21 @@
   font-weight: 500;
   line-height: 26px;
   padding-bottom: 15px;
+  padding-right: 20%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .list .content {
   font-size: 20px;
+  line-height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 20%;
 }
+
 .list .util-wrap {
   text-align: right;
   font-size: 20px;
@@ -71,7 +77,7 @@
   transform: translateY(-50%);
 }
 .list .util-wrap .date {
-  padding-top: 10px;
+  padding-top: 15px;
 }
 .list .util-wrap .grade {
   padding-left: 20px;
@@ -95,6 +101,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+
+/* no-result */
+.no-result {
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  font-size: 24px;
 }
 
 /* paging */
@@ -296,4 +310,52 @@
   padding-top: 20px;
   font-size: 20px;
   line-height: 24px;
+}
+
+/* ask-list */
+.ask {
+}
+.ask .ask-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.ask .ask-table .num {
+  width: 10%;
+  text-align: center;
+}
+.ask .ask-table .tit {
+  width: 20%;
+}
+.ask .ask-table .cont {
+  width: 40%;
+}
+.ask .ask-table .date {
+  width: 20%;
+}
+.ask .ask-table .yn {
+  width: 10%;
+  text-align: center;
+}
+.ask .ask-table .yn .done {
+  color: #ff8b34;
+}
+.ask .ask-table thead tr {
+  border-bottom: 1px solid #ccc;
+}
+.ask .ask-table thead tr th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  font-size: 20px;
+}
+.ask .ask-table tbody tr {
+  border-bottom: 1px solid #eee;
+}
+.ask .ask-table tbody tr td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  font-size: 18px;
 }

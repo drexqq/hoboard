@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Util.UtilEx;
 import net.sf.json.JSONObject;
 
-@WebServlet("/MEMBER")
+@WebServlet("/member")
 public class MemberController extends HttpServlet {
 
 	@Override

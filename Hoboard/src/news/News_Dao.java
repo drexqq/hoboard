@@ -242,7 +242,7 @@ private static News_Dao n_dao = new News_Dao();
 		
 		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE"
 				+ " FROM NEWS "
-				+ " ORDER BY WDATE DESC";
+				+ " ORDER BY NEWS_SEQ DESC";
 				
 		String sqlWord = "";
 		if(choice.equals("title")) {
@@ -338,25 +338,28 @@ private static News_Dao n_dao = new News_Dao();
 			String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE "
 					+ " FROM ";
 			
-			sql += "(SELECT ROW_NUMBER()OVER(ORDER BY WDATE) AS RNUM, " + 
+			sql += "(SELECT ROW_NUMBER()OVER(ORDER BY NEWS_SEQ DESC) AS RNUM, " + 
 						" NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE " + 
 						" FROM NEWS ";
 			
-			  String sqlWord = "";
+			  if(choice!=null && !choice.equals("sel") ) {
+				  sql += " WHERE "+ choice + " LIKE ? ";
+			  }
+			  /*
 			  if (choice.equals("title")) {
 				  sqlWord = " WHERE TITLE LIKE '%" + searchWord.trim() + "%' ";
 			  }else if(choice.equals("content")) { 
 				  sqlWord = " WHERE CONTENT LIKE '%" +searchWord.trim() + "%' "; 
 			  } 
 			  sql = sql + sqlWord; 
-			
-			  sql += " ORDER BY WDATE DESC) "; // 최신 날짜 순으로 정렬
+			  */
+			  
+			  sql += " ORDER BY NEWS_SEQ DESC) "; // 최신 날짜 순으로 정렬
 			  sql += " WHERE RNUM >=? AND RNUM <= ?";
 			  
 			 int start, end;
 			  start = 1 + 10 * page;
 			  end = 10 + 10 * page;
-			
 			
 			Connection conn = null;
 			PreparedStatement psmt = null;
@@ -369,8 +372,16 @@ private static News_Dao n_dao = new News_Dao();
 				System.out.println("1/6 getNewsPagingList success");
 
 				psmt = conn.prepareStatement(sql);
-				psmt.setInt(1, start);
-				psmt.setInt(2, end);
+				
+			    if(choice!=null && !choice.equals("sel") ) {
+			    	psmt.setString(1, "%"+searchWord+"%");
+			    	psmt.setInt(2, start);
+			    	psmt.setInt(3, end);
+					 
+				}else {
+					psmt.setInt(1, start);
+					psmt.setInt(2, end);
+				}
 				System.out.println("2/6 getNewsPagingList success");
 
 				rs = psmt.executeQuery();

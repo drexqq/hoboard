@@ -42,9 +42,9 @@ $(".check_dup").on("click", function () {
   }
 });
 // before form submit input value check
+const auth = $("input[name=auth]").val();
 $("#joinBtn").on("click", function () {
   // auth 1 - INDVD / 2 - BUSI
-  const auth = $("input[name=auth]").val();
 
   // member default info check
   var exit = false;
@@ -109,3 +109,38 @@ $("#joinBtn").on("click", function () {
     $("form").submit();
   }
 });
+
+// input placeholder
+$("input#name").attr("placeholder", "이름을 입력해주세요.");
+$("input#id").attr("placeholder", "사용하실 ID를 입력해주세요.");
+$("input#pw").attr("placeholder", "비밀번호를 입력해주세요.");
+$("input#pw_Check").attr("placeholder", "비밀번호를 확인해주세요.");
+$("input#tel").attr("placeholder", "전화번호(휴대폰번호)를 입력해주세요.");
+$("input#email").attr("placeholder", "'-'를 제외한 숫자만 입력해주세요.");
+$("input#post_Num").attr("placeholder", "우편번호");
+$("input#address").attr("placeholder", "주소");
+$("input#d_Address").attr("placeholder", "상세주소");
+
+// post_Num or address click -> find
+$("input#post_Num, input#address").on("click", function () {
+  $("#findPostCode").click();
+});
+
+// busi member logo, hompage
+var fileValue, fileName;
+$("input#logo, #fileBtn").on("click", function () {
+  $("input#fileAdd").click();
+});
+$("input#fileAdd").on("change", function () {
+  fileValue = $("input#fileAdd").val().split("\\");
+  fileName = fileValue[fileValue.length - 1];
+  console.log(fileName);
+  console.log(fileValue);
+  if (validateFileType(fileName)) $("input#logo").val(fileName);
+  else alert("JPG, JPEG, PNG 형식으로만 로고를 올릴 수 있습니다 !");
+});
+
+if (auth == 2) {
+  $("input#logo").attr("placeholder", "파일명").css("cursor", "pointer");
+  $("input#homepage").attr("placeholder", "홈페이지 URL");
+}
