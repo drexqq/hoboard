@@ -1,82 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
-<!-- <nav class="nav">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="text-wrap">
-          <div class="big">현재 위치 근처에 있는 병원들을 찾아 보세요 !</div>
-          <div class="small">
-            Hoboard에 등록된 병원들과 다른 병원들을 찾아볼 수 있습니다 !
-          </div>
-        </div>
-        <div class="search-wrap">
-          <div class="location">
-            <select name="" id="">
-              <option value="">지역</option>
-            </select>
-            <div class="arrow"><i class="ri-arrow-down-s-line"></i></div>
-          </div>
-          <div class="category">
-            <select name="" id="">
-              <option value="">진료과</option>
-            </select>
-            <div class="arrow"><i class="ri-arrow-down-s-line"></i></div>
-          </div>
-          <div class="hos-name">
-            <input type="text" value="병원이름" />
-          </div>
-          <div class="search">
-            <button>검색하기<i class="ri-search-line"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav> -->
 <div class="map-wrap clearfix">
   <aside class="side-list">
     <div class="title">등록된 병원</div>
     <div class="enroll-wrap">
       <div class="list-wrap">
-        <a href="#" class="list">
-          <div class="list-upper clearfix">
-            <div class="tit">서울비트병원</div>
-            <div class="tel"><i class="ri-phone-line"></i>02-1234-1234</div>
-          </div>
-          <div class="list-down clearfix">
-            <div class="address">
-              서울 강남구 강남대로 320 서울 강남구 역삼동 832-7
-            </div>
-          </div>
-        </a>
-        <a href="#" class="list">
-          <div class="list-upper clearfix">
-            <div class="tit">서울비트병원</div>
-            <div class="tel"><i class="ri-phone-line"></i>02-1234-1234</div>
-          </div>
-          <div class="list-down clearfix">
-            <div class="address">
-              서울 강남구 강남대로 320 서울 강남구 역삼동 832-7
-            </div>
-          </div>
-        </a>
-        <a href="#" class="list">
-          <div class="list-upper clearfix">
-            <div class="tit">서울비트병원</div>
-            <div class="tel"><i class="ri-phone-line"></i>02-1234-1234</div>
-          </div>
-          <div class="list-down clearfix">
-            <div class="address">
-              서울 강남구 강남대로 320 서울 강남구 역삼동 832-7
-            </div>
-          </div>
-        </a>
+      	<c:forEach items="${ busiMembers }" var="mem">
+	      	<a href="#" class="list">
+	          <div class="list-upper clearfix">
+	            <div class="tit">${ mem.name }</div>
+	            <div class="tel"><i class="ri-phone-line"></i>${ mem.tel }</div>
+	          </div>
+	          <div class="list-down clearfix">
+	            <div class="address">
+	              ${ mem.address } ${ mem.d_Address }
+	            </div>
+	          </div>
+	        </a>
+      	</c:forEach>
       </div>
       <div class="paging-wrap">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
       </div>
     </div>
     <div class="title">근처 병원들</div>
@@ -118,9 +61,6 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
         </a>
       </div>
       <div class="paging-wrap" id="pagination">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
       </div>
     </div>
   </aside>
@@ -272,6 +212,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
       itemStr =
         '<div class="list-upper clearfix">' +
         '<div class="tit">' +
+        '<span>'+(index+1)+'</span>' + 
         places.place_name +
         "</div>" +
         '<div class="tel"><i class="ri-phone-line"></i>' +
@@ -335,6 +276,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
 
     for (i = 1; i <= pagination.last; i++) {
       var el = document.createElement("a");
+      el.className = "page";
       el.href = "#";
       el.innerHTML = i;
 
@@ -368,5 +310,14 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
       el.removeChild(el.lastChild);
     }
   }
+
+  function panTo() {
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+    
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon);            
+}  
 </script>
 <%@ include file="module/footer.jsp"%>

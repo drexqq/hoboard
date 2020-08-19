@@ -28,5 +28,5 @@
     </form>
   </div>
 </div>
-
+<script src="js/login.js"></script>
 <%@ include file="module/footer.jsp"%>
