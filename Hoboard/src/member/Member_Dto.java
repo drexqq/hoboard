@@ -45,11 +45,18 @@ public class Member_Dto {
 		this.address = address;
 		this.d_Address = d_Address;
 	}
+	
+	public Member_Dto(String name, String tel, String address, String d_Address) {
+		super();
+		this.name = name;
+		this.tel = tel;
+		this.address = address;
+		this.d_Address = d_Address;
+	}
 
 	public int getAuth() {
 		return auth;
 	}
-
 
 	public void setAuth(int auth) {
 		this.auth = auth;

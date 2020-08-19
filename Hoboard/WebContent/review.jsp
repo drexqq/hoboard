@@ -19,8 +19,8 @@
 							<div class="arrow"><i class="ri-arrow-down-s-line"></i></div>
 						</div>
 						<div class="input-wrap clearfix">
-							<input type="text" id="search" value="">
-							<button onclick="searchBbs()"><i class="ri-search-line"></i></button>
+							<input type="text" id="search" placeholder="검색어를 입력해주세요." value="${ searchWord }" onkeydown="enter('review')">
+							<button onclick="search( 'review' )"><i class="ri-search-line"></i></button>
 						</div>
 					</div>
 				</div>
@@ -29,7 +29,7 @@
 				<div class="list-wrap">
 					<c:choose>
 						<c:when test="${len eq 0}">
-							<div>검색 결과가 없습니다.</div>
+							<div class="no-result">검색 결과가 없습니다.</div>
 						</c:when>
 						<c:otherwise>
 						<c:forEach items="${ reviewlist }" var="list" varStatus="status" begin="0" end="4">
@@ -58,8 +58,8 @@
 					<c:if test="${ len != 0 }">
 						<c:forEach var="page" varStatus="status" begin="0" end="${ page }">
 							<div class="page 
-							<c:if test="${ param.page eq status.index }">on</c:if>"
-							onclick="goPage(${ status.index })">${ status.index + 1 }</div> 
+							<c:if test="${ param.page eq status.index || (empty param.page && status.first) }">on</c:if>"
+							onclick="goPage('review',${ status.index })">${ status.index + 1 }</div> 
 						</c:forEach>
 					</c:if>
 				</div>
@@ -67,29 +67,13 @@
 		</div>
 	</div>
 </div>
-
-
-<!-- 검색버튼  -->
 <script type="text/javascript">
-function searchBbs() {
-	var choice = document.getElementById("choice").value;
-	var word = document.getElementById("search").value;
-
-    if(word == ""){
-		document.getElementById("search").value = "";
-	}
-    
-	location.href = "review?searchWord=" + word + "&choice=" + choice;
-}
-
-function goPage( pageNum ) {	
-	
-	var choice = document.getElementById("choice").value;
-	var word = document.getElementById("search").value;
-	
-	location.href = "review?page=" + pageNum;
-}
-
+$(document).ready(function(e) {
+	let c = "<c:out value='${ choice }' />"
+	$("#choice").find("option").each(function(){
+		if($(this).val() == c) $(this).attr("selected","selected");
+	})
+})
 </script>
 
 <%-- //TODO after scriptlet session ID add change 
@@ -108,5 +92,5 @@ function writeBtn(){
 }
 </script> --%>
 
-
+<script src="js/util.js"></script>
 <%@ include file="module/footer.jsp"%>

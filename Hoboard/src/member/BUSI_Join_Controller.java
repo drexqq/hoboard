@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Util.UtilEx;
 
-@WebServlet("/BUSI_JOIN")
+@WebServlet("/busijoin")
 public class BUSI_Join_Controller extends HttpServlet {
 
 	@Override
