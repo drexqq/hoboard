@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+<%@page import="Ask.Ask_Comm_Dto"%>
+<%@page import="Ask.Ask_Comm_Dao"%>
 <%@page import="Ask.Ask_Dto"%>
 <%@page import="Ask.Ask_Dao"%>
 <%@page import="java.util.List"%>
@@ -11,10 +14,16 @@ System.out.println("ask_detail"+seq);
 
 <% 
 Ask_Dao dao = Ask_Dao.getInstance();
-//dao.readcount(seq);
-System.out.println("!!!!!!!!!!!!!!!!!!!!!");
 Ask_Dto dto = (Ask_Dto)request.getAttribute("dto");
-%>  
+%> 
+
+<%
+Ask_Comm_Dao dao2 = Ask_Comm_Dao.getInstance();
+Ask_Comm_Dto dto2 = (Ask_Comm_Dto)request.getAttribute("dto2");
+
+System.out.println("A_C_D = "+ dto2);
+
+%> 
     
 <!DOCTYPE html>
 <html>
@@ -68,9 +77,66 @@ $(document).ready(function () {
 
 </script>
 
+<h1>댓글을 입력하세요</h1>
+<form action="ask.do?two=c_write&seq=<%=nseq%>" method="post">
+ <input type="hidden" name="two" value="c_updateAf"> 
+ <input type="hidden" name="nseq" value="<%=dto2.getC_seq()%>">
+
+<table border="1">
+	<tr>
+		<th>제목</th>
+			<td><input type="text" name="title" size="50px" value="<%=dto2.getContent()%>"></td></tr>	
+	<tr>	
+		<th>내용</th>
+			<td><input type="text" name="content" cols="50px" value="<%=dto2.getContent()%>"></td></tr>
+
+</table>
 
 
-
-
+</form>
 </body>
 </html>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
+<div class="mypage-wrap ask-detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-wrap clearfix">
+          <h2 class="page-title">${ dto.title } 문의에 대한 답변</h2>
+          <div class="info">
+            <span class="num">문의 번호 : ${ dto.seq }</span>
+            <span class="date">문의 날짜 : ${ dto.wdate }</span>
+          </div>
+        </div>
+        <div class="ask-wrap">
+          <div class="ask-head">상세 내용</div>
+          <div class="ask-body">${ dto.content }</div>
+        </div>
+        <div class="comm-wrap">
+          <div class="comm-head">
+            <i class="ri-customer-service-2-line"></i>답변 내용
+          </div>
+          <div class="comm-body">
+            <c:choose>
+              <c:when test="${ dto.comm eq 0 }">
+                <div class="result">여기는 문의 답변 완료</div>
+              </c:when>
+              <c:otherwise>
+                <div class="no-result">
+                  죄송합니다. 아직 문의에 대한 답변이 없습니다.
+                </div>
+              </c:otherwise>
+            </c:choose>
+          </div>
+        </div>
+        <div class="btn-wrap">
+          <a href="ask">문의 목록</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%@ include file="module/footer.jsp"%>
+>>>>>>> 5c33b9fc7420f2884ec458355cc5ad91088fc9e7

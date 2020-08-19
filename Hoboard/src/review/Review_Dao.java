@@ -457,8 +457,8 @@ public class Review_Dao {
 			sqlWord = " WHERE CONTENT LIKE '%" + searchWord.trim() + "%' ";
 		} else if (choice.equals("score")) {
 			sqlWord = " WHERE SCORE='" + searchWord.trim() + "'";
-		} else if (choice.equals("sel")) {
-			sqlWord = "WHERE DEL= 0 ";
+		} else if (choice.equals("") || choice == null) {
+			sqlWord = "";
 		}
 		sql = sql + sqlWord;
 
@@ -468,9 +468,6 @@ public class Review_Dao {
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
 		end = limit + limit * page; // 끝 글의 번호
-
-		System.out.println(start + "start");
-		System.out.println(end + "end");
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
