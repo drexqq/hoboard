@@ -1,7 +1,7 @@
-<%@page import="Ask.Ask_Comm_Dto"%>
-<%@page import="Ask.Ask_Comm_Dao"%>
-<%@page import="Ask.Ask_Dto"%>
-<%@page import="Ask.Ask_Dao"%>
+<%@page import="ask.Ask_Comm_Dto"%>
+<%@page import="ask.Ask_Comm_Dao"%>
+<%@page import="ask.Ask_Dto"%>
+<%@page import="ask.Ask_Dao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

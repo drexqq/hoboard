@@ -1,6 +1,6 @@
-<%@page import="Ask.Ask_Dao"%>
+<%@page import="ask.Ask_Dao"%>
 <%@page import="java.util.List"%>
-<%@page import="Ask.Ask_Dto"%>
+<%@page import="ask.Ask_Dto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

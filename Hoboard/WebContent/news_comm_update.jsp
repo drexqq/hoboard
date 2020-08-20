@@ -1,4 +1,4 @@
-<%@page import="news.news_comm_dto"%>
+<%@page import="news.News_COMM_Dto"%>
 <%@page import="news.news_comm_dao"%>
 <%@page import="news.News_Dao"%>
 <%@page import="java.util.List"%>
