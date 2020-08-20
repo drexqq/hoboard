@@ -184,6 +184,7 @@ public class Member_Dao {
 
 	// GET BUSI_CATE COLUMN
 	public String[] getBusiCateList() {
+		
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_CATE' AND COLUMN_NAME != 'ID' ";
 
 		Connection conn = null;
