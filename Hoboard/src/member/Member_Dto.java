@@ -53,6 +53,22 @@ public class Member_Dto {
 		this.address = address;
 		this.d_Address = d_Address;
 	}
+	
+	
+	
+
+	public Member_Dto(int auth , String id, String name, String tel, String email, String address, String d_Address, String post_Num) {
+		super();
+		this.auth = auth;
+		this.id = id;
+		this.name = name;
+		this.tel = tel;
+		this.email = email;
+		this.address = address;
+		this.d_Address = d_Address;
+		this.post_Num = post_Num;
+		
+	}
 
 	public int getAuth() {
 		return auth;
