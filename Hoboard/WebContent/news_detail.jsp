@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 <%@page import="news.News_COMM_Dto"%>
+=======
+<%@page import="member.Member_Dto"%>
+<%@page import="news.news_comm_dto"%>
+>>>>>>> ed1ef60d2645bdc5006a79ceb88a72bda390f38c
 <%@page import="news.news_comm_dao"%>
 <%@page import="news.News_Dao"%>
-<%@page import="java.util.List"%>
 <%@page import="news.News_Dto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -15,6 +20,7 @@ System.out.println("detail="+seq);
 News_Dao dao = News_Dao.getInstance();
 //dao.readcount(seq);
 News_Dto dto = (News_Dto)request.getAttribute("dto");
+<<<<<<< HEAD
 %>
 
 <%-- <% 
@@ -22,6 +28,10 @@ news_comm_dao dao2 = news_comm_dao.getInstance();
 news_comm_dto dto2 = (news_comm_dto)request.getAttribute("dto2");
 System.out.println("news comm dto" +dto);
 %>  --%>
+=======
+
+%>
+>>>>>>> ed1ef60d2645bdc5006a79ceb88a72bda390f38c
     
 <!DOCTYPE html>
 <html>
@@ -82,12 +92,89 @@ $(document).ready(function () {
 
 </script>
 
+<%-- <%
+String cseq = request.getParameter("c_seq");
+int c_seq = Integer.parseInt(cseq);
+System.out.println("c_seq="+c_seq);
+%> --%>
+
+<%-- <%
+/* Member_Dto mem = (Member_Dto)session.getAttribute("sessionID"); */
+
+List<news_comm_dto> clist = (List<news_comm_dto>)request.getAttribute("clist");
+System.out.println("clist = "+clist);
+
+news_comm_dao dao2 = news_comm_dao.getInstance();
+//dao.readcount(seq);
+news_comm_dto dto2 = (news_comm_dto)request.getAttribute("dto2");
+System.out.println("dto2 abc= "+dto2);
+
+%> --%>
+
+<% 
+news_comm_dao dao2 = news_comm_dao.getInstance();
+news_comm_dto dto2 = (news_comm_dto)request.getAttribute("dto2");
+
+List<news_comm_dto> clist = (List<news_comm_dto>)request.getAttribute("clist");
+
+%>
+
+<%
+System.out.println(clist);
 
 
+System.out.println("news comm dto" +dto2);
+%>
+
+<%
+String ccseq = request.getParameter("c_seq");
+int c_seq = Integer.parseInt(ccseq);
+System.out.println("c_seq="+c_seq);
+%>
 
 
+<%
+if(clist.size() == 0){	// 하나도 없다
+	%>
+	<tr bgcolor="#f6f6f6">
+		<td colspan="3" align="center">고객 리스트가 존재하지 않습니다</td>
+	</tr>
+	<tr>
+		<td height="2" bgcolor="#0000ff" colspan="3"></td>
+	</tr>
+	<%
+}else{	// 있다
+	for(int i = 0;i < clist.size(); i++){
+		dto2 = clist.get(i);
+		%>
+		<tr bgcolor="#f6f6f6">
+			<td align="center" bgcolor="yellow">
+				<input type="checkbox" name="delck" value="<%=dto2.getId() %>">
+			</td>		
+			<td>
+				<%=dto2.getId() %>
+			</td>
+			<td>
+					<%=dto2.getContent()%>
+			</td>
+		</tr>
+		<tr>
+			<td height="2" bgcolor="#0000ff" colspan="3"></td>
+		</tr>		
+		<%
+	}
+}
+%>
 
+<form action="news?work=detail" method="get">
+	<input type="hidden" name="b_seq" value="2"/>
+	 <%-- <input type="hidden" name="c_seq" value="<%=dto2.getC_seq()%>"/>  --%>
+		
+		<td><input type="text" name="c_content"/>
+			<input type="submit" value="댓글 작성"/>
+		</td>
 
+</form>
 
 
 

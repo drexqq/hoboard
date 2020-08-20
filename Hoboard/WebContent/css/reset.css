@@ -164,3 +164,11 @@ dl {
 input[type="password"] {
   font-family: Arial, Helvetica, sans-serif !important;
 }
+input.hidden {
+  display: none;
+  appearance: initial;
+  background-color: initial;
+  cursor: default;
+  padding: initial;
+  border: initial;
+}
