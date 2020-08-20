@@ -69,6 +69,14 @@ public class Member_Dto {
 		this.post_Num = post_Num;
 		
 	}
+	
+	
+	public Member_Dto(String name, String tel , String address) {
+		super();
+		this.name = name;
+		this.tel = tel;
+		this.address = address;
+	}
 
 	public int getAuth() {
 		return auth;

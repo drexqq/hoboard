@@ -8,7 +8,11 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
+import member.BUSI_Cate_Dto;
+import member.BUSI_Member_Dto;
+import member.BUSI_Time_Dto;
 import member.Member_Dto;
+import review.Review_Dto;
 
 public class Reserve_Dao {
 
@@ -209,11 +213,212 @@ public class Reserve_Dao {
 		return list;
 	}
 	
-	//public List<Member_Dto> getDetail_list(String name) {
-	//	String sql = " SELECT  "
+	public int getScore_avg(String id) {
+		String sql = " SELECT AVG(A.SCORE) "
+				  +  " FROM REVIEW A INNER JOIN MEMBER B "
+				  +  " ON  A.BUSI_ID = B.ID "
+		          +  " WHERE B.ID = ? ";
 		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int score = 0;
 		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getScore_avg success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getScore_avg success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getScore_avg success");
+			
+			if (rs.next()) {
+				score = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return score;
+	}
+	
+	public String getHomepage(String name){
+		String sql = " SELECT HOMEPAGE "
+				  +  " FROM BUSI_MEMBER A INNER JOIN MEMBER B "
+				  +  " ON  A.ID = B.ID "
+		          +  " WHERE B.ID = ? ";
 		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String home = null;
 		
-	//}
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getHomepage success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			System.out.println("2/6 getHomepage success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getHomepage success");
+			
+			if (rs.next()) {
+				home = rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return home;
+	
+	}
+	
+	public List<Member_Dto> getMember_list(String id){
+		String sql =  " SELECT NAME , TEL , ADDRESS "
+				  +  " FROM MEMBER "
+		          +  " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getMember_list success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getMember_list success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getMember_list success");
+			
+			if (rs.next()) {
+				
+		
+				String name = rs.getString("NAME");
+				String tel = rs.getString("TEL");
+				String address = rs.getString("ADDRESS");
+				
+				list.add(new Member_Dto(name, tel, address));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+	
+	
+	public List<BUSI_Time_Dto> getTime_list(String id){
+		String sql = " SELECT * "
+				  +  " FROM BUSI_TIME A INNER JOIN MEMBER B "
+				  +  " ON  A.ID = B.ID "
+		          +  " WHERE B.ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<BUSI_Time_Dto> list = new ArrayList<BUSI_Time_Dto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getTime_list success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getTime_list success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getTime_list success");
+			
+			if (rs.next()) {
+				
+				int i = 1;
+				BUSI_Time_Dto dto = new BUSI_Time_Dto(rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++)
+						);
+				
+				list.add(dto);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+	
+	public List<BUSI_Cate_Dto> getCate_list(String id){
+		String sql = " SELECT * "
+				  +  " FROM BUSI_CATE A INNER JOIN MEMBER B "
+				  +  " ON  A.ID = B.ID "
+		          +  " WHERE B.ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<BUSI_Cate_Dto> list = new ArrayList<BUSI_Cate_Dto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getCate_list success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getCate_list success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getCate_list success");
+			
+			if (rs.next()) {
+				
+				int i = 1;
+				BUSI_Cate_Dto dto = new BUSI_Cate_Dto(rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++),
+						rs.getString(i++));
+				
+				list.add(dto);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+	
+	
+	
 }

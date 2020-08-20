@@ -1,6 +1,8 @@
 package Reserve;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,12 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Util.UtilEx;
+import member.BUSI_Cate_Dto;
+import member.BUSI_Member_Dao;
+import member.BUSI_Time_Dto;
+import member.Member_Dao;
 import member.Member_Dto;
 import review.Review_Dao;
 
 @WebServlet("/reserve")
 public class ReserveController extends HttpServlet {
 
+	public static String[] cate = { "내과", "마취통증학과", "산부인과", "소아청소년과", "신경과", "신경외과", "심장내과", "영상의학과", "외과", "응급의학과",
+									"정형외과", "재활의학과", "흉부심장혈관과", "피부비뇨기과", "치과", "안과" };
+	public static String[] time = { "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "점심시간", "공휴일", "야간진료", "응급실" };
+	public static String[] amenity = { "주차장", "편의점", "ATM,은행", "약국", "대중 교통" };
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -95,10 +107,32 @@ public class ReserveController extends HttpServlet {
 		}else if(key.equals("detail")) {
 			
 			String id = req.getParameter("id");
+			int score = dao.getScore_avg(id);
+			String homepage = dao.getHomepage(id);
 			
 			
-			//req.setAttribute(name, o);
+			List<Member_Dto> m_list = dao.getMember_list(id);
+			List<BUSI_Time_Dto> t_list = dao.getTime_list(id);
+			List<BUSI_Cate_Dto> c_list = dao.getCate_list(id);
+			
+			
+			System.out.println(c_list);
+
+			
+			
+			
+			
+			
+			req.setAttribute("busi_id", id);
+			req.setAttribute("score",score);
+			req.setAttribute("homepage",homepage);
+			req.setAttribute("memberlist", m_list);
+			req.setAttribute("timelist", t_list);
+			req.setAttribute("catelist", c_list);
+			//req.setAttribute(a_list, o);
 			UtilEx.forward("reserve_detail.jsp", req, resp);
+			
+			
 		}
 		
 		
