@@ -1,104 +1,147 @@
-<<<<<<< HEAD
-<%@page import="news.News_COMM_Dto"%>
-=======
-<%@page import="member.Member_Dto"%>
-<%@page import="news.news_comm_dto"%>
->>>>>>> ed1ef60d2645bdc5006a79ceb88a72bda390f38c
-<%@page import="news.news_comm_dao"%>
-<%@page import="news.News_Dao"%>
-<%@page import="news.News_Dto"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-String nseq = request.getParameter("seq");
-int seq = Integer.parseInt(nseq);
-System.out.println("detail="+seq);
-%>
+	pageEncoding="UTF-8"%>
+<%@ include file="module/header.jsp"%>
 
-<% 
-News_Dao dao = News_Dao.getInstance();
-//dao.readcount(seq);
-News_Dto dto = (News_Dto)request.getAttribute("dto");
-<<<<<<< HEAD
-%>
+<div class="board-detail news-detail">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="title-wrap">
+					<div class="title">${ dto.title }</div>
+					<div class="util-wrap clearfix">
+						<div class="author">${ dto.id }</div>
+						<div class="date">${ dto.date }</div>
+						<div class="view">
+							<i class="ri-eye-line"></i>${ dto.viewcount }</div>
+					</div>
+				</div>
+				<div class="content-wrap">${dto.content}</div>
+				<div class="goList">
+					<a href="news">글 목록으로</a>
+				</div>
 
-<%-- <% 
-news_comm_dao dao2 = news_comm_dao.getInstance();
-news_comm_dto dto2 = (news_comm_dto)request.getAttribute("dto2");
-System.out.println("news comm dto" +dto);
-%>  --%>
-=======
-
-%>
->>>>>>> ed1ef60d2645bdc5006a79ceb88a72bda390f38c
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>건강 정보 상세보기</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-
-<h1>건강관리</h1>
-
-<table border="1">
-	<tr>
-		<th>제목</th>
-			<td><input type="text" name="title" size="50px" value="<%=dto.getTitle()%>" readonly></td></tr>	
-	<tr>	
-		<th>날짜</th>
-			<td><%=dto.getDate()%></td></tr>
-	<tr>
-		<th>조회수</th>
-			<td><%=dto.getViewcount()%></td></tr>
-	<tr>
-		<th>내용</th>
-			<td><input type="text" name="content" cols="50px" value="<%=dto.getContent()%>" readonly></td></tr>
-
-</table>
-<br>
-<button type="button" id="exBtn">전단계</button>
-<button type="button" id="updateBtn">수정</button>
-<button type="button" id="deleteBtn">삭제</button>
-<br>
-<br>
-
-<textarea name="c_content"></textarea>
-<button type="button" id="commBtn">댓글 등록</button>
+				<div class="reply-wrap">
+					<div class="reply-title">
+						댓글 <span>${ fn:length(comm) }</span>
+					</div>
+					<c:choose>
+						<c:when test="${ sessionScope.sessionID == null }">
+							<div class="reply nologin-disabled">
+								<a href="login.jsp">로그인 후 이용하실 수 있습니다 !</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="reply clearfix">
+								<form action="news" method="get">
+									<input type="hidden" name="seq" id="seq"
+										value="${dto.news_seq}"> <input
+										type="hidden" name="no" id="no"
+										value="${dto.content}"> <input
+										type="hidden" name="id" id="id"
+										value="${ sessionScope.sessionID }">
+									<textarea placeholder="댓글 작성" name="reply_content"
+										id="reply_content"></textarea>
+									<input class="submit" type="submit" value="댓글등록">
+								</form>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="reply-items">
+						<div class="reply-items">
+							<c:forEach items="${ comm }" var="comm" varStatus="status"
+								begin="0" end="10">
+								<div class="item">
+									<div class="upper clearfix">
+										<div class="id">
+											<i class="ri-user-line"></i>${comm.id}</div>
+										<div class="date">
+											<i class="ri-calendar-line"></i>${comm.wdate}</div>
+									</div>
+									<div class="down">${comm.content}</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
-$(document).ready(function () {
-	
-	$("#updateBtn").click(function () {		
-		location.href = "news?work=update&seq=<%=seq%>";
-	});
-	
-	$("#deleteBtn").click(function () {
-		location.href = "news?work=del&seq=<%=seq%>";
-		alert('삭제 완료');
-	});
-	
-	$("#exBtn").click(function () {		
-		location.href = "news?work=move";
-	});
-	
-	$("#commBtn").click(function () {		
-		location.href = "news?work=c_update&seq=<%=seq%>";
-	});
-});
+function update(seq) {
+	location.href = "news?work=update&seq=" + seq;
+}
+
+function del(seq) {
+	location.href = "news?work=update&seq=" + seq;
+}
+
+function cupdateBbs(seq) {
+	location.href = "newswork=c_update&c_seq=" + c_seq + "&seq=" + ${seq};
+}
+
+function cdeleteBbs(seq) {
+	location.href = "newswork=c_update&c_seq=" + c_seq + "&seq=" + ${dto.seq};
+}
 
 </script>
+<!--TODO Connect session ID -->
+<c:choose>
+	<c:when test="${ sessionScope.sessionID == dto.id }">
+		<div align="center">
+			<button type="button"
+				onclick="update(${dto.seq})">수정</button>
+			<button type="button"
+				onclick="del(${dto.seq})">삭제</button>
+		</div>
+	</c:when>
+	<c:when test="${ sessionScope.sessionID != dto.id }">
+		<div></div>
+	</c:when>
+</c:choose>
 
-<%-- <%
+
+
+
+
+
+
+<%-- <form action="news?detail" method="get">
+	<input type="hidden" name="seq" id="seq" value="${comm.c_seq}"> 
+	<input type="hidden" name="content" id="content value="${comm.content}"> 
+	<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
+		<textarea placeholder="댓글 작성" name="reply_content" id="reply_content"></textarea>
+			<input class="submit" type="submit" value="댓글등록">
+</form> 
+	
+<div class="comm-body">
+  <c:choose>
+    <c:when test="${ dto.comm eq 0 }">
+     <div class="result">첫번째 댓글의 주인공이 돼 보세요!</div>
+        </c:when>
+           <c:otherwise>
+             <div class="no-result"> 
+             ㅎㅎㅎㅎ
+             </div>
+           </c:otherwise>
+       </c:choose>
+      </div>    
+   <h2>dd</h2>
+
+</div> --%>
+
+
+
+
+	<%-- 
+<%
 String cseq = request.getParameter("c_seq");
 int c_seq = Integer.parseInt(cseq);
 System.out.println("c_seq="+c_seq);
-%> --%>
+%>
 
-<%-- <%
+<%
 /* Member_Dto mem = (Member_Dto)session.getAttribute("sessionID"); */
 
 List<news_comm_dto> clist = (List<news_comm_dto>)request.getAttribute("clist");
@@ -109,7 +152,7 @@ news_comm_dao dao2 = news_comm_dao.getInstance();
 news_comm_dto dto2 = (news_comm_dto)request.getAttribute("dto2");
 System.out.println("dto2 abc= "+dto2);
 
-%> --%>
+%>
 
 <% 
 news_comm_dao dao2 = news_comm_dao.getInstance();
@@ -168,15 +211,12 @@ if(clist.size() == 0){	// 하나도 없다
 
 <form action="news?work=detail" method="get">
 	<input type="hidden" name="b_seq" value="2"/>
-	 <%-- <input type="hidden" name="c_seq" value="<%=dto2.getC_seq()%>"/>  --%>
+	 <input type="hidden" name="c_seq" value="<%=dto2.getC_seq()%>"/> 
 		
 		<td><input type="text" name="c_content"/>
 			<input type="submit" value="댓글 작성"/>
 		</td>
 
 </form>
-
-
-
-</body>
-</html>
+ --%>
+	<%@ include file="module/footer.jsp"%>

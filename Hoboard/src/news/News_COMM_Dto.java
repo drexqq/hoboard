@@ -20,6 +20,13 @@ public class News_COMM_Dto {
 		this.wdate = wdate;
 		this.c_seq = c_seq;
 	}
+	
+	public News_COMM_Dto(String id, String content,int c_seq) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.c_seq = c_seq;
+	}
 
 	
 	public int getB_seq() {
