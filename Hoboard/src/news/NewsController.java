@@ -207,7 +207,7 @@ public class NewsController extends HttpServlet {
 			String work2 = req.getParameter("work2");
 			//HttpSession session = req.getSession();
 			News_Dao dao = News_Dao.getInstance();
-			news_comm_dao dao2 = news_comm_dao.getInstance(); // 뉴스 댓글 관련 dao
+			News_COMM_Dao dao2 = News_COMM_Dao.getInstance(); // 뉴스 댓글 관련 dao
 			
 			JSONObject obj = new JSONObject();
 			//String id = "";
@@ -242,7 +242,7 @@ public class NewsController extends HttpServlet {
 				System.out.println("b_seq"+ b_seq);
 				
 				News_COMM_Dto dto2 = new News_COMM_Dto();
-				dao2 = news_comm_dao.getInstance();
+				dao2 = News_COMM_Dao.getInstance();
 				
 				dto2 = dao2.getCseq(c_seq);
 			

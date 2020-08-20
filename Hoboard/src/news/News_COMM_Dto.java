@@ -22,15 +22,6 @@ public class News_COMM_Dto {
 	}
 
 	
-	
-	
-	public news_comm_dto(String id, String content, int b_seq) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.b_seq = b_seq;
-	}
-
 	public int getB_seq() {
 		return b_seq;
 	}
