@@ -33,8 +33,9 @@ public class MyReviewController extends HttpServlet {
 			pageNumber = 0;
 		else
 			pageNumber = Integer.parseInt((String) req.getParameter("page"));
-
-		int len = dao.getsearch(c, sW);
+		
+		int len = UtilEx.getAllCountTable("review", c, sW);
+//		int len = dao.getsearch(c, sW);
 		int page = len / limit; // 예: 12개 -> 2page
 		if (len % limit > 0)
 			page = page + 1; // -> 2
