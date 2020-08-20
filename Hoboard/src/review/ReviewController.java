@@ -21,11 +21,8 @@ public class ReviewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		resp.setCharacterEncoding("UTF-8");
-
 		Review_Dao dao = Review_Dao.getInstance();
 		String key = req.getParameter("key");
-
 		if (key == null || "".equals(key)) {
 			List<Review_Dto> list = null;
 
@@ -39,20 +36,22 @@ public class ReviewController extends HttpServlet {
 				pageNumber = 0;
 			else
 				pageNumber = Integer.parseInt((String) req.getParameter("page"));
-
-			int len = dao.getsearch(c, sW);
-			int page = len / limit; // 예: 12개 -> 2page
+			
+			int len = UtilEx.getAllCountTable("REVIEW", c, sW);
+			System.out.println(len);
+//			int len = dao.getAllCount(c, sW);
+			int page = len / limit;
 			if (len % limit > 0)
 				page = page + 1; // -> 2
 			// 처음 들어왔을때
 			if (sW == null && c == null && pageNumber == 0)
-				list = dao.getReview_PagingList("", "", limit, pageNumber);
+				list = dao.getReviewPagingList("", "", limit, pageNumber);
 			// 페이지만 바뀔때
 			else if (sW == null && c == null && req.getParameter("page") != null)
-				list = dao.getReview_PagingList("", "", limit, pageNumber);
+				list = dao.getReviewPagingList("", "", limit, pageNumber);
 			// 검색후 페이지 바뀔때
 			else {
-				list = dao.getReview_PagingList(c, sW, limit, pageNumber);
+				list = dao.getReviewPagingList(c, sW, limit, pageNumber);
 				req.setAttribute("choice", c);
 				req.setAttribute("searchWord", sW);
 			}
@@ -117,10 +116,10 @@ public class ReviewController extends HttpServlet {
 			// seq check
 			System.out.println("seq:" + seq);
 
-			Review_Dto dto = dao.getDetail_list(seq);
+			Review_Dto dto = dao.getReviewDetail(seq);
 
 			// view count
-			dao.viewcount(seq);
+			dao.updateViewCount(seq);
 
 			Review_COMM_Dao Cdao = Review_COMM_Dao.getInstance();
 
@@ -136,7 +135,7 @@ public class ReviewController extends HttpServlet {
 
 			int seq = Integer.parseInt(req.getParameter("seq"));
 
-			Review_Dto dto = dao.getDetail_list(seq);
+			Review_Dto dto = dao.getReviewDetail(seq);
 
 			req.setAttribute("detaillist", dto);
 			UtilEx.forward("review_update.jsp", req, resp);
@@ -147,15 +146,17 @@ public class ReviewController extends HttpServlet {
 			// seq check
 			System.out.println("seq:" + seq);
 
-			boolean delete = dao.Review_delete(seq);
+			boolean delete = dao.deleteReview(seq);
 
 			if (delete) {
 				System.out.println("글 삭제 성공");
-				resp.sendRedirect("review?key=main");
+				req.setAttribute("delete", delete);
+				UtilEx.forward("myreview", req, resp);
 
 			} else {
 				System.out.println("글 삭제 실패");
-				resp.sendRedirect("review?key=main");
+				req.setAttribute("delete", delete);
+				UtilEx.forward("review?key=detail&seq="+seq+"", req, resp);
 			}
 
 		} else if (key.equals("commentwrite")) {
@@ -230,7 +231,7 @@ public class ReviewController extends HttpServlet {
 			System.out.println("title: " + title);
 			System.out.println("content: " + content);
 
-			boolean update = dao.getReview_update(seq, title, content);
+			boolean update = dao.updateReview(seq, title, content);
 
 			if (update) {
 				System.out.println("글 수정 성공");

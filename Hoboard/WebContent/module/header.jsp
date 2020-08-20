@@ -56,7 +56,7 @@
               <div class="menu-wrap">
                 <ul class="menu clearfix">
                   <li class="menu-item"><a href="map">근처 병원 찾기</a></li>
-                  <li class="menu-item"><a href="reserve.jsp">예약하기</a></li>
+                  <li class="menu-item"><a href="reserve">예약하기</a></li>
                   <li class="menu-item"><a href="review">후기보기</a></li>
                   <li class="menu-item"><a href="news">건강정보</a></li>
                 </ul>
@@ -69,7 +69,7 @@
 			    <c:choose>
 			    	<c:when test="${ login eq 1 }">
 			    	<!-- after login -->
-              	 	    <li class="util-item logout"><a href="logout.do">로그아웃</a></li>
+              	 	    <li class="util-item logout"><a href="logout">로그아웃</a></li>
 			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
 			    	</c:when>
 			    	

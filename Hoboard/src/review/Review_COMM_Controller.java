@@ -32,7 +32,7 @@ public class Review_COMM_Controller extends HttpServlet {
 			dto = dao.getOne_Comment(seq);
 			
 			Review_Dao dao2 = Review_Dao.getInstance();
-			Review_Dto dto2 = dao2.getDetail_list(boardnum);
+			Review_Dto dto2 = dao2.getReviewDetail(boardnum);
 			
 			
 			req.setAttribute("commentlist", dto);

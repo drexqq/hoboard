@@ -478,6 +478,10 @@ body {
   line-height: 30px;
   font-weight: 600;
 }
+.mypage-wrap .page-title.form-title {
+  max-width: 700px;
+  margin: 0 auto;
+}
 
 .mypage-wrap .box-wrap {
 }
@@ -519,60 +523,6 @@ body {
 }
 .mypage-wrap.ask .title-wrap .page-title {
   float: left;
-}
-.mypage-wrap.ask .title-wrap .search-wrap {
-  float: right;
-  height: 30px;
-}
-.mypage-wrap.ask .title-wrap .search-wrap .select-wrap {
-  float: left;
-  width: 100px;
-  position: relative;
-  margin-right: 15px;
-}
-.mypage-wrap.ask .title-wrap .search-wrap .select-wrap select {
-  float: left;
-  appearance: none;
-  padding: 0 10px;
-  height: 30px;
-  width: 100%;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.mypage-wrap.ask .title-wrap .search-wrap .select-wrap .arrow {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.mypage-wrap.ask .title-wrap .search-wrap .input-wrap {
-  float: left;
-  position: relative;
-}
-.mypage-wrap.ask .title-wrap .search-wrap .input-wrap input {
-  float: left;
-  width: 250px;
-  padding-left: 10px;
-  padding-right: 30px;
-  height: 30px;
-  line-height: 30px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.mypage-wrap.ask .title-wrap .search-wrap .input-wrap button {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.mypage-wrap.ask .title-wrap .search-wrap .input-wrap button i {
-  font-size: 18px;
 }
 .mypage-wrap.ask .util-wrap {
   font-size: 20px;
@@ -873,4 +823,26 @@ body {
   color: #fff;
   border-radius: 5px;
   font-size: 20px;
+}
+/* myreview */
+.mypage-wrap.myreview .title-wrap .page-title {
+  float: left;
+}
+.mypage-wrap.myreview .util-wrap {
+  font-size: 20px;
+  line-height: 30px;
+  padding-bottom: 30px;
+}
+.mypage-wrap.myreview .util-wrap .notice {
+  float: left;
+}
+.mypage-wrap.myreview .util-wrap .write {
+  float: right;
+}
+.mypage-wrap.myreview .util-wrap .write a {
+  padding: 5px 10px;
+  background-color: #3da0d7;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
 }

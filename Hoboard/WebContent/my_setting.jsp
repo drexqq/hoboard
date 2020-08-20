@@ -6,7 +6,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="page-title">개인정보관리</h2>
+				<h2 class="page-title form-title">
+					<c:if test="${ user.auth eq 1 }">개인</c:if>
+					<c:if test="${ user.auth eq 2 }">병원</c:if>
+					정보관리
+				</h2>
 			</div>
 		</div>
 		<div class="row justify-content-center">
@@ -19,7 +23,7 @@
 								name="name" class="textChk" value="${ user.name }"
 								readonly="readonly" />
 						</div>
-						<div class="input-wrap btn-added clearfix">
+						<div class="input-wrap clearfix">
 							<label for="id">아이디</label> <input type="text" id="id" name="id"
 								class="textChk" value="${ user.id }" readonly="readonly" />
 						</div>

@@ -23,121 +23,85 @@ public class ReserveController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 
 		Reserve_Dao dao = Reserve_Dao.getInstance();
-
+		
 		String cate = req.getParameter("cate");
+		String key = req.getParameter("key");
+		
+		//key == null || "".equals(key)
+		if(key == null || "".equals(key)) {
+			
+			List<Member_Dto> S_list = null;
+			
+			String loc = req.getParameter("loc");
+			String amt = req.getParameter("amt");
+			String searchWord =  req.getParameter("searchWord");
+			
+			System.out.println(loc);
+			System.out.println(amt);
+			System.out.println(searchWord);
+			
+			int limit = 5;
+			int pageNumber = 0;
 
-		if (cate.equals("internal")) {
+			if (req.getParameter("page") == null)
+				pageNumber = 0;
+			else
+				pageNumber = Integer.parseInt((String) req.getParameter("page"));
+			
+			int len = dao.getsearch_allcount(loc, amt, searchWord);
+			
+			int page = len / limit; // 예: 12개 -> 2page
+			if (len % limit > 0)
+				page = page + 1; // -> 2
+			
+			System.out.println("총 게시물 숫자 len : " + len);
+			System.out.println("페이지 갯수 page : " + page);
+			System.out.println("페이지 넘버 pageNum : " + pageNumber);
+			
+			// 처음 들어왔을때
+			if (loc == null && amt == null && searchWord == null && pageNumber == 0) {
+				System.out.println("처음");
+				S_list = dao.getSearch_list("", "", "", limit, pageNumber);
+			// 페이지만 바뀔때
+			}else if (loc == null && amt == null && searchWord == null && req.getParameter("page") != null) {
+				System.out.println("페이지만");
+				S_list = dao.getSearch_list("", "", "", limit, pageNumber);
+			// 검색후 페이지 바뀔때
+			}else {
+				System.out.println("검색");
+				S_list = dao.getSearch_list(loc, amt, searchWord, limit, pageNumber);
+				req.setAttribute("loc", loc);
+				req.setAttribute("amt", amt);
+				req.setAttribute("searchWord", searchWord);
+			}
+			
+			
+			req.setAttribute("len", len); // 총 개수
+			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
+			req.setAttribute("page", page - 1); // 총 페이지수
+			req.setAttribute("res_search_list", S_list); // 실제 데이터 
+			UtilEx.forward("reserve.jsp", req, resp);
+			
+		
+		
+		}else if(key.equals("category")) {
+			
 			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getInternal_list(seq);
-
-
+			List<Member_Dto> list = dao.getCate_list(cate, seq);
+			
 			req.setAttribute("reslist", list);
 			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("anpn")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getanpn_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-		} else if (cate.equals("mtrnt")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getmtrnt_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-		} else if (cate.equals("pdtrc")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getpdtrc_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-		} else if (cate.equals("nrlgy")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getnrlgy_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("nrsrg")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getnrsrg_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("crdlg")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getcrdlg_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("xray")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getxray_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("gs")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getgs_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("dprtm")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getdprtm_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("os")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getos_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("rhblt")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getrhblt_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("thrcc")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getthrcc_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("skin_uro")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getskin_uro_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("dent")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getdent_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
-		} else if (cate.equals("ophth")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			List<Member_Dto> list = dao.getophth_list(seq);
-
-			req.setAttribute("reslist", list);
-			UtilEx.forward("reserve.jsp", req, resp);
-
+			
+		}else if(key.equals("detail")) {
+			
+			String id = req.getParameter("id");
+			
+			
+			//req.setAttribute(name, o);
+			UtilEx.forward("reserve_detail.jsp", req, resp);
 		}
-
+		
+		
 	}
 
 	@Override

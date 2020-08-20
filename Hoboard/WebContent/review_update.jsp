@@ -1,22 +1,7 @@
-<%@page import="review.Review_Dto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<% 
-Review_Dto dto =(Review_Dto)request.getAttribute("detaillist");
-
-
-%>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>후기 수정</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-</head>
-<body>
-<h1>후기수정</h1>
+	pageEncoding="UTF-8"%>
+<%@ include file="module/header.jsp"%>
+<%-- <h1>후기수정</h1>
 <form action="review" method="post">
 <input type="hidden" name="key" value="update">
 <input type="hidden" name="seq" value="<%=dto.getReview_seq() %>">
@@ -55,7 +40,6 @@ Review_Dto dto =(Review_Dto)request.getAttribute("detaillist");
 <div align="center">
 	<input type="submit" value="글수정">
 </div>
-</form>
+</form> --%>
 
-</body>
-</html>
+<%@ include file="module/footer.jsp"%>
