@@ -75,6 +75,43 @@ function search(page) {
   }
 }
 
+// Reserve_search
+function R_search(page) {
+ 	let loc = document.getElementById("loc").value;
+	let amt = document.getElementById("amt").value;
+	let searchWord = document.getElementById("searchWord").value; 
+  
+  if (searchWord == null || searchWord == "") {
+    document.getElementById("searchWord").value = "";
+    location.href = page + "?loc=" + loc + "&amt=" + amt;
+  }	else {
+    location.href = page + "?searchWord=" + searchWord + "&loc=" + loc + "&amt=" + amt;
+  }
+}
+
+// reserve paging
+function goRPage(pageName, pageNum) {
+  var loc = document.getElementById("loc").value;
+  var amt = document.getElementById("amt").value;
+  var searchWord = document.getElementById("searchWord").value;
+  
+  if (loc != null && loc != "" && amt != null && amt != ""  && searchWord != null && searchWord != "") {
+    location.href =
+      pageName +
+      "?searchWord=" +
+      searchWord +
+      "&loc=" +
+      loc +
+      "&amt=" +
+      amt +
+      "&page=" +
+      pageNum;
+  } else if (searchWord == null || searchWord == "") {
+    location.href = pageName + "?page=" + pageNum;
+  }
+}
+
+
 // paging
 function goPage(pageName, pageNum) {
   var choice = document.getElementById("choice").value;
