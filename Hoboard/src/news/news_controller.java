@@ -27,6 +27,7 @@ public class news_controller extends HttpServlet {
 		String work = req.getParameter("work");
 		// HttpSession session = req.getSession();
 		News_Dao dao = News_Dao.getInstance();
+		news_comm_dao dao2 = news_comm_dao.getInstance();
 		JSONObject obj = new JSONObject();
 		// String id = "";
 
@@ -153,16 +154,30 @@ public class news_controller extends HttpServlet {
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			System.out.println("news_detail.seq =" + seq);
 
+			int c_seq = Integer.parseInt(req.getParameter("c_seq"));
+			System.out.println("c_seq =" + c_seq);
+				
 			dao = News_Dao.getInstance();
+			dao2 = news_comm_dao.getInstance();
 
 			News_Dto dto = dao.getNewsSeq(seq);
 			System.out.println(dto.toString());
+			
+			news_comm_dto dto2 = dao2.getCseq(c_seq);
+			System.out.println("dto2 = aaa" + dto2.toString());
 
+			List<news_comm_dto> clist = (List<news_comm_dto>)req.getAttribute("clist");
+			System.out.println("clist = " + clist);
 			boolean vc = dao.viewcount(seq);
 
 			req.setAttribute("dto", dto);
+			req.setAttribute("dto2", dto2);
+			req.setAttribute("seq", seq);
+			req.setAttribute("c_seq", c_seq);
+			req.setAttribute("clist", clist);
 
 			UtilEx.forward("news_detail.jsp", req, resp);
+		
 		}
 		if(work.equals("update")) {				// update view로 이동			
 			
@@ -233,45 +248,49 @@ public class news_controller extends HttpServlet {
 					System.out.println("실패");
 					//resp.sendRedirect("news_detail.do");
 				}
+//
+//			// 댓글 작성
+//			  } else if (work2.equals("c_write")) {
+//				  
+//				dao2 = news_comm_dao.getInstance();
+//				
+//				int b_seq = Integer.parseInt(req.getParameter("b_seq"));
+//				List<news_comm_dto> clist = dao2.getComm(b_seq);
+//				
+//				System.out.println("clist="+clist);
+//				
+//				news_comm_dto dto2 = new news_comm_dto();
+//				
+//
+//				
+//				
+//				String id = req.getParameter("id");
+//				//int b_seq = Integer.parseInt(req.getParameter("b_seq"));
+//				String c_content = req.getParameter("c_content");
+//				//reply_content = new String(reply_content.getBytes("8859_1"),"utf-8");
+//							
+//				System.out.println(req.getParameter("id"));
+//				System.out.println("b_seq!!!"+ b_seq);
+//				System.out.println(req.getParameter("c_content"));	
+//				
+//				System.out.println("dto2zzzzzz"+dto2);
+//				 
+//				boolean isS = dao2.comm_write(new news_comm_dto(id, c_content, b_seq));
+//
+//				String seq = req.getParameter("b_seq");
+//				
+//				if(isS) {
+//						System.out.println("덧글 작성 성공");
+//						resp.sendRedirect("news?work=detail&seq="+b_seq);
+//				} else {
+//						System.out.println("덧글 작성 실패");
+//						resp.sendRedirect("news?work=detail&seq="+b_seq);
+//				}
+//				
+//				//resp.sendRedirect("news?work=move&seq="+b_seq);
+			}	
+	}
+				
 
-			// 댓글 작성
-			  } else if (work2.equals("c_write")) {
-				  
-				dao2 = news_comm_dao.getInstance();
-				news_comm_dto dto2 = new news_comm_dto();
-				
-				String id = req.getParameter("id");
-				int b_seq = Integer.parseInt(req.getParameter("b_seq"));
-				String c_content = req.getParameter("c_content");
-				//reply_content = new String(reply_content.getBytes("8859_1"),"utf-8");
-							
-				System.out.println(req.getParameter("id"));
-				System.out.println("b_seq!!!"+ b_seq);
-				System.out.println(req.getParameter("c_content"));				  
-				 
-				boolean isS = dao2.comm_write(new news_comm_dto(id, c_content, b_seq));
 
-				String seq = req.getParameter("b_seq");
-				
-				if(isS) {
-						System.out.println("덧글 작성 성공");
-						resp.sendRedirect("news?work2=detail&seq="+b_seq );
-				} else {
-						System.out.println("덧글 작성 실패");
-						resp.sendRedirect("news?work2=detail&seq="+b_seq );
-				}
-				
-				resp.sendRedirect("news?work=move&seq="+b_seq);
-			}				
-				
-
-				
-				
-				//UtilEx.forward("news_detail.jsp", req, resp);
-				
-
-				
-				
-			  }
-	
 }

@@ -1,3 +1,5 @@
+<%@page import="news.news_comm_dto"%>
+<%@page import="news.news_comm_dao"%>
 <%@page import="news.News_Dto"%>
 <%@page import="news.News_Dao"%>
 <%@page import="java.util.List"%>
@@ -20,6 +22,28 @@ int pageNumber = (Integer)request.getAttribute("pageNumber");
 <% 	
 		System.out.println("NewspageNumber:"+pageNumber);
 %>	
+
+<% 
+news_comm_dao dao2 = news_comm_dao.getInstance();
+news_comm_dto dto2 = (news_comm_dto)request.getAttribute("dto2");
+
+List<news_comm_dto> clist = (List<news_comm_dto>)request.getAttribute("clist");
+
+%>
+
+<%
+System.out.println(clist);
+
+
+System.out.println("news comm dto" +dto2);
+%>
+
+<%
+String ccseq = request.getParameter("c_seq");
+int c_seq = Integer.parseInt(ccseq);
+System.out.println("c_seq="+c_seq);
+%>
+
 
 <%
 //목록 리스트를 검색한것만 가져옴
@@ -91,7 +115,7 @@ if(list.size() == 0){
 		<tr class="table-row">
 			<th><%=i+1 %></th>
 			<td>
-			<a href="news?work=detail&seq=<%=dto.getNews_seq()%>">
+			<a href="news?work=detail&seq=<%=dto.getNews_seq()%>&c_seq=<%=dto2.getC_seq()%>">
 				<%=dto.getTitle()%></a>
 			</td>
 			<td>
@@ -132,7 +156,6 @@ for(int i = 0;i < NewsPage; i++){
 }
 %>
 <br>
-
 
 	<script type="text/javascript">
 function searchNews() {
