@@ -81,8 +81,8 @@
 			<div class="email">이메일 : ${ s_list.email }</div>
 			<div class="address">주소 : ${ s_list.address }</div>
 			<div class="d_address">상세주소 : ${ s_list.d_Address }</div>
-			<div class="box">
-				<button onclick="reservebtn(${ s_list.id })">예약하기</button>
+			<div class="button">
+				<button type="button" onclick="reservebtn('${ s_list.id }')">예약하기</button>
 			</div>
 			<hr>
 		</c:forEach>
@@ -124,6 +124,8 @@
 	</c:if>
 </div>
 
+
+
 <script type="text/javascript">
 $(document).ready(function(e) {
 	let c = "<c:out value='${ loc }' />"
@@ -138,11 +140,8 @@ $(document).ready(function(e) {
 })
 
 function reservebtn( id ){
-	
 	location.href = "reserve?key=detail&id" + id;
-
 }
-
 </script>
 <script src="js/util.js"></script>
 <%@ include file="module/footer.jsp"%>

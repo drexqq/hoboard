@@ -94,7 +94,15 @@ public class ReserveController extends HttpServlet {
 			
 		}else if(key.equals("detail")) {
 			
+			String id = req.getParameter("id");
 			
+			
+			
+			
+			
+			
+			req.setAttribute(name, o);
+			UtilEx.forward("reserve_detail", req, resp);
 		}
 		
 		
