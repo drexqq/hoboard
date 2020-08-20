@@ -72,6 +72,7 @@
 <br>
 <br>
 <br>
+
 <c:choose>
 	<c:when test="${ res_search_list ne null }">
 		<c:forEach items="${ res_search_list }" var="s_list"
@@ -91,9 +92,6 @@
 		<div class="null"></div>
 	</c:when>
 </c:choose>
-
-
-
 
 <c:choose>
 	<c:when test="${ reslist ne null }">
@@ -140,7 +138,7 @@ $(document).ready(function(e) {
 })
 
 function reservebtn( id ){
-	location.href = "reserve?key=detail&id" + id;
+	location.href = "reserve?key=detail&id=" + id;
 }
 </script>
 <script src="js/util.js"></script>

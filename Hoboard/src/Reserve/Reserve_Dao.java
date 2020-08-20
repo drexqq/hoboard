@@ -208,4 +208,12 @@ public class Reserve_Dao {
 		}
 		return list;
 	}
+	
+	//public List<Member_Dto> getDetail_list(String name) {
+	//	String sql = " SELECT  "
+		
+		
+		
+		
+	//}
 }

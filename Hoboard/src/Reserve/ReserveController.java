@@ -97,12 +97,8 @@ public class ReserveController extends HttpServlet {
 			String id = req.getParameter("id");
 			
 			
-			
-			
-			
-			
-			req.setAttribute(name, o);
-			UtilEx.forward("reserve_detail", req, resp);
+			//req.setAttribute(name, o);
+			UtilEx.forward("reserve_detail.jsp", req, resp);
 		}
 		
 		
