@@ -69,7 +69,7 @@
 			    <c:choose>
 			    	<c:when test="${ login eq 1 }">
 			    	<!-- after login -->
-              	 	    <li class="util-item logout"><a href="logout.do">로그아웃</a></li>
+              	 	    <li class="util-item logout"><a href="logout">로그아웃</a></li>
 			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
 			    	</c:when>
 			    	

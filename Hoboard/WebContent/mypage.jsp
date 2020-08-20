@@ -11,9 +11,9 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
     <div class="box-wrap">
       <div class="row">
         <div class="col-3">
-          <a href="mypage?c=setting">
+          <a href="setting">
             <div class="box">
-              <div class="title">개인정보관리</div>
+              <div class="title">정보관리</div>
               <div class="icon clearfix">
                 <img src="img/mypage_setting.svg" alt="" />
               </div>
@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
           </a>
         </div>
         <div class="col-3">
-          <a href="">
+          <a href="myreserve">
             <div class="box">
               <div class="title">예약 내역</div>
               <div class="icon clearfix">
@@ -31,11 +31,11 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
           </a>
         </div>
         <div class="col-3">
-          <a href="">
+          <a href="myreview">
             <div class="box">
               <div class="title">후기 관리</div>
               <div class="icon clearfix">
-                <a href="REVIEW?review=main&id=fff"><img src="img/mypage_review.svg" alt="" /></a>
+                <img src="img/mypage_review.svg" alt="" />
               </div>
             </div>
           </a>

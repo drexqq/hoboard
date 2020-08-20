@@ -76,21 +76,6 @@ $(document).ready(function(e) {
 })
 </script>
 
-<%-- //TODO after scriptlet session ID add change 
-<button type="button" id="getId" onclick="writeBtn()" value="<%="fff"%>">글쓰기</button>
-<!-- after -> reserve button  -->
-<script type="text/javascript">
-function writeBtn(){
-	let ID = document.getElementById("getId").value;
-	//TODO dummy
-	let BUSI_ID = "hanbang";
-	let seq = "7"; 
-	
-	//reserve status="3" select button "show" else
-	//after id , busi_id , seq must
-	location.href="review?key=writeview&id=" + ID + "&busi=" + BUSI_ID + "&seq=" + seq;
-}
-</script> --%>
 
 <script src="js/util.js"></script>
 <%@ include file="module/footer.jsp"%>

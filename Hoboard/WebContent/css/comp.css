@@ -359,3 +359,122 @@
   padding: 15px;
   font-size: 18px;
 }
+
+/* .myreview-list */
+.myreview {
+}
+.myreview .review-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.myreview .review-table .cate {
+  width: 28%;
+}
+.myreview .review-table .tit {
+  width: 28%;
+}
+.myreview .review-table .date {
+  width: 20%;
+}
+.myreview .review-table .view {
+  width: 10%;
+  text-align: center;
+}
+.myreview .review-table .btns {
+  width: 14%;
+  text-align: center;
+}
+.myreview .review-table .btns a {
+  width: 50%;
+  padding: 3px 5px;
+  border: 1px solid #ff8b34;
+  border-radius: 5px;
+  transition: all 0.25s ease;
+}
+.myreview .review-table .btns a:hover {
+  color: #fff;
+  background-color: #ff8b34;
+}
+.myreview .review-table .yn .done {
+  color: #ff8b34;
+}
+.myreview .review-table thead tr {
+  border-bottom: 1px solid #ccc;
+}
+.myreview .review-table thead tr th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  font-size: 20px;
+}
+.myreview .review-table tbody tr {
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: all 0.25s ease;
+}
+.myreview .review-table tbody tr:hover {
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+}
+.myreview .review-table tbody tr td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  font-size: 18px;
+}
+/* search-wrap */
+.search-wrap {
+  float: right;
+  height: 30px;
+}
+.search-wrap .select-wrap {
+  float: left;
+  width: 100px;
+  position: relative;
+  margin-right: 15px;
+}
+.search-wrap .select-wrap select {
+  float: left;
+  appearance: none;
+  padding: 0 10px;
+  height: 30px;
+  width: 100%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.search-wrap .select-wrap .arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.search-wrap .input-wrap {
+  float: left;
+  position: relative;
+}
+.search-wrap .input-wrap input {
+  float: left;
+  width: 250px;
+  padding-left: 10px;
+  padding-right: 30px;
+  height: 30px;
+  line-height: 30px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.search-wrap .input-wrap button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.search-wrap .input-wrap button i {
+  font-size: 18px;
+}

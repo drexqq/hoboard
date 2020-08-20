@@ -5,7 +5,7 @@
   <div class="login-form">
     <p class="login-head">&lt;Hoboard /&gt;</p>
     <p class="title">Log in</p>
-    <form action="login.do" method="post">
+    <form action="login" method="post">
       <div class="input-wrap">
         <label for="id">ID</label>
         <input type="text" name="id" id="id" />

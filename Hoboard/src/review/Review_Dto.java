@@ -42,6 +42,21 @@ public class Review_Dto implements Serializable {
 		this.busi_cate = busi_cate;
 		this.del = del;
 	}
+	
+	public Review_Dto(int review_seq, String busi_id, String indvd_id, String title, String content, int viewcount,
+			int score, String wdate, String busi_cate, int del) {
+		super();
+		this.review_seq = review_seq;
+		this.busi_id = busi_id;
+		this.indvd_id = indvd_id;
+		this.title = title;
+		this.content = content;
+		this.viewcount = viewcount;
+		this.score = score;
+		this.wdate = wdate;
+		this.busi_cate = busi_cate;
+		this.del = del;
+	}
 
 	public Review_Dto(String busi_id, String indvd_id, String title, String content, int score, String filename, String busi_cate) {
 		super();
