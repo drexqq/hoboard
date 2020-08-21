@@ -15,10 +15,6 @@
 							<i class="ri-eye-line"></i>${ dto.viewcount }</div>
 					</div>
 				</div>
-				<div><input type="button" name="updateBtn" value="수정"
-				onclick="location.href='news?work=update&seq=${dto.news_seq}'"></div>
-				<div><input type="button" name="delBtn" value="삭제"
-				onclick="location.href='news?work=del&seq=${dto.news_seq}'"></div>
 				<div class="content-wrap">${dto.content}</div>
 				<div class="goList">
 					<a href="news">글 목록으로</a>
@@ -59,8 +55,7 @@
 											<i class="ri-calendar-line"></i>${comm.wdate}</div>
 									</div>
 									<div class="down">${comm.content}</div>
-									<br><br>
-										
+									<br><br>										
 										<input type="button" name="updateBtn" value="댓글  수정"
 										onclick="location.href='news?work=c_update&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}&content=${comm.content}'">
 										<input type="button" name="delBtn" value="댓글 삭제"
@@ -74,6 +69,10 @@
 		</div>
 	</div>
 </div>
+
+
+
+
 
 <!--TODO Connect session ID -->
 <c:choose>
