@@ -32,13 +32,11 @@
 						</c:when>
 						<c:otherwise>
 							<div class="reply clearfix">
-								<form action="news" method="get">
-									<input type="hidden" name="seq" id="seq"
-										value="${dto.news_seq}"> <input
-										type="hidden" name="no" id="no"
-										value="${dto.content}"> <input
-										type="hidden" name="id" id="id"
-										value="${ sessionScope.sessionID }">
+								<form action="news?work2=c_write" method="post">
+									<!-- <input type="hidden" name="work2" id="seq" value="c_write">  -->
+									<input type="hidden" name="b_seq" id="b_seq" value="${dto.news_seq}">
+										<input type="hidden" name="c_content" id="c_content" value="${dto.content}"> 
+										<input type="hidden" name="id" id="id" value="${ sessionScope.sessionID }">
 									<textarea placeholder="댓글 작성" name="reply_content"
 										id="reply_content"></textarea>
 									<input class="submit" type="submit" value="댓글등록">
@@ -58,6 +56,10 @@
 											<i class="ri-calendar-line"></i>${comm.wdate}</div>
 									</div>
 									<div class="down">${comm.content}</div>
+									<br><br>
+									<a href = "news?work=c_del&c_seq="${comm.c_seq}>댓글 삭제</a>
+										<input type="hidden" name="b_seq" id="b_seq" value="${comm.b_seq}">
+										<input type="hidden" name="c_seq" id="c_seq" value="${comm.c_seq}">
 								</div>
 							</c:forEach>
 						</div>
@@ -68,27 +70,9 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-function update(seq) {
-	location.href = "news?work=update&seq=" + seq;
-}
-
-function del(seq) {
-	location.href = "news?work=update&seq=" + seq;
-}
-
-function cupdateBbs(seq) {
-	location.href = "newswork=c_update&c_seq=" + c_seq + "&seq=" + ${seq};
-}
-
-function cdeleteBbs(seq) {
-	location.href = "newswork=c_update&c_seq=" + c_seq + "&seq=" + ${dto.seq};
-}
-
-</script>
 <!--TODO Connect session ID -->
 <c:choose>
-	<c:when test="${ sessionScope.sessionID == dto.id }">
+	<c:when test="${ sessionScope.sessionID == {dto.id} }">
 		<div align="center">
 			<button type="button"
 				onclick="update(${dto.seq})">수정</button>

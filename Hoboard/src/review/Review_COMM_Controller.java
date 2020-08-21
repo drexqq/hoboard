@@ -79,7 +79,6 @@ public class Review_COMM_Controller extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		
 		Review_COMM_Dao dao = Review_COMM_Dao.getInstance();
 		Review_COMM_Dto dto = new Review_COMM_Dto();
 		

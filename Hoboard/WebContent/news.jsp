@@ -36,6 +36,7 @@
 								<div class="content">${ list.content }</div>
 								<div class="util-wrap">
 									<div>
+									<span>댓글 수 (${ fn:length(comm)})</span>
 										<span class="view">
 											<i class="ri-eye-line"></i>
 											${ list.viewcount }
