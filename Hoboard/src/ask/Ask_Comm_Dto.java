@@ -1,4 +1,4 @@
-package Ask;
+package ask;
 
 public class Ask_Comm_Dto {
 

@@ -1,4 +1,4 @@
-package Ask;
+package ask;
 
 import java.io.IOException;
 import java.sql.Connection;

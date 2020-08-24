@@ -1,4 +1,4 @@
-package Ask;
+package ask;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
