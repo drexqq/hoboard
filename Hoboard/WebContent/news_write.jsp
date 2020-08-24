@@ -10,8 +10,8 @@
 </head>
 <body>
 <h1>건강 정보 쓰기</h1>
-
-<form action="news?work2=write" method="post">
+<!-- news?work2=write -->
+<form action="news_file" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" value="admin">
 <!-- <input type="hidden" name="work" value="move"> -->
 
@@ -26,7 +26,7 @@
 <tr>
 	<th>파일첨부</th>
 	<td>
-		<input type="text" name="file" size="50px">
+		<input type="file" name="filename" size="50px">
 		<input type="button" name="fileBtn" value="파일찾기"/>
 	</td>
 </tr>

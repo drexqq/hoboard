@@ -75,13 +75,8 @@ public class NewsController extends HttpServlet {
 
 			News_Dto dto = dao.getNewsSeq(seq);
 			News_COMM_Dao commDao = News_COMM_Dao.getInstance();
-<<<<<<< HEAD
-
 			System.out.println(dto.toString());
-=======
-			
 //			System.out.println(dto.toString());
->>>>>>> news_f
 			System.out.println(commDao.getComm(seq).toString());
 			boolean vc = dao.viewcount(seq);
 
@@ -212,7 +207,6 @@ public class NewsController extends HttpServlet {
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			// System.out.println("title ="+title+", content= "+content);
-
 			id = "admin";
 			dao = News_Dao.getInstance();
 			News_Dto dto = new News_Dto(id, title, content);

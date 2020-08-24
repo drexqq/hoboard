@@ -23,9 +23,16 @@
 					</div>
 				</div>
 				<a href = "news_write.jsp">글쓰기</a>
-			<form action="news_file.jsp" enctype="multipart/form-data" method="post">
+			<form action="news_file" enctype="multipart/form-data" method="post">
+					<%-- <input type="hidden" name="seq" value="${dto.news_seq }">
+					<input type="hidden" name="id" value="${dto.id }">
+					<input type="hidden" name="title" value="${dto.title }">
+					<input type="hidden" name="content" value="${dto.content }">
+					<input type="hidden" name="viewcount" value="${dto.viewcount }">
+					<input type="hidden" name="date" value="${dto.wdate }">
+					<input type="hidden" name="news_file" value="${dto.news_file }"> --%>
 				 <input type="submit" value="파일업로드">
-				 </form> 
+			</form> 
 				</div>
 			<div class="col-12">
 				<div class="list-wrap">
