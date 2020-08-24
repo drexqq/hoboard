@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DBClose;
 import db.DBConnection;
@@ -366,7 +368,7 @@ public class Reserve_Dao {
 		return list;
 	}
 	
-	public List<BUSI_Cate_Dto> getCate_list(String id){
+	public Map<String, Integer> getCate_list(String id){
 		String sql = " SELECT * "
 				  +  " FROM BUSI_CATE A INNER JOIN MEMBER B "
 				  +  " ON  A.ID = B.ID "
@@ -375,7 +377,7 @@ public class Reserve_Dao {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		List<BUSI_Cate_Dto> list = new ArrayList<BUSI_Cate_Dto>();
+		Map<String, Integer> list = null;
 		
 		try {
 			conn = DBConnection.getConnection();
@@ -388,37 +390,119 @@ public class Reserve_Dao {
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getCate_list success");
 			
-			if (rs.next()) {
+			
+			while(rs.next()) {
+		
+				list = new HashMap<String, Integer>();
 				
-				int i = 1;
-				BUSI_Cate_Dto dto = new BUSI_Cate_Dto(rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++));
-				
-				list.add(dto);
-				
+				list.put("내과", rs.getInt("INTERNAL"));
+				list.put("마취통증학과", rs.getInt("ANPN"));
+				list.put("산부인과", rs.getInt("MTRNT"));
+				list.put("소아청소년과", rs.getInt("PDTRC"));
+				list.put("신경과", rs.getInt("NRLGY"));
+				list.put("신경외과", rs.getInt("NRSRG"));
+				list.put("심장내과", rs.getInt("CRDLG"));
+				list.put("영상의학과", rs.getInt("XRAY"));
+				list.put("외과", rs.getInt("GS"));
+				list.put("응급의학과", rs.getInt("DPRTM"));
+				list.put("정형외과", rs.getInt("OS"));
+				list.put("재활의학과", rs.getInt("RHBLT"));
+				list.put("흉부심장혈관학과", rs.getInt("THRCC"));
+				list.put("피부비뇨기과", rs.getInt("SKIN_URO"));
+				list.put("치과", rs.getInt("DENT"));
+				list.put("안과", rs.getInt("OPHTH"));
 			}
+			
+			System.out.println(list.toString());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
+		
 		return list;
 	}
 	
+	public Map<String, Integer> getAmetiny_list(String id){
+		String sql = " SELECT * "
+				  +  " FROM BUSI_AMENITY A INNER JOIN MEMBER B "
+				  +  " ON  A.ID = B.ID "
+		          +  " WHERE B.ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		Map<String, Integer> list = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getAmetiny_list success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getAmetiny_list success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getAmetiny_list success");
+			
+			
+			while(rs.next()) {
+		
+				list = new HashMap<String, Integer>();
+				
+				list.put("주차장", rs.getInt("PARKING"));
+				list.put("편의점", rs.getInt("CONV"));
+				list.put("ATM,은행", rs.getInt("BANK"));
+				list.put("약국", rs.getInt("DRUG"));
+				list.put("대중 교통", rs.getInt("BMW"));
+				
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		System.out.println(list.toString());
+		return list;
+	}
 	
+	public String getLunch_Time(String id, String date){
+		String sql = " SELECT "+ date +" " 
+					+ " FROM BUSI_TIME "
+					+ " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String lunch = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getLunch_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getLunch_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getLunch_Time success");
+			
+			if (rs.next()) {
+				lunch = rs.getString(1);
+			}
+			System.out.println(lunch);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return lunch;
+	
+	}
 	
 }

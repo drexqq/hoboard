@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,11 +23,8 @@ import review.Review_Dao;
 @WebServlet("/reserve")
 public class ReserveController extends HttpServlet {
 
-	public static String[] cate = { "내과", "마취통증학과", "산부인과", "소아청소년과", "신경과", "신경외과", "심장내과", "영상의학과", "외과", "응급의학과",
-									"정형외과", "재활의학과", "흉부심장혈관과", "피부비뇨기과", "치과", "안과" };
-	public static String[] time = { "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "점심시간", "공휴일", "야간진료", "응급실" };
-	public static String[] amenity = { "주차장", "편의점", "ATM,은행", "약국", "대중 교통" };
 	
+	public static ArrayList<String> Arraylist = new ArrayList<String>();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -113,29 +111,90 @@ public class ReserveController extends HttpServlet {
 			
 			List<Member_Dto> m_list = dao.getMember_list(id);
 			List<BUSI_Time_Dto> t_list = dao.getTime_list(id);
-			List<BUSI_Cate_Dto> c_list = dao.getCate_list(id);
-			
-			
-			System.out.println(c_list);
-
-			
-			
-			
-			
+			Map<String, Integer> busi_cate = dao.getCate_list(id);
+			Map<String, Integer> busi_amenity = dao.getAmetiny_list(id);
 			
 			req.setAttribute("busi_id", id);
 			req.setAttribute("score",score);
 			req.setAttribute("homepage",homepage);
 			req.setAttribute("memberlist", m_list);
 			req.setAttribute("timelist", t_list);
-			req.setAttribute("catelist", c_list);
-			//req.setAttribute(a_list, o);
+			req.setAttribute("catelist", busi_cate);
+			req.setAttribute("amenitylist", busi_amenity);
 			UtilEx.forward("reserve_detail.jsp", req, resp);
 			
 			
+		} else if(key.equals("select")) {
+			
+			String date = req.getParameter("date");
+			String id = req.getParameter("id");
+			
+			int idx = date.indexOf("(");
+			String date2 = date.substring(idx+1);
+			String date3 = date2.substring(0,1);
+			
+			switch (date3) {
+			case "월":
+				date3 = "MON";
+				break;
+			case "화":
+				date3 = "TUE";
+				break;
+			case "수":
+				date3 = "WED";
+				break;
+			case "목":
+				date3 = "THU";
+				break;
+			case "금":
+				date3 = "FRI";
+				break;
+			case "토":
+				date3 = "SAT";
+				break;
+			case "일":
+				date3 = "SUN";
+				break;
+			}
+			System.out.println(date);	
+			System.out.println(id);
+			System.out.println(date3);
+			
+			String lunch = dao.getLunch_Time(id, date3);
+			
+			if(lunch.equals("휴무")) {
+				
+				String breaktime = "휴무일입니다.";
+				
+				req.setAttribute("lunch", breaktime);
+			
+			} else {
+				
+				
+				
+				
+			}
+			
+			
+			
+			//String lunch = dao.getLunch_Time();
+			
+			
+			Arraylist.add("09:00~10:00");
+			Arraylist.add("10:00~11:00");
+			Arraylist.add("11:00~12:00");
+			Arraylist.add("12:00~13:00");
+			Arraylist.add("13:00~14:00");
+			Arraylist.add("14:00~15:00");
+			Arraylist.add("16:00~17:00");
+			Arraylist.add("17:00~18:00");
+
+			
+			
+			
+			
+			
 		}
-		
-		
 	}
 
 	@Override

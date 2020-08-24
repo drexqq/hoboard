@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
           <div class="wrap">
             <div class="box">
               <div class="icon">
-                <img src="img/busi_join.png" alt="" />
+                <img src="img/busi_join.png" alt=""/>
               </div>
               <div class="text">병원 회원 가입</div>
               <div class="desc">
