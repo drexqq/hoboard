@@ -1,4 +1,4 @@
-package ask;
+package Ask;
 
 import java.io.IOException;
 import java.net.URLEncoder;
