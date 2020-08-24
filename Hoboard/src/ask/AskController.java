@@ -1,4 +1,4 @@
-package Ask;
+package ask;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -21,7 +21,6 @@ public class AskController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		Ask_Dao dao = Ask_Dao.getInstance();
 		String one = req.getParameter("one");
 		HttpSession session = req.getSession();
@@ -35,10 +34,8 @@ public class AskController extends HttpServlet {
 			int limit = 10;
 			int pageNumber = 0;
 
-			if (req.getParameter("page") == null)
-				pageNumber = 0;
-			else
-				pageNumber = Integer.parseInt((String) req.getParameter("page"));
+			if (req.getParameter("page") == null) pageNumber = 0;
+			else pageNumber = Integer.parseInt((String) req.getParameter("page"));
 
 			int len = dao.getAskCount((String) session.getAttribute("sessionID"), c, sW);
 			int page = len / limit; // 예: 12개 -> 2page

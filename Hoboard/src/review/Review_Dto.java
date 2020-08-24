@@ -54,10 +54,6 @@ public class Review_Dto implements Serializable {
 		this.busi_cate = busi_cate;
 	}
 
-
-
-
-
 	public int getReview_seq() {
 		return review_seq;
 	}

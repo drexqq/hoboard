@@ -1,6 +1,6 @@
 package news;
 
-public class news_comm_dto {
+public class News_COMM_Dto {
 
 	private int b_seq;
 	private String id;
@@ -8,11 +8,11 @@ public class news_comm_dto {
 	private String wdate;
 	private int c_seq;
 	
-	public news_comm_dto() {
+	public News_COMM_Dto() {
 		
 	}
 
-	public news_comm_dto(int b_seq, String id, String content, String wdate, int c_seq) {
+	public News_COMM_Dto(int b_seq, String id, String content, String wdate, int c_seq) {
 		super();
 		this.b_seq = b_seq;
 		this.id = id;
@@ -20,17 +20,15 @@ public class news_comm_dto {
 		this.wdate = wdate;
 		this.c_seq = c_seq;
 	}
-
 	
-	
-	
-	public news_comm_dto(String id, String content, int b_seq) {
+	public News_COMM_Dto(String id, String content,int c_seq) {
 		super();
 		this.id = id;
 		this.content = content;
-		this.b_seq = b_seq;
+		this.c_seq = c_seq;
 	}
 
+	
 	public int getB_seq() {
 		return b_seq;
 	}

@@ -312,6 +312,117 @@
   line-height: 24px;
 }
 
+/* board-write */
+.board-write {
+  padding-top: 80px;
+  padding-bottom: 60px;
+}
+.board-write input,
+.board-write textarea {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 30px;
+  height: 40px;
+  line-height: 40px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.board-write textarea {
+  min-height: 400px;
+  padding: 15px;
+}
+.board-write .title-wrap {
+  position: relative;
+  padding-bottom: 30px;
+}
+.board-write .title-wrap:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e6e6e6;
+}
+.board-write .title-wrap .cate-name {
+  font-size: 20px;
+  line-height: 20px;
+  color: #ff8b34;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.board-write .title-wrap .title {
+  margin: 20px 0;
+  font-size: 28px;
+  line-height: 30px;
+  font-weight: 600;
+  color: #162a48;
+}
+.board-write .title-wrap .util-wrap {
+}
+.board-write .title-wrap .util-wrap > div {
+  float: left;
+  font-size: 16px;
+}
+.board-write .title-wrap .util-wrap .author {
+  margin-right: 30px;
+}
+.board-write .title-wrap .util-wrap .date {
+  margin-right: 10px;
+}
+.board-write .title-wrap .util-wrap .view {
+}
+.board-write .title-wrap .util-wrap .view i {
+  color: #ff8b34;
+  vertical-align: -3px;
+  padding-right: 3px;
+}
+.board-write .content-wrap {
+  position: relative;
+  min-height: 300px;
+  padding: 30px 0;
+  font-size: 22px;
+  line-height: 24px;
+  color: #1a2e3b;
+}
+.board-write .content-wrap:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e6e6e6;
+}
+.board-write .btn-wrap {
+  position: relative;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 20px;
+}
+.board-write .btn-wrap:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e6e6e6;
+}
+.board-write .btn-wrap a {
+  display: inline-block;
+  width: 150px;
+  padding: 15px 20px;
+  background-color: #3da0d7;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.board-write .btn-wrap a.update-done {
+  background-color: #ff8b34;
+  cursor: pointer;
+}
+
 /* ask-list */
 .ask {
 }
@@ -357,5 +468,128 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 15px;
+  font-size: 18px;
+}
+
+/* .myreview-list */
+.myreview {
+}
+.myreview .review-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.myreview .review-table .name {
+  width: 20%;
+}
+.myreview .review-table .cate {
+  width: 10%;
+  text-align: center;
+}
+.myreview .review-table .tit {
+  width: 25%;
+}
+.myreview .review-table .date {
+  width: 20%;
+}
+.myreview .review-table .view {
+  width: 10%;
+  text-align: center;
+}
+.myreview .review-table .btns {
+  width: 15%;
+  text-align: center;
+}
+.myreview .review-table .btns a {
+  width: 50%;
+  padding: 3px 5px;
+  border: 1px solid #ff8b34;
+  border-radius: 5px;
+  transition: all 0.25s ease;
+}
+.myreview .review-table .btns a:hover {
+  color: #fff;
+  background-color: #ff8b34;
+}
+.myreview .review-table .yn .done {
+  color: #ff8b34;
+}
+.myreview .review-table thead tr {
+  border-bottom: 1px solid #ccc;
+}
+.myreview .review-table thead tr th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  font-size: 20px;
+}
+.myreview .review-table tbody tr {
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: all 0.25s ease;
+}
+.myreview .review-table tbody tr:hover {
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+}
+.myreview .review-table tbody tr td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  font-size: 18px;
+}
+/* search-wrap */
+.search-wrap {
+  float: right;
+  height: 30px;
+}
+.search-wrap .select-wrap {
+  float: left;
+  width: 100px;
+  position: relative;
+  margin-right: 15px;
+}
+.search-wrap .select-wrap select {
+  float: left;
+  appearance: none;
+  padding: 0 10px;
+  height: 30px;
+  width: 100%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.search-wrap .select-wrap .arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.search-wrap .input-wrap {
+  float: left;
+  position: relative;
+}
+.search-wrap .input-wrap input {
+  float: left;
+  width: 250px;
+  padding-left: 10px;
+  padding-right: 30px;
+  height: 30px;
+  line-height: 30px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.search-wrap .input-wrap button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.search-wrap .input-wrap button i {
   font-size: 18px;
 }

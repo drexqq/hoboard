@@ -1,21 +1,8 @@
-<%@page import="Ask.Ask_Dao"%>
+<%-- <%@page import="ask.Ask_Dao"%>
 <%@page import="java.util.List"%>
-<%@page import="Ask.Ask_Dto"%>
+<%@page import="ask.Ask_Dto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String nseq = request.getParameter("seq");
-int seq = Integer.parseInt(nseq);
-System.out.println("ask_detail"+seq);
-%>
-<% 
-	Ask_Dto dto = (Ask_Dto)request.getAttribute("dto");
-	System.out.println("dto:"+dto.toString());	
-	
-	Ask_Dao dao = Ask_Dao.getInstance();
-	
-%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,3 +32,4 @@ System.out.println("ask_detail"+seq);
 </form>
 </body>
 </html>
+ --%>
