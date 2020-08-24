@@ -37,7 +37,7 @@
 
 </table>
 
-<input type="button" onclick="location.href =news?work=move" value="목록으로 돌아가기">
+<input type="button" onclick="location.href='news'" value="글 목록">
 <input type="submit" value="수정 완료"> 
 </form>
 </body>
