@@ -103,8 +103,8 @@ public class News_Dao {
 	// 글쓰기
 	public boolean news_write(News_Dto dto) {
 
-		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, REF,STEP,DEPTH)  "
-				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?,?,0,SYSDATE,0,0,0  ) ";
+		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, File, STEP,DEPTH)  "
+				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?, ?, 0,SYSDATE, ?,0,0  ) ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -119,6 +119,40 @@ public class News_Dao {
 			psmt.setString(1, dto.getId());
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getFile());
+			System.out.println("2/6 news_write success");
+
+			count = psmt.executeUpdate();
+			System.out.println("3/6 news_write success");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		return count > 0 ? true : false;
+	}
+	
+	// 글쓰기
+	public boolean news_file(News_Dto dto) {
+
+		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, FILE, STEP, DEPTH)  "
+				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?, ?,0,SYSDATE,?,0,0  ) ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+		int count = 0;
+
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 news_write success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getFile());
 			System.out.println("2/6 news_write success");
 
 			count = psmt.executeUpdate();

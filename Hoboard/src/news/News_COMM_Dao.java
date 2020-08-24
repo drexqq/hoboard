@@ -61,7 +61,8 @@ public class News_COMM_Dao {
 
 	public List<News_COMM_Dto> getComm(int b_seq) {
 
-		String sql = " SELECT " + " B_SEQ, C_SEQ, ID, CONTENT, WDATE " + " from news_comm where b_seq = ? ";
+		String sql = " SELECT " + " B_SEQ, C_SEQ, ID, CONTENT, WDATE " + " from news_comm where b_seq = ? "
+				+ " ORDER BY C_SEQ DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

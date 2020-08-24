@@ -1,5 +1,6 @@
 package news;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
@@ -143,9 +144,6 @@ public class NewsController extends HttpServlet {
 				System.out.println("덧글 삭제 실패");
 				resp.sendRedirect("news?work=detail&seq="+b_seq);
 			}
-		} else if (work.equals("c_updateView")) {
-			
-			System.out.println("c_updateView");
 				
 		// 댓글 수정
 		} else if (work.equals("c_update")) {
@@ -158,34 +156,35 @@ public class NewsController extends HttpServlet {
 			
 			System.out.println("c_seq" + c_seq);
 			System.out.println("b_seq" + b_seq);
-			System.out.println("c_content " + content);
+			System.out.println("content " + content);
 
+			News_Dto dto = new News_Dto();
 			News_COMM_Dto dto2 = new News_COMM_Dto();
-			dao2 = News_COMM_Dao.getInstance();
+			
+			dto = dao.getNewsSeq(b_seq);
+			System.out.println(dto.toString());	
+			
+			dto2 = dao2.getCseq(c_seq);
+			System.out.println(dto2.toString());
+			
+			News_COMM_Dao commDao = News_COMM_Dao.getInstance();
+			
+			System.out.println(commDao.getComm(c_seq).toString());
 
+			//System.out.println(commDao.getComm(c_seq).toString());
 			// News_Dto dto2 = dao2.getNewsSeq(b_seq);
 
 			req.setAttribute("c_seq", c_seq);
 			req.setAttribute("b_seq", b_seq);
-			req.setAttribute("c_content", content);
+			req.setAttribute("content", content);
+			
+			req.setAttribute("dto", dto);
+			req.setAttribute("dto2", dto2);
+			req.setAttribute("comm", commDao.getComm(c_seq));
 		
 			UtilEx.forward("news_comm_update.jsp", req, resp);
 
-		} else if (work.contentEquals("c_updateAf")) {
-			
-			System.out.println("c_updateAf");
-			
-			int c_seq = Integer.parseInt(req.getParameter("c_seq"));
-			int b_seq = Integer.parseInt(req.getParameter("b_seq"));
-			String content = req.getParameter("content");
-			
-			System.out.println("c_seq" + c_seq);
-			System.out.println("b_seq" + b_seq);
-			System.out.println("c_content " + content);
-			
-			//resp.sendRedirect("news?work=detail&b_seq"+b_seq);
-			
-		}
+		} 
 	}
 
 	@Override
@@ -216,7 +215,7 @@ public class NewsController extends HttpServlet {
 
 			if (b) {
 				System.out.println("글쓰기 성공");
-				resp.sendRedirect("news?work=move");
+				resp.sendRedirect("news");
 			} else {
 				System.out.println("실패");
 				// resp.sendRedirect("news_detail.do");
@@ -241,7 +240,35 @@ public class NewsController extends HttpServlet {
 			System.out.println("덧글 작성 실패");
 			resp.sendRedirect("news?work=detail&seq=" + b_seq);
 		}
+		
+		
 
+		} else if (work2.equals("c_updateAf")) {
+			
+			System.out.println("c_updateAf");
+			
+			int c_seq = Integer.parseInt(req.getParameter("c_seq"));
+			int b_seq = Integer.parseInt(req.getParameter("b_seq"));
+			String content = req.getParameter("content");
+			
+			System.out.println("c_seq" + c_seq);
+			System.out.println("b_seq" + b_seq);
+			System.out.println("c_content " + content);
+			
+			boolean c_update = dao2.comm_update(c_seq, content);
+			
+			if (c_update) {
+				System.out.println("덧글 수정 성공");
+				resp.sendRedirect("news_comm_updateCK.jsp");
+			} else {
+				System.out.println("덧글 수정 실패");
+				resp.sendRedirect("news?work=detail&seq=" + b_seq);
+			}
+			
+			
+			
+			//resp.sendRedirect("news?work=detail&b_seq"+b_seq);
+			
 		}
 	
 	}

@@ -1,19 +1,6 @@
 <%@page import="member.Member_Dto"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
-Object ologin = session.getAttribute("sessionID");
-Member_Dto mem = null;
-if(ologin == null){
-%>
-	<script type="text/javascript">
-	alert("로그인 해 주십시오");
-	location.href = "login.jsp";
-	</script>	
-<%
-}
-mem = (Member_Dto)ologin;
-%> 	 --%>
 
 <!DOCTYPE html>
 <html>
@@ -40,6 +27,7 @@ mem = (Member_Dto)ologin;
 	<th>파일첨부</th>
 	<td>
 		<input type="text" name="file" size="50px">
+		<input type="button" name="fileBtn" value="파일찾기"/>
 	</td>
 </tr>
 
@@ -59,6 +47,6 @@ mem = (Member_Dto)ologin;
 
 </form>
 
-<a href="news?work=move">글목록</a>
+<a href="news">글목록</a>
 </body>
 </html>
