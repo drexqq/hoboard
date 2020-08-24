@@ -21,7 +21,6 @@ public class login_Controller extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		HttpSession session = req.getSession();
 		String context = req.getContextPath();
 		resp.setContentType("text/html; charset=UTF-8");
@@ -32,13 +31,14 @@ public class login_Controller extends HttpServlet {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		String name = null;
-
+		mdto = mdao.getUser(id);
 		name = mdao.login(id, pw);
 
 		if (name != null) {
 			session.setAttribute("login", 1);
-			session.setAttribute("sessionID", id);
-			session.setAttribute("name", name);
+			session.setAttribute("sessionID", mdto.getId());
+			session.setAttribute("name", mdto.getName());
+			session.setAttribute("auth", mdto.getAuth());
 			resp.sendRedirect(context + "/");
 
 		} else {

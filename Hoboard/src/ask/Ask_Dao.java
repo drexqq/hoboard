@@ -26,7 +26,7 @@ public class Ask_Dao {
 	}
 
 	public List<Ask_Dto> getAskList(String id) {
-		String query = " SELECT SEQ, AUTH, ID, TITLE, CONTENT, COMM, WDATE FROM ASK_TABLE " + " WHERE ID = ?";
+		String query = " SELECT SEQ, AUTH, ID, TITLE, CONTENT, COMM, WDATE FROM ASK_TABLE " + " WHERE ID = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

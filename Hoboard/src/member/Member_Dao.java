@@ -17,60 +17,46 @@ public class Member_Dao {
 	public static Member_Dao getInstance() {
 		return dao;
 	}
-	
+
 	public String login(String id, String pw) {
 		String sql = " SELECT * " + "	FROM MEMBER " + " WHERE ID=? AND PW =? ";
-
 		String name = null;
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 login success");
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
-			System.out.println("2/6 login success");
 
 			rs = psmt.executeQuery();
-			System.out.println("3/6 login success");
-
 			if (rs.next()) {
 				name = rs.getString("name");
 				name = rs.getString("NAME");
 			}
-			System.out.println("4/6 login success");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
-			System.out.println("login done");
 		}
-
 		return name;
 	}
 
 	// INSERT INTO MEMBER TABLE
 	public boolean addMember(Member_Dto dto) {
-		System.out.println("MEMBER TABLE INSERT");
-		// 회원가입의 데이터 -> DB
 		String sql = " INSERT INTO MEMBER " + " (AUTH, NAME, ID, PW, TEL, EMAIL, POST_NUM, ADDRESS, D_ADDRESS) "
 				+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		int count = 0;
-
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 addMember success");
 
 			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 addMember success");
 
 			psmt.setInt(1, dto.getAuth());
 			psmt.setString(2, dto.getName());
@@ -83,12 +69,9 @@ public class Member_Dao {
 			psmt.setString(9, dto.getD_Address());
 
 			count = psmt.executeUpdate();
-			System.out.println("3/6 addMember success");
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("addMember fail");
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
@@ -96,16 +79,12 @@ public class Member_Dao {
 			}
 		} finally {
 			DBClose.close(psmt, conn, null);
-			System.out.println("addMember done");
 		}
-		System.out.println(count);
 		return count > 0 ? true : false;
 	}
 
 	// UPDATE USER MEMBER TABLE
 	public boolean updateMember(Member_Dto dto) {
-		// 비밀번호 전화번호 주소
-		System.out.println("UPDATE USER MEMBER TABLE");
 		String query = " UPDATE MEMBER" + " SET" + " PW = ?, " + " TEL = ?, " + " ADDRESS = ?," + " D_ADDRESS = ? "
 				+ " WHERE ID = ? ";
 
@@ -114,6 +93,7 @@ public class Member_Dao {
 		int count = 0;
 		try {
 			conn = DBConnection.getConnection();
+
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, dto.getPw());
 			psmt.setString(2, dto.getTel());
@@ -122,13 +102,11 @@ public class Member_Dao {
 			psmt.setString(5, dto.getId());
 
 			count = psmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, null);
 		}
-		System.out.println("UPDATE USER MEMBER DONE");
 		return count > 0 ? true : false;
 	}
 
@@ -148,7 +126,6 @@ public class Member_Dao {
 
 			if (rs.next())
 				exist = true;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -184,7 +161,6 @@ public class Member_Dao {
 
 	// GET BUSI_CATE COLUMN
 	public String[] getBusiCateList() {
-		
 		String query = " SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'BUSI_CATE' AND COLUMN_NAME != 'ID' ";
 
 		Connection conn = null;
@@ -197,10 +173,8 @@ public class Member_Dao {
 			rs = psmt.executeQuery();
 
 			int i = 0;
-			while (rs.next()) {
+			while (rs.next())
 				cate[i++] = rs.getString(1);
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -247,10 +221,8 @@ public class Member_Dao {
 			rs = psmt.executeQuery();
 
 			int i = 0;
-			while (rs.next()) {
+			while (rs.next())
 				time[i++] = rs.getString(1);
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -336,7 +308,8 @@ public class Member_Dao {
 
 	// GET USER INFO
 	public Member_Dto getUser(String id) {
-		String query = " SELECT * FROM MEMBER" + " WHERE ID = ? ";
+		String query = " SELECT " + " AUTH , ID, NAME, TEL, EMAIL, POST_NUM, ADDRESS, D_ADDRESS " + " FROM MEMBER "
+				+ " WHERE ID = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -352,7 +325,7 @@ public class Member_Dao {
 			if (rs.next()) {
 				int i = 1;
 				dto = new Member_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
-						rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
+						rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
 			}
 
 		} catch (Exception e) {
@@ -366,7 +339,7 @@ public class Member_Dao {
 	// GET MEMBER WHERE AUTH = 2
 	public List<Member_Dto> getBusiMember() {
 		String query = " SELECT NAME, TEL, ADDRESS, D_ADDRESS FROM MEMBER WHERE AUTH = 2 ";
-		
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -375,13 +348,8 @@ public class Member_Dao {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(query);
 			rs = psmt.executeQuery();
-			while(rs.next()) {
-				Member_Dto dto = new Member_Dto(
-								rs.getString(1),
-								rs.getString(2),
-								rs.getString(3),
-								rs.getString(4)
-							);
+			while (rs.next()) {
+				Member_Dto dto = new Member_Dto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
 				list.add(dto);
 			}
 		} catch (Exception e) {

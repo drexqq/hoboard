@@ -13,14 +13,19 @@
 								<option value="id" selected="selected">작성자</option>
 								<option value="busi_name">병원이름</option>
 								<option value="title">제목</option>
-								<option value="content">내용</option>	
+								<option value="content">내용</option>
 								<option value="score">평점</option>
 							</select>
-							<div class="arrow"><i class="ri-arrow-down-s-line"></i></div>
+							<div class="arrow">
+								<i class="ri-arrow-down-s-line"></i>
+							</div>
 						</div>
 						<div class="input-wrap clearfix">
-							<input type="text" id="search" placeholder="검색어를 입력해주세요." value="${ searchWord }" onkeydown="enter('review')">
-							<button onclick="search( 'review' )"><i class="ri-search-line"></i></button>
+							<input type="text" id="search" placeholder="검색어를 입력해주세요."
+								value="${ searchWord }" onkeydown="enter('review')">
+							<button onclick="search( 'review' )">
+								<i class="ri-search-line"></i>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -28,38 +33,40 @@
 			<div class="col-12">
 				<div class="list-wrap">
 					<c:choose>
-						<c:when test="${len eq 0}">
+						<c:when test="${ fn:length(reviewlist) eq 0}">
 							<div class="no-result">검색 결과가 없습니다.</div>
 						</c:when>
 						<c:otherwise>
-						<c:forEach items="${ reviewlist }" var="list" varStatus="status" begin="0" end="4">
-							<a href="review?key=detail&seq=${ list.review_seq }" class="list">
-								<div class="name">${ list.title }</div>
-								<div class="content">${ list.content }</div>
-								<div class="util-wrap">
-									<div>
-										<span class="grade">
-											<i class="ri-star-smile-line"></i>
-											${ list.score } / 5
-										</span>
-										<span class="view">
-											<i class="ri-eye-line"></i>
-											${ list.viewcount }
-										</span>
-									</div>
-									<div class="date">${ list.wdate }</div>
-								</div>
-							</a>
+							<c:forEach items="${ reviewlist }" var="map" varStatus="status">
+								<c:if test="${status.first}">
+									<c:forEach items="${map}" var="list">
+										<a href="review?d=${ list.key.review_seq }" class="list">
+											<div class="cate">[${list.value}] - [${ list.key.busi_cate }]</div>
+											<div class="name">${ list.key.title }</div>
+											<div class="content">${ list.key.content }</div>
+											<div class="util-wrap">
+												<div>
+													<span class="grade"> <i class="ri-star-smile-line"></i>
+														${ list.key.score } / 5
+													</span> <span class="view"> <i class="ri-eye-line"></i> ${ list.key.viewcount }
+													</span>
+												</div>
+												<div class="date">${ list.key.wdate }</div>
+											</div>
+										</a>
+									</c:forEach>
+								</c:if>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 				</div>
 				<div class="paging-wrap">
-					<c:if test="${ len != 0 }">
+					<c:if test="${ fn:length(reviewlist) != 0 }">
 						<c:forEach var="page" varStatus="status" begin="0" end="${ page }">
-							<div class="page 
+							<div
+								class="page 
 							<c:if test="${ param.page eq status.index || (empty param.page && status.first) }">on</c:if>"
-							onclick="goPage('review',${ status.index })">${ status.index + 1 }</div> 
+								onclick="goPage('review',${ status.index })">${ status.index + 1 }</div>
 						</c:forEach>
 					</c:if>
 				</div>
@@ -75,7 +82,5 @@ $(document).ready(function(e) {
 	})
 })
 </script>
-
-
 <script src="js/util.js"></script>
 <%@ include file="module/footer.jsp"%>

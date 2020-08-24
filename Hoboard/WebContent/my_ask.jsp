@@ -1,44 +1,3 @@
-<<<<<<< HEAD
-<%@page import="ask.Ask_Dto"%>
-<%@page import="java.util.List"%>
-<%@page import="member.Member_Dto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 	
-<%
-//Ask_Dao dao = Ask_Dao.getInstance();
-List<Ask_Dto> list = (List<Ask_Dto>)request.getAttribute("list");
-
-int len = (int)request.getAttribute("len");
-String searchWord = (String)request.getAttribute("searchWord");
-String choice = (String)request.getAttribute("choice");
-int pageNumber = (Integer)request.getAttribute("pageNumber");
-
-	//System.out.println("Asklist = "+list.toString());
-	System.out.println("Asklen = "+len+" s"+searchWord+" c="+choice+" page "+pageNumber );
-
-%>
-
-<% 	
-	System.out.println("AskpageNumber:"+pageNumber);
-%>	
-
-<%
-//목록 리스트를 검색한것만 가져옴
-//10개씩 넘김 
-	int AskPage = len/10;
-	if(len % 10 > 0){	
-		AskPage = AskPage + 1;
-	}
-%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>my_ask.jsp</title>
-
-=======
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="module/header.jsp"%>
 <div class="mypage-wrap ask">
@@ -113,7 +72,6 @@ int pageNumber = (Integer)request.getAttribute("pageNumber");
 		</div>
 	</div>
 </div>
->>>>>>> ed1ef60d2645bdc5006a79ceb88a72bda390f38c
 <script type="text/javascript">
 $(document).ready(function() {
 	let c = "<c:out value='${ choice }' />"

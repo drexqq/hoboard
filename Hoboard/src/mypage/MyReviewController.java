@@ -1,6 +1,7 @@
 package mypage;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,24 +22,19 @@ public class MyReviewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Review_Dao dao = Review_Dao.getInstance();
-		List<Review_Dto> list = null;
-		String id = (String)session.getAttribute("sessionID");
+		List<LinkedHashMap<Review_Dto, String>> list = null;
+		// 로그인한 사용자
+		int auth = (int)session.getAttribute("auth");
+		String id = (String) session.getAttribute("sessionID");
+		
 		String sW = (String) req.getParameter("searchWord");
 		String c = (String) req.getParameter("choice");
-		
 		int limit = 5;
-		int pageNumber = 0;
-
-		if (req.getParameter("page") == null)
-			pageNumber = 0;
-		else
-			pageNumber = Integer.parseInt((String) req.getParameter("page"));
-		
-		int len = UtilEx.getAllCountTable("review", c, sW);
-//		int len = dao.getsearch(c, sW);
-		int page = len / limit; // 예: 12개 -> 2page
-		if (len % limit > 0)
-			page = page + 1; // -> 2
+		int pageNumber = (req.getParameter("page") != null) ? Integer.parseInt((String) req.getParameter("page")) : 0;
+		int count = dao.getUserReviewCount(c, sW, id, auth);
+		int page = count / limit;
+		if (count % limit > 0) page = page + 1; // -> 2
+		System.out.println(count+"총 개시글 수");
 		// 처음 들어왔을때
 		if (sW == null && c == null && pageNumber == 0)
 			list = dao.getMyPageReviewPagingList(id, "", "", limit, pageNumber);
@@ -51,10 +47,10 @@ public class MyReviewController extends HttpServlet {
 			req.setAttribute("choice", c);
 			req.setAttribute("searchWord", sW);
 		}
-		req.setAttribute("len", len);
+		req.setAttribute("count", count);
 		req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 		req.setAttribute("page", page - 1); // 총 페이지수
-		req.setAttribute("list", list); // 실제 데이터
+		req.setAttribute("reviewlist", list); // 실제 데이터
 		UtilEx.forward("my_review.jsp", req, resp);
 	}
 }
