@@ -59,6 +59,7 @@
                   <li class="menu-item"><a href="reserve">예약하기</a></li>
                   <li class="menu-item"><a href="review">후기보기</a></li>
                   <li class="menu-item"><a href="news">건강정보</a></li>
+                 
                 </ul>
               </div>
               <!-- //menu -->
@@ -75,6 +76,7 @@
 			    	
 			    	<c:otherwise>
 	                <!-- before login -->
+	                	 <li class="util-item admin"><a href="admin">관리자페이지</a></li>
               		    <li class="util-item join"><a href="join.jsp">회원가입</a></li>
 			    		<li class="util-item login"><a href="login.jsp">로그인</a></li>
 			    	</c:otherwise>

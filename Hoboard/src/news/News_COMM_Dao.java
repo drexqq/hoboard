@@ -84,7 +84,6 @@ public class News_COMM_Dao {
 						rs.getString(i++), rs.getString(i++));
 				list.add(dto);
 			}
-			System.out.println(list.toString());
 			System.out.println("3/6 getComm");
 		} catch (Exception e) {
 

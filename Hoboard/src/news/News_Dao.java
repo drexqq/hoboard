@@ -39,14 +39,10 @@ public class News_Dao {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				int seq = rs.getInt("NEWS_SEQ");
-				String id = rs.getString("ID");
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				int viewcount = rs.getInt("VIEWCOUNT");
-				String wdate = rs.getString("WDATE");
-
-				list.add(new News_Dto(seq, id, title, content, viewcount, wdate));
+				int j = 1;
+				News_Dto dto = new News_Dto(rs.getInt(j++), rs.getString(j++), rs.getString(j++), rs.getString(j++),
+						rs.getInt(j++), rs.getString(j++));
+				list.add(dto);
 			}
 			System.out.println("3/6 nlist success");
 

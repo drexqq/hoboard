@@ -2,6 +2,7 @@ package news;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -263,12 +264,9 @@ public class NewsController extends HttpServlet {
 				System.out.println("덧글 수정 실패");
 				resp.sendRedirect("news?work=detail&seq=" + b_seq);
 			}
-			
-			
-			
+
 			//resp.sendRedirect("news?work=detail&b_seq"+b_seq);
-			
-		}
+		} 
 	
 	}
 }

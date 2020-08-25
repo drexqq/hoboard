@@ -10,10 +10,8 @@
 </head>
 <body>
 <h1>건강 정보 쓰기</h1>
-<!-- news?work2=write -->
 <form action="news_file" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" value="admin">
-<!-- <input type="hidden" name="work" value="move"> -->
 
 <table border="1">
 <col width="200"><col width="400">
@@ -27,7 +25,6 @@
 	<th>파일첨부</th>
 	<td>
 		<input type="file" name="filename" size="50px">
-		<input type="button" name="fileBtn" value="파일찾기"/>
 	</td>
 </tr>
 
@@ -40,6 +37,8 @@
 <tr>
 	<td colspan="2">
 		&nbsp;&nbsp;<input type="submit" value="글쓰기">
+		<input type="reset" value="초기화">
+		<input type="button" value="글목록" onclick="news">
 	</td>
 </tr>
 
@@ -47,6 +46,5 @@
 
 </form>
 
-<a href="news">글목록</a>
 </body>
 </html>
