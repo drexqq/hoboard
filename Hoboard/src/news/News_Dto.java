@@ -10,7 +10,7 @@ public class News_Dto implements Serializable {
 	private String content;
 	private String date;
 	private int viewcount;
-	private int ref;
+	private String file;
 	private int step;
 	private int depth;
 	
@@ -31,7 +31,7 @@ public class News_Dto implements Serializable {
 		this.content = content;
 	}
 
-	public News_Dto(int news_seq, String id, String title, String content, String date, int viewcount, int ref,
+	public News_Dto(int news_seq, String id, String title, String content, String date, int viewcount, String file,
 			int step, int depth) {
 		this.news_seq = news_seq;
 		this.id = id;
@@ -39,7 +39,7 @@ public class News_Dto implements Serializable {
 		this.content = content;
 		this.date = date;
 		this.viewcount = viewcount;
-		this.ref = ref;
+		this.file = file;
 		this.step = step;
 		this.depth = depth;
 	}
@@ -127,12 +127,12 @@ public class News_Dto implements Serializable {
 		this.viewcount = viewcount;
 	}
 
-	public int getRef() {
-		return ref;
+	public String getFile() {
+		return file;
 	}
 
-	public void setRef(int ref) {
-		this.ref = ref;
+	public void setFile(String file) {
+		this.file = file;
 	}
 
 	public int getStep() {
@@ -154,7 +154,7 @@ public class News_Dto implements Serializable {
 	@Override
 	public String toString() {
 		return "News_Dto [news_seq=" + news_seq + ", id=" + id + ", title=" + title + ", content=" + content + ", date="
-				+ date + ", viewcount=" + viewcount + ", ref=" + ref + ", step=" + step + ", depth=" + depth + "]";
+				+ date + ", viewcount=" + viewcount + ", file=" + file + ", step=" + step + ", depth=" + depth + "]";
 	}
 	
 	

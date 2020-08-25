@@ -1,9 +1,12 @@
+<%@page import="news.News_Dao"%>
+<%@page import="news.News_Dto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +20,18 @@
 	System.out.println("isS="+result);
 	if(result){
 %>
+
+    
 	<script type="text/javascript">
 		alert("글이 수정되었습니다");
-		location.href = "news?work=move";
+		location.href = "news";
 	</script>
 <%
 	}else{
 %>
 	<script type="text/javascript">
 		alert("수정되지 않았습니다");
-		location.href = "news?work=move";
+		location.href = "news";
 	</script>
 <%
 	}

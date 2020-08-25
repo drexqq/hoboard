@@ -1,100 +1,72 @@
+<<<<<<< HEAD
 <%@page import="news.News_COMM_Dto"%>
 <%@page import="news.News_COMM_Dao"%>
 <%@page import="news.News_Dao"%>
 <%@page import="java.util.List"%>
 <%@page import="news.News_Dto"%>
+=======
+>>>>>>> news_f
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-String nseq = request.getParameter("nseq");
-int seq = Integer.parseInt(nseq);
-System.out.println(seq);
-%>
+	pageEncoding="UTF-8"%>
+<%@ include file="module/header.jsp"%>
 
-<% 
-News_Dao ndao = News_Dao.getInstance();
-//dao.readcount(seq);
-News_Dto ndto = (News_Dto)request.getAttribute("ndto");
-%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>news_detail</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-
-<h1>건강관리</h1>
-
-<table border="1">
-	<tr>
-		<th>제목</th>
-			<td><input type="text" name="title" size="50px" value="<%=ndto.getTitle()%>" readonly></td></tr>	
-	<tr>	
-		<th>날짜</th>
-			<td><%=ndto.getDate()%></td></tr>
-	<tr>
-		<th>조회수</th>
-			<td><%=ndto.getViewcount()%></td></tr>
-	<tr>
-		<th>내용</th>
-			<td><input type="text" name="content" cols="50px" value="<%=ndto.getContent()%>" readonly></td></tr>
-
-</table>
-<br>
-<button type="button" id="exBtn">전단계</button>
-<button type="button" id="updateBtn">수정</button>
-<button type="button" id="deleteBtn">삭제</button>
-<br>
-<br>
-
+<div class="board-detail news-detail">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="reply-wrap">
+					<div class="reply-title">
+						<span>게시글 " ${ dto.title } " 관련 댓글을 수정합니다.</span>
+					</div>
+					<c:choose>
+						<c:when test="${ sessionScope.sessionID == null }">
+							<div class="reply nologin-disabled">
+								<a href="login.jsp">로그인 후 이용하실 수 있습니다 !</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="reply clearfix">
+								<form action="news?work2=c_updateAf" method="post">
+									<input type="hidden" name="b_seq" id="b_seq"
+										value="${dto2.b_seq}"> <input type="hidden"
+										name="c_seq" id="c_seq" value="${dto2.c_seq}"> <input
+										type="hidden" name="c_content" id="c_content"
+										value="${dto.content}"> <input type="hidden" name="id"
+										id="id" value="${ sessionScope.sessionID }">
+									<div class="reply-items">
+										<div class="reply-items">
+											<div class="item">
+												<div class="upper clearfix">
+													<div class="id">
+														<i class="ri-user-line"></i>${dto2.id}</div>
+													<div class="date">
+														<i class="ri-calendar-line"></i>${dto2.wdate}</div>
+												</div>
+												<div class="down">
+													<input type="text" value="${dto2.content}" name="content"
+														id="content" /> <input class="submit" type="submit"
+														value="수정 완료">
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="goList">
+						<input type='button' onclick='backBtn()' value='뒤로 가기'/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
-$(document).ready(function () {
-	
-	$("#updateBtn").click(function () {		
-		location.href = "news_update.do?work=update&nseq=<%=seq%>";
-	});
-	
-	$("#deleteBtn").click(function () {
-		location.href = "news_update.do?work=del&nseq=<%=seq%>";
-		alert('삭제 완료');
-	});
-	
-	$("#exBtn").click(function () {		
-		location.href = "news_list.do";
-	});
-	
-});
+function backBtn() {
+	alert('댓글이 수정되지 않았습니다.');
+window.opener.location.reload();
+window.close();  
+}
 
 </script>
-
-	<h1>[나의 댓글수정]</h1>
-
-	<form action="ask.do?two=ask_update" method="post">
-		<input type="hidden" name="key" value="updatecomplete"> <input
-			type="hidden" name="seq" value="${commentlist.getSeq()}"> <input
-			type="hidden" name="boardnum" value="${detaillist.getReview_seq()}">
-
-		<table border="1">
-			<tr>
-				<th>ID:</th>
-				<td><%=ndto.getId()%></td>
-				<th>작성일:</th>
-				<td><%=ndto.getDate() %></td>
-				<td><input type="submit" value="수정완료">
-				<td>
-			<tr>
-				<th>내용:</th>
-				<td><input type="text" name="content" placeholder="<%=ndto.getContent()%>"></td>
-			</tr>
-		</table>
-	</form>
-	
-	</script>
-
-
-</body>
-</html>
-	
