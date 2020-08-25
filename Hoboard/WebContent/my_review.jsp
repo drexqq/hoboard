@@ -10,7 +10,14 @@
 					<div class="search-wrap">
 						<div class="select-wrap clearfix">
 							<select id="choice">
-								<option value="name">병원이름</option>
+								<c:choose>
+									<c:when test="${ auth eq 1 }">
+									<option value="name">병원이름</option>
+									</c:when>
+									<c:otherwise>
+									<option value="name">환자이름</option>
+									</c:otherwise>
+								</c:choose>
 								<option value="cate">진료과</option>
 							</select>
 							<div class="arrow">
@@ -19,7 +26,7 @@
 						</div>
 						<div class="input-wrap clearfix">
 							<input type="text" id="search" placeholder="검색어를 입력해주세요."
-								value="" onkeydown="enter('myreview')">
+								value="${ searchWord }" onkeydown="enter('myreview')">
 							<button class="btn" onclick="search('myreview')">
 								<i class="ri-search-line"></i>
 							</button>
@@ -27,7 +34,14 @@
 					</div>
 				</div>
 				<div class="util-wrap clearfix">
-					<div class="notice">총 "${ count }" 건의 후기를 작성하셨습니다.</div>
+					<c:choose>
+						<c:when test="${ auth eq 1 }">
+						<div class="notice">총 "${ count }" 건의 후기를 작성하셨습니다.</div>
+						</c:when>
+						<c:otherwise>
+						<div class="notice">총 "${ count }" 건의 후기가 작성되었습니다.</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="list-wrap">
 					<c:choose>
@@ -43,7 +57,9 @@
 										<th class="tit">제목</th>
 										<th class="date">작성 일시</th>
 										<th class="view">조회수</th>
+										<c:if test="${ auth eq 1 }">
 										<th class="btns">수정/삭제</th>
+										</c:if>
 									</tr>
 								</thead>
 								<tbody>
@@ -56,10 +72,12 @@
 													<td class="tit" onclick="location.href='review?d=${ list.key.review_seq }'">${ list.key.title }</td>
 													<td class="date">${ list.key.wdate }</td>
 													<td class="view">${ list.key.viewcount }</td>
-													<td class="btns"><a
-														href="review?d=u&seq=${ list.key.review_seq }">수정</a> <a
-														href="review?key=delete&seq=${ list.key.review_seq }">삭제</a>
+													<c:if test="${ auth eq 1 }">
+													<td class="btns">
+														<a href="review?d=u&seq=${ list.key.review_seq }">수정</a>
+														<a class="deleteBtn" data-seq="${ list.key.review_seq }">삭제</a>
 													</td>
+													</c:if>
 												</tr>
 											</c:forEach>
 										</c:if>
@@ -83,6 +101,33 @@
 		</div>
 	</div>
 </div>
-
 <script src="js/util.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+	let c = "<c:out value='${ choice }' />"
+	$("#choice").find("option").each(function(){
+		if($(this).val() == c) $(this).attr("selected","selected");
+	})
+})
+$(".deleteBtn").on('click', function(){
+	console.log($(this).data("seq"));
+	$.ajax({
+		url : "review?d=d&seq="+$(this).data("seq"),
+		datatype : "json",
+		type : 'get',
+		data : {seq : $("#seq").val()},
+		success : function(data) {
+			if(data.del == true) {
+				alert('삭제를 완료하였습니다 !');
+				location.href = "myreview";
+			}
+			else alert('삭제를 실패하였습니다 !');
+		},
+		error : function(e) {
+			alert('삭제를 실패하였습니다 !');
+			console.log(e);
+		},
+	});
+})
+</script>
 <%@ include file="module/footer.jsp"%>

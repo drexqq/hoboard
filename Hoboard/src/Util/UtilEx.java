@@ -21,15 +21,15 @@ public class UtilEx {
 	
 	public static int getAllCountTable(String tableName, String choice, String searchWord) {
 		String sql = " SELECT COUNT(*) FROM "+tableName.toUpperCase()+" ";
-		String sqlWord = "";
+		String sqlWord = " WHERE DEL = 0 ";
 		if((choice != null || "".equals(choice)) && (searchWord != null || "".equals(searchWord))) {
 			switch(tableName) {
 				case "REVIEW":
-					if (choice.equals("id"))			sqlWord = " WHERE INDVD_ID='" + searchWord.trim() + "'";
-					else if (choice.equals("busi_name"))sqlWord = " WHERE BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
-					else if (choice.equals("title"))	sqlWord = " WHERE TITLE LIKE '%" + searchWord.trim() + "%' ";
-					else if (choice.equals("content"))	sqlWord = " WHERE CONTENT LIKE '%" + searchWord.trim() + "%' ";
-					else if (choice.equals("score"))	sqlWord = " WHERE SCORE='" + searchWord.trim() + "'";
+					if (choice.equals("id"))			sqlWord += " AND INDVD_ID='" + searchWord.trim() + "'";
+					else if (choice.equals("busi_name"))sqlWord += " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+					else if (choice.equals("title"))	sqlWord += " AND TITLE LIKE '%" + searchWord.trim() + "%' ";
+					else if (choice.equals("content"))	sqlWord += " AND CONTENT LIKE '%" + searchWord.trim() + "%' ";
+					else if (choice.equals("score"))	sqlWord += " AND SCORE='" + searchWord.trim() + "'";
 					break;
 				case "NEWS":
 					System.out.println("news");
@@ -40,6 +40,7 @@ public class UtilEx {
 			}
 		}
 		sql += sqlWord;
+		System.out.println(sql);
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -54,7 +55,7 @@ public class UtilEx {
 		finally { DBClose.close(psmt, conn, rs); }
 		return len;
 	}
-	
+	// 어디서쓰니?....
 	public static int getUsersCountTable (String tableName, String choice, String searchWord, String id) {
 		String sql = " SELECT COUNT(*) FROM "+tableName.toUpperCase()+" ";
 		String sqlWord = "";
@@ -95,6 +96,7 @@ public class UtilEx {
 	public static boolean numCheck(String str) {
 		String regExp = "^[0-9]+$";
 		if (str.matches(regExp)) return true;
-		else return false;
+		else
+			return false;
 	}
 }

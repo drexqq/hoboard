@@ -29,22 +29,26 @@ public class Review_Dao {
 	public static Review_Dao getInstance() { return dao; }
 
 	// TODO GET ALL REVIEW LIST
-	public List<Review_Dto> getReviewList() {
-		String sql = " SELECT * FROM REVIEW " + " ORDER BY REVIEW_SEQ DESC ";
+	public List<LinkedHashMap<Review_Dto, String>> getReviewList() {
+		String sql = " SELECT * FROM REVIEW WHERE DEL = 0 " + " ORDER BY REVIEW_SEQ DESC ";
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		List<Review_Dto> list = new ArrayList<Review_Dto>();
+		LinkedHashMap<Review_Dto, String> map = new LinkedHashMap<Review_Dto, String>();
+		List<LinkedHashMap<Review_Dto, String>> list = new ArrayList<LinkedHashMap<Review_Dto, String>>();
 		try {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
-			while (rs.next()) {
+			int j = 1;
+			while (rs.next() && j < 3) {
 				int i = 1;
 				Review_Dto dto = new Review_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getInt(i++));
-				list.add(dto);
+				map.put(dto, Member_Dao.getInstance().getUser(rs.getString(2)).getName());
+				list.add(map);
+				j++;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,7 +199,7 @@ public class Review_Dao {
 
 	// TODO DELETE REIVEW TABLE
 	public boolean deleteReview(int seq) {
-		String sql = " UPDATE REVIEW " + " SET DEL=1 " + " WHERE REVIEW_SEQ= ? ";
+		String sql = " UPDATE REVIEW " + " SET DEL = 1 " + " WHERE REVIEW_SEQ= ? ";
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		int count = 0;
@@ -219,24 +223,23 @@ public class Review_Dao {
 
 		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY REVIEW_SEQ DESC) AS RNUM, "
 				+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
-				+ " FILENAME, BUSI_CATE, DEL " + " FROM REVIEW ";
+				+ " FILENAME, BUSI_CATE, DEL " + " FROM REVIEW WHERE DEL = 0 ";
 
 		String sqlWord = "";
 		if (choice.equals("id")) {
-			sqlWord = " WHERE INDVD_ID='" + searchWord.trim() + "'";
+			sqlWord = " AND INDVD_ID='" + searchWord.trim() + "'";
 		} else if (choice.equals("busi_name")) {
-			sqlWord = " WHERE BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+			sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 		} else if (choice.equals("title")) {
-			sqlWord = " WHERE TITLE LIKE '%" + searchWord.trim() + "%' ";
+			sqlWord = " AND TITLE LIKE '%" + searchWord.trim() + "%' ";
 		} else if (choice.equals("content")) {
-			sqlWord = " WHERE CONTENT LIKE '%" + searchWord.trim() + "%' ";
+			sqlWord = " AND CONTENT LIKE '%" + searchWord.trim() + "%' ";
 		} else if (choice.equals("score")) {
-			sqlWord = " WHERE SCORE='" + searchWord.trim() + "'";
+			sqlWord = " AND SCORE='" + searchWord.trim() + "'";
 		}
 		sql = sql + sqlWord;
 		sql += " ORDER BY REVIEW_SEQ DESC) ";
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
-
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
 		end = limit + limit * page; // 끝 글의 번호
@@ -306,25 +309,35 @@ public class Review_Dao {
 	}
 
 	// TODO GET MYPAGE PAGING REVIEW LIST
-	public List<LinkedHashMap<Review_Dto, String>> getMyPageReviewPagingList(String id, String choice, String searchWord, int limit, int page) {
+	public List<LinkedHashMap<Review_Dto, String>> getMyPageReviewPagingList(String id, String choice, String searchWord, int limit, int page, int auth) {
+		String column = "";
+		String name = "";
+		if(auth == 2) {
+			column = "BUSI_ID";
+			name = "INDVD_ID";
+		}
+		else {
+			column = "INDVD_ID";
+			name = "BUSI_ID";
+		}
 		String sql = " SELECT REVIEW_SEQ, BUSI_ID, INDVD_ID, " + " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
 				+ " FILENAME, BUSI_CATE, DEL " + " FROM ";
 		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY REVIEW_SEQ DESC) AS RNUM, "
 				+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, FILENAME, BUSI_CATE, DEL "
-				+ " FROM REVIEW ";
+				+ " FROM REVIEW WHERE DEL = 0 ";
 
 		String sqlWord = "";
 		if (choice.equals("name")) {
-			sqlWord = " WHERE INDVD_ID ='" + searchWord.trim() + "'";
+			sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
 		} else if (choice.equals("cate")) {
-			sqlWord = " WHERE BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+			sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 		}
 		
 		sql = sql + sqlWord;
 		sql += " ORDER BY REVIEW_SEQ DESC) ";
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
-		sql += " AND INDVD_ID = ? ";
-		
+		sql += " AND "+column+" = ? ";
+		System.out.println(sql);
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
 		end = limit + limit * page; // 끝 글의 번호
@@ -367,18 +380,24 @@ public class Review_Dao {
 
 	// TODO GET USER REVIEW COUNT
 	public int getUserReviewCount(String choice, String searchWord, String id, int auth) {
-		String column = (auth == 2) ? "BUSI_ID" : "INDVD_ID";
-		String query = " SELECT COUNT(*) FROM REVIEW WHERE "+column+" = '"+id+"' ";
+		String column = "";
+		String name = "";
+		if(auth == 2) {
+			column = "BUSI_ID";
+			name = "INDVD_ID";
+		}
+		else {
+			column = "INDVD_ID";
+			name = "BUSI_ID";
+		}
+		
+		String query = " SELECT COUNT(*) FROM REVIEW WHERE "+column+" = '"+id+"' AND DEL = 0 ";
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
-			if (choice.equals("name")) {
-				sqlWord = " AND BUSI_ID LIKE '%" + searchWord.trim() + "%' ";
-			} else if (choice.equals("cate")) {
-				sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
-			}
+			if (choice.equals("name"))		sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
+			else if (choice.equals("cate"))	sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 		}
 		query += sqlWord;
-
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -388,7 +407,6 @@ public class Review_Dao {
 			psmt = conn.prepareStatement(query);
 			rs = psmt.executeQuery();
 			if(rs.next()) count = rs.getInt(1);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -483,7 +501,6 @@ public class Review_Dao {
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				name = rs.getString(1);
-				System.out.println(name + "___---__");
 			}
 			
 		} catch (Exception e) {

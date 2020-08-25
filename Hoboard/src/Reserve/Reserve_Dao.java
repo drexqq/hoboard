@@ -505,4 +505,43 @@ public class Reserve_Dao {
 	
 	}
 	
+	
+	
+	// GET ALL LIST RESERVE
+	public int getUserReserveCount(String choice, String searchWord, String id, int auth) {
+		String column = "";
+		String name = "";
+		if(auth == 2) {
+			column = "BUSI_ID";
+			name = "INDVD_ID";
+		}
+		else {
+			column = "INDVD_ID";
+			name = "BUSI_ID";
+		}
+		
+		String query = " SELECT COUNT(*) FROM RESERVE WHERE "+column+" = '"+id+"' ";
+		String sqlWord = "";
+		if (choice != null || searchWord != null) {
+			if (choice.equals("name"))		sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
+			else if (choice.equals("cate"))	sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+		}
+		query += sqlWord;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			if(rs.next()) count = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return count;
+	}
+	
 }

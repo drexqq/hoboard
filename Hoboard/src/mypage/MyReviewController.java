@@ -34,19 +34,19 @@ public class MyReviewController extends HttpServlet {
 		int count = dao.getUserReviewCount(c, sW, id, auth);
 		int page = count / limit;
 		if (count % limit > 0) page = page + 1; // -> 2
-		System.out.println(count+"총 개시글 수");
 		// 처음 들어왔을때
 		if (sW == null && c == null && pageNumber == 0)
-			list = dao.getMyPageReviewPagingList(id, "", "", limit, pageNumber);
+			list = dao.getMyPageReviewPagingList(id, "", "", limit, pageNumber, auth);
 		// 페이지만 바뀔때
 		else if (sW == null && c == null && req.getParameter("page") != null)
-			list = dao.getMyPageReviewPagingList(id, "", "", limit, pageNumber);
+			list = dao.getMyPageReviewPagingList(id, "", "", limit, pageNumber, auth);
 		// 검색후 페이지 바뀔때
 		else {
-			list = dao.getMyPageReviewPagingList(id, c, sW, limit, pageNumber);
+			list = dao.getMyPageReviewPagingList(id, c, sW, limit, pageNumber, auth);
 			req.setAttribute("choice", c);
 			req.setAttribute("searchWord", sW);
 		}
+		req.setAttribute("auth", auth);
 		req.setAttribute("count", count);
 		req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 		req.setAttribute("page", page - 1); // 총 페이지수
