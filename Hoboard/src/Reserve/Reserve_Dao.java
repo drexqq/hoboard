@@ -470,8 +470,44 @@ public class Reserve_Dao {
 		return list;
 	}
 	
-	public String getLunch_Time(String id, String date){
+	public String getBreak_Time(String id, String date){
 		String sql = " SELECT "+ date +" " 
+					+ " FROM BUSI_TIME "
+					+ " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String Break = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getBreak_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getBreak_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getBreak_Time success");
+			
+			if (rs.next()) {
+				Break = rs.getString(1);
+			}
+			System.out.println(Break);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return Break;
+	
+	}
+	
+	
+	public String getLunch_Time(String id){
+		String sql = " SELECT LUNCH " 
 					+ " FROM BUSI_TIME "
 					+ " WHERE ID = ? ";
 		
@@ -502,6 +538,80 @@ public class Reserve_Dao {
 			DBClose.close(psmt, conn, rs);
 		}
 		return lunch;
+	
+	}
+	
+	public String getReserve_Time(String id){
+		String sql = " SELECT LUNCH " 
+					+ " FROM BUSI_TIME "
+					+ " WHERE ID = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String lunch = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getReserve_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getReserve_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getReserve_Time success");
+			
+			if (rs.next()) {
+				lunch = rs.getString(1);
+			}
+			System.out.println(lunch);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return lunch;
+	
+	}
+	
+	public List<String> getDate_Time(String date, String id){
+		String sql = " SELECT RESERVE_TIME " 
+					+ " FROM RESERVE "
+					+ " WHERE RESERVE_DATE = ? and BUSI_ID = ?  ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
+		String time = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getReserve_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, date);
+			psmt.setString(2, id);
+			System.out.println("2/6 getReserve_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getReserve_Time success");
+			
+			while(rs.next()) {
+				time = rs.getString(1);
+				
+				
+				list.add(time);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
 	
 	}
 	
