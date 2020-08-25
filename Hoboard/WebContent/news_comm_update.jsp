@@ -3,9 +3,6 @@
 <%@page import="news.News_COMM_Dao"%>
 <%@page import="news.News_Dao"%>
 <%@page import="java.util.List"%>
-<%@page import="news.News_Dto"%>
-=======
->>>>>>> news_f
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="module/header.jsp"%>
