@@ -8,15 +8,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-<!-- FULLCALENDAR  -->
-<link
-	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css'
-	rel='stylesheet' />
-<script
-	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js'></script>
-
-
 <div class="reservedetail">
 	<div class="cntainer">
 		<div class="row">
@@ -78,7 +69,7 @@
 	aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div id="calendar"></div>
+			
 			<h4 class="modal-title" id="myModalLabel">예약하기</h4>
 			<div>달력</div>
 			<p>병원이름 예약하기</p>
@@ -91,8 +82,9 @@
 				</c:forEach>
 			</select>
 			<p>진료일</p>
-			<div id='calendar'></div>
+			<div id="calendar"></div>
 			<div>간단한 증상</div>
+			<div id="plus"></div>
 			<div><textarea id=cont></textarea></div> 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">CANCLE</button>
@@ -101,6 +93,8 @@
 		</div>
 	</div>
 </div>
+
+
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -113,15 +107,78 @@
 				right : 'dayGridMonth,timeGridWeek,timeGridDay'
 			},
 			dateClick : function(info) {
-				alert('clicked ' + info.dateStr);
+				alert("오늘의요일" + info.startStr + "/" +  "클릭한요일" + info.dateStr);
 			},
-			select : function(info) {
+			/* select : function(info) {
 				alert('selected ' + info.startStr + ' to ' + info.endStr);
-			}
+			} */
 		});
 
 		calendar.render();
 	});
+	
+	
+	
+	$('dateClick').click(function(){	
+		
+		/* var nowDate = new Date();
+		 var nYear = nowDate.getFullYear();      
+		 var nMonth = nowDate.getMonth() ;       
+		 var nDate = nowDate.getDate();           
+		 var nNumday = nowDate.getDay();
+		 var clickday = $("#selData").val();
+		
+		 var nowday = nYear + nMonth + nDate + nNumday; */
+		 
+		alert("오늘의요일" + info.startStr + "/" +  "클릭한요일" + info.dateStr);
+		
+		if( info.startStr  ==  info.dateStr || info.startStr  >  info.dateStr ){
+			
+			alert("당일 예약 및 지난 일짜는 선택 하실 수 없습니다.");
+			
+			 document.getElementById('selDate').value = "당일 예약 및 지난 일짜는 선택 하실 수 없습니다.";  
+			
+			 $(".plus").empty();
+		
+		}else{
+			
+			
+			$.ajax({
+				url:"reserve?key=select",
+				type:"GET",
+				data:{date:$("#selDate").val(), id:$("#id").val() , reserve_date:$("#reserve_date").val()},
+				success:function( json ){
+						
+					$(".plus").empty();
+				
+					let jlist = json.map.jlist;
+					let alist = json.map.alist;
+				
+					if(jlist != null){
+						
+						$(".plus").append("<select>" + "<option>" 
+								+ jlist
+								+ "</option>" 
+								+"</select>");
+						
+					} else {
+						$(".plus").append("<select id='option'></select>");
+						console.log(alist);
+						for(i=0; i < alist.length; i++){
+							$("#option").append("<option>" +  alist[i] + "</option>");
+						}
+					}
+					
+				},
+				error:function(){
+					alert("error");
+				}
+			});
+		}
+	});
+	
+	
+	
 </script>
 <script>
 	
