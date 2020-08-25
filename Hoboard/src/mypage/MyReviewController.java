@@ -35,7 +35,7 @@ public class MyReviewController extends HttpServlet {
 		int page = count / limit;
 		if (count % limit > 0) page = page + 1; // -> 2
 		// 처음 들어왔을때
-		if (sW == null && c == null && pageNumber == 0)
+		if (sW == null && c == null && pageNumber == 0) 
 			list = dao.getMyPageReviewPagingList(id, "", "", limit, pageNumber, auth);
 		// 페이지만 바뀔때
 		else if (sW == null && c == null && req.getParameter("page") != null)

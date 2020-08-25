@@ -310,33 +310,32 @@ public class Review_Dao {
 
 	// TODO GET MYPAGE PAGING REVIEW LIST
 	public List<LinkedHashMap<Review_Dto, String>> getMyPageReviewPagingList(String id, String choice, String searchWord, int limit, int page, int auth) {
-		String column = "";
-		String name = "";
+		String searchColumn = "";
+		String user = "";
 		if(auth == 2) {
-			column = "BUSI_ID";
-			name = "INDVD_ID";
+			user = "BUSI_ID";
+			searchColumn = "INDVD_ID";
 		}
-		else {
-			column = "INDVD_ID";
-			name = "BUSI_ID";
+		else if (auth == 1) {
+			user = "INDVD_ID";
+			searchColumn = "BUSI_ID";
 		}
-		String sql = " SELECT REVIEW_SEQ, BUSI_ID, INDVD_ID, " + " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
-				+ " FILENAME, BUSI_CATE, DEL " + " FROM ";
-		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY REVIEW_SEQ DESC) AS RNUM, "
-				+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, FILENAME, BUSI_CATE, DEL "
-				+ " FROM REVIEW WHERE DEL = 0 ";
-
+		String sql =  " SELECT "
+					+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, FILENAME, BUSI_CATE, DEL "
+					+ " FROM "
+					+ " ( SELECT ROW_NUMBER()OVER(ORDER BY REVIEW_SEQ DESC) AS RNUM, "
+					+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, FILENAME, BUSI_CATE, DEL "
+					+ " FROM REVIEW WHERE DEL = 0 AND "+user+" = ? ";
 		String sqlWord = "";
 		if (choice.equals("name")) {
-			sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
+			sqlWord = " AND "+searchColumn+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
 		} else if (choice.equals("cate")) {
 			sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 		}
-		
 		sql = sql + sqlWord;
 		sql += " ORDER BY REVIEW_SEQ DESC) ";
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
-		sql += " AND "+column+" = ? ";
+		
 		System.out.println(sql);
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
@@ -353,9 +352,9 @@ public class Review_Dao {
 			conn = DBConnection.getConnection();
 
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, start);
-			psmt.setInt(2, end);
-			psmt.setString(3, id);
+			psmt.setString(1, id);
+			psmt.setInt(2, start);
+			psmt.setInt(3, end);
 
 			rs = psmt.executeQuery();
 

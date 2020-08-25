@@ -99,3 +99,22 @@ footer .copyright {
   padding-top: 80px;
   padding-bottom: 20px;
 }
+
+/* reserveModal */
+#reserveModal {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+}
+#reserveModal .modal-content {
+  position: absolute;
+  width: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
