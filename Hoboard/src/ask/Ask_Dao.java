@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import db.DBClose;
 import db.DBConnection;
+import review.Review_Dto;
 
 public class Ask_Dao {
 	private static Ask_Dao dao = new Ask_Dao();
@@ -52,6 +53,37 @@ public class Ask_Dao {
 		return list;
 	}
 
+	public List<Ask_Dto> getAskList2() {
+		String sql = " SELECT * FROM ASK_TABLE " + " ORDER BY SEQ DESC ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Ask_Dto> qlist = new ArrayList<Ask_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				int i = 1;
+				Ask_Dto dto = new Ask_Dto(rs.getInt(i++), 
+										rs.getInt(i++), 
+										rs.getString(i++), 
+										rs.getString(i++),
+										rs.getString(i++), 
+										rs.getString(i++),
+										rs.getString(i++));
+									qlist.add(dto);
+								}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return qlist;
+	}	
+	
+	
+	
 	public int getAskCount(String id, String choice, String searchWord) {
 		String sql = " SELECT COUNT(*) FROM ASK_TABLE ";
 
