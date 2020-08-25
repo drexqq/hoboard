@@ -573,20 +573,22 @@ public class Reserve_Dao {
 	public int getUserReserveCount(String choice, String searchWord, String id, int auth) {
 		String column = "";
 		String name = "";
-		if(auth == 2) {
+		if (auth == 2) {
 			column = "BUSI_ID";
 			name = "INDVD_ID";
-		}
-		else {
+		} else {
 			column = "INDVD_ID";
 			name = "BUSI_ID";
 		}
-		
-		String query = " SELECT COUNT(*) FROM RESERVE WHERE "+column+" = '"+id+"' ";
+
+		String query = " SELECT COUNT(*) FROM RESERVE WHERE " + column + " = '" + id + "' ";
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
-			if (choice.equals("name"))		sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
-			else if (choice.equals("cate"))	sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+			if (choice.equals("name"))
+				sqlWord = " AND " + name + " LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%" + searchWord.trim()
+						+ "%' )";
+			else if (choice.equals("cate"))
+				sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 		}
 		query += sqlWord;
 		Connection conn = null;
@@ -597,7 +599,8 @@ public class Reserve_Dao {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(query);
 			rs = psmt.executeQuery();
-			if(rs.next()) count = rs.getInt(1);
+			if (rs.next())
+				count = rs.getInt(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -605,5 +608,40 @@ public class Reserve_Dao {
 		}
 		return count;
 	}
-	
+
+	public List<Reserve_Dto> getReserve_list(String id) {
+		String sql = " SELECT RESERVE_DATE , RESERVE_TIME " + " FROM RESERVE " + " WHERE BUSI_ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Reserve_Dto> list = new ArrayList<Reserve_Dto>();
+
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getReserve_list success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getReserve_list success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getReserve_list success");
+
+			while (rs.next()) {
+				Reserve_Dto dto = new Reserve_Dto();
+				int i = 1;
+				dto.setReserve_date(rs.getString(i++));
+				dto.setReserve_time(rs.getString(i++));
+				
+				list.add(dto);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
 }
