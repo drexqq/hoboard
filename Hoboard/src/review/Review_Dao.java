@@ -367,12 +367,21 @@ public class Review_Dao {
 
 	// TODO GET USER REVIEW COUNT
 	public int getUserReviewCount(String choice, String searchWord, String id, int auth) {
-		String column = (auth == 2) ? "BUSI_ID" : "INDVD_ID";
+		String column = "";
+		String name = "";
+		if(auth == 2) {
+			column = "BUSI_ID";
+			name = "INDVD_ID";
+		}
+		else {
+			column = "INDVD_ID";
+			name = "BUSI_ID";
+		}
 		String query = " SELECT COUNT(*) FROM REVIEW WHERE "+column+" = '"+id+"' ";
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
 			if (choice.equals("name")) {
-				sqlWord = " AND BUSI_ID LIKE '%" + searchWord.trim() + "%' ";
+				sqlWord = " AND "+name+" LIKE '%" + searchWord.trim() + "%' ";
 			} else if (choice.equals("cate")) {
 				sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
 			}

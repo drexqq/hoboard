@@ -56,7 +56,6 @@ public class ReviewController extends HttpServlet {
 				req.setAttribute("choice", c);
 				req.setAttribute("searchWord", sW);
 			}
-			System.out.println(list.toString());
 			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 			req.setAttribute("page", page - 1); // 총 페이지수
 			req.setAttribute("reviewlist", list); // 실제 데이터
@@ -71,7 +70,6 @@ public class ReviewController extends HttpServlet {
 			Review_COMM_Dao commDao = Review_COMM_Dao.getInstance();
 			// getCommentList
 			List<Review_COMM_Dto> commList = commDao.getComments(seq);
-			System.out.println(dto.toString());
 			req.setAttribute("seq", seq);
 			req.setAttribute("reviewDto", dto);
 			req.setAttribute("commList", commList);
