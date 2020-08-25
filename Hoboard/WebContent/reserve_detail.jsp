@@ -92,6 +92,8 @@
 			</select>
 			<p>진료일</p>
 			<div id='calendar'></div>
+			<div>간단한 증상</div>
+			<div><textarea id=cont></textarea></div> 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">CANCLE</button>
 				<button type="button" class="btn btn-primary">NEXT</button>
