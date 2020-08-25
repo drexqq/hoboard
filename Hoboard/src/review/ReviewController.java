@@ -24,16 +24,14 @@ public class ReviewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Review_Dao dao = Review_Dao.getInstance();
 		String d = req.getParameter("d");
-		int seq = 0;
-		if (d != null) {
-			seq = UtilEx.numCheck(d) ? Integer.parseInt(req.getParameter("d")) : -1;
-		}
+		JSONObject jsonData = new JSONObject();
 		
-		// String key = req.getParameter("key");
+		int seq = 0;
+		if (d != null) seq = UtilEx.numCheck(d) ? Integer.parseInt(req.getParameter("d")) : -1;
+		
 		// review.jsp
 		if (d == null || "".equals(d)) {
 			System.out.println("review.jsp");
-			
 			List<LinkedHashMap<Review_Dto, String>> list = null;
 			String sW = (String) req.getParameter("searchWord");
 			String c = (String) req.getParameter("choice");
@@ -56,7 +54,6 @@ public class ReviewController extends HttpServlet {
 				req.setAttribute("choice", c);
 				req.setAttribute("searchWord", sW);
 			}
-			System.out.println(list.toString());
 			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 			req.setAttribute("page", page - 1); // 총 페이지수
 			req.setAttribute("reviewlist", list); // 실제 데이터
@@ -66,12 +63,11 @@ public class ReviewController extends HttpServlet {
 		else if ((seq+"").equals(d)) {
 			System.out.println("detail.jsp");
 			HashMap<String, Review_Dto> dto = dao.getReviewDetail(seq);
-			// updateViewCount;
 			dao.updateViewCount(seq);
 			Review_COMM_Dao commDao = Review_COMM_Dao.getInstance();
+			
 			// getCommentList
 			List<Review_COMM_Dto> commList = commDao.getComments(seq);
-			System.out.println(dto.toString());
 			req.setAttribute("seq", seq);
 			req.setAttribute("reviewDto", dto);
 			req.setAttribute("commList", commList);
@@ -81,10 +77,19 @@ public class ReviewController extends HttpServlet {
 		else if ("u".equals(d)) {
 			System.out.println("review_update.jsp");
 			seq = Integer.parseInt(req.getParameter("seq"));
-			HashMap<String, Review_Dto> dto = dao.getReviewDetail(seq);
 			
+			HashMap<String, Review_Dto> dto = dao.getReviewDetail(seq);
 			req.setAttribute("reviewDto", dto);
 			UtilEx.forward("review_update.jsp", req, resp);
+		}
+		// review_delete
+		else if ("d".equals(d)) {
+			System.out.println("review_delete.jsp");
+			seq = Integer.parseInt(req.getParameter("seq"));
+			boolean delete = dao.deleteReview(seq);
+			jsonData.put("del", delete);
+			resp.setContentType("application/json; charset=UTF-8");
+			resp.getWriter().print(jsonData);
 		}
 
 		/*
@@ -124,44 +129,6 @@ public class ReviewController extends HttpServlet {
 		 * 
 		 * }
 		 * 
-		 * } else if (key.equals("detail")) {
-		 * 
-		 * int seq = Integer.parseInt(req.getParameter("seq")); // seq check
-		 * System.out.println("seq:" + seq);
-		 * 
-		 * Review_Dto dto = dao.getReviewDetail(seq);
-		 * 
-		 * // view count dao.updateViewCount(seq);
-		 * 
-		 * Review_COMM_Dao Cdao = Review_COMM_Dao.getInstance();
-		 * 
-		 * // comment List<Review_COMM_Dto> Clist = Cdao.getComments(seq);
-		 * 
-		 * req.setAttribute("seq", seq); req.setAttribute("detaillist", dto);
-		 * req.setAttribute("commentlist", Clist); UtilEx.forward("review_detail.jsp",
-		 * req, resp);
-		 * 
-		 * } else if (key.equals("updateview")) {
-		 * 
-		 * int seq = Integer.parseInt(req.getParameter("seq"));
-		 * 
-		 * 
-		 * 
-		 *  UtilEx.forward("review_update.jsp", req,
-		 * resp);
-		 * 
-		 * } else if (key.equals("delete")) { int seq =
-		 * Integer.parseInt(req.getParameter("seq"));
-		 * 
-		 * // seq check System.out.println("seq:" + seq);
-		 * 
-		 * boolean delete = dao.deleteReview(seq);
-		 * 
-		 * if (delete) { System.out.println("글 삭제 성공"); req.setAttribute("delete",
-		 * delete); UtilEx.forward("myreview", req, resp);
-		 * 
-		 * } else { System.out.println("글 삭제 실패"); req.setAttribute("delete", delete);
-		 * UtilEx.forward("review?key=detail&seq="+seq+"", req, resp); }
 		 * 
 		 * } else if (key.equals("commentwrite")) {
 		 * 
@@ -186,22 +153,20 @@ public class ReviewController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		System.out.println("post");
-		
+
 		Review_Dao dao = Review_Dao.getInstance();
 		JSONObject jsonData = new JSONObject();
-		
+
 		int seq = Integer.parseInt(req.getParameter("seq"));
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		System.out.println(title);
-		System.out.println(content);
 		boolean isUpdate = dao.updateReview(seq, title, content);
-		if(isUpdate) {
+
+		if (isUpdate) {
 			jsonData.put("update", isUpdate);
-			System.out.println(jsonData);
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonData);
-		};
+		}
+		;
 	}
 }

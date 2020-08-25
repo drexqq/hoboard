@@ -128,7 +128,30 @@ public class ReserveController extends HttpServlet {
 			
 		} else if(key.equals("select")) {
 			
-		ArrayList<String> Alist = new ArrayList<String>();
+			String id = req.getParameter("id");
+			
+			System.out.println(id);
+			
+			List<Reserve_Dto> rlist = dao.getReserve_list(id);
+			HashMap<String, Object> rmap = new HashMap<String, Object>();
+			JSONObject jobj = new JSONObject();
+
+			System.out.println(rlist.toString());
+			
+			rmap.put("rlist", rlist);
+			jobj.put("rmap", rmap);
+			resp.setContentType("application/x-json; charset=UTF-8");
+			resp.getWriter().print(jobj);
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			/*ArrayList<String> Alist = new ArrayList<String>();
 			
 			Alist.add("09:00~10:00");
 			Alist.add("10:00~11:00");
@@ -138,10 +161,16 @@ public class ReserveController extends HttpServlet {
 			Alist.add("14:00~15:00");
 			Alist.add("16:00~17:00");
 			Alist.add("17:00~18:00");
-			
+
 			String reserve_date = req.getParameter("reserve_date");
 			String date = req.getParameter("date");
-			String id = req.getParameter("id");
+			
+			
+			
+			
+			
+			
+			
 			
 			int idx = date.indexOf("(");
 			String date2 = date.substring(idx+1);
@@ -225,7 +254,9 @@ public class ReserveController extends HttpServlet {
 				jobj.put("map", map);
 				resp.setContentType("application/x-json; charset=UTF-8");
 				resp.getWriter().print(jobj);
-			}
+			}*/
+			
+			
 		}
 	}
 

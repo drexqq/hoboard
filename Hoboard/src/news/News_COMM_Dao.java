@@ -25,38 +25,35 @@ public class News_COMM_Dao {
 
 	// TODO insert comment
 	public boolean comm_write(News_COMM_Dto dto) {
+		
+		String sql = " INSERT INTO NEWS_COMM " 
+				+ " VALUES(SEQ_NEWS_COMM.NEXTVAL, ?, ?, ?, SYSDATE) ";
 
-		String sql = " INSERT INTO NEWS_COMM " + " VALUES( SEQ_NEWS_COMM.NEXTVAL, ?, 'admin', ?, SYSDATE ) ";
-
+		System.out.println(dto.toString());
 		Connection conn = null;
 		PreparedStatement psmt = null;
-
 		int count = 0;
 
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 insertComment success");
+			
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, dto.getB_seq());
-			// psmt.setString(2, dto.getId());
-			psmt.setString(2, dto.getContent());
-
+			psmt.setString(2, dto.getId());
+			psmt.setString(3, dto.getContent());
 			System.out.println("2/6 insertComment success");
-
 			count = psmt.executeUpdate();
-
 			System.out.println("3/6 insertComment success");
 
 		} catch (Exception e) {
 			try {
-				conn.rollback(); // error rollback
-			} catch (SQLException sqle) {
-				sqle.printStackTrace();
-			}
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} // error rollback
 		} finally {
-
 			DBClose.close(psmt, conn, null);
 		}
 		return count > 0 ? true : false;
@@ -64,12 +61,8 @@ public class News_COMM_Dao {
 
 	public List<News_COMM_Dto> getComm(int b_seq) {
 
-		String sql = " SELECT "
-				+ " B_SEQ, ID, CONTENT, WDATE, C_SEQ "
-				+ " from news_comm where b_seq = ? ";
-//				   + " FROM NEWS A INNER JOIN NEWS_COMM B "
-//				   + " ON A.NEWS_SEQ = ? "
-//				   + " ORDER BY C_SEQ DESC ";
+		String sql = " SELECT " + " B_SEQ, C_SEQ, ID, CONTENT, WDATE " + " from news_comm where b_seq = ? "
+				+ " ORDER BY C_SEQ DESC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -78,21 +71,21 @@ public class News_COMM_Dao {
 		List<News_COMM_Dto> list = new ArrayList<News_COMM_Dto>();
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 selectComments success");
+			System.out.println("1/6 getComm success");
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, b_seq);
-			System.out.println("2/6 selectComments success");
+			System.out.println("2/6 getComm success");
 
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
 				int i = 1;
-				News_COMM_Dto dto = new News_COMM_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++),
-						rs.getString(i++), rs.getInt(i++));
+				News_COMM_Dto dto = new News_COMM_Dto(rs.getInt(i++), rs.getInt(i++), rs.getString(i++),
+						rs.getString(i++), rs.getString(i++));
 				list.add(dto);
 			}
 			System.out.println(list.toString());
-			System.out.println("3/6 selectComments success");
+			System.out.println("3/6 getComm");
 		} catch (Exception e) {
 
 			e.printStackTrace();

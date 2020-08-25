@@ -149,7 +149,10 @@ dl {
 }
 
 /* edit bootstrap grid.css */
-* {
+#calendar > * {
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+*:not(.fc*) {
   font-family: "NanumSquare", sans-serif !important;
   color: #333333;
 }

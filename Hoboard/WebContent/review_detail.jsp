@@ -13,6 +13,7 @@
 							<div class="author">${ item.value.indvd_id }</div>
 							<div class="date">${ item.value.wdate }</div>
 							<div class="view"><i class="ri-eye-line"></i>${ item.value.viewcount }</div>
+							<div class="rating"><i class="ri-star-smile-line"></i>${ item.value.score } / 5</div>
 						</div>
 					</div>
 					<div class="content-wrap">
