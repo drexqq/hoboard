@@ -42,24 +42,25 @@
       <div class="col-12">
         <div class="title">후기게시판</div>
         <div class="list-wrap">
-			<c:forEach items="${ reviewList }" var="list" varStatus="status" begin="0" end="2">
-				<a href="review?key=detail&seq=${ list.review_seq }" class="list">
-					<div class="name">${ list.title }</div>
-					<div class="content">${ list.content }</div>
-					<div class="util-wrap">
-						<div>
-							<span class="grade">
-								<i class="ri-star-smile-line"></i>
-								${ list.score } / 5
-							</span>
-							<span class="view">
-								<i class="ri-eye-line"></i>
-								${ list.viewcount }
-							</span>
-						</div>
-						<div class="date">${ list.wdate }</div>
-					</div>
-				</a>
+			<c:forEach items="${ reviewList }" var="map" varStatus="status">
+				<c:if test="${status.first}">
+					<c:forEach items="${ map }" var="list">
+						<a href="review?d=${ list.key.review_seq }" class="list">
+							<div class="cate">[${ list.value }] - [${ list.key.busi_cate }]</div>
+							<div class="name">${ list.key.title }</div>
+							<div class="content">${ list.key.content }</div>
+							<div class="util-wrap">
+								<div>
+									<span class="grade"> <i class="ri-star-smile-line"></i>
+										${ list.key.score } / 5
+									</span> <span class="view"> <i class="ri-eye-line"></i> ${ list.key.viewcount }
+									</span>
+								</div>
+								<div class="date">${ list.key.wdate }</div>
+							</div>
+						</a>
+					</c:forEach>
+				</c:if>
 			</c:forEach>
         </div>
         <div class="go-review">

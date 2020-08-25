@@ -2,6 +2,7 @@ package Reserve;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,14 @@ import member.BUSI_Member_Dao;
 import member.BUSI_Time_Dto;
 import member.Member_Dao;
 import member.Member_Dto;
+import net.sf.json.JSONObject;
 import review.Review_Dao;
 
 @WebServlet("/reserve")
 public class ReserveController extends HttpServlet {
 
 	
-	public static ArrayList<String> Arraylist = new ArrayList<String>();
+	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -126,6 +128,18 @@ public class ReserveController extends HttpServlet {
 			
 		} else if(key.equals("select")) {
 			
+		ArrayList<String> Alist = new ArrayList<String>();
+			
+			Alist.add("09:00~10:00");
+			Alist.add("10:00~11:00");
+			Alist.add("11:00~12:00");
+			Alist.add("12:00~13:00");
+			Alist.add("13:00~14:00");
+			Alist.add("14:00~15:00");
+			Alist.add("16:00~17:00");
+			Alist.add("17:00~18:00");
+			
+			String reserve_date = req.getParameter("reserve_date");
 			String date = req.getParameter("date");
 			String id = req.getParameter("id");
 			
@@ -159,41 +173,59 @@ public class ReserveController extends HttpServlet {
 			System.out.println(date);	
 			System.out.println(id);
 			System.out.println(date3);
+			System.out.println(reserve_date);
 			
-			String lunch = dao.getLunch_Time(id, date3);
+			String Break = dao.getBreak_Time(id, date3);
 			
-			if(lunch.equals("휴무")) {
+			JSONObject jobj = new JSONObject();
+			List<String> jlist = new ArrayList<String>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			if(Break.equals("휴무")) {
 				
-				String breaktime = "휴무일입니다.";
+				Break = "휴무일입니다.";
 				
-				req.setAttribute("lunch", breaktime);
+				
+				jlist.add(Break);
+				map.put("jlist", jlist);
+				jobj.put("map", map);
+				
+				resp.setContentType("application/x-json; charset=UTF-8");
+				resp.getWriter().print(jobj);
 			
 			} else {
 				
+				String cut = reserve_date.substring(2);
+				System.out.println(cut);
+				
+				String lunch = dao.getLunch_Time(id);
+				System.out.println(lunch);
+				
+				Alist.remove(lunch);
 				
 				
+				List<String> tlist = dao.getDate_Time(cut,id);
 				
+				
+				for (int i = 0; i < Alist.size(); i++) {
+					for (int j = 0; j < tlist.size(); j++) {
+						if(Alist.get(i).equals(tlist.get(j))) {
+							Alist.remove(i);
+						}
+					}
+					
+					System.out.println(Alist.get(i));
+					
+				}
+				
+				System.out.println(Alist.toString());
+				
+				
+				map.put("alist", Alist);
+				jobj.put("map", map);
+				resp.setContentType("application/x-json; charset=UTF-8");
+				resp.getWriter().print(jobj);
 			}
-			
-			
-			
-			//String lunch = dao.getLunch_Time();
-			
-			
-			Arraylist.add("09:00~10:00");
-			Arraylist.add("10:00~11:00");
-			Arraylist.add("11:00~12:00");
-			Arraylist.add("12:00~13:00");
-			Arraylist.add("13:00~14:00");
-			Arraylist.add("14:00~15:00");
-			Arraylist.add("16:00~17:00");
-			Arraylist.add("17:00~18:00");
-
-			
-			
-			
-			
-			
 		}
 	}
 

@@ -47,6 +47,13 @@
 .list:hover {
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
 }
+.list .cate {
+  color: #ff8b34;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+  padding-bottom: 15px;
+}
 .list .name {
   color: #222222;
   font-size: 24px;
@@ -168,8 +175,10 @@
   margin-right: 10px;
 }
 .board-detail .title-wrap .util-wrap .view {
+  margin-right: 10px;
 }
-.board-detail .title-wrap .util-wrap .view i {
+.board-detail .title-wrap .util-wrap .view i,
+.board-detail .title-wrap .util-wrap .rating i {
   color: #ff8b34;
   vertical-align: -3px;
   padding-right: 3px;

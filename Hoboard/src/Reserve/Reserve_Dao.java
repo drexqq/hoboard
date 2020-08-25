@@ -27,69 +27,65 @@ public class Reserve_Dao {
 	public static Reserve_Dao getInstance() {
 		return dao;
 	}
-	
-	
+
 	// TODO search all write count
-		public int getsearch_allcount(String loc, String amt, String word) {
+	public int getsearch_allcount(String loc, String amt, String word) {
 
-			String sql = " SELECT COUNT(*) FROM MEMBER " 
-					   + " WHERE ID IN ";
+		String sql = " SELECT COUNT(*) FROM MEMBER " + " WHERE ID IN ";
 
-			String sqlamt = "";
-			String sqlloc = "";
-			String sqlword = "";
-			
-			if (loc == null && amt == null && word == null) {
-			String sql2 = " SELECT COUNT(*) FROM MEMBER "
-					+ " WHERE AUTH = 2 ";
-				
-				sql = sql2;
-			} else if (loc != null && amt != null && word == null) {
-				sqlamt = " (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
-				sqlloc = " AND ADDRESS LIKE '%" + loc + "%' ";
-				sql += sqlamt + sqlloc; 
-			
-			} else if (loc != null && amt != null && word != null) {
-				sqlamt = " (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
-				sqlloc = " AND ADDRESS LIKE '%" + loc + "%' ";
-				sqlword = "AND NAME LIKE '%" + word + "%'";
-				
-				sql += sqlamt + sqlloc + sqlword;
-			}
-			
-			
-			System.out.println(sql);
+		String sqlamt = "";
+		String sqlloc = "";
+		String sqlword = "";
 
-			Connection conn = null;
-			PreparedStatement psmt = null;
-			ResultSet rs = null;
-			int len = 0;
+		if (loc == null && amt == null && word == null) {
+			String sql2 = " SELECT COUNT(*) FROM MEMBER " + " WHERE AUTH = 2 ";
 
-			try {
-				conn = DBConnection.getConnection();
+			sql = sql2;
+		} else if (loc != null && amt != null && word == null) {
+			sqlamt = " (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
+			sqlloc = " AND ADDRESS LIKE '%" + loc + "%' ";
+			sql += sqlamt + sqlloc;
 
-				psmt = conn.prepareStatement(sql);
+		} else if (loc != null && amt != null && word != null) {
+			sqlamt = " (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
+			sqlloc = " AND ADDRESS LIKE '%" + loc + "%' ";
+			sqlword = "AND NAME LIKE '%" + word + "%'";
 
-				rs = psmt.executeQuery();
-				if (rs.next()) {
-					len = rs.getInt(1);
-				}
-				System.out.println(len);
-			} catch (Exception e) {
-				System.out.println("getsearch fail");
-				e.printStackTrace();
-			} finally {
-				DBClose.close(psmt, conn, rs);
-			}
-			System.out.println("search done");
-			return len;
+			sql += sqlamt + sqlloc + sqlword;
 		}
-	
+
+		System.out.println(sql);
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int len = 0;
+
+		try {
+			conn = DBConnection.getConnection();
+
+			psmt = conn.prepareStatement(sql);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				len = rs.getInt(1);
+			}
+			System.out.println(len);
+		} catch (Exception e) {
+			System.out.println("getsearch fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("search done");
+		return len;
+	}
+
 	// TODO search
 	public List<Member_Dto> getSearch_list(String loc, String amt, String searchWord, int limit, int page) {
-		String sql = " SELECT * FROM " 
-				   + " (SELECT ROW_NUMBER()OVER(ORDER BY NAME ASC) AS RNUM, AUTH, ID, NAME, TEL, EMAIL, ADDRESS, D_ADDRESS, POST_NUM "
-				   + " FROM MEMBER ";
+		String sql = " SELECT * FROM "
+				+ " (SELECT ROW_NUMBER()OVER(ORDER BY NAME ASC) AS RNUM, AUTH, ID, NAME, TEL, EMAIL, ADDRESS, D_ADDRESS, POST_NUM "
+				+ " FROM MEMBER ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -99,39 +95,36 @@ public class Reserve_Dao {
 		String sqlamt = "";
 		String sqlloc = "";
 		String sqlword = "";
-		
-		if(loc.equals("") && amt.equals("") && searchWord.equals("")) {
+
+		if (loc.equals("") && amt.equals("") && searchWord.equals("")) {
 			String sql1 = " SELECT * FROM( "
-				+ " SELECT ROW_NUMBER()OVER(ORDER BY NAME ASC) AS RNUM, AUTH, ID, NAME, TEL, EMAIL, ADDRESS, D_ADDRESS, POST_NUM " 
-				+ " FROM MEMBER "
-				+ " WHERE AUTH = 2) ";
+					+ " SELECT ROW_NUMBER()OVER(ORDER BY NAME ASC) AS RNUM, AUTH, ID, NAME, TEL, EMAIL, ADDRESS, D_ADDRESS, POST_NUM "
+					+ " FROM MEMBER " + " WHERE AUTH = 2) ";
 			sql = sql1;
-		} else if(loc != null && amt != null && searchWord == null) {
+		} else if (loc != null && amt != null && searchWord == null) {
 			sqlamt = " WHERE ID IN (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
 			sqlloc = " AND ADDRESS LIKE '%" + loc + "%' )";
-			
+
 			sql += sqlamt + sqlloc;
 		} else if (loc != null && amt != null && searchWord != null) {
-			
+
 			sqlamt = " WHERE ID IN (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
 			sqlloc = " AND ADDRESS LIKE '%" + loc + "%' ";
 			sqlword = " AND NAME LIKE '%" + searchWord.trim() + "%') ";
-			
+
 			sql = sql + sqlamt + sqlloc + sqlword;
 		}
-		
+
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
-		
+
 		System.out.println(sql);
-		
-		
+
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
 		end = limit + limit * page; // 끝 글의 번호
-		
+
 		System.out.println("start : " + start);
 		System.out.println("end : " + end);
-		
 
 		try {
 			conn = DBConnection.getConnection();
@@ -157,20 +150,17 @@ public class Reserve_Dao {
 				String post_num = rs.getString("POST_NUM");
 
 				list.add(new Member_Dto(auth, id, name, tel, email, address, d_address, post_num));
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		
+
 		return list;
 
 	}
-
-	
-
 
 	public List<Member_Dto> getCate_list(String cate, int num) {
 		String sql = " SELECT AUTH, ID, NAME, TEL, EMAIL, ADDRESS, D_ADDRESS, POST_NUM " + " FROM MEMBER "
@@ -214,18 +204,16 @@ public class Reserve_Dao {
 		}
 		return list;
 	}
-	
+
 	public int getScore_avg(String id) {
-		String sql = " SELECT AVG(A.SCORE) "
-				  +  " FROM REVIEW A INNER JOIN MEMBER B "
-				  +  " ON  A.BUSI_ID = B.ID "
-		          +  " WHERE B.ID = ? ";
-		
+		String sql = " SELECT AVG(A.SCORE) " + " FROM REVIEW A INNER JOIN MEMBER B " + " ON  A.BUSI_ID = B.ID "
+				+ " WHERE B.ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		int score = 0;
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getScore_avg success");
@@ -236,7 +224,7 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getScore_avg success");
-			
+
 			if (rs.next()) {
 				score = rs.getInt(1);
 			}
@@ -247,18 +235,16 @@ public class Reserve_Dao {
 		}
 		return score;
 	}
-	
-	public String getHomepage(String name){
-		String sql = " SELECT HOMEPAGE "
-				  +  " FROM BUSI_MEMBER A INNER JOIN MEMBER B "
-				  +  " ON  A.ID = B.ID "
-		          +  " WHERE B.ID = ? ";
-		
+
+	public String getHomepage(String name) {
+		String sql = " SELECT HOMEPAGE " + " FROM BUSI_MEMBER A INNER JOIN MEMBER B " + " ON  A.ID = B.ID "
+				+ " WHERE B.ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		String home = null;
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getHomepage success");
@@ -269,7 +255,7 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getHomepage success");
-			
+
 			if (rs.next()) {
 				home = rs.getString(1);
 			}
@@ -279,19 +265,17 @@ public class Reserve_Dao {
 			DBClose.close(psmt, conn, rs);
 		}
 		return home;
-	
+
 	}
-	
-	public List<Member_Dto> getMember_list(String id){
-		String sql =  " SELECT NAME , TEL , ADDRESS "
-				  +  " FROM MEMBER "
-		          +  " WHERE ID = ? ";
-		
+
+	public List<Member_Dto> getMember_list(String id) {
+		String sql = " SELECT NAME , TEL , ADDRESS " + " FROM MEMBER " + " WHERE ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		List<Member_Dto> list = new ArrayList<Member_Dto>();
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getMember_list success");
@@ -302,14 +286,13 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getMember_list success");
-			
+
 			if (rs.next()) {
-				
-		
+
 				String name = rs.getString("NAME");
 				String tel = rs.getString("TEL");
 				String address = rs.getString("ADDRESS");
-				
+
 				list.add(new Member_Dto(name, tel, address));
 			}
 		} catch (Exception e) {
@@ -319,19 +302,15 @@ public class Reserve_Dao {
 		}
 		return list;
 	}
-	
-	
-	public List<BUSI_Time_Dto> getTime_list(String id){
-		String sql = " SELECT * "
-				  +  " FROM BUSI_TIME A INNER JOIN MEMBER B "
-				  +  " ON  A.ID = B.ID "
-		          +  " WHERE B.ID = ? ";
-		
+
+	public List<BUSI_Time_Dto> getTime_list(String id) {
+		String sql = " SELECT * " + " FROM BUSI_TIME A INNER JOIN MEMBER B " + " ON  A.ID = B.ID " + " WHERE B.ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		List<BUSI_Time_Dto> list = new ArrayList<BUSI_Time_Dto>();
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getTime_list success");
@@ -342,23 +321,16 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getTime_list success");
-			
+
 			if (rs.next()) {
-				
+
 				int i = 1;
-				BUSI_Time_Dto dto = new BUSI_Time_Dto(rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++),
-						rs.getString(i++)
-						);
-				
+				BUSI_Time_Dto dto = new BUSI_Time_Dto(rs.getString(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++));
+
 				list.add(dto);
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -367,18 +339,15 @@ public class Reserve_Dao {
 		}
 		return list;
 	}
-	
-	public Map<String, Integer> getCate_list(String id){
-		String sql = " SELECT * "
-				  +  " FROM BUSI_CATE A INNER JOIN MEMBER B "
-				  +  " ON  A.ID = B.ID "
-		          +  " WHERE B.ID = ? ";
-		
+
+	public Map<String, Integer> getCate_list(String id) {
+		String sql = " SELECT * " + " FROM BUSI_CATE A INNER JOIN MEMBER B " + " ON  A.ID = B.ID " + " WHERE B.ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		Map<String, Integer> list = null;
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getCate_list success");
@@ -389,12 +358,11 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getCate_list success");
-			
-			
-			while(rs.next()) {
-		
+
+			while (rs.next()) {
+
 				list = new HashMap<String, Integer>();
-				
+
 				list.put("내과", rs.getInt("INTERNAL"));
 				list.put("마취통증학과", rs.getInt("ANPN"));
 				list.put("산부인과", rs.getInt("MTRNT"));
@@ -412,29 +380,27 @@ public class Reserve_Dao {
 				list.put("치과", rs.getInt("DENT"));
 				list.put("안과", rs.getInt("OPHTH"));
 			}
-			
+
 			System.out.println(list.toString());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		
+
 		return list;
 	}
-	
-	public Map<String, Integer> getAmetiny_list(String id){
-		String sql = " SELECT * "
-				  +  " FROM BUSI_AMENITY A INNER JOIN MEMBER B "
-				  +  " ON  A.ID = B.ID "
-		          +  " WHERE B.ID = ? ";
-		
+
+	public Map<String, Integer> getAmetiny_list(String id) {
+		String sql = " SELECT * " + " FROM BUSI_AMENITY A INNER JOIN MEMBER B " + " ON  A.ID = B.ID "
+				+ " WHERE B.ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		Map<String, Integer> list = null;
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getAmetiny_list success");
@@ -445,41 +411,70 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getAmetiny_list success");
-			
-			
-			while(rs.next()) {
-		
+
+			while (rs.next()) {
+
 				list = new HashMap<String, Integer>();
-				
+
 				list.put("주차장", rs.getInt("PARKING"));
 				list.put("편의점", rs.getInt("CONV"));
 				list.put("ATM,은행", rs.getInt("BANK"));
 				list.put("약국", rs.getInt("DRUG"));
 				list.put("대중 교통", rs.getInt("BMW"));
-				
+
 			}
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		
+
 		System.out.println(list.toString());
 		return list;
 	}
-	
-	public String getLunch_Time(String id, String date){
-		String sql = " SELECT "+ date +" " 
-					+ " FROM BUSI_TIME "
-					+ " WHERE ID = ? ";
-		
+
+	public String getBreak_Time(String id, String date) {
+		String sql = " SELECT " + date + " " + " FROM BUSI_TIME " + " WHERE ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String Break = null;
+
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getBreak_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getBreak_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getBreak_Time success");
+
+			if (rs.next()) {
+				Break = rs.getString(1);
+			}
+			System.out.println(Break);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return Break;
+
+	}
+
+	public String getLunch_Time(String id) {
+		String sql = " SELECT LUNCH " + " FROM BUSI_TIME " + " WHERE ID = ? ";
+
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		String lunch = null;
-		
+
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getLunch_Time success");
@@ -490,19 +485,125 @@ public class Reserve_Dao {
 
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getLunch_Time success");
-			
+
 			if (rs.next()) {
 				lunch = rs.getString(1);
 			}
 			System.out.println(lunch);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
 		return lunch;
-	
+
+	}
+
+	public String getReserve_Time(String id) {
+		String sql = " SELECT LUNCH " + " FROM BUSI_TIME " + " WHERE ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		String lunch = null;
+
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getReserve_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getReserve_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getReserve_Time success");
+
+			if (rs.next()) {
+				lunch = rs.getString(1);
+			}
+			System.out.println(lunch);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return lunch;
+
+	}
+
+	public List<String> getDate_Time(String date, String id) {
+		String sql = " SELECT RESERVE_TIME " + " FROM RESERVE " + " WHERE RESERVE_DATE = ? and BUSI_ID = ?  ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
+		String time = null;
+
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getReserve_Time success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, date);
+			psmt.setString(2, id);
+			System.out.println("2/6 getReserve_Time success");
+
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getReserve_Time success");
+
+			while (rs.next()) {
+				time = rs.getString(1);
+
+				list.add(time);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+
+	}
+
+	// GET ALL LIST RESERVE
+	public int getUserReserveCount(String choice, String searchWord, String id, int auth) {
+		String column = "";
+		String name = "";
+		if(auth == 2) {
+			column = "BUSI_ID";
+			name = "INDVD_ID";
+		}
+		else {
+			column = "INDVD_ID";
+			name = "BUSI_ID";
+		}
+		
+		String query = " SELECT COUNT(*) FROM RESERVE WHERE "+column+" = '"+id+"' ";
+		String sqlWord = "";
+		if (choice != null || searchWord != null) {
+			if (choice.equals("name"))		sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
+			else if (choice.equals("cate"))	sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+		}
+		query += sqlWord;
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			if(rs.next()) count = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return count;
 	}
 	
 }

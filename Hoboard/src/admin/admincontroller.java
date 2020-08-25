@@ -37,13 +37,13 @@ public class admincontroller extends HttpServlet{
 		
 		List<News_Dto> nlist = dao.getNewsList();
 		List<News_COMM_Dto> clist = dao2.getComm(dto2.getB_seq());
-		List<Review_Dto> rlist = dao3.getReviewList();
+		//List<Review_Dto> rlist = dao3.getReviewList();
 		System.out.println(clist);
 		
 		
 		req.setAttribute("nlist", nlist);
 		req.setAttribute("clist", clist);
-		req.setAttribute("rlist", rlist);
+		//req.setAttribute("rlist", rlist);
 		
 		UtilEx.forward("admin.jsp", req, resp);
 	}

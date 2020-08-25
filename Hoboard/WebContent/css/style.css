@@ -543,6 +543,34 @@ body {
   font-size: 18px;
 }
 
+/* mypage - reserve */
+.mypage-wrap.reserve {
+}
+.mypage-wrap.reserve .title-wrap .page-title {
+  float: left;
+}
+.mypage-wrap.reserve .util-wrap {
+  font-size: 20px;
+  line-height: 30px;
+  padding-bottom: 30px;
+}
+.mypage-wrap.reserve .util-wrap .notice {
+  float: left;
+}
+.mypage-wrap.reserve .util-wrap .write {
+  float: right;
+}
+.mypage-wrap.reserve .util-wrap .write a {
+  padding: 5px 10px;
+  background-color: #3da0d7;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+}
+.mypage-wrap.reserve .calendar-wrap {
+  margin-top: 30px;
+}
+
 /* map */
 .map-wrap {
   height: calc(100vh - 80px);
@@ -824,11 +852,6 @@ body {
   border-radius: 5px;
   font-size: 20px;
 }
-<<<<<<< HEAD
-
-
-
-=======
 /* myreview */
 .mypage-wrap.myreview .title-wrap .page-title {
   float: left;
@@ -851,4 +874,3 @@ body {
   border-radius: 5px;
   font-size: 18px;
 }
->>>>>>> 39d00d1e80222e82da4f50546e390542e78622dc

@@ -78,6 +78,7 @@ public class NewsController extends HttpServlet {
 			News_COMM_Dao commDao = News_COMM_Dao.getInstance();
 			System.out.println(dto.toString());
 //			System.out.println(dto.toString());
+
 			System.out.println(commDao.getComm(seq).toString());
 			boolean vc = dao.viewcount(seq);
 
