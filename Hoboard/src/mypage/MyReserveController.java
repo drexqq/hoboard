@@ -24,13 +24,7 @@ public class MyReserveController extends HttpServlet {
 		int auth = (int) session.getAttribute("auth");
 		String id = (String) session.getAttribute("sessionID");
 		int count = dao.getUserReserveCount("", "", id, auth);
-<<<<<<< HEAD
-		System.out.println(count);
-=======
 		
-		
-		
->>>>>>> 405c0f4953fd6e039d94818d0d223151af664ce0
 		req.setAttribute("count", count);
 		UtilEx.forward("my_reserve.jsp", req, resp);
 	}
