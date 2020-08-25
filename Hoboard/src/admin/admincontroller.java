@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Util.UtilEx;
+import ask.Ask_Dao;
+import ask.Ask_Dto;
 import news.News_COMM_Dao;
 import news.News_COMM_Dto;
 import news.News_Dao;
@@ -29,21 +31,28 @@ public class admincontroller extends HttpServlet{
 		System.out.println("admin");
 		
 		News_Dao dao = News_Dao.getInstance();
-		News_COMM_Dao dao2 = News_COMM_Dao.getInstance();
-		Review_Dao dao3 = Review_Dao.getInstance();
+		//News_COMM_Dao dao2 = News_COMM_Dao.getInstance();
+		Review_Dao dao2 = Review_Dao.getInstance();
+		Ask_Dao dao3 = Ask_Dao.getInstance();
 		
-		News_Dto dto = new News_Dto();
-		News_COMM_Dto dto2 = new News_COMM_Dto();
+		//News_Dto dto = new News_Dto();
+		//News_COMM_Dto dto2 = new News_COMM_Dto();
+		//Ask_Dto dto2 = new Ask_Dto();
 		
 		List<News_Dto> nlist = dao.getNewsList();
 		List<News_COMM_Dto> clist = dao2.getComm(dto2.getB_seq());
 		//List<Review_Dto> rlist = dao3.getReviewList();
 		System.out.println(clist);
 		
+		List<News_Dto> nlist = dao.getNewsList();
+		List<Review_Dto> rlist = dao2.getReviewList();
+		List<Ask_Dto> qlist = dao3.getAskList2();
 		
 		req.setAttribute("nlist", nlist);
 		req.setAttribute("clist", clist);
 		//req.setAttribute("rlist", rlist);
+		req.setAttribute("rlist", rlist);
+		req.setAttribute("qlist", qlist);
 		
 		UtilEx.forward("admin.jsp", req, resp);
 	}

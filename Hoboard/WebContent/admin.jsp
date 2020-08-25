@@ -41,13 +41,11 @@
 
 <br><br>
 
-
-
-<table border="1">
-<tr>
-<th colspan="3">Q&A 게시판</th>
-<td><input type="button" name="qnaBtn" onclick="location.href='ask'"value="바로가기"/></td>
-
+<div>Q&A 게시판</div>
+<div><input type="button" name="revBtn" onclick="location.href='ask'" value="바로가기"/></div>
+<c:forEach items="${ qlist }" var="qlist" varStatus="status" begin="0" end="5">
+<div>${qlist.wdate}${qlist.id}${qlist.title}</div>
+</c:forEach>
 
 <br><br>
 
@@ -66,31 +64,10 @@
 <div><input type="button" name="newsBtn" onclick="location.href='news'" value="바로가기"/></div>
 
 <!-- 원글 -->
-<c:forEach items="${ nlist }" var="nlist" varStatus="status" begin="0" end="0">
+<c:forEach items="${ nlist }" var="nlist" varStatus="status" begin="0" end="4">
 <div>${nlist.date}${nlist.id}${nlist.title}</div>
-</c:forEach>
-<!-- 댓글 -->
-<c:forEach items="${ clist }" var="clist" varStatus="status" begin="0" end="2">
-<div>${clist}</div>
 </c:forEach>
 
-<!-- 원글 -->
-<c:forEach items="${ nlist }" var="nlist" varStatus="status" begin="1" end="1">
-<div>${nlist.date}${nlist.id}${nlist.title}</div>
-</c:forEach>
-<!-- 댓글 -->
-<c:forEach items="${ clist }" var="clist" varStatus="status" begin="0" end="2">
-<div>${clist}</div>
-</c:forEach>
-
-<!-- 원글 -->
-<c:forEach items="${ nlist }" var="nlist" varStatus="status" begin="2" end="2">
-<div>${nlist.date}${nlist.id}${nlist.title}</div>
-</c:forEach>
-<!-- 댓글 -->
-<c:forEach items="${ clist }" var="clist" varStatus="status" begin="0" end="2">
-<div>${clist}</div>
-</c:forEach>
 
 
 <%@ include file="module/footer.jsp"%>
