@@ -64,7 +64,7 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${ reviewlist }" var="map" varStatus="status">
-										<c:if test="${status.first}">
+										<c:if test="${ status.first }">
 											<c:forEach items="${map}" var="list">
 												<tr>
 													<td class="name">${ list.value }</td>

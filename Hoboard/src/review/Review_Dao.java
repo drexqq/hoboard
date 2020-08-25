@@ -390,12 +390,23 @@ public class Review_Dao {
 			column = "INDVD_ID";
 			name = "BUSI_ID";
 		}
+<<<<<<< HEAD
 		
 		String query = " SELECT COUNT(*) FROM REVIEW WHERE "+column+" = '"+id+"' AND DEL = 0 ";
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
 			if (choice.equals("name"))		sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
 			else if (choice.equals("cate"))	sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+=======
+		String query = " SELECT COUNT(*) FROM REVIEW WHERE "+column+" = '"+id+"' ";
+		String sqlWord = "";
+		if (choice != null || searchWord != null) {
+			if (choice.equals("name")) {
+				sqlWord = " AND "+name+" LIKE '%" + searchWord.trim() + "%' ";
+			} else if (choice.equals("cate")) {
+				sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+			}
+>>>>>>> 405c0f4953fd6e039d94818d0d223151af664ce0
 		}
 		query += sqlWord;
 		Connection conn = null;

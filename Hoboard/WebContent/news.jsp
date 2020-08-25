@@ -22,7 +22,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				<a href = "news_write.jsp">글쓰기</a>
+			<form action="news_file.jsp" enctype="multipart/form-data" method="post">
+				 <input type="submit" value="파일업로드">
+				 </form> 
+				</div>
 			<div class="col-12">
 				<div class="list-wrap">
 					<c:choose>
@@ -36,6 +40,7 @@
 								<div class="content">${ list.content }</div>
 								<div class="util-wrap">
 									<div>
+									<%-- <span>댓글 수 (${ fn:length(comm)})</span> --%>
 										<span class="view">
 											<i class="ri-eye-line"></i>
 											${ list.viewcount }

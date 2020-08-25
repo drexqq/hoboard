@@ -35,8 +35,13 @@
     <link rel="stylesheet" href="css/comp.css" />
     <!-- jqeuryCDN -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<<<<<<< HEAD
     <!-- fullcander js/css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.css">
+=======
+    <!-- fullcalendar js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css">
+>>>>>>> 405c0f4953fd6e039d94818d0d223151af664ce0
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js"></script>
   </head>
   <body>
