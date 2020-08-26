@@ -23,13 +23,6 @@
 					<input type="button" class="delBtn" name="delBtn" value="삭제"
 							onclick="location.href='news?work=del&seq=${dto.news_seq}'">
 				</div>
-<<<<<<< HEAD
-				<div><img alt="이미지 없음" src="upload/ ${dto.news_file}"></div>
-				alert('dto.news_file'+ "upload/" + ${dto.news_file});
-				
-				<div class="content-wrap">${dto.content}</div>
-=======
->>>>>>> 97898732c5a1938bb6bcea817110723abd62e8b7
 				<div class="goList">
 				<br><br>	
 					<a href="news">글 목록으로</a>

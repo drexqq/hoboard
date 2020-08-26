@@ -123,7 +123,6 @@ public class NewsController extends HttpServlet {
 			dao2.comm_del2(seq);
 			dao.news_delete(seq);
 			resp.sendRedirect("news");
-			resp.sendRedirect("news?work=detail&seq="+seq);
 			
 		// 댓글 삭제
 		} else if (work.equals("c_del")) {
