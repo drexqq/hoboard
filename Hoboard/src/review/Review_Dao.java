@@ -40,6 +40,7 @@ public class Review_Dao {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
+			// j = 보여줄 갯수
 			int j = 1;
 			while (rs.next() && j < 3) {
 				int i = 1;

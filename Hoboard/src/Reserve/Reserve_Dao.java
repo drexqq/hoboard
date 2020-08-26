@@ -5,16 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import Util.UtilEx;
 import db.DBClose;
 import db.DBConnection;
-import member.BUSI_Cate_Dto;
-import member.BUSI_Member_Dto;
 import member.BUSI_Time_Dto;
+import member.Member_Dao;
 import member.Member_Dto;
-import review.Review_Dto;
 
 public class Reserve_Dao {
 
@@ -605,5 +605,57 @@ public class Reserve_Dao {
 		}
 		return count;
 	}
-	
+
+	// GET ALL LIST USER'S RESERVE
+	public List<LinkedHashMap<Reserve_Dto, String>> getUserReserveList(String choice, String searchWord, String id, int auth){
+		String column = "";
+		String name = "";
+		if(auth == 2) {
+			column = "BUSI_ID";
+			name = "INDVD_ID";
+		}
+		else {
+			column = "INDVD_ID";
+			name = "BUSI_ID";
+		}
+		String query = " SELECT * FROM RESERVE WHERE "+column+" = ? ";
+		String sqlWord = "";
+		if (choice != null || searchWord != null) {
+			if (choice.equals("name"))		sqlWord = " AND "+name+" LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%"+searchWord.trim()+"%' )";
+			else if (choice.equals("cate"))	sqlWord = " AND BUSI_CATE LIKE '%" + searchWord.trim() + "%' ";
+		}
+		query += sqlWord;
+		
+		LinkedHashMap<Reserve_Dto, String> map = new LinkedHashMap<Reserve_Dto, String>();
+		List<LinkedHashMap<Reserve_Dto, String>> list = new ArrayList<LinkedHashMap<Reserve_Dto, String>>();
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			int j = 1;
+			while (rs.next()) {
+				int i = 1;
+				Reserve_Dto dto = new Reserve_Dto(
+										rs.getInt(i++),
+										rs.getString(i++),
+										rs.getString(i++),
+										rs.getString(i++),
+										rs.getString(i++),
+										rs.getInt(i++),
+										rs.getString(i++), 
+										UtilEx.dateToTimestamp(rs.getString(i++)));
+				map.put(dto, Member_Dao.getInstance().getUser(rs.getString(2)).getName());
+				list.add(map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
 }

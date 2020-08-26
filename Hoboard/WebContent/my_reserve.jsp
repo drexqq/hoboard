@@ -9,8 +9,8 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
           <div class="search-wrap">
             <div class="select-wrap clearfix">
               <select id="choice">
-                <option value="title">병원이름</option>
-                <option value="content">진료과</option>
+                <option value="name">병원이름</option>
+                <option value="cate">진료과</option>
               </select>
               <div class="arrow">
                 <i class="ri-arrow-down-s-line"></i>
@@ -46,17 +46,65 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
 </div>
 <script src="js/util.js"></script>
 <script>
+  function getEventList() {
+	  var events = [];
+    $.ajax({
+      url: "myreserve",
+      method: "POST",
+      dataType: "json",
+      success: function (data) {
+    	  console.log(data);
+    	  
+        if (data.length != 0) {
+          $.each(data, function (k, v) {
+        	  let obj = {
+        	              title: k,
+        	              id: v.reserve_seq,
+        	              start: v.reserve_date,
+        	              end: v.reserve_date,
+        	  }
+          events.push(data);
+          });
+        }
+      },
+    });
+    return events;
+  }
+  
   document.addEventListener("DOMContentLoaded", function () {
+	console.log(getEventList());
     var calendarEl = document.getElementById("calendar");
+    var a = [
+      {
+        title: "asdf",
+        start: "2020-08-27",
+        end: "2020-08-28",
+      },
+      {
+        title: "asdf",
+        start: "2020-08-28",
+        end: "2020-08-29",
+      },
+      {
+        title: "asdf",
+        start: "2020-08-30",
+        end: "2020-08-31",
+      },
+    ];
+    console.log(a)
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: "prev,next today",
         center: "title",
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       },
-      dateClick: function (info) {},
+      events: a,
+      dateClick: function (info) {
+        console.log(info);
+      },
       select: function (info) {},
     });
+
     calendar.render();
   });
 </script>
