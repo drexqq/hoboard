@@ -84,7 +84,6 @@ public class News_COMM_Dao {
 						rs.getString(i++), rs.getString(i++));
 				list.add(dto);
 			}
-			System.out.println(list.toString());
 			System.out.println("3/6 getComm");
 		} catch (Exception e) {
 
@@ -194,5 +193,39 @@ public class News_COMM_Dao {
 
 		return count > 0 ? true : false;
 	}
+	
+	public boolean comm_del2(int b_seq) {
+
+		String sql = " DELETE FROM NEWS_COMM " + " WHERE B_SEQ = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		Review_COMM_Dto dto = null;
+
+		int count = 0;
+
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 Comment_del2 success");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, b_seq);
+			System.out.println("2/6 Comment_del2 success");
+
+			count = psmt.executeUpdate();
+			System.out.println("3/6 Comment_del2 success");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+
+		return count > 0 ? true : false;
+	}
+
+	
+	
 
 }

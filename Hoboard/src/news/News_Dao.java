@@ -39,14 +39,10 @@ public class News_Dao {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				int seq = rs.getInt("NEWS_SEQ");
-				String id = rs.getString("ID");
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				int viewcount = rs.getInt("VIEWCOUNT");
-				String wdate = rs.getString("WDATE");
-
-				list.add(new News_Dto(seq, id, title, content, viewcount, wdate));
+				int j = 1;
+				News_Dto dto = new News_Dto(rs.getInt(j++), rs.getString(j++), rs.getString(j++), rs.getString(j++),
+						rs.getInt(j++), rs.getString(j++));
+				list.add(dto);
 			}
 			System.out.println("3/6 nlist success");
 
@@ -64,7 +60,7 @@ public class News_Dao {
 	// LIST => DETAIL로 접근 시 이용 함수
 	public News_Dto getNewsSeq(int seq) {
 
-		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE " + "	FROM NEWS" + " WHERE NEWS_SEQ=? ";
+		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE, NEWS_FILE " + "	FROM NEWS" + " WHERE NEWS_SEQ=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -91,6 +87,7 @@ public class News_Dao {
 				ndto.setContent(rs.getString("CONTENT"));
 				ndto.setViewcount(rs.getInt("VIEWCOUNT"));
 				ndto.setDate(rs.getString("WDATE"));
+				ndto.setFile(rs.getString("NEWS_FILE"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,8 +100,8 @@ public class News_Dao {
 	// 글쓰기
 	public boolean news_write(News_Dto dto) {
 
-		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, File, STEP,DEPTH)  "
-				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?, ?, 0,SYSDATE, ?,0,0  ) ";
+		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, NEWS_FILE)  "
+				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?, ?, 0, SYSDATE, ?) ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -119,7 +116,7 @@ public class News_Dao {
 			psmt.setString(1, dto.getId());
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
-			psmt.setString(4, dto.getFile());
+			psmt.setString(4, dto.getNews_file());
 			System.out.println("2/6 news_write success");
 
 			count = psmt.executeUpdate();
@@ -132,12 +129,11 @@ public class News_Dao {
 		}
 		return count > 0 ? true : false;
 	}
-	
+
 	// 글쓰기
 	public boolean news_file(News_Dto dto) {
-
-		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, FILE, STEP, DEPTH)  "
-				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?, ?,0,SYSDATE,?,0,0  ) ";
+		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, NEWS_FILE)  "
+				+ " VALUES( SEQ_NEWS.NEXTVAL, ?, ?, ?, 0, SYSDATE, ? ) ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -146,17 +142,17 @@ public class News_Dao {
 
 		try {
 			conn = DBConnection.getConnection();
-			System.out.println("1/6 news_write success");
+			System.out.println("1/6 news_file success");
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getId());
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
-			psmt.setString(4, dto.getFile());
-			System.out.println("2/6 news_write success");
+			psmt.setString(4, dto.getNews_file());
+			System.out.println("2/6 news_file success");
 
 			count = psmt.executeUpdate();
-			System.out.println("3/6 news_write success");
+			System.out.println("3/6 news_file success");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -274,7 +270,7 @@ public class News_Dao {
 		}
 		sql = sql + sqlWord;
 
-		sql += " ORDER BY REF DESC, STEP ASC ";
+		// sql += " ORDER BY REF DESC, STEP ASC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -386,7 +382,7 @@ public class News_Dao {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, start);
 			psmt.setInt(2, end);
-			
+
 			System.out.println("2/6 getNewsPagingList success");
 
 			rs = psmt.executeQuery();
@@ -406,6 +402,9 @@ public class News_Dao {
 			DBClose.close(psmt, conn, rs);
 		}
 		return list;
+		
+		
 	}
-
+	   	
+	
 }

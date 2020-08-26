@@ -10,9 +10,7 @@ public class News_Dto implements Serializable {
 	private String content;
 	private String date;
 	private int viewcount;
-	private String file;
-	private int step;
-	private int depth;
+	private String news_file;
 	
 	public News_Dto() {
 	}
@@ -31,17 +29,14 @@ public class News_Dto implements Serializable {
 		this.content = content;
 	}
 
-	public News_Dto(int news_seq, String id, String title, String content, String date, int viewcount, String file,
-			int step, int depth) {
+	public News_Dto(int news_seq, String id, String title, String content, String date, int viewcount, String news_file) {
 		this.news_seq = news_seq;
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.date = date;
 		this.viewcount = viewcount;
-		this.file = file;
-		this.step = step;
-		this.depth = depth;
+		this.news_file = news_file;
 	}
 	 
 	public News_Dto(int news_seq, String id, String title, String date, int viewcount) {
@@ -77,6 +72,13 @@ public class News_Dto implements Serializable {
 		this.content = content;
 		this.viewcount = viewcount;
 		this.date = date;
+	}
+	
+	public News_Dto(String id, String title, String content, String news_file) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.news_file = news_file;
 	}
 
 	public int getNews_seq() {
@@ -127,34 +129,19 @@ public class News_Dto implements Serializable {
 		this.viewcount = viewcount;
 	}
 
-	public String getFile() {
-		return file;
+	public String getNews_file() {
+		return news_file;
 	}
 
-	public void setFile(String file) {
-		this.file = file;
+	public void setFile(String news_file) {
+		this.news_file = news_file;
 	}
 
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
-
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
 
 	@Override
 	public String toString() {
 		return "News_Dto [news_seq=" + news_seq + ", id=" + id + ", title=" + title + ", content=" + content + ", date="
-				+ date + ", viewcount=" + viewcount + ", file=" + file + ", step=" + step + ", depth=" + depth + "]";
+				+ date + ", viewcount=" + viewcount + ", news_file=" + news_file + "]";
 	}
 	
 	

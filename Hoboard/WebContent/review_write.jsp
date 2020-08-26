@@ -1,17 +1,13 @@
 <%@page import="java.util.Date"%>
-<%@page import="Reserve.Reserve_Dto"%>
-<%@page import="member.Member_Dto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%
-Member_Dto N_list = (Member_Dto)request.getAttribute("businame");
+<%@ include file="module/header.jsp"%>
+<!-- Member_Dto N_list = (Member_Dto)request.getAttribute("businame");
 Reserve_Dto C_list = (Reserve_Dto)request.getAttribute("reservecate");
-Reserve_Dto R_list = (Reserve_Dto)request.getAttribute("reservelist");
-
+Reserve_Dto R_list = (Reserve_Dto)request.getAttribute("reservelist"); -->
+<%
 String fname = (new Date().getTime()) + "";
 System.out.println("fname:" + fname);
-
 %>
     
 <!DOCTYPE html>
@@ -23,8 +19,8 @@ System.out.println("fname:" + fname);
 <body>
 
 <form action="file" method="post" enctype="multipart/form-data">
-<input type="hidden" name="indvd_id" value="<%=R_list.getIndvd_id()%>">
-<input type="hidden" name="busi_id" value="<%=R_list.getBusi_id()%>"> 
+<input type="hidden" name="indvd_id" value="${ R_list.getIndvd_id() }">
+<input type="hidden" name="busi_id" value="${ R_list.getBusi_id() }"> 
 
 <table border="1" align="center">
 <col width="100"><col width="300">
@@ -36,7 +32,7 @@ System.out.println("fname:" + fname);
 		병원 카테고리
 	</th>
 		<td>
-			<input type="text" name="cate" value="<%=N_list.getName() %>-<%=C_list.getCate() %>" readonly="readonly">
+			<input type="text" name="cate" value="${ N_list.getName() }-${ C_list.getCate() }" readonly="readonly">
 		</td>
 </tr>
 <tr>
@@ -47,7 +43,7 @@ System.out.println("fname:" + fname);
 		아이디 :
 	</th>
 		<td>
-			<input type="text" name="id" value="<%=R_list.getIndvd_id() %>" readonly="readonly">
+			<input type="text" name="id" value="${R_list.getIndvd_id() }" readonly="readonly">
 		</td>
 </tr>
 <tr>
@@ -97,7 +93,7 @@ System.out.println("fname:" + fname);
 <tr>
 	<td align="center" colspan="2">
 		<input type="submit" value="후기작성">
-		<input type="button" onclick="location='review?key=main&id=<%=R_list.getIndvd_id() %>'" value="후기작성취소하기">
+		<input type="button" onclick="location='review?key=main&id=${R_list.getIndvd_id()}'" value="후기작성취소하기">
 	</td>
 </tr>
 </table>

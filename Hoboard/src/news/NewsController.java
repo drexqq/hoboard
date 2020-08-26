@@ -2,6 +2,7 @@ package news;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -75,6 +76,8 @@ public class NewsController extends HttpServlet {
 
 			News_Dto dto = dao.getNewsSeq(seq);
 			News_COMM_Dao commDao = News_COMM_Dao.getInstance();
+			//System.out.println(dto.toString());
+//			System.out.println(dto.toString());
 
 			System.out.println(commDao.getComm(seq).toString());
 			boolean vc = dao.viewcount(seq);
@@ -115,11 +118,12 @@ public class NewsController extends HttpServlet {
 		} else if (work.equals("del")) {
 			
 			System.out.println("work.equals(del)");
-			int b_seq = Integer.parseInt(req.getParameter("b_seq"));
+			int seq = Integer.parseInt(req.getParameter("seq"));
 
-			dao.news_delete(b_seq);
-			resp.sendRedirect("news?work=detail&seq="+b_seq);
-
+			dao2.comm_del2(seq);
+			dao.news_delete(seq);
+			resp.sendRedirect("news");
+			
 		// 댓글 삭제
 		} else if (work.equals("c_del")) {
 			
@@ -206,7 +210,6 @@ public class NewsController extends HttpServlet {
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			// System.out.println("title ="+title+", content= "+content);
-
 			id = "admin";
 			dao = News_Dao.getInstance();
 			News_Dto dto = new News_Dto(id, title, content);
@@ -263,12 +266,9 @@ public class NewsController extends HttpServlet {
 				System.out.println("덧글 수정 실패");
 				resp.sendRedirect("news?work=detail&seq=" + b_seq);
 			}
-			
-			
-			
+
 			//resp.sendRedirect("news?work=detail&b_seq"+b_seq);
-			
-		}
+		} 
 	
 	}
 }

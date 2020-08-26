@@ -23,9 +23,8 @@
 					</div>
 				</div>
 				<a href = "news_write.jsp">글쓰기</a>
-			<form action="news_file.jsp" enctype="multipart/form-data" method="post">
-				 <input type="submit" value="파일업로드">
-				 </form> 
+			<form action="news_file" enctype="multipart/form-data" method="post">
+			</form> 
 				</div>
 			<div class="col-12">
 				<div class="list-wrap">

@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 <%@page import="news.News_COMM_Dto"%>
 <%@page import="news.News_COMM_Dao"%>
 <%@page import="news.News_Dao"%>
 <%@page import="java.util.List"%>
-<%@page import="news.News_Dto"%>
-=======
->>>>>>> news_f
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="module/header.jsp"%>
@@ -44,7 +40,8 @@
 												</div>
 												<div class="down">
 													<input type="text" value="${dto2.content}" name="content"
-														id="content" /> <input class="submit" type="submit"
+														id="content" />
+													<input class="replyupdate" type="submit" 
 														value="수정 완료">
 												</div>
 											</div>
@@ -55,7 +52,7 @@
 						</c:otherwise>
 					</c:choose>
 					<div class="goList">
-						<input type='button' onclick='backBtn()' value='뒤로 가기'/>
+						<input type='button' class="back" onclick='backBtn()' value='뒤로 가기'/>
 					</div>
 				</div>
 			</div>
