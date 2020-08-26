@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
                 type="text"
                 id="search"
                 placeholder="검색어를 입력해주세요."
-                value=""
+                value="${ searchWord }"
                 onkeydown="enter('myreserve')"
               />
               <button class="btn" onclick="search('myreserve')">
@@ -46,66 +46,60 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
 </div>
 <script src="js/util.js"></script>
 <script>
-  function getEventList() {
-	  var events = [];
-    $.ajax({
-      url: "myreserve",
-      method: "POST",
-      dataType: "json",
-      success: function (data) {
-    	  console.log(data);
-    	  
-        if (data.length != 0) {
-          $.each(data, function (k, v) {
-        	  let obj = {
-        	              title: k,
-        	              id: v.reserve_seq,
-        	              start: v.reserve_date,
-        	              end: v.reserve_date,
-        	  }
-          events.push(data);
-          });
-        }
-      },
-    });
-    return events;
-  }
-  
-  document.addEventListener("DOMContentLoaded", function () {
-	console.log(getEventList());
+$(document).ready(function() {
+	let c = "<c:out value='${ choice }' />"
+	$("#choice").find("option").each(function(){
+		if($(this).val() == c) $(this).attr("selected","selected");
+	})
+})
+  var events = [];
+   $.when(getEventList()).done(function () {
+   	calendarRender();
+   });
+
+  function calendarRender() {
     var calendarEl = document.getElementById("calendar");
-    var a = [
-      {
-        title: "asdf",
-        start: "2020-08-27",
-        end: "2020-08-28",
-      },
-      {
-        title: "asdf",
-        start: "2020-08-28",
-        end: "2020-08-29",
-      },
-      {
-        title: "asdf",
-        start: "2020-08-30",
-        end: "2020-08-31",
-      },
-    ];
-    console.log(a)
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: "prev,next today",
         center: "title",
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       },
-      events: a,
-      dateClick: function (info) {
-        console.log(info);
-      },
+      events: events,
+      dateClick: function (info) {},
       select: function (info) {},
     });
-
     calendar.render();
-  });
+  }
+
+  function getEventList() {
+    console.log("ajax start");
+    console.log($("#search").val())
+    return $.ajax({
+      url: "myreserve",
+      method: "POST",
+      dataType: "json",
+      data : {
+    	  choice : "<c:out value='${ choice }' />",
+    	  searchWord : $("#search").val() 
+      },
+      success: function (data) {
+        if (data.length != 0) {
+          $.each(data, function (k, v) {
+            var eventData = {
+              title: k.substring(0, k.length-13),
+              id: v.reserve_seq,
+              start: v.reserve_time,
+              end: v.reserve_time,
+            };
+            events.push(eventData);
+          });
+        }
+      },
+      error: function () {
+        console.log("error");
+      },
+    });
+  }
 </script>
 <%@ include file="module/footer.jsp"%>

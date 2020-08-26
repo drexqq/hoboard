@@ -26,6 +26,31 @@ public class BUSI_Cate_Dto extends Member_Dto implements Serializable {
 	private String ophth;
 	
 	public BUSI_Cate_Dto() {}
+	
+	
+	public BUSI_Cate_Dto(String id, String internal, String anpn, String mtrnt, String pdtrc, String nrlgy,
+			String nrsrg, String crdlg, String xray, String gs, String dprtm, String os, String rhblt, String thrcc,
+			String skin_uro, String dent, String ophth) {
+		super();
+		this.id = id;
+		this.internal = internal;
+		this.anpn = anpn;
+		this.mtrnt = mtrnt;
+		this.pdtrc = pdtrc;
+		this.nrlgy = nrlgy;
+		this.nrsrg = nrsrg;
+		this.crdlg = crdlg;
+		this.xray = xray;
+		this.gs = gs;
+		this.dprtm = dprtm;
+		this.os = os;
+		this.rhblt = rhblt;
+		this.thrcc = thrcc;
+		this.skin_uro = skin_uro;
+		this.dent = dent;
+		this.ophth = ophth;
+	}
+
 
 	public BUSI_Cate_Dto(String internal, String anpn, String mtrnt, String pdtrc, String nrlgy, String nrsrg,
 			String crdlg, String xray, String gs, String dprtm, String os, String rhblt, String thrcc, String skin_uro,

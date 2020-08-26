@@ -14,7 +14,11 @@ public class BUSI_Member_Dto extends Member_Dto implements Serializable {
 	private String time;
 	private String homepage;
 	private String logo;
-	 // 진료 시간
+	public BUSI_Member_Dto(String homepage, String logo) {
+		this.homepage = homepage;
+		this.logo = logo;
+	}
+	
 	public BUSI_Member_Dto(String id, String homepage, String logo) {
 		super();
 		this.id = id;

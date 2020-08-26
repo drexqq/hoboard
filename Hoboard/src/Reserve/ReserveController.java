@@ -24,79 +24,67 @@ import review.Review_Dao;
 
 @WebServlet("/reserve")
 public class ReserveController extends HttpServlet {
-
-	
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
 		Reserve_Dao dao = Reserve_Dao.getInstance();
-		
 		String cate = req.getParameter("cate");
 		String key = req.getParameter("key");
 		
-		//key == null || "".equals(key)
 		if(key == null || "".equals(key)) {
-			
 			List<Member_Dto> S_list = null;
 			
 			String loc = req.getParameter("loc");
 			String amt = req.getParameter("amt");
 			String searchWord =  req.getParameter("searchWord");
 			
-			System.out.println(loc);
-			System.out.println(amt);
-			System.out.println(searchWord);
-			
-			int limit = 5;
+			int limit = 2;
 			int pageNumber = 0;
 
-			if (req.getParameter("page") == null)
-				pageNumber = 0;
-			else
-				pageNumber = Integer.parseInt((String) req.getParameter("page"));
+			if (req.getParameter("page") == null) pageNumber = 0;
+			else pageNumber = Integer.parseInt((String) req.getParameter("page"));
 			
 			int len = dao.getsearch_allcount(loc, amt, searchWord);
-			
+			System.out.println(len);
 			int page = len / limit; // 예: 12개 -> 2page
-			if (len % limit > 0)
-				page = page + 1; // -> 2
-			
-			System.out.println("총 게시물 숫자 len : " + len);
-			System.out.println("페이지 갯수 page : " + page);
-			System.out.println("페이지 넘버 pageNum : " + pageNumber);
+			if (len % limit > 0) page = page + 1; // -> 2
 			
 			// 처음 들어왔을때
 			if (loc == null && amt == null && searchWord == null && pageNumber == 0) {
-				System.out.println("처음");
 				S_list = dao.getSearch_list("", "", "", limit, pageNumber);
-			// 페이지만 바뀔때
-			}else if (loc == null && amt == null && searchWord == null && req.getParameter("page") != null) {
-				System.out.println("페이지만");
-				S_list = dao.getSearch_list("", "", "", limit, pageNumber);
-			// 검색후 페이지 바뀔때
-			}else {
-				System.out.println("검색");
-				S_list = dao.getSearch_list(loc, amt, searchWord, limit, pageNumber);
-				req.setAttribute("loc", loc);
-				req.setAttribute("amt", amt);
-				req.setAttribute("searchWord", searchWord);
 			}
-			
-			
+			else {
+				S_list = dao.getSearch_list(loc, amt, searchWord, limit, pageNumber);
+			}
+			req.setAttribute("loc", loc);
+			req.setAttribute("amt", amt);
+			req.setAttribute("searchWord", searchWord);
 			req.setAttribute("len", len); // 총 개수
 			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 			req.setAttribute("page", page - 1); // 총 페이지수
 			req.setAttribute("res_search_list", S_list); // 실제 데이터 
 			UtilEx.forward("reserve.jsp", req, resp);
+		
+		}
+		else if(key.equals("detail")) {
+			String id = req.getParameter("id");
+			String time[] = BUSI_Member_Dao.time;
+			String cate_k[] = BUSI_Member_Dao.cate;
+			String amenity_k[] = BUSI_Member_Dao.amenity;
+			Map<String, Object> map = dao.getBusiUserDetail(id);
 			
-		
-		
-		}else if(key.equals("category")) {
+			req.setAttribute("busi_id", id);
+			req.setAttribute("time", time);
+			req.setAttribute("cate_k", cate_k);
+			req.setAttribute("amenity_k", amenity_k);
+			req.setAttribute("map", map);
+			UtilEx.forward("reserve_detail.jsp", req, resp);
+		}
+		/*
+		 	else if(key.equals("category")) {
 			
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			List<Member_Dto> list = dao.getCate_list(cate, seq);
@@ -104,160 +92,8 @@ public class ReserveController extends HttpServlet {
 			req.setAttribute("reslist", list);
 			UtilEx.forward("reserve.jsp", req, resp);
 			
-		}else if(key.equals("detail")) {
-			
-			String id = req.getParameter("id");
-			int score = dao.getScore_avg(id);
-			String homepage = dao.getHomepage(id);
-			
-			
-			List<Member_Dto> m_list = dao.getMember_list(id);
-			List<BUSI_Time_Dto> t_list = dao.getTime_list(id);
-			Map<String, Integer> busi_cate = dao.getCate_list(id);
-			Map<String, Integer> busi_amenity = dao.getAmetiny_list(id);
-			
-			req.setAttribute("busi_id", id);
-			req.setAttribute("score",score);
-			req.setAttribute("homepage",homepage);
-			req.setAttribute("memberlist", m_list);
-			req.setAttribute("timelist", t_list);
-			req.setAttribute("catelist", busi_cate);
-			req.setAttribute("amenitylist", busi_amenity);
-			UtilEx.forward("reserve_detail.jsp", req, resp);
-			
-			
-		} else if(key.equals("select")) {
-			
-			String id = req.getParameter("id");
-			
-			System.out.println(id);
-			
-			List<Reserve_Dto> rlist = dao.getReserve_list(id);
-			HashMap<String, Object> rmap = new HashMap<String, Object>();
-			JSONObject jobj = new JSONObject();
-
-			System.out.println(rlist.toString());
-			
-			rmap.put("rlist", rlist);
-			jobj.put("rmap", rmap);
-			resp.setContentType("application/x-json; charset=UTF-8");
-			resp.getWriter().print(jobj);
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			/*ArrayList<String> Alist = new ArrayList<String>();
-			
-			Alist.add("09:00~10:00");
-			Alist.add("10:00~11:00");
-			Alist.add("11:00~12:00");
-			Alist.add("12:00~13:00");
-			Alist.add("13:00~14:00");
-			Alist.add("14:00~15:00");
-			Alist.add("16:00~17:00");
-			Alist.add("17:00~18:00");
-
-			String reserve_date = req.getParameter("reserve_date");
-			String date = req.getParameter("date");
-			
-			
-			
-			
-			
-			
-			
-			
-			int idx = date.indexOf("(");
-			String date2 = date.substring(idx+1);
-			String date3 = date2.substring(0,1);
-			
-			switch (date3) {
-			case "월":
-				date3 = "MON";
-				break;
-			case "화":
-				date3 = "TUE";
-				break;
-			case "수":
-				date3 = "WED";
-				break;
-			case "목":
-				date3 = "THU";
-				break;
-			case "금":
-				date3 = "FRI";
-				break;
-			case "토":
-				date3 = "SAT";
-				break;
-			case "일":
-				date3 = "SUN";
-				break;
-			}
-			System.out.println(date);	
-			System.out.println(id);
-			System.out.println(date3);
-			System.out.println(reserve_date);
-			
-			String Break = dao.getBreak_Time(id, date3);
-			
-			JSONObject jobj = new JSONObject();
-			List<String> jlist = new ArrayList<String>();
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			
-			if(Break.equals("휴무")) {
-				
-				Break = "휴무일입니다.";
-				
-				
-				jlist.add(Break);
-				map.put("jlist", jlist);
-				jobj.put("map", map);
-				
-				resp.setContentType("application/x-json; charset=UTF-8");
-				resp.getWriter().print(jobj);
-			
-			} else {
-				
-				String cut = reserve_date.substring(2);
-				System.out.println(cut);
-				
-				String lunch = dao.getLunch_Time(id);
-				System.out.println(lunch);
-				
-				Alist.remove(lunch);
-				
-				
-				List<String> tlist = dao.getDate_Time(cut,id);
-				
-				
-				for (int i = 0; i < Alist.size(); i++) {
-					for (int j = 0; j < tlist.size(); j++) {
-						if(Alist.get(i).equals(tlist.get(j))) {
-							Alist.remove(i);
-						}
-					}
-					
-					System.out.println(Alist.get(i));
-					
-				}
-				
-				System.out.println(Alist.toString());
-				
-				
-				map.put("alist", Alist);
-				jobj.put("map", map);
-				resp.setContentType("application/x-json; charset=UTF-8");
-				resp.getWriter().print(jobj);
-			}*/
-			
-			
 		}
+		 */
 	}
 
 	@Override

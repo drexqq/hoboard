@@ -25,7 +25,10 @@ public class Review_Dto implements Serializable {
 	
 	public Review_Dto() {
 	}
-
+	
+	public Review_Dto(int score) {
+		this.score = score;
+	}
 
 	public Review_Dto(int review_seq, String busi_id, String indvd_id, String title, String content, int viewcount,
 			int score, String wdate, String filename, String busi_cate, int del) {

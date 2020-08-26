@@ -77,15 +77,41 @@ function search(page) {
 
 // Reserve_search
 function R_search(page) {
- 	let loc = document.getElementById("loc").value;
-	let amt = document.getElementById("amt").value;
-	let searchWord = document.getElementById("searchWord").value; 
-  
-  if (searchWord == null || searchWord == "") {
-    document.getElementById("searchWord").value = "";
-    location.href = page + "?loc=" + loc + "&amt=" + amt;
-  }	else {
-    location.href = page + "?searchWord=" + searchWord + "&loc=" + loc + "&amt=" + amt;
+  let loc = document.getElementById("loc").value;
+  let amt = document.getElementById("amt").value;
+  let searchWord = document.getElementById("searchWord").value;
+  // 셋 다 설정 안하고 검색
+  if (
+    (loc == null || loc == "") &&
+    (amt == null || amt == "") &&
+    (searchWord == null || searchWord == "")
+  ) {
+    location.href = "reserve";
+  }
+  // 지역만 설정
+  else if ((loc != null || loc != "") && (amt == null || amt == "")) {
+    if (searchWord == null || searchWord == "") {
+      location.href = page + "?loc=" + loc;
+    } else {
+      location.href = page + "?searchWord=" + searchWord + "&loc=" + loc;
+    }
+  }
+  // 과만 설정
+  else if ((loc == null || loc == "") && (amt != null || amt != "")) {
+    if (searchWord == null || searchWord == "") {
+      location.href = page + "?amt=" + amt;
+    } else {
+      location.href = page + "?searchWord=" + searchWord + "&amt=" + amt;
+    }
+  }
+  // 지역, 과 설정
+  else if ((loc != null || loc != "") && (amt != null || amt != "")) {
+    if (searchWord == null || searchWord == "") {
+      location.href = page + "?loc=" + loc + "&amt=" + amt;
+    } else {
+      location.href =
+        page + "?searchWord=" + searchWord + "&loc=" + loc + "&amt=" + amt;
+    }
   }
 }
 
@@ -94,8 +120,49 @@ function goRPage(pageName, pageNum) {
   var loc = document.getElementById("loc").value;
   var amt = document.getElementById("amt").value;
   var searchWord = document.getElementById("searchWord").value;
-  
-  if (loc != null && loc != "" && amt != null && amt != ""  && searchWord != null && searchWord != "") {
+  console.log(loc);
+  console.log(amt);
+  console.log(searchWord);
+  // 페이징만
+  if (
+    (loc == null || loc == "") &&
+    (amt == null || amt == "") &&
+    (searchWord == null || searchWord == "")
+  ) {
+    location.href = pageName + "?page=" + pageNum;
+  }
+  // 지역만 설정
+  else if (
+    (loc != null || loc != "") &&
+    (amt == null || amt == "") &&
+    (searchWord == null || searchWord == "")
+  ) {
+    location.href =
+      pageName +
+      "?searchWord=" +
+      searchWord +
+      "&loc=" +
+      loc +
+      "&page=" +
+      pageNum;
+  }
+  // 과만 설정
+  else if (
+    (amt != null || amt != "") &&
+    (loc == null || loc == "") &&
+    (searchWord == null || searchWord == "")
+  ) {
+    location.href =
+      pageName +
+      "?searchWord=" +
+      searchWord +
+      "&amt=" +
+      amt +
+      "&page=" +
+      pageNum;
+  }
+  // 둘다 설정
+  else if ((amt != null || amt != "") && (loc != null || loc != "")) {
     location.href =
       pageName +
       "?searchWord=" +
@@ -106,11 +173,8 @@ function goRPage(pageName, pageNum) {
       amt +
       "&page=" +
       pageNum;
-  } else if (searchWord == null || searchWord == "") {
-    location.href = pageName + "?page=" + pageNum;
   }
 }
-
 
 // paging
 function goPage(pageName, pageNum) {
@@ -136,9 +200,3 @@ function enter(pageName) {
     search(pageName);
   }
 }
-
-
-
-
-
-

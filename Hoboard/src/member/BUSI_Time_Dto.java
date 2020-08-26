@@ -40,7 +40,22 @@ public class BUSI_Time_Dto extends Member_Dto implements Serializable {
 		this.night = night;
 		this.emer = emer;
 	}
-
+	
+	public BUSI_Time_Dto(String mon, String tue, String wed, String thu, String fri, String sat, String sun,
+			String lunch, int holiday, int night, int emer) {
+		super();
+		this.mon = mon;
+		this.tue = tue;
+		this.wed = wed;
+		this.thu = thu;
+		this.fri = fri;
+		this.sat = sat;
+		this.sun = sun;
+		this.lunch = lunch;
+		this.holiday = holiday;
+		this.night = night;
+		this.emer = emer;
+	}
 	
 	
 

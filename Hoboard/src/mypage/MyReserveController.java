@@ -31,8 +31,6 @@ public class MyReserveController extends HttpServlet implements Serializable {
 		String c = (String) req.getParameter("choice");
 		String sW = (String) req.getParameter("searchWord");
 		int count = dao.getUserReserveCount(c, sW, id, auth);
-		
-		
 		if (sW == null && c == null) 
 			list = dao.getUserReserveList(c, sW, id, auth);
 		else {
@@ -58,6 +56,8 @@ public class MyReserveController extends HttpServlet implements Serializable {
 		// parameters
 		String c = (String) req.getParameter("choice");
 		String sW = (String) req.getParameter("searchWord");
+		System.out.println(c);
+		System.out.println(sW);
 		int count = dao.getUserReserveCount(c, sW, id, auth);
 		
 		if (sW == null && c == null) 
