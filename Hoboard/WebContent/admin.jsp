@@ -20,21 +20,21 @@
 <tr>
 <td>회원 관리</td>
 <td>회원 수()</td>
-<td><input type="button" name="memBtn" value="바로가기"/></td>
+<td><input type="button" name="memBtn" onclick="location.href='member'" value="바로가기"/></td>
 </tr>
 <tr>
 <td>Q&A 관리</td>
-<td>답변 대기 ()건</td>
+<td>답변 대기 (${ fn:length(rlist) })건</td>
 <td><input type="button" name="qnaBtn" onclick="location.href='ask'" value="바로가기"/></td>
 </tr>
 <tr>
 <td>이용 후기 관리</td>
-<td>총 후기 ()건</td>
+<td>작성 된 후기 (${ fn:length(rlist) })건</td>
 <td><input type="button" name="revBtn" onclick="location.href='review'" value="바로가기"/></td>
 </tr>
 <tr>
 <td>건강 정보 게시판 관리</td>
-<td>건강 정보 ()건</td>
+<td>건강 정보 (${ fn:length(nlist) })건</td>
 <td><input type="button" name="newsBtn" onclick="location.href='news'"value="바로가기"/></td>
 </tr>
 </table>
@@ -43,7 +43,7 @@
 
 <div>Q&A 게시판</div>
 <div><input type="button" name="revBtn" onclick="location.href='ask'" value="바로가기"/></div>
-<c:forEach items="${ qlist }" var="qlist" varStatus="status" begin="0" end="5">
+<c:forEach items="${ qlist }" var="qlist" varStatus="status" begin="0" end="4">
 <div>${qlist.wdate}${qlist.id}${qlist.title}</div>
 </c:forEach>
 
@@ -52,7 +52,7 @@
 
 <div>최신 이용 후기</div>
 <div><input type="button" name="revBtn" onclick="location.href='review'" value="바로가기"/></div>
-<c:forEach items="${ rlist }" var="rlist" varStatus="status" begin="0" end="5">
+<c:forEach items="${ rlist }" var="rlist" varStatus="status" begin="0" end="4">
 <div>${rlist.wdate}${rlist.indvd_id}${rlist.title}${rlist.score}</div>
 </c:forEach>
 
