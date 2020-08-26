@@ -60,7 +60,7 @@ public class News_Dao {
 	// LIST => DETAIL로 접근 시 이용 함수
 	public News_Dto getNewsSeq(int seq) {
 
-		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE " + "	FROM NEWS" + " WHERE NEWS_SEQ=? ";
+		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE, NEWS_FILE " + "	FROM NEWS" + " WHERE NEWS_SEQ=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -87,6 +87,7 @@ public class News_Dao {
 				ndto.setContent(rs.getString("CONTENT"));
 				ndto.setViewcount(rs.getInt("VIEWCOUNT"));
 				ndto.setDate(rs.getString("WDATE"));
+				ndto.setFile(rs.getString("NEWS_FILE"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -401,6 +402,9 @@ public class News_Dao {
 			DBClose.close(psmt, conn, rs);
 		}
 		return list;
+		
+		
 	}
-
+	   	
+	
 }

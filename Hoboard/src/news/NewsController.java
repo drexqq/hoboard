@@ -76,7 +76,7 @@ public class NewsController extends HttpServlet {
 
 			News_Dto dto = dao.getNewsSeq(seq);
 			News_COMM_Dao commDao = News_COMM_Dao.getInstance();
-			System.out.println(dto.toString());
+			//System.out.println(dto.toString());
 //			System.out.println(dto.toString());
 
 			System.out.println(commDao.getComm(seq).toString());
@@ -118,10 +118,11 @@ public class NewsController extends HttpServlet {
 		} else if (work.equals("del")) {
 			
 			System.out.println("work.equals(del)");
-			int b_seq = Integer.parseInt(req.getParameter("b_seq"));
+			int seq = Integer.parseInt(req.getParameter("seq"));
 
-			dao.news_delete(b_seq);
-			resp.sendRedirect("news?work=detail&seq="+b_seq);
+			dao2.comm_del2(seq);
+			dao.news_delete(seq);
+			resp.sendRedirect("news");
 
 		// 댓글 삭제
 		} else if (work.equals("c_del")) {
