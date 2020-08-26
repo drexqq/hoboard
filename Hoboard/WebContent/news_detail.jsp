@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="module/header.jsp"%>
+
+
+<img src="">
+	
 <div class="board-detail news-detail">
 	<div class="container">
 		<div class="row">
@@ -14,15 +18,18 @@
 							<i class="ri-eye-line"></i>${ dto.viewcount }</div>
 					</div>
 				</div>
-				<%-- <div><img alt="이미지 없음" src="/WebContent/upload/"+${dto.news_file}></div> --%>
+				<%-- <div><img alt="이미지 없음" src="/upload/"+${dto.news_file}></div> --%>
+				<div><img alt="이미지 없음" src="hoboard/upload/Member.jpg"></div>
 				<div class="content-wrap"> ${dto.content} </div>
 				<br>
+				<c:if test="${ sessionID eq dto.id }">
 				<div class="btns" align="center">
 					<input type="button" class="updateBtn" name="updateBtn" value="수정"
 							onclick="location.href='news?work=update&seq=${dto.news_seq}'">
 					<input type="button" class="delBtn" name="delBtn" value="삭제"
 							onclick="location.href='news?work=del&seq=${dto.news_seq}'">
 				</div>
+				</c:if>
 				<div class="goList">
 				<br><br>	
 					<a href="news">글 목록으로</a>

@@ -609,7 +609,6 @@ public class Reserve_Dao {
 		return count;
 	}
 
-<<<<<<< HEAD
 	// GET ALL LIST USER'S RESERVE
 	public List<LinkedHashMap<Reserve_Dto, String>> getUserReserveList(String choice, String searchWord, String id, int auth){
 		String column = "";
@@ -655,7 +654,14 @@ public class Reserve_Dao {
 				map.put(dto, Member_Dao.getInstance().getUser(rs.getString(2)).getName());
 				list.add(map);
 			}
-=======
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+
 	public List<Reserve_Dto> getReserve_list(String id) {
 		String sql = " SELECT RESERVE_DATE , RESERVE_TIME " + " FROM RESERVE " + " WHERE BUSI_ID = ? ";
 
@@ -684,7 +690,6 @@ public class Reserve_Dao {
 				list.add(dto);
 			}
 
->>>>>>> 88b36130bf347e2e557f81fd3bb168554c89c1ab
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
