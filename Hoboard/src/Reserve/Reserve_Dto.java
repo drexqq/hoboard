@@ -29,6 +29,19 @@ public class Reserve_Dto implements Serializable {
 		this.status = status;
 		this.reserve_date = reserve_date;
 	}
+	
+	public Reserve_Dto(int reserve_seq, String busi_id, String indvd_id, String cate, String cont, int status, String reserve_time,
+			 String reserve_date) {
+		super();
+		this.reserve_seq = reserve_seq;
+		this.busi_id = busi_id;
+		this.indvd_id = indvd_id;
+		this.cate = cate;
+		this.reserve_time = reserve_time;
+		this.cont = cont;
+		this.status = status;
+		this.reserve_date = reserve_date;
+	}
 
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -96,8 +109,8 @@ public class Reserve_Dto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Reserve_Dto [reserve_seq=" + reserve_seq + ", busi_id=" + busi_id + ", indvd_id=" + indvd_id + ", cate="
+		return "reserve_seq=" + reserve_seq + ", busi_id=" + busi_id + ", indvd_id=" + indvd_id + ", cate="
 				+ cate + ", reserve_time=" + reserve_time + ", cont=" + cont + ", status=" + status + ", reserve_date="
-				+ reserve_date + "]";
+				+ reserve_date;
 	}
 }

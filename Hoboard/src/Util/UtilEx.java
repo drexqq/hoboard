@@ -4,14 +4,25 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Reserve.Reserve_Dto;
 import db.DBClose;
 import db.DBConnection;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+
 
 public class UtilEx {
 	public static void forward(String link, HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
@@ -99,4 +110,31 @@ public class UtilEx {
 		else
 			return false;
 	}
+	
+	// date to timestamp
+	public static String dateToTimestamp(String date) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date d = (Date) sdf.parse(date);
+		long real = d.getTime();
+		return real+"";
+	}
+	// 혹시 몰라서 넣어둠 ㅎ
+	public static JSONArray listToJson (List<LinkedHashMap<Reserve_Dto,String>> list) {
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.add(mapToJson(list.get(1)));
+		System.out.println(jsonArray.size());
+		return jsonArray;
+	}
+	// MyReserverController에서 사용  << map to json
+	public static JSONObject mapToJson (LinkedHashMap<Reserve_Dto, String> map) {
+		JSONObject json = new JSONObject();
+		for (Entry<Reserve_Dto, String> entry : map.entrySet()) {
+			Reserve_Dto key = entry.getKey();
+			Object value = entry.getValue();
+			json.put(value+key.getReserve_date(), key);
+		}
+		return json;
+	}
+
+	
 }
