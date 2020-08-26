@@ -661,6 +661,7 @@ public class Reserve_Dao {
 		}
 		return list;
 	}
+
 	public List<Reserve_Dto> getReserve_list(String id) {
 		String sql = " SELECT RESERVE_DATE , RESERVE_TIME " + " FROM RESERVE " + " WHERE BUSI_ID = ? ";
 
