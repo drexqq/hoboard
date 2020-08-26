@@ -118,11 +118,13 @@ public class NewsController extends HttpServlet {
 		} else if (work.equals("del")) {
 			
 			System.out.println("work.equals(del)");
-			int b_seq = Integer.parseInt(req.getParameter("b_seq"));
+			int b_seq = Integer.parseInt(req.getParameter("seq"));
+			System.out.println(b_seq);
 
 			dao.news_delete(b_seq);
 			resp.sendRedirect("news?work=detail&seq="+b_seq);
-
+			
+			
 		// 댓글 삭제
 		} else if (work.equals("c_del")) {
 			

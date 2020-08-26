@@ -196,11 +196,11 @@ public class Review_File_Controller extends HttpServlet {
 		boolean isS = dao.writeReview(new Review_Dto(busi_id, indvd_id, title, content, score, filename, busi_cate));
 		if (isS) {
 			System.out.println("파일 업로드 성공");
-			resp.sendRedirect("review?key=main");
+			resp.sendRedirect("reviewn");
 
 		} else {
 			System.out.println("파일 업로드 실패");
-			resp.sendRedirect("review?key=main");
+			resp.sendRedirect("review");
 
 		}
 	}
