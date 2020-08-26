@@ -4,9 +4,7 @@
 
 
 
-<title>Insert title here</title>
-</head>
-<body>
+<title>관리자 페이지</title>
 
 <table border="1">
 <tr>
@@ -19,8 +17,8 @@
 </tr>
 <tr>
 <td>회원 관리</td>
-<td>회원 수()</td>
-<td><input type="button" name="memBtn" onclick="location.href='member'" value="바로가기"/></td>
+<td>병원 회원 (${ fn:length(hmlist) })명 /개인 회원 (${ fn:length(pmlist) })명</td>
+<td><input type="button" name="memBtn" onclick="location.href='admin?adm=adminM'" value="바로가기"/></td>
 </tr>
 <tr>
 <td>Q&A 관리</td>
@@ -42,7 +40,7 @@
 <br><br>
 
 <div>Q&A 게시판</div>
-<div><input type="button" name="revBtn" onclick="location.href='ask'" value="바로가기"/></div>
+<div><input type="button" name="qnaBtn" onclick="location.href='ask'" value="바로가기"/></div>
 <c:forEach items="${ qlist }" var="qlist" varStatus="status" begin="0" end="4">
 <div>${qlist.wdate}${qlist.id}${qlist.title}</div>
 </c:forEach>

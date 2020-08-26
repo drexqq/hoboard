@@ -15,6 +15,17 @@ public class Member_Dto {
 	public Member_Dto() {
 	}
 
+	public Member_Dto(int auth, String id, String name, String tel, String email) {
+		super();
+		this.auth = auth;
+		this.id = id;
+		this.name = name;
+		this.tel = tel;
+		this.email = email;
+
+	}
+	
+	
 	public Member_Dto(String name, String tel, String address, String d_Address) {
 		super();
 		this.name = name;

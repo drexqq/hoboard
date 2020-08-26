@@ -360,4 +360,55 @@ public class Member_Dao {
 		System.out.println("get busimember from member table done");
 		return list;
 	}
+	
+	public List<Member_Dto> getBusiMember_admin() {
+		
+		String query = " SELECT * FROM MEMBER WHERE AUTH =2 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				Member_Dto dto = new Member_Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("get busimember from member table done");
+		return list;
+	}
+	
+	public List<Member_Dto> getPMember_admin() {
+		
+		String query = " SELECT AUTH, ID, NAME, TEL, EMAIL FROM MEMBER WHERE AUTH =1 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				Member_Dto dto = new Member_Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("get busimember from member table done");
+		return list;
+	}
+	
 }

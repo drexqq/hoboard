@@ -57,6 +57,36 @@ public class Review_Dao {
 		}
 		return list;
 	}
+	
+	public List<Review_Dto> getReviewList2() {
+		String sql = " SELECT * FROM REVIEW WHERE DEL = 0 " + " ORDER BY REVIEW_SEQ DESC ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		//LinkedHashMap<Review_Dto, String> map = new LinkedHashMap<Review_Dto, String>();
+		List<Review_Dto> list = new ArrayList<Review_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			//int j = 1;
+			while (rs.next()) {
+				int i = 1;
+				Review_Dto dto = new Review_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++), rs.getInt(i++));
+				//map.put(dto, Member_Dao.getInstance().getUser(rs.getString(2)).getName());
+				list.add(dto);
+				//j++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+	
 
 	// TODO INSERT INTO REVIEW TALBE
 	public boolean writeReview(Review_Dto dto) {
