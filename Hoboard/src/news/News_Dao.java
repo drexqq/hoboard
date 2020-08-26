@@ -60,7 +60,12 @@ public class News_Dao {
 	// LIST => DETAIL로 접근 시 이용 함수
 	public News_Dto getNewsSeq(int seq) {
 
+<<<<<<< HEAD
 		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE, NEWS_FILE " + "	FROM NEWS" + " WHERE NEWS_SEQ=? ";
+=======
+		String sql = " SELECT NEWS_SEQ, ID, TITLE, CONTENT, VIEWCOUNT, WDATE, NEWS_FILE " + "	FROM NEWS"
+				+ " WHERE NEWS_SEQ=? ";
+>>>>>>> 97898732c5a1938bb6bcea817110723abd62e8b7
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -87,7 +92,11 @@ public class News_Dao {
 				ndto.setContent(rs.getString("CONTENT"));
 				ndto.setViewcount(rs.getInt("VIEWCOUNT"));
 				ndto.setDate(rs.getString("WDATE"));
+<<<<<<< HEAD
 				ndto.setFile(rs.getString("NEWS_FILE"));
+=======
+				ndto.setFile(rs.getString("news_file"));
+>>>>>>> 97898732c5a1938bb6bcea817110723abd62e8b7
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -129,7 +138,7 @@ public class News_Dao {
 		}
 		return count > 0 ? true : false;
 	}
-	
+
 	// 글쓰기
 	public boolean news_file(News_Dto dto) {
 		String sql = " INSERT INTO NEWS " + " ( NEWS_SEQ, ID, TITLE, CONTENT,VIEWCOUNT, WDATE, NEWS_FILE)  "
@@ -270,7 +279,7 @@ public class News_Dao {
 		}
 		sql = sql + sqlWord;
 
-		//sql += " ORDER BY REF DESC, STEP ASC ";
+		// sql += " ORDER BY REF DESC, STEP ASC ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -382,7 +391,7 @@ public class News_Dao {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, start);
 			psmt.setInt(2, end);
-			
+
 			System.out.println("2/6 getNewsPagingList success");
 
 			rs = psmt.executeQuery();

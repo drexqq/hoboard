@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="module/header.jsp"%>
-
 <div class="board-detail news-detail">
 	<div class="container">
 		<div class="row">
@@ -15,19 +14,24 @@
 							<i class="ri-eye-line"></i>${ dto.viewcount }</div>
 					</div>
 				</div>
-				<div>
-					<input type="button" name="updateBtn" value="수정"
-						onclick="location.href='news?work=update&seq=${dto.news_seq}'">
+				<%-- <div><img alt="이미지 없음" src="/WebContent/upload/"+${dto.news_file}></div> --%>
+				<div class="content-wrap"> ${dto.content} </div>
+				<br>
+				<div class="btns" align="center">
+					<input type="button" class="updateBtn" name="updateBtn" value="수정"
+							onclick="location.href='news?work=update&seq=${dto.news_seq}'">
+					<input type="button" class="delBtn" name="delBtn" value="삭제"
+							onclick="location.href='news?work=del&seq=${dto.news_seq}'">
 				</div>
-				<div>
-					<input type="button" name="delBtn" value="삭제"
-						onclick="location.href='news?work=del&seq=${dto.news_seq}'">
-				</div>
+<<<<<<< HEAD
 				<div><img alt="이미지 없음" src="upload/ ${dto.news_file}"></div>
 				alert('dto.news_file'+ "upload/" + ${dto.news_file});
 				
 				<div class="content-wrap">${dto.content}</div>
+=======
+>>>>>>> 97898732c5a1938bb6bcea817110723abd62e8b7
 				<div class="goList">
+				<br><br>	
 					<a href="news">글 목록으로</a>
 				</div>
 
@@ -70,11 +74,13 @@
 									<div class="down">${comm.content}</div>
 									<br> <br>
 									<c:if test="${comm.id == sessionScope.sessionID }">
-										<button
+										<div class="btns">
+										<button class="updateBtn"
 											onclick="window.open('news?work=c_update&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}&content=${comm.content}'
 											,'댓글 수정하기','width=1000, height=300 ,location=no,status=no,scrollbars=no');">댓글 수정</button>
-										<input type="button" name="delBtn" value="댓글 삭제"
+										<input type="button" class="replydelBtn" name="delBtn" value="댓글 삭제"
 											onclick="location.href='news?work=c_del&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}'">
+										</div>
 									</c:if>
 								</div>
 							</c:forEach>

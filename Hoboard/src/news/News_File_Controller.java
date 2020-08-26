@@ -43,7 +43,8 @@ public class News_File_Controller extends HttpServlet {
 			if (idx == -1) {
 				idx = filename.lastIndexOf("/");
 			}
-
+			
+			
 			filename = filename.substring(idx + 1); // -> abc.txt
 			File uploadFile = new File(dir, filename);
 
@@ -75,7 +76,7 @@ public class News_File_Controller extends HttpServlet {
 
 		// tomcat(server)
 		filePath = mConfig.getServletContext().getRealPath("/upload");
-
+		
 		// filePath = "d:\\tmp";
 
 		filePath = filePath + "\\" + filename;
