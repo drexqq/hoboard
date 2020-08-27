@@ -122,9 +122,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
     thisSeq = event.event._def.publicId;
     $.each(event.el.classList, function (i, v) {
       if (v == "ready") {
-        if ("${ auth }" == "1") {
-          alert(time + " " + cont + " 예약입니다.");
-        } else {
+        if ("${ auth }" == "2") {
           stautsModal();
         }
       } else if (v == "cancle") {
@@ -139,8 +137,6 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
       } else if (v == "reviewDone") {
         if ("${ auth }" == "1") {
           alert("후기를 이미 작성하셨습니다.");
-        } else {
-          location.href = "review/d=" + thisSeq;
         }
       }
     });

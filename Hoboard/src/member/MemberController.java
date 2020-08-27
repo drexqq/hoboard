@@ -45,8 +45,8 @@ public class MemberController extends HttpServlet {
 		Member_Dao dao = Member_Dao.getInstance();
 		Member_Dto dto = new Member_Dto(
 									auth,
-									req.getParameter("name"),
 									req.getParameter("id"),
+									req.getParameter("name"),
 									req.getParameter("pw"),
 									req.getParameter("tel"),
 									req.getParameter("email"),
@@ -54,6 +54,7 @@ public class MemberController extends HttpServlet {
 									req.getParameter("address"),
 									req.getParameter("d_Address")
 									);
+		System.out.println(dto.toString());
 		dao.addMember(dto);
 		if (auth == 1) {
 			System.out.println("개인회원가입하기 member controller");

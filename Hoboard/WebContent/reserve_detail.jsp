@@ -22,9 +22,11 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
             <div class="grade">
               <i class="ri-star-smile-line"></i> ${ map['reviewDto'].score } / 5
             </div>
+            <c:if test="${ auth eq 1 }">
             <div class="reserve-btn">
               <button type="button" id="reserveBtn">예약하기</button>
             </div>
+            </c:if>
           </div>
           <div class="right">
             <div id="map">MAP</div>
@@ -78,6 +80,31 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
                 </c:if>
               </c:forEach>
             </div>
+          </div>
+        </div>
+        <div class="reviews">
+       	  <div class="title">후기</div>
+          <div class="list-wrap">
+            <c:forEach items="${ reviewList }" var="map" varStatus="status">
+				<c:if test="${status.first}">
+					<c:forEach items="${ map }" var="list">
+						<a href="review?d=${ list.key.review_seq }" class="list">
+							<div class="cate">[${ list.value }] - [${ list.key.busi_cate }]</div>
+							<div class="name">${ list.key.title }</div>
+							<div class="content">${ list.key.content }</div>
+							<div class="util-wrap">
+								<div>
+									<span class="grade"> <i class="ri-star-smile-line"></i>
+										${ list.key.score } / 5
+									</span> <span class="view"> <i class="ri-eye-line"></i> ${ list.key.viewcount }
+									</span>
+								</div>
+								<div class="date">${ list.key.wdate }</div>
+							</div>
+						</a>
+					</c:forEach>
+				</c:if>
+			</c:forEach>
           </div>
         </div>
       </div>

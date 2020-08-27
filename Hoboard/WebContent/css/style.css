@@ -983,6 +983,15 @@ body {
 .reserve-detail .info-wrap .week > div.lunch {
   padding-bottom: 0;
 }
+.reserve-detail .reviews {
+	padding-top: 25px;
+}
+.reserve-detail .reviews .title {
+	font-size: 24px;
+    line-height: 28px;
+    padding-bottom: 20px;
+}
+
 /* ask */
 .ask-detail .title-wrap {
   padding-bottom: 30px;
@@ -1065,3 +1074,17 @@ body {
   font-size: 18px;
 }
 
+.admin-list {
+  padding-top: 30px;
+  padding-bottom: 80px;
+}
+
+/* news */
+.news {
+	min-height: calc(100vh - 365px);
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+.news .title-wrap {
+	padding-bottom: 50px;
+}

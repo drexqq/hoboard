@@ -6,8 +6,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="title-wrap clearfix">
-					<br>
-					<h1 class="title" style="font-size:20px; font-weight:bold;  line-height:0px " >요즘 많이 찾는 건강 정보</h1>
+					<h1 class="title">요즘 많이 찾는 건강 정보</h1>
 					<div class="search-wrap clearfix">
 						<div class="select-wrap">
 							<select id="choice">

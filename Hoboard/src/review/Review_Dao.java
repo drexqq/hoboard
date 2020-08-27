@@ -28,9 +28,15 @@ public class Review_Dao {
 
 	public static Review_Dao getInstance() { return dao; }
 
-	// TODO GET ALL REVIEW LIST
-	public List<LinkedHashMap<Review_Dto, String>> getReviewList() {
-		String sql = " SELECT * FROM REVIEW WHERE DEL = 0 " + " ORDER BY REVIEW_SEQ DESC ";
+	
+	// TODO GET ALL REVIEW LIST --- 사용중
+	public List<LinkedHashMap<Review_Dto, String>> getReviewList(String id) {
+		String sql = "";
+		if("".equals(id)) {
+			sql = " SELECT * FROM REVIEW WHERE DEL = 0 " + " ORDER BY REVIEW_SEQ DESC ";
+		} else {
+			sql = " SELECT * FROM REVIEW WHERE DEL = 0 AND BUSI_ID = '"+id+"' ORDER BY REVIEW_SEQ DESC ";
+		}
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -59,6 +65,7 @@ public class Review_Dao {
 		return list;
 	}
 	
+	// 사용중
 	public List<Review_Dto> getReviewList2() {
 		String sql = " SELECT * FROM REVIEW WHERE DEL = 0 " + " ORDER BY REVIEW_SEQ DESC ";
 		Connection conn = null;
@@ -88,7 +95,6 @@ public class Review_Dao {
 		return list;
 	}
 	
-
 	// TODO INSERT INTO REVIEW TALBE
 	public boolean writeReview(Review_Dto dto) {
 		String sql = "INSERT INTO REVIEW " + " ( REVIEW_SEQ, BUSI_ID, INDVD_ID, "
@@ -275,7 +281,7 @@ public class Review_Dao {
 		return count > 0 ? true : false;
 	}
 
-	// TODO GET PAGING REVIEW LIST
+	// TODO GET PAGING REVIEW LIST --- 사용중
 	public List<LinkedHashMap<Review_Dto, String>> getReviewPagingList(String choice, String searchWord, int limit, int page) {
 		String sql = " SELECT REVIEW_SEQ, BUSI_ID, INDVD_ID, " + " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
 				+ " FILENAME, BUSI_CATE, DEL " + " FROM ";
@@ -333,39 +339,7 @@ public class Review_Dao {
 		}
 		return list;
 	}
-
-	// TODO GET ALL MYPAGE REVIEW LIST
-	public List<Review_Dto> getMyPageReviewList(String id) {
-		String query = " SELECT "
-				+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, "
-				+ " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
-				+ " FILENAME, BUSI_CATE, DEL "
-				+ " FROM REVIEW WHERE INDVD_ID = ? " + " AND DEL = 0 ";
-
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		List<Review_Dto> list = new ArrayList<Review_Dto>();
-		try {
-			conn = DBConnection.getConnection();
-			psmt = conn.prepareStatement(query);
-			psmt.setString(1, id);
-			rs = psmt.executeQuery();
-
-			while (rs.next()) {
-				int i = 1;
-				Review_Dto dto = new Review_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
-						rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++),
-						rs.getString(i++), rs.getInt(i++));
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBClose.close(psmt, conn, rs);
-		}
-		return list;
-	}
+	
 
 	// TODO GET MYPAGE PAGING REVIEW LIST
 	public List<LinkedHashMap<Review_Dto, String>> getMyPageReviewPagingList(String id, String choice, String searchWord, int limit, int page, int auth) {
@@ -471,67 +445,52 @@ public class Review_Dao {
 		}
 		return count;
 	}
-	
+	/*
 	// TODO CHECK STATUS
 	public String checkStatus(String id, int seq) {
 		String sql = " SELECT STATUS " + " FROM RESERVE " + " WHERE INDVD_ID = ? AND RESERVE_SEQ = ? ";
-
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-
 		String check = null;
-
 		try {
 			conn = DBConnection.getConnection();
-
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setInt(2, seq);
-
 			rs = psmt.executeQuery();
 			if (rs.next()) 
 				check = rs.getString(1);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-
 		return check;
 	}
-
 	// TODO GET ALL RESERVE DATA
 	public Reserve_Dto getReserve_Data(String id, int seq) {
 		String sql = " SELECT RESERVE_SEQ, BUSI_ID, INDVD_ID, CATE, " + " RESERVE_TIME, CONT, STATUS, RESERVE_DATE "
 				+ " FROM RESERVE " + " WHERE INDVD_ID=? AND RESERVE_SEQ =? ";
-
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-
 		Reserve_Dto dto = null;
-
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getReserveData success");
-
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setInt(2, seq);
 			System.out.println("2/6 getReserveData success");
-
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getReserveData success");
-
 			while (rs.next()) {
 				int i = 1;
 				dto = new Reserve_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getString(i++));
 			}
 			System.out.println("4/6 getReserveData success");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -539,7 +498,6 @@ public class Review_Dao {
 		}
 		return dto;
 	}
-
 	// TODO get BUSI_member name
 	public String getBusi_Name(String busi, int seq) {
 		String sql = " SELECT A.NAME " + " FROM MEMBER A INNER JOIN RESERVE B " + " ON A.ID =? AND B.RESERVE_SEQ =? ";
@@ -547,19 +505,15 @@ public class Review_Dao {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		String name = "";
-
 		try {
 			conn = DBConnection.getConnection();
-
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, busi);
 			psmt.setInt(2, seq);
-
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				name = rs.getString(1);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -567,5 +521,36 @@ public class Review_Dao {
 		}
 		return name;
 	}
+	// TODO GET ALL MYPAGE REVIEW LIST
+	public List<Review_Dto> getMyPageReviewList(String id) {
+		String query = " SELECT "
+				+ " REVIEW_SEQ, BUSI_ID, INDVD_ID, "
+				+ " TITLE, CONTENT, VIEWCOUNT, SCORE, WDATE, "
+				+ " FILENAME, BUSI_CATE, DEL "
+				+ " FROM REVIEW WHERE INDVD_ID = ? " + " AND DEL = 0 ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Review_Dto> list = new ArrayList<Review_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				int i = 1;
+				Review_Dto dto = new Review_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++), rs.getInt(i++));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
+	}
+	*/
 	
 }

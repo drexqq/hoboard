@@ -80,9 +80,9 @@
 				<c:choose>
 					<c:when test="${ len != 0 }">
 						<c:forEach items="${ res_search_list }" var="s_list"
-							varStatus="status" begin="0" end="5">
+							varStatus="status" begin="0" end="9">
 							<div class="item">
-								<div class="name">이름 : ${ s_list.name }</div>
+								<div class="name">${ s_list.name }</div>
 								<div class="info">
 									<i class="ri-phone-line"></i> ${ s_list.tel }<span
 										class="space"></span><i class="ri-mail-line"></i> ${ s_list.email }

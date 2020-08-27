@@ -14,10 +14,10 @@
         <label for="pw">Password</label>
         <input type="password" name="pw" id="pw" />
       </div>
-      <div class="check-wrap">
+      <!-- <div class="check-wrap">
         <input type="checkbox" name="save_id" id="save_id" value="save_id" />
         <label for="save_id">아이디 저장</label>
-      </div>
+      </div> -->
       <div class="btn-wrap">
         <button class="btn" id="login_btn" value="login">로그인</button>
       </div>

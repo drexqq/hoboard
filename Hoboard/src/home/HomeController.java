@@ -30,7 +30,7 @@ public class HomeController extends HttpServlet {
 		LinkedHashMap<String, String> cate = new LinkedHashMap<String, String>();
 		for (int i = 0; i < cate_e.length; i++) cate.put(cate_e[i].toLowerCase(), cate_k[i]);
 		
-		List<LinkedHashMap<Review_Dto, String>> list = r_dao.getReviewList();
+		List<LinkedHashMap<Review_Dto, String>> list = r_dao.getReviewList("");
 		
 		req.setAttribute("busiCate", cate);
 		req.setAttribute("reviewList", list);
