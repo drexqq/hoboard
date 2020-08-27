@@ -10,7 +10,7 @@ bitcamp semi project (Hospital Comprehensive Service)
 * * *
 
 ### Use Thing
->Java (ver - ), Oracle (ver - ), jsp, javascript, jquery, html, css .. (추후 수정)
+>Java (ver - 8), Oracle (ver - 11), jsp, javascript, jquery, ajax, html, css, kakao map api
 
 
 ## git  사용법
