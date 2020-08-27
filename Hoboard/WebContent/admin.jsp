@@ -24,8 +24,8 @@
 						</tr>
 						<tr>
 							<td class="admin">Q&A 관리</td>
-							<td class="now">답변 대기 (${ fn:length(rlist) })건</td>
-							<td class="abtns"><input type="button" name="qnaBtn"
+							<td class="now">답변 대기 (${ fn:length(qlist_all) })건</td>
+							<td class="abtns"><input type="button" nsame="qnaBtn"
 								onclick="location.href='ask'" value="바로가기" /></td>
 						</tr>
 						<tr>
