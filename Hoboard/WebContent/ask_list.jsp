@@ -1,4 +1,5 @@
-<%@page import="Ask.Ask_Dto"%>
+<%@page import="ask.Ask_Dto"%>
+<%@page import="ask.Ask_Dto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
