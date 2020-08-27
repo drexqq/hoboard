@@ -1,6 +1,7 @@
 package map;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,11 @@ public class MAPController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		Member_Dao m_dao = Member_Dao.getInstance();
 		
+		
+		List<String[]> list = m_dao.getBusiMember();
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(java.util.Arrays.toString(list.get(i)));
+		}
 		req.setAttribute("busiMembers", m_dao.getBusiMember());
 		UtilEx.forward("map.jsp", req, resp);
 	}

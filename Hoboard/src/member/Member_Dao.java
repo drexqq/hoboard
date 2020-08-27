@@ -136,8 +136,7 @@ public class Member_Dao {
 
 	// GET EMAIL MEMBER
 	public boolean chkEmail(String email) {
-		String query = " SELECT EMAIL" + " FROM MEMBER" + " WHERE EMAIL = ? ";
-
+		String query = " SELECT EMAIL FROM MEMBER WHERE EMAIL = ? ";
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -147,10 +146,9 @@ public class Member_Dao {
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, email);
 			rs = psmt.executeQuery();
-
-			if (rs.next())
+			if (rs.next()) {
 				exist = true;
-
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -338,27 +336,32 @@ public class Member_Dao {
 	}
 
 	// GET MEMBER WHERE AUTH = 2
-	public List<Member_Dto> getBusiMember() {
-		String query = " SELECT NAME, TEL, ADDRESS, D_ADDRESS FROM MEMBER WHERE AUTH = 2 ";
+	public List<String[]> getBusiMember() {
+		String query = " SELECT NAME, TEL, ADDRESS, D_ADDRESS, HOMEPAGE "
+					 + " FROM MEMBER M "
+					 + " INNER JOIN BUSI_MEMBER B ON M.ID = B.ID "
+					 + " WHERE AUTH = 2 ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		List<String[]> list = new ArrayList<String[]>();
 		try {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(query);
 			rs = psmt.executeQuery();
 			while (rs.next()) {
-				Member_Dto dto = new Member_Dto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
-				list.add(dto);
+				String[] data = new String[5];
+				for (int i = 1; i <= data.length; i++) {
+					data[i-1] = rs.getString(i);
+				}
+				list.add(data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		System.out.println("get busimember from member table done");
 		return list;
 	}
 	

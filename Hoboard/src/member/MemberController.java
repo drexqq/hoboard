@@ -18,19 +18,15 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String chk = req.getParameter("chk");
-		String id = "";
-		String email = "";
 		Member_Dao dao = Member_Dao.getInstance();
 		JSONObject jsonData = new JSONObject();
 		if("id".equals(chk)) {
 			System.out.println("id chk");
-			id = req.getParameter("id");
-			jsonData.put("chk", dao.chkId(id));
+			jsonData.put("chk", dao.chkId(req.getParameter("check_kor")));
 		}
 		else if ("email".equals(chk)) {
 			System.out.println("email chk");
-			email = req.getParameter("email");
-			jsonData.put("chk", dao.chkEmail(email));
+			jsonData.put("chk", dao.chkEmail(req.getParameter("check_kor")));
 		}
 		resp.setContentType("application/x-json; charset=UTF-8");
 		resp.getWriter().print(jsonData);

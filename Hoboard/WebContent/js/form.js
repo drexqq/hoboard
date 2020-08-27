@@ -12,10 +12,12 @@ $(".check_dup").on("click", function () {
   } else {
     $.ajax({
       type: "GET",
-      url: "MEMBER?chk=" + check_eng,
+      url: "member?chk=" + check_eng,
       datatype: "json",
       data: { check_kor: $("#" + check_eng).val() },
       success: function (json) {
+    	  console.log(json)
+    	  console.log(json.chk)
         if (json.chk) {
           alert(
             "중복된 " +

@@ -81,8 +81,7 @@ public class MypageController extends HttpServlet {
 		if (done)
 			done = b_dao.updateBusi_Extra(b_dto.getId(), time, extra, cate, amenity);
 
-		if (done)
-			resp.sendRedirect("mypage.jsp");
+		resp.sendRedirect("mypage.jsp");
 	}
 
 }

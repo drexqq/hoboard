@@ -6,17 +6,17 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
     <div class="enroll-wrap">
       <div class="list-wrap">
       	<c:forEach items="${ busiMembers }" var="mem">
-	      	<a href="#" class="list">
-	          <div class="list-upper clearfix">
-	            <div class="tit">${ mem.name }</div>
-	            <div class="tel"><i class="ri-phone-line"></i>${ mem.tel }</div>
-	          </div>
-	          <div class="list-down clearfix">
-	            <div class="address">
-	              ${ mem.address } ${ mem.d_Address }
-	            </div>
-	          </div>
-	        </a>
+	      		<a href="${ mem[4] }" class="list">
+		          <div class="list-upper clearfix">
+		            <div class="tit">${ mem[0] }</div>
+		            <div class="tel"><i class="ri-phone-line"></i>${ mem[1] }</div>
+		          </div>
+		          <div class="list-down clearfix">
+		            <div class="address">
+		              ${ mem[2] } ${ mem[3] }
+		            </div>
+		          </div>
+		        </a>
       	</c:forEach>
       </div>
       <div class="paging-wrap">
