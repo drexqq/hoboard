@@ -26,70 +26,83 @@ import review.Review_Dto;
 @WebServlet("/admin")
 public class AdminController extends HttpServlet{
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String adm = req.getParameter("adm");
-		
-		System.out.println("admin");
-		
-		News_Dao dao = News_Dao.getInstance();
-		Review_Dao dao2 = Review_Dao.getInstance();
-		Ask_Dao dao3 = Ask_Dao.getInstance();
-		Member_Dao dao4 = Member_Dao.getInstance();
-		//News_COMM_Dao dao2 = News_COMM_Dao.getInstance();
-		
-		//News_Dto dto = new News_Dto();
-		//News_COMM_Dto dto2 = new News_COMM_Dto();
-		//Ask_Dto dto2 = new Ask_Dto();
-		
-		List<Member_Dto> hmlist = dao4.getBusiMember_admin();
-		List<Member_Dto> pmlist = dao4.getPMember_admin();
-		
-		if(adm == null || "".equals(adm)) {
-		
-			List<News_Dto> nlist = dao.getNewsList();
-			List<Review_Dto > rlist = dao2.getReviewList2();
-			List<Ask_Dto> qlist = dao3.getAskList2();
-			
-			req.setAttribute("nlist", nlist);
-			req.setAttribute("rlist", rlist);
-			req.setAttribute("qlist", qlist);
-			
-			req.setAttribute("hmlist", hmlist);
-			req.setAttribute("pmlist", pmlist);
-			
-			UtilEx.forward("admin.jsp", req, resp);
-		
-		}else if(adm.equals("adminM")) {
-			System.out.println("Admin_Mem_Count");
-			
-			req.setAttribute("hmlist", hmlist);
-			req.setAttribute("pmlist", pmlist);
-			
-			UtilEx.forward("admin_mem.jsp", req, resp);
-		
-		}else if(adm.equals("adminBD")) {
-		
-		}else if(adm.equals("adminPD")) {
-			
-			req.setAttribute("pmlist", pmlist);
+   @Override
+   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      
+      String adm = req.getParameter("adm");
+      
+      System.out.println("admin");
+      
+      News_Dao dao = News_Dao.getInstance();
+      Review_Dao dao2 = Review_Dao.getInstance();
+      Ask_Dao dao3 = Ask_Dao.getInstance();
+      Member_Dao dao4 = Member_Dao.getInstance();
+      //News_COMM_Dao dao2 = News_COMM_Dao.getInstance();
+      
+      //News_Dto dto = new News_Dto();
+      //News_COMM_Dto dto2 = new News_COMM_Dto();
+      //Ask_Dto dto2 = new Ask_Dto();
+      Member_Dto dto = new Member_Dto();
+      
+      List<Member_Dto> hmlist = dao4.getBusiMember_admin();
+      List<Member_Dto> pmlist = dao4.getPMember_admin();
+      
+      if(adm == null || "".equals(adm)) {
+      
+         List<News_Dto> nlist = dao.getNewsList();
+         List<Review_Dto > rlist = dao2.getReviewList2();
+         List<Ask_Dto> qlist = dao3.getAskList2();
+         
+         req.setAttribute("nlist", nlist);
+         req.setAttribute("rlist", rlist);
+         req.setAttribute("qlist", qlist);
+         
+         req.setAttribute("hmlist", hmlist);
+         req.setAttribute("pmlist", pmlist);
+         
+         UtilEx.forward("admin.jsp", req, resp);
+      
+      }else if(adm.equals("adminM")) {
+         System.out.println("Admin_Mem_Count");
+         
+         req.setAttribute("hmlist", hmlist);
+         req.setAttribute("pmlist", pmlist);
+         
+         UtilEx.forward("admin_mem.jsp", req, resp);
+      
+      }else if(adm.equals("adminBD")) {
+      
+      }else if(adm.equals("adminPD")) {
+         
+         System.out.println("adminPD");
+         
+         String id = req.getParameter("id");
+         
+         System.out.println("adminD id ="+id);
+         
+         dto = dao4.getUser(id);
+         
+         System.out.println("adminD dto"+dto);
+         
+         req.setAttribute("id", id);
+         req.setAttribute("dto", dto);
+         
+         
+         UtilEx.forward("admin_individ_detail.jsp", req, resp);
+         
+      }else if(adm.equals("admin_del")){
+         
+         
+      }
+      
+      
+      
+   }
 
-			UtilEx.forward("admin_individ_detail.jsp", req, resp);
-			
-		}else if(adm.equals("admin_del")){
-			
-			
-		}
-		
-		
-		
-	}
+   @Override
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+   }
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	}
-
-	
-	
+   
+   
 }
