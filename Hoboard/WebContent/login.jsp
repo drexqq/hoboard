@@ -3,7 +3,7 @@
 
 <div class="login-wrap">
   <div class="login-form">
-    <p class="login-head">&lt;Hoboard /&gt;</p>
+    <p class="login-head"></p>
     <p class="title">Log in</p>
     <form action="login" method="post">
       <div class="input-wrap">
@@ -23,7 +23,7 @@
       </div>
       <div class="util-wrap clearfix">
         <a class="join" href="join.jsp">회원가입</a>
-        <a class="find" href="#">아이디 / 비밀번호 찾기</a>
+        <a class="find" href="searchIDPW.jsp">아이디 / 비밀번호 찾기</a>
       </div>
     </form>
   </div>

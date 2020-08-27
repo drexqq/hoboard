@@ -469,4 +469,86 @@ public class Member_Dao {
 
 	}
 	
+	public String IDfind(String name, String email) { 
+		
+		String sql = " SELECT ID"
+					+ " FROM MEMBER "
+					+ " WHERE NAME=? AND EMAIL=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String findid = null;
+		
+		try {
+			
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 IDfind success");
+			
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 IDfind success");
+			
+			psmt.setString(1, name.trim());
+			psmt.setString(2, email.trim());
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 IDfind success");
+			
+			if(rs.next()) {
+			findid = rs.getString("id");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("IDfind 실패");
+		}finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return findid;
+	}
+	
+	public String PWfind(String id, String email) { 
+		
+		String sql = " SELECT ID, NAME, PWD"
+					+ " FROM MEMBER "
+					+ " WHERE ID=? AND NAME=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String pw = null;
+		
+		try {
+			
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 PWDfind success");
+			
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 PWDfind success");
+			
+			psmt.setString(1, id.trim());
+			psmt.setString(2, email.trim());
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 PWDfind success");
+		
+			
+			if(rs.next()) {
+			pw = rs.getString("pw");
+			System.out.println("찾음:"+id);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("PWDfind 실패");
+		}finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return pw;
+		}
+	
+	
 }
