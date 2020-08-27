@@ -106,8 +106,7 @@ public class MemberController extends HttpServlet {
 		}
 		if(done) resp.sendRedirect("/Hoboard");
 		else return;
+	
 	}
-	
-	
 	
 }
