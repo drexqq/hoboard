@@ -72,18 +72,22 @@
                 <ul class="util clearfix">
                 <c:set var="login" scope="session" value="${ login }"/>
 			    <c:choose>
-			    	<c:when test="${ login eq 1 }">
+			    	<c:when test="${ login eq 1 and auth ne 0 }">
 			    	<!-- after login -->
-			    	 	<li class="util-item admin"><a href="admin">관리자페이지</a></li>
               	 	    <li class="util-item logout"><a href="logout">로그아웃</a></li>
 			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
 			    	</c:when>
-			    	
+			    	<c:when test="${ login eq 1 and auth eq 0 }">
+			    		<li class="util-item admin"><a href="admin">관리자페이지</a></li>
+              	 	    <li class="util-item logout"><a href="logout">로그아웃</a></li>
+			    		<li class="util-item mypage"><a href="mypage.jsp">마이페이지</a></li>
+			    	</c:when>
 			    	<c:otherwise>
 	                <!-- before login -->
               		    <li class="util-item join"><a href="join.jsp">회원가입</a></li>
 			    		<li class="util-item login"><a href="login.jsp">로그인</a></li>
 			    	</c:otherwise>
+			    	
 			    </c:choose>
 			    </ul>
               </div>
