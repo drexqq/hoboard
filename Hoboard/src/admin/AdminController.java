@@ -114,8 +114,6 @@ public class AdminController extends HttpServlet{
 			dto = dao4.DelBMember(id);
 			
 			resp.sendRedirect("admin?adm=adminM");
-		
-
 		}
 	}
    @Override
