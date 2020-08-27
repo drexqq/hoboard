@@ -82,6 +82,35 @@ public class Ask_Dao {
 		return qlist;
 	}	
 	
+	//답변 대기
+	public List<Ask_Dto> getAskListComment() {
+		String sql = " SELECT * FROM ASK_TABLE " + "WHERE COMM = 1 " +" ORDER BY SEQ DESC ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Ask_Dto> qlist = new ArrayList<Ask_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				int i = 1;
+				Ask_Dto dto = new Ask_Dto(rs.getInt(i++), 
+										rs.getInt(i++), 
+										rs.getString(i++), 
+										rs.getString(i++),
+										rs.getString(i++), 
+										rs.getString(i++),
+										rs.getString(i++));
+									qlist.add(dto);
+								}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return qlist;
+	}	
 	
 	
 	public int getAskCount(String id, String choice, String searchWord) {

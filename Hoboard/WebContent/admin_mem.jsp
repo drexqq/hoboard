@@ -29,7 +29,7 @@
 										<td class="tel">${ hm.tel }</td>
 										<td class="email">${ hm.email }</td>
 										<td><input type="button" id="hmdBtn" name="hmdBtn"
-											onclick="location.href='admin?adm=adminBD'" value="상세보기" /></td>
+											onclick="location.href='admin?adm=adminBD&id=${ hm.id }'" value="상세보기" /></td>
 										<td><input type="button" id="hmdelBtn" name="hmdelBtn"
 											onclick="location.href='#'" value="탈퇴" /></td>
 									</tr>
@@ -61,7 +61,7 @@
 												<td class="tel">${ pm.tel }</td>
 												<td class="email">${ pm.email }</td>
 												<td><input type="button" id="hmdBtn" name="pmdBtn"
-													onclick="location.href='admin?adm=adminPD'" value="상세보기" />
+													onclick="location.href='admin?adm=adminPD&id=${ pm.id }'" value="상세보기" />
 												</td>
 												<td><input type="button" id="hmdelBtn" name="pmdelBtn"
 													onclick="location.href='#'" value="탈퇴" /></td>

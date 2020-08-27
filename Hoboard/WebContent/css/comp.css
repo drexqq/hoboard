@@ -460,7 +460,7 @@
 .board-write .content-wrap {
 	position: relative;
 	min-height: 300px;
-	padding: 30px 0;
+	padding: 50px 0;
 	font-size: 22px;
 	line-height: 24px;
 	color: #1a2e3b;
@@ -501,7 +501,6 @@
 	color: #ffffff;
 	border-radius: 5px;
 }
-
 /* 조성현 작업 news_update 글목록 버튼*/
 .board-write .btn-wrap input {
 	display: inline-block;
@@ -607,19 +606,76 @@
 	background-color: #ff8b34;
 	color: #fff;
 }
-/* news_write  글작성하기 호버버튼  */
-.board-write input.news_write:hover {
+
+/* news_write  글작성하기 컨텐츠 타이틀  */
+.board-write .content .content-title{
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+
+/* news_write  글작성하기 버튼1  */
+.board-write input.s_write {
+	
+	width: 10%;
+	float: left;
+	margin-top: 3px;
+	margin-right: 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	
+}
+
+
+/* news_write  글작성하기 버튼2  */
+.board-write input.s_del {
+	width: 10%;
+	float: left;
+	margin-top: 3px;
+	margin-right: 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+/* news_write  글작성하기 버튼3  */
+.board-write input.s_list {
+	width: 10%;
+	float: left;
+	margin-top: 3px;
+	margin-right: 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+
+
+/* news_write/ask  글작성하기 호버버튼  */
+.board-write input.s_write:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* news_write 글삭제하기 호버버튼  */
-.board-write input.news_del:hover {
+/* news_write/ask 글삭제하기 호버버튼  */
+.board-write input.s_del:hover {
 	background-color: #ff0000;
 	color: #fff;
 }
-/* news_write  리스트로가기 호버버튼   */
-.board-write input.news_list:hover {
+/* news_write/ask 리스트로가기 호버버튼   */
+.board-write input.s_list:hover {
 	background-color: #3da0d7;
 	color: #fff;
 }
@@ -650,7 +706,7 @@
 	padding-top: 30px;
 	padding-bottom: 20px;
 	padding-left: 35px;
-	font-size: 25px;	
+	font-size: 25px;
 	line-height: 50px;
 	font-weight: 600;
 }
@@ -746,7 +802,7 @@
 	padding-bottom: 30px;
 	padding-left: 50px;
 	font-weight: 600;
-	margin : auto;
+	margin: auto;
 }
 /* admin.jsp 관리게시판 작성일  */
 .admin-list .board-table .date {
@@ -876,14 +932,21 @@
 	font-size: 18px;
 }
 
-/* admin.jsp 관리리스트 테이블 수평선 효과  */
+/* admin-mem.jsp 관리리스트 테이블 수평선 효과  */
 .admin-mem .m-table tbody td {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
 
-/* admin.jsp 관리게시판 글씨 올렷을때 그림자 효과  */
+/* admin-mem.jsp 관리리스트 테이블 수평선 효과  */
+.admin-mem .m-table tbody td {
+	cursor: pointer;
+	border-bottom: 1px solid #eee;
+	transition: all 0.25s ease;
+}
+
+/* admin-mem.jsp 관리게시판 버튼  */
 .admin-mem .m-table tbody input {
 	width: 100px;
 	padding: 3px 5px;
@@ -892,16 +955,29 @@
 	transition: all 0.25s ease;
 }
 
-/* admin.jsp 관리게시판 글씨 올렷을때 그림자 효과  */
+/* admin-mem.jsp 관리게시판 글씨 올렷을때 그림자 효과  */
+.admin-mem .m-table tbody tr:hover {
+	box-shadow: 1px 1px 10px #ddd;
+}
+
+/* admin-mem.jsp 관리게시판 버튼 올렷을때 그림자 효과  */
 .admin-mem .m-table tbody input#hmdBtn:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* admin.jsp 관리게시판 글씨 올렷을때 그림자 효과  */
+/* admin-mem.jsp 관리게시판 버튼 올렷을때 그림자 효과  */
 .admin-mem .m-table tbody input#hmdelBtn:hover {
 	background-color: #ff0000;
 	color: #fff;
+}
+
+.news .title-wrap .title {
+	float: left;
+	font-size: 30px;
+	line-height: 30px;
+	font-weight: 600;
+	color: #162a48;
 }
 
 /* 조성현 작업 끝  */
@@ -911,15 +987,16 @@
 }
 
 .myreview .review-table .btns a {
-    width: 50%;
-    padding: 3px 5px;
-    border: 1px solid #ff8b34;
-    border-radius: 5px;
-    transition: all 0.25s ease;
+	width: 50%;
+	padding: 3px 5px;
+	border: 1px solid #ff8b34;
+	border-radius: 5px;
+	transition: all 0.25s ease;
 }
+
 a, a:hover {
-    text-decoration: none;
-    color: #333333;
+	text-decoration: none;
+	color: #333333;
 }
 
 /* ask-list */
