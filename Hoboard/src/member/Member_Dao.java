@@ -363,7 +363,7 @@ public class Member_Dao {
 	
 	public List<Member_Dto> getBusiMember_admin() {
 		
-		String query = " SELECT * FROM MEMBER WHERE AUTH =2 ";
+		String query = " SELECT AUTH, ID, NAME, TEL, EMAIL, POST_NUM, ADDRESS, D_ADDRESS FROM MEMBER WHERE AUTH = 2 ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -388,7 +388,7 @@ public class Member_Dao {
 	
 	public List<Member_Dto> getPMember_admin() {
 		
-		String query = " SELECT AUTH, ID, NAME, TEL, EMAIL FROM MEMBER WHERE AUTH =1 ";
+		String query = " SELECT AUTH, ID, NAME, TEL, EMAIL FROM MEMBER WHERE AUTH = 1 ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -409,6 +409,63 @@ public class Member_Dao {
 		}
 		System.out.println("get busimember from member table done");
 		return list;
+	}
+	
+	//회원 탈퇴 AUTH 3(개인)으로 관리
+	public Member_Dto DelIMember(String id) {
+		
+		String query = " UPDATE MEMBER SET AUTH = 3 WHERE ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		Member_Dto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+		System.out.println("auth 3 대기중 1/3");
+			rs = psmt.executeQuery();
+		System.out.println("auth 3 대기중 2/3");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		System.out.println("auth 3 success");
+		
+		return dto;
+
+	}
+	//회원 탈퇴 AUTH 4(병원)으로 관리
+	public Member_Dto DelBMember(String id) {
+		
+		String query = " UPDATE MEMBER SET AUTH = 4 WHERE ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		Member_Dto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+		System.out.println("auth 4 대기중 1/3");
+			rs = psmt.executeQuery();
+		System.out.println("auth 4 대기중 2/3");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		System.out.println("auth 4 success");
+		
+		return dto;
+
 	}
 	
 }

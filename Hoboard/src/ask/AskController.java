@@ -127,8 +127,7 @@ public class AskController extends HttpServlet {
 				
 				String id = req.getParameter("id");
 				// String title = URLEncoder.encode(req.getParameter("title"), "utf-8");
-				
-				
+					
 				String title = req.getParameter("title");  
 				String content = req.getParameter("content"); 
 								
@@ -142,7 +141,7 @@ public class AskController extends HttpServlet {
 				
 				if(b){ 
 					System.out.println("글쓰기 성공");
-					resp.sendRedirect("ask.do?one=move");
+					resp.sendRedirect("ask");
 				} else {
 					System.out.println("실패");
 					//resp.sendRedirect("news_detail.do");

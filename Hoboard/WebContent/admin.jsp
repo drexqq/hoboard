@@ -47,7 +47,6 @@
 
 <br><br>
 
-
 <div>최신 이용 후기</div>
 <div><input type="button" name="revBtn" onclick="location.href='review'" value="바로가기"/></div>
 <c:forEach items="${ rlist }" var="rlist" varStatus="status" begin="0" end="4">

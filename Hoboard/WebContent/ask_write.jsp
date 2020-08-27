@@ -24,7 +24,7 @@ mem = (Member_Dto)ologin;
 <body>
 <h1>Q&A 글쓰기</h1>
 
-<form action="ask.do?two=write" method="post">
+<form action="ask?two=write" method="post">
 <input type="hidden" name="id" value="admin">
 <table border="1">
 <col width="200"><col width="400">

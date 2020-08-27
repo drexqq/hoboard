@@ -42,9 +42,14 @@ public class AdminController extends HttpServlet{
 		//News_Dto dto = new News_Dto();
 		//News_COMM_Dto dto2 = new News_COMM_Dto();
 		//Ask_Dto dto2 = new Ask_Dto();
+		Member_Dto dto = new Member_Dto();
+		
 		
 		List<Member_Dto> hmlist = dao4.getBusiMember_admin();
 		List<Member_Dto> pmlist = dao4.getPMember_admin();
+		
+		
+		System.out.println(pmlist.toString());
 		
 		if(adm == null || "".equals(adm)) {
 		
@@ -73,17 +78,45 @@ public class AdminController extends HttpServlet{
 		
 		}else if(adm.equals("adminPD")) {
 			
-			req.setAttribute("pmlist", pmlist);
-
+			System.out.println("adminPD");
+			
+			String id = req.getParameter("id");
+			
+			System.out.println("adminD id ="+id);
+			
+			dto = dao4.getUser(id);
+		
+			req.setAttribute("id", id);
+			req.setAttribute("dto", dto);
+			
 			UtilEx.forward("admin_individ_detail.jsp", req, resp);
 			
-		}else if(adm.equals("admin_del")){
+		}else if(adm.equals("adminIDel")){
 			
+			System.out.println("adminIDel");
 			
+			String id = req.getParameter("id");
+			
+			System.out.println("adminIDel ="+id);
+			
+			dto = dao4.DelIMember(id);
+			
+			resp.sendRedirect("admin?adm=adminM");
+			
+		}else if(adm.equals("adminBDel")){
+			
+			System.out.println("adminBDel");
+			
+			String id = req.getParameter("id");
+			
+			System.out.println("adminBDel ="+id);
+			
+			dto = dao4.DelBMember(id);
+			
+			resp.sendRedirect("admin?adm=adminM");
+		
+
 		}
-		
-		
-		
 	}
 
 	@Override

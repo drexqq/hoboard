@@ -77,7 +77,7 @@
 										<div class="btns">
 										<button class="updateBtn"
 											onclick="window.open('news?work=c_update&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}&content=${comm.content}'
-											,'댓글 수정하기','width=1000, height=300 ,location=no,status=no,scrollbars=no');">댓글 수정</button>
+											,'댓글 수정하기','width=700, height=500, left=600, top=400, location=no,status=no,scrollbars=no');">댓글 수정</button>
 										<input type="button" class="replydelBtn" name="delBtn" value="댓글 삭제"
 											onclick="location.href='news?work=c_del&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}'">
 										</div>
