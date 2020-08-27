@@ -24,16 +24,10 @@ import review.Review_Dto;
 public class Reserve_Dao {
 
 	private static Reserve_Dao dao = new Reserve_Dao();
+	private Reserve_Dao() {}
+	public static Reserve_Dao getInstance() { return dao; }
 
-	private Reserve_Dao() {
-
-	}
-
-	public static Reserve_Dao getInstance() {
-		return dao;
-	}
-
-	// TODO search all write count
+	// GET RESERVE COUNT --- 사용중
 	public int getsearch_allcount(String loc, String amt, String searchWord) {
 		String sql = " SELECT COUNT(*) FROM MEMBER WHERE ID IN ";
 		String sqlamt = (amt == null || "".equals(amt)) ? "" : " (SELECT ID FROM BUSI_CATE WHERE " + amt + " = 1) ";
@@ -65,7 +59,6 @@ public class Reserve_Dao {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		int len = 0;
-		System.out.println(sql);
 		try {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -80,7 +73,7 @@ public class Reserve_Dao {
 		return len;
 	}
 
-	// TODO search
+	// GET RESERVE LIST --- 사용중
 	public List<Member_Dto> getSearch_list(String loc, String amt, String searchWord, int limit, int page) {
 		String sql = "";
 		String sqlamt = (amt == null || "".equals(amt)) ? ""
@@ -122,7 +115,6 @@ public class Reserve_Dao {
 						+ sqlamt + sqlloc + sqlword + " ) MEM ";
 			}
 		}
-		System.out.println(sql);
 		sql += " WHERE MEM.RNUM >= ? AND MEM.RNUM <= ? ";
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
@@ -194,8 +186,7 @@ public class Reserve_Dao {
 	}
 
 	// GET ALL LIST USER'S RESERVE --- 사용중
-	public List<LinkedHashMap<Reserve_Dto, String>> getUserReserveList(String choice, String searchWord, String id,
-			int auth) {
+	public List<LinkedHashMap<Reserve_Dto, String>> getUserReserveList(String choice, String searchWord, String id, int auth) {
 		String column = "";
 		String name = "";
 		if (auth == 2) {
@@ -205,7 +196,7 @@ public class Reserve_Dao {
 			column = "INDVD_ID";
 			name = "BUSI_ID";
 		}
-		String query = " SELECT * FROM RESERVE WHERE " + column + " = ? ";
+		String query = " SELECT R.*, M.NAME FROM RESERVE R INNER JOIN MEMBER M ON M.ID = R."+name+" WHERE " + column + " = ? ";
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
 			if (choice.equals("name"))
@@ -215,7 +206,6 @@ public class Reserve_Dao {
 				sqlWord = " AND CATE LIKE '%" + searchWord.trim() + "%' ";
 		}
 		query += sqlWord;
-
 		LinkedHashMap<Reserve_Dto, String> map = new LinkedHashMap<Reserve_Dto, String>();
 		List<LinkedHashMap<Reserve_Dto, String>> list = new ArrayList<LinkedHashMap<Reserve_Dto, String>>();
 		Connection conn = null;
@@ -232,7 +222,7 @@ public class Reserve_Dao {
 				Reserve_Dto dto = new Reserve_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getString(i++),
 						UtilEx.dateToTimestamp(rs.getString(i++)));
-				map.put(dto, Member_Dao.getInstance().getUser(rs.getString(2)).getName());
+				map.put(dto, rs.getString(i++));
 				list.add(map);
 			}
 		} catch (Exception e) {
@@ -242,6 +232,8 @@ public class Reserve_Dao {
 		}
 		return list;
 	}
+	
+	// GET BUSI_USER DETAILS
 	public Map<String, Object> getBusiUserDetail (String id) {
 		String query = " SELECT"
 						+ " NAME, TEL, ADDRESS, D_ADDRESS, HOMEPAGE, LOGO,"
@@ -340,6 +332,86 @@ public class Reserve_Dao {
 				map.put("timeDto", timeDto);
 				map.put("amenityList", amenityList);
 				map.put("cateList", cateList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return map;
+	}
+	
+	// INSERT RESERVE
+	public boolean addReserve(Reserve_Dto reserveDto) {
+		String query = " INSERT INTO RESERVE "
+					+ " VALUES( SEQ_RESERVE.NEXTVAL, ?, ?, ?, ?, 0, ?, SYSDATE ) ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, reserveDto.getBusi_id());
+			psmt.setString(2, reserveDto.getIndvd_id());
+			psmt.setString(3, reserveDto.getCate());
+			psmt.setString(4, reserveDto.getCont());
+			psmt.setString(5, reserveDto.getReserve_time());
+			count = psmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		return count > 0 ? true : false;
+	}
+	
+	// UPDATE RESERVE STATUS
+	public boolean updateReserve(int seq) {
+		String query = " UPDATE RESERVE SET STATUS = 2 WHERE RESERVE_SEQ = ? ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setInt(1, seq);
+			count = psmt.executeUpdate();
+			System.out.println("update complete");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		return count > 0 ? true : false;
+		
+	}
+
+	// GET RESERVE
+	public HashMap<String, Reserve_Dto> getReserve(int seq) {
+		String sql = " SELECT R.*, M.NAME "
+				   + " FROM RESERVE R "
+				   + " INNER JOIN MEMBER M ON M.ID = R.BUSI_ID "
+				   + " WHERE RESERVE_SEQ = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		HashMap<String, Reserve_Dto> map = new HashMap<String, Reserve_Dto>();
+		Reserve_Dto dto = null;
+		try {
+			conn = DBConnection.getConnection();
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				int i = 1;
+				dto = new Reserve_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+						rs.getString(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++));
+				map.put(rs.getString(i++), dto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

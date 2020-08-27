@@ -38,7 +38,11 @@
     <!-- fullcander js/css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.css">
     <!-- fullcalendar js -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+    <!-- fullcalendar bundle -->
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.min.js'></script>
+	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.2.0/main.global.min.js'></script>
   </head>
   <body>
   <!-- header -->

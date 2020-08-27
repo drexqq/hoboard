@@ -1,6 +1,7 @@
 package review;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,11 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import Reserve.Reserve_Dao;
+import Reserve.Reserve_Dto;
 import Util.UtilEx;
-import member.BUSI_Member_Dao;
-import member.Member_Dao;
-import member.Member_Dto;
 import net.sf.json.JSONObject;
 
 @WebServlet("/review")
@@ -23,6 +24,7 @@ public class ReviewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Review_Dao dao = Review_Dao.getInstance();
+		Reserve_Dao reserveDao = Reserve_Dao.getInstance();
 		String d = req.getParameter("d");
 		JSONObject jsonData = new JSONObject();
 		
@@ -91,7 +93,14 @@ public class ReviewController extends HttpServlet {
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonData);
 		}
-
+		// review_write
+		else if ("w".equals(d)) {
+			System.out.println("review write.jsp");
+			seq = Integer.parseInt(req.getParameter("seq"));
+			HashMap<String, Reserve_Dto> dto = reserveDao.getReserve(seq);
+			req.setAttribute("reserveDto", dto);
+			UtilEx.forward("review_write.jsp", req, resp);
+		}
 		/*
 		 * else if (key.equals("writeview")) {
 		 * System.out.println("---review writeView ---");
@@ -153,20 +162,36 @@ public class ReviewController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
+		HttpSession sessoin = req.getSession();
 		Review_Dao dao = Review_Dao.getInstance();
-		JSONObject jsonData = new JSONObject();
-
-		int seq = Integer.parseInt(req.getParameter("seq"));
-		String title = req.getParameter("title");
-		String content = req.getParameter("content");
-		boolean isUpdate = dao.updateReview(seq, title, content);
-
-		if (isUpdate) {
-			jsonData.put("update", isUpdate);
-			resp.setContentType("application/json; charset=UTF-8");
-			resp.getWriter().print(jsonData);
+		JSONObject json = new JSONObject();
+		
+		
+		
+		if("write".equals(req.getParameter("hidden"))) {
+			System.out.println("write post");
+			String formData = URLDecoder.decode(req.getParameter("data"));
+			String userId = (String)sessoin.getAttribute("sessionID");
+			String busiId = formData.split("&")[0].split("=")[1];
+			String cate = formData.split("&")[1].split("=")[1];
+			String title = formData.split("&")[2].split("=")[1];
+			int score = Integer.parseInt(formData.split("&")[3].split("=")[1]);
+			String content = formData.split("&")[4].split("=")[1];
+			Review_Dto dto = new Review_Dto(busiId, userId, title, content, score, "파일은추후", cate);
+			boolean done =dao.addReview(dto);
+			json.put("done", done);
+			resp.setContentType("application/x-json; charset=UTF-8");
+			resp.getWriter().print(json);
+		} else {
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			boolean isUpdate = dao.updateReview(seq, title, content);
+			if (isUpdate) {
+				json.put("update", isUpdate);
+				resp.setContentType("application/json; charset=UTF-8");
+				resp.getWriter().print(json);
+			};
 		}
-		;
 	}
 }

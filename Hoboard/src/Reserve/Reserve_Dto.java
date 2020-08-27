@@ -42,6 +42,15 @@ public class Reserve_Dto implements Serializable {
 		this.status = status;
 		this.reserve_date = reserve_date;
 	}
+	
+	public Reserve_Dto(String busi_id, String indvd_id, String cate, String cont, String reserve_time) {
+		super();
+		this.busi_id = busi_id;
+		this.indvd_id = indvd_id;
+		this.cate = cate;
+		this.cont = cont;
+		this.reserve_time = reserve_time;
+	}
 
 	public int getReserve_seq() {
 		return reserve_seq;

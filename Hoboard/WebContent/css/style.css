@@ -546,9 +546,42 @@ body {
 /* mypage - reserve */
 .mypage-wrap.reserve {
 }
+.mypage-wrap.reserve .title-wrap {
+  position: relative;
+}
 .mypage-wrap.reserve .title-wrap .page-title {
   float: left;
 }
+.mypage-wrap.reserve .title-wrap .tip-wrap {
+  position: absolute;
+  left: 0;
+  top: 45px;
+}
+.mypage-wrap.reserve .title-wrap .tip-wrap > div {
+  float: left;
+  margin-right: 15px;
+  font-size: 16px;
+}
+.mypage-wrap.reserve .title-wrap .tip-wrap .circle {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #000;
+}
+.mypage-wrap.reserve .title-wrap .tip-wrap .ready .circle {
+  background-color: #ff8b34;
+}
+.mypage-wrap.reserve .title-wrap .tip-wrap .cancle .circle {
+  background-color: #ff5151;
+}
+.mypage-wrap.reserve .title-wrap .tip-wrap .reviewOk .circle {
+  background-color: #3da0d7;
+}
+.mypage-wrap.reserve .title-wrap .tip-wrap .reviewDone .circle {
+  background-color: #424242;
+}
+
 .mypage-wrap.reserve .util-wrap {
   font-size: 20px;
   line-height: 30px;

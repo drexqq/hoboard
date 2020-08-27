@@ -339,7 +339,8 @@
 }
 .board-write textarea {
   min-height: 400px;
-  padding: 15px;
+  padding: 10px;
+  line-height: 1.2;
 }
 .board-write .title-wrap {
   position: relative;
@@ -363,7 +364,7 @@
 }
 .board-write .title-wrap .title {
   margin: 20px 0;
-  font-size: 28px;
+  font-size: 22px;
   line-height: 30px;
   font-weight: 600;
   color: #162a48;
@@ -372,10 +373,20 @@
 }
 .board-write .title-wrap .util-wrap > div {
   float: left;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 24px;
 }
 .board-write .title-wrap .util-wrap .author {
   margin-right: 30px;
+}
+.board-write .title-wrap .util-wrap .score {
+}
+.board-write .title-wrap .util-wrap .score .score-title {
+  float: left;
+  margin-right: 15px;
+}
+.board-write .title-wrap .util-wrap .score select {
+  float: left;
 }
 .board-write .title-wrap .util-wrap .date {
   margin-right: 10px;
@@ -420,6 +431,7 @@
   background-color: #e6e6e6;
 }
 .board-write .btn-wrap a {
+  cursor: pointer;
   display: inline-block;
   width: 150px;
   padding: 15px 20px;
@@ -428,7 +440,7 @@
   border-radius: 5px;
 }
 
-/* Á¶¼ºÇö ÀÛ¾÷ news_update ±Û¸ñ·Ï ¹öÆ°*/
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ news_update ï¿½Û¸ï¿½ï¿½ ï¿½ï¿½Æ°*/
 .board-write .btn-wrap input {
   display: inline-block;
   width: 150px;
@@ -438,7 +450,7 @@
   border-radius: 5px;
 }
 
-/* ¼öÁ¤¿Ï·á ¹öÆ°  */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½Æ°  */
 .board-write .btn-wrap input#submit {
   display: inline-block;
   width: 150px;
@@ -448,51 +460,50 @@
   border-radius: 5px;
 }
 
-
-/* news_detail ±Û ¼öÁ¤¹öÆ° */
+/* news_detail ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
 .board-detail .btns input.updateBtn {
-    width: 5%;
-    padding: 3px 5px;
-    border: 1px solid #ff8b34;
-    border-radius: 5px;
-    color: #ffffff;
-    background-color: #ff8b34;
-    transition: all 0.25s ease;
+  width: 5%;
+  padding: 3px 5px;
+  border: 1px solid #ff8b34;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #ff8b34;
+  transition: all 0.25s ease;
 }
 
-/*±Û »èÁ¦¹öÆ° */
+/*ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
 .board-detail .btns input.delBtn {
-    width: 5%;
-    padding: 3px 5px;
-    border: 1px solid #ff8b34;
-    border-radius: 5px;
-    color: #ffffff;
-    background-color: #ff0000;
-    transition: all 0.25s ease;
+  width: 5%;
+  padding: 3px 5px;
+  border: 1px solid #ff8b34;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #ff0000;
+  transition: all 0.25s ease;
 }
 
-/*´ñ±Û ¼öÁ¤¹öÆ° */
+/*ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
 .board-detail .btns button {
-    width: 10%;
-    padding: 3px 5px;
-    border: 1px solid #ff8b34;
-    border-radius: 5px;
-    color: #ffffff;
-    background-color: #ff8b34;
-    transition: all 0.25s ease;
+  width: 10%;
+  padding: 3px 5px;
+  border: 1px solid #ff8b34;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #ff8b34;
+  transition: all 0.25s ease;
 }
-/*´ñ±Û »èÁ¦¹öÆ° */
+/*ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
 .board-detail .btns input.replydelBtn {
-    width: 10%;
-    padding: 3px 5px;
-    border: 1px solid #ff8b34;
-    border-radius: 5px;
-    color: #ffffff;
-    background-color: #ff0000;
-    transition: all 0.25s ease;
+  width: 10%;
+  padding: 3px 5px;
+  border: 1px solid #ff8b34;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #ff0000;
+  transition: all 0.25s ease;
 }
 
-/* news_comm_update ¸®ÇÃ ¼öÁ¤ÇÏ±â ¹öÆ°  */
+/* news_comm_update ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°  */
 .board-detail .reply-wrap .reply form input.replyupdate {
   width: 90px;
   height: 35px;
@@ -506,14 +517,14 @@
   border-radius: 5px;
   transition: all 0.25s ease;
   background-color: #fff;
-} 
-
-.board-detail .reply-wrap .reply form input.replyupdate:hover {
-    background-color: #ff8b34;
-    color: #fff;
 }
 
-/* news_comm_update ¸®ÇÃ ¼öÁ¤ µÚ·Î°¡±â ¹öÆ°  */
+.board-detail .reply-wrap .reply form input.replyupdate:hover {
+  background-color: #ff8b34;
+  color: #fff;
+}
+
+/* news_comm_update ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°  */
 .board-detail .reply-wrap .goList input {
   width: 120px;
   height: 40px;
@@ -527,18 +538,14 @@
   border-radius: 5px;
   transition: all 0.25s ease;
   background-color: #fff;
-} 
-
-.board-detail .reply-wrap .goList input:hover {
-    background-color: #ff0000;
-    color: #fff;
 }
 
+.board-detail .reply-wrap .goList input:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
 
-/* Á¶¼ºÇö ÀÛ¾÷ ³¡  */
-
-
-
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ ï¿½ï¿½  */
 
 .board-write .btn-wrap a.update-done {
   background-color: #ff8b34;
@@ -715,4 +722,3 @@
 .search-wrap .input-wrap button i {
   font-size: 18px;
 }
-

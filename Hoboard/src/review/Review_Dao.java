@@ -128,9 +128,12 @@ public class Review_Dao {
 		return dto;
 	}
 
-	// TODO GET REVIEW DETAIL
+	// TODO GET REVIEW DETAIL ---사용중
 	public HashMap<String, Review_Dto> getReviewDetail(int seq) {
-		String sql = " SELECT * " + " FROM REVIEW " + " WHERE REVIEW_SEQ = ? ";
+		String sql = " SELECT R.*, M.NAME "
+				   + " FROM REVIEW R "
+				   + " INNER JOIN MEMBER M ON M.ID = R.BUSI_ID "
+				   + " WHERE REVIEW_SEQ = ? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -150,7 +153,7 @@ public class Review_Dao {
 				dto = new Review_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getInt(i++));
-				map.put(Member_Dao.getInstance().getUser(rs.getString(2)).getName(), dto);
+				map.put(rs.getString(i++), dto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -158,7 +161,6 @@ public class Review_Dao {
 			DBClose.close(psmt, conn, rs);
 		}
 		return map;
-
 	}
 
 	// TODO UPDATE REVIEW TABLE
@@ -182,6 +184,32 @@ public class Review_Dao {
 		return count > 0 ? true : false;
 	}
 
+	// INSERT REVIEW
+	public boolean addReview(Review_Dto dto) {
+		String query = " INSERT INTO REVIEW "
+					 + " VALUES(SEQ_REVIEW.NEXTVAL, ?, ?, ?, ?, 0, ?, SYSDATE, ?, ?, 0) ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, dto.getBusi_id());
+			psmt.setString(2, dto.getIndvd_id());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setInt(5, dto.getScore());
+			psmt.setString(6, dto.getFilename());
+			psmt.setString(7, dto.getBusi_cate());
+
+			count = psmt.executeUpdate();
+		}
+		catch (Exception e) { e.printStackTrace(); }
+		finally { DBClose.close(psmt, conn, null); }
+		return count > 0 ? true : false;
+	}
+	
 	// TODO viewcount
 	public void updateViewCount(int seq) {
 		String sql = "  UPDATE REVIEW " + "	SET VIEWCOUNT=VIEWCOUNT+1 " + " WHERE REVIEW_SEQ=? ";
