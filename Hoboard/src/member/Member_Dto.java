@@ -44,8 +44,8 @@ public class Member_Dto {
 		this.d_Address = d_Address;
 	}
 
-	public Member_Dto(int auth, String id, String name, String tel, String email, String address, String d_Address,
-			String post_Num) {
+	public Member_Dto(int auth, String id, String name, String tel, String email, String post_Num, String address, String d_Address
+			) {
 		super();
 		this.auth = auth;
 		this.id = id;

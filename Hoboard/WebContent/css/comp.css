@@ -395,14 +395,9 @@
 }
 
 .board-write textarea {
-<<<<<<< HEAD
   min-height: 400px;
   padding: 10px;
   line-height: 1.2;
-=======
-	min-height: 400px;
-	padding: 15px;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
 .board-write .title-wrap {
@@ -429,41 +424,25 @@
 }
 
 .board-write .title-wrap .title {
-<<<<<<< HEAD
   margin: 20px 0;
   font-size: 22px;
   line-height: 30px;
   font-weight: 600;
   color: #162a48;
-=======
-	margin: 20px 0;
-	font-size: 28px;
-	line-height: 30px;
-	font-weight: 600;
-	color: #162a48;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
 .board-write .title-wrap .util-wrap {
 	
 }
-<<<<<<< HEAD
 .board-write .title-wrap .util-wrap > div {
   float: left;
   font-size: 18px;
   line-height: 24px;
-=======
-
-.board-write .title-wrap .util-wrap>div {
-	float: left;
-	font-size: 16px;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
 .board-write .title-wrap .util-wrap .author {
 	margin-right: 30px;
 }
-<<<<<<< HEAD
 .board-write .title-wrap .util-wrap .score {
 }
 .board-write .title-wrap .util-wrap .score .score-title {
@@ -473,9 +452,6 @@
 .board-write .title-wrap .util-wrap .score select {
   float: left;
 }
-=======
-
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 .board-write .title-wrap .util-wrap .date {
 	margin-right: 10px;
 }
@@ -493,7 +469,7 @@
 .board-write .content-wrap {
 	position: relative;
 	min-height: 300px;
-	padding: 30px 0;
+	padding: 50px 0;
 	font-size: 22px;
 	line-height: 24px;
 	color: #1a2e3b;
@@ -527,7 +503,6 @@
 }
 
 .board-write .btn-wrap a {
-<<<<<<< HEAD
   cursor: pointer;
   display: inline-block;
   width: 150px;
@@ -535,17 +510,9 @@
   background-color: #3da0d7;
   color: #ffffff;
   border-radius: 5px;
-=======
-	display: inline-block;
-	width: 150px;
-	padding: 15px 20px;
-	background-color: #3da0d7;
-	color: #ffffff;
-	border-radius: 5px;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
-/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ news_update ï¿½Û¸ï¿½ï¿½ ï¿½ï¿½Æ°*/
+/* ì¡°ì„±í˜„ ì‘ì—… news_update ê¸€ëª©ë¡ ë²„íŠ¼*/
 .board-write .btn-wrap input {
 	display: inline-block;
 	width: 150px;
@@ -555,7 +522,7 @@
 	border-radius: 5px;
 }
 
-/* ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½Æ°  */
+/* å ì™ì˜™å ì™ì˜™å ì‹¹ë¤„ì˜™ å ì™ì˜™íŠ¼  */
 .board-write .btn-wrap input#submit {
 	display: inline-block;
 	width: 150px;
@@ -565,7 +532,6 @@
 	border-radius: 5px;
 }
 
-<<<<<<< HEAD
 /* news_detail ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
 .board-detail .btns input.updateBtn {
   width: 5%;
@@ -575,22 +541,10 @@
   color: #ffffff;
   background-color: #ff8b34;
   transition: all 0.25s ease;
-=======
-/* news_detail ±Û ¼öÁ¤¹öÆ° */
-.board-detail .btns input.updateBtn {
-	width: 5%;
-	padding: 3px 5px;
-	border: 1px solid #ff8b34;
-	border-radius: 5px;
-	color: #ffffff;
-	background-color: #ff8b34;
-	transition: all 0.25s ease;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
-/*ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
+/*å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¼ */
 .board-detail .btns input.delBtn {
-<<<<<<< HEAD
   width: 5%;
   padding: 3px 5px;
   border: 1px solid #ff8b34;
@@ -598,20 +552,10 @@
   color: #ffffff;
   background-color: #ff0000;
   transition: all 0.25s ease;
-=======
-	width: 5%;
-	padding: 3px 5px;
-	border: 1px solid #ff8b34;
-	border-radius: 5px;
-	color: #ffffff;
-	background-color: #ff0000;
-	transition: all 0.25s ease;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
-/*ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
+/*å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¼ */
 .board-detail .btns button {
-<<<<<<< HEAD
   width: 10%;
   padding: 3px 5px;
   border: 1px solid #ff8b34;
@@ -620,7 +564,7 @@
   background-color: #ff8b34;
   transition: all 0.25s ease;
 }
-/*ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
+/*å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¼ */
 .board-detail .btns input.replydelBtn {
   width: 10%;
   padding: 3px 5px;
@@ -629,16 +573,8 @@
   color: #ffffff;
   background-color: #ff0000;
   transition: all 0.25s ease;
-=======
-	width: 10%;
-	padding: 3px 5px;
-	border: 1px solid #ff8b34;
-	border-radius: 5px;
-	color: #ffffff;
-	background-color: #ff8b34;
-	transition: all 0.25s ease;
 }
-/*´ñ±Û »èÁ¦¹öÆ° */
+/*ëŒ“ê¸€ ì‚­ì œë²„íŠ¼ */
 .board-detail .btns input.replydelBtn {
 	width: 10%;
 	padding: 3px 5px;
@@ -647,12 +583,10 @@
 	color: #ffffff;
 	background-color: #ff0000;
 	transition: all 0.25s ease;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
-/* news_comm_update ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°  */
+/* news_comm_update å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¹ê¹ì˜™ å ì™ì˜™íŠ¼  */
 .board-detail .reply-wrap .reply form input.replyupdate {
-<<<<<<< HEAD
   width: 90px;
   height: 35px;
   padding: 1;
@@ -668,9 +602,6 @@
 }
 
 .board-detail .reply-wrap .reply form input.replyupdate:hover {
-  background-color: #ff8b34;
-  color: #fff;
-=======
 	width: 90px;
 	height: 35px;
 	padding: 1;
@@ -685,15 +616,8 @@
 	background-color: #fff;
 }
 
-.board-detail .reply-wrap .reply form input.replyupdate:hover {
-	background-color: #ff8b34;
-	color: #fff;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
-}
-
-/* news_comm_update ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°  */
+/* news_comm_update å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ìŒ˜ë¡œê³¤ì˜™å ì™ì˜™ å ì™ì˜™íŠ¼  */
 .board-detail .reply-wrap .goList input {
-<<<<<<< HEAD
   width: 120px;
   height: 40px;
   padding: 1;
@@ -706,52 +630,104 @@
   border-radius: 5px;
   transition: all 0.25s ease;
   background-color: #fff;
-=======
-	width: 120px;
-	height: 40px;
-	padding: 1;
-	margin: 0;
-	font-size: 20px;
-	text-align: center;
-	line-height: 40px;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	transition: all 0.25s ease;
-	background-color: #fff;
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 }
 
-/* news_detail ±Û¸ñ·ÏÀ¸·Î°¡±â È£¹ö¹öÆ°  */
+/* news_detail ê¸€ëª©ë¡ìœ¼ë¡œê°€ê¸° í˜¸ë²„ë²„íŠ¼  */
 .board-detail .reply-wrap .goList input:hover {
-<<<<<<< HEAD
   background-color: #ff0000;
   color: #fff;
 }
 
-/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ ï¿½ï¿½  */
-=======
-	background-color: #ff8b34;
-	color: #fff;
+
+/* news_write  ê¸€ì‘ì„±í•˜ê¸° ì»¨í…ì¸  íƒ€ì´í‹€  */
+.board-write .content .content-title{
+	font-size: 30px;
+	margin-bottom: 10px;
 }
-/* news_write  ±ÛÀÛ¼ºÇÏ±â È£¹ö¹öÆ°  */
+
+/* news_write  ê¸€ì‘ì„±í•˜ê¸° ë²„íŠ¼1  */
+.board-write input.s_write {
+	
+	width: 10%;
+	float: left;
+	margin-top: 3px;
+	margin-right: 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	
+}
+
+
+/* news_write  ê¸€ì‘ì„±í•˜ê¸° ë²„íŠ¼2  */
+.board-write input.s_del {
+	width: 10%;
+	float: left;
+	margin-top: 3px;
+	margin-right: 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+/* news_write  ê¸€ì‘ì„±í•˜ê¸° ë²„íŠ¼3  */
+.board-write input.s_list {
+	width: 10%;
+	float: left;
+	margin-top: 3px;
+	margin-right: 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+
+
+/* news_write/ask  ê¸€ì‘ì„±í•˜ê¸° í˜¸ë²„ë²„íŠ¼  */
+.board-write input.s_write:hover {
+}
+
+/* news_detail ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½Æ°  */
+.board-detail .reply-wrap .goList input:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
+/* news_write  ï¿½ï¿½ï¿½Û¼ï¿½ï¿½Ï±ï¿½ È£ï¿½ï¿½ï¿½ï¿½Æ°  */
 .board-write input.news_write:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* news_write ±Û»èÁ¦ÇÏ±â È£¹ö¹öÆ°  */
+/* news_write/ask ê¸€ì‚­ì œí•˜ê¸° í˜¸ë²„ë²„íŠ¼  */
+.board-write input.s_del:hover {
+	background-color: #ff0000;
+	color: #fff;
+}
+/* news_write/ask ë¦¬ìŠ¤íŠ¸ë¡œê°€ê¸° í˜¸ë²„ë²„íŠ¼   */
+/* news_write ï¿½Û»ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ È£ï¿½ï¿½ï¿½ï¿½Æ°  */
 .board-write input.news_del:hover {
 	background-color: #ff0000;
 	color: #fff;
 }
-/* news_write  ¸®½ºÆ®·Î°¡±â È£¹ö¹öÆ°   */
+/* news_write  ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Î°ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½Æ°   */
 .board-write input.news_list:hover {
 	background-color: #3da0d7;
 	color: #fff;
 }
 
-/* news.jsp ±ÛÀÛ¼º ¹öÆ°  */
+/* news.jsp ê¸€ì‘ì„± ë²„íŠ¼  */
 .news .auth_write button {
 	width: 120px;
 	height: 40px;
@@ -766,47 +742,47 @@
 	transition: all 0.25s ease;
 	background-color: #fff;
 }
-/* news.jsp ±ÛÀÛ¼º È£¹ö¹öÆ°   */
+/* news.jsp ï¿½ï¿½ï¿½Û¼ï¿½ È£ï¿½ï¿½ï¿½ï¿½Æ°   */
 .news .auth_write button:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ Å¸ÀÌÆ²  */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ íƒ€ì´í‹€  */
 .admin-list .title-wrap .page-title {
 	padding-top: 30px;
 	padding-bottom: 20px;
 	padding-left: 35px;
-	font-size: 25px;	
+	font-size: 25px;
 	line-height: 50px;
 	font-weight: 600;
 }
-/* admin.jsp °ü¸®¸®½ºÆ® Å×ÀÌºí ÁÙ°£°İ  */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” ì¤„ê°„ê²©  */
 .admin-list .list-wrap .admin-table {
 	padding-bottom: 20px;
 	padding-left: 50px;
 	font-weight: 600;
 	margin: auto;
 }
-/* admin.jsp °ü¸®¸®½ºÆ® °ü¸®  */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬  */
 .admin-list .admin-table .admin {
 	width: 20%;
 	padding-bottom: 1%;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® Á¤º¸  */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ ì •ë³´  */
 .admin-list .admin-table .now {
 	width: 30%;
 	text-align: left;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® ¹öÆ° */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ ë²„íŠ¼ */
 .admin-list .admin-table .abtns {
 	width: 10%;
 	text-align: center;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® Å×ÀÌºí thead */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” thead */
 .admin-list .admin-table thead tr th {
 	box-shadow: 0 0 0px 1px black;
 	background-color: #ff8b34;
@@ -817,7 +793,7 @@
 	font-size: 20px;
 	font-weight: 600;
 }
-/* admin.jsp  °ü¸®¸®½ºÆ® Å×ÀÌºí tbody*/
+/* admin.jsp  ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” tbody*/
 .admin-list .admin-table tbody tr td {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -826,19 +802,19 @@
 	font-size: 18px;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® ±Û¾¾ ¿Ã·ÇÀ»¶§ ±×¸²ÀÚ È¿°ú  */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ ê¸€ì”¨ ì˜¬ë ·ì„ë•Œ ê·¸ë¦¼ì íš¨ê³¼  */
 .admin-list .admin-table tbody tr:hover {
 	box-shadow: 1px 1px 10px #ddd;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® Å×ÀÌºí ¼öÆò¼± È¿°ú  */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” ìˆ˜í‰ì„  íš¨ê³¼  */
 .admin-list .admin-table tbody td {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® ¹Ù·Î°¡±â¹öÆ° */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ ë°”ë¡œê°€ê¸°ë²„íŠ¼ */
 .admin-list .admin-table input {
 	width: 90px;
 	height: 35px;
@@ -854,13 +830,13 @@
 	background-color: #fff;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® ¹Ù·Î°¡±â¹öÆ° È£¹ö È¿°ú */
+/* admin.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ ë°”ë¡œê°€ê¸°ë²„íŠ¼ í˜¸ë²„ íš¨ê³¼ */
 .admin-list .admin-table input:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ Å¸ÀÌÆ²  */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ íƒ€ì´í‹€  */
 .admin-list .board-name {
 	padding-top: 3px;
 	padding-left: 35px;
@@ -868,21 +844,21 @@
 	font-weight: 600;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ Å×ÀÌºí ÁÙ°£°İ ¹× ÆùÆ®±½±â */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ í…Œì´ë¸” ì¤„ê°„ê²© ë° í°íŠ¸êµµê¸° */
 .admin-list .list-wrap .board-table {
 	padding-bottom: 30px;
 	padding-left: 50px;
 	font-weight: 600;
-	margin : auto;
+	margin: auto;
 }
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ÀÛ¼ºÀÏ  */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ ì‘ì„±ì¼  */
 .admin-list .board-table .date {
 	width: 240px;
 	padding: 20px;
 	padding-bottom: 1%;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ÀÛ¼ºÀÚ */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ ì‘ì„±ì */
 .admin-list .board-table .id {
 	width: 30%;
 	padding: 20px;
@@ -890,14 +866,14 @@
 	text-align: left;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ±âÅ¸ */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ ê¸°íƒ€ */
 .admin-list .board-table .etc {
 	width: 50%;
 	padding: 20px;
 	padding-left: 220px;
 	text-align: left;
 }
-/* admin.jsp  °ü¸®°Ô½ÃÆÇ Å×ÀÌºí tbody*/
+/* admin.jsp  ê´€ë¦¬ê²Œì‹œíŒ í…Œì´ë¸” tbody*/
 .admin-list .board-table tbody tr td {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -906,18 +882,18 @@
 	font-size: 18px;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ±Û¾¾ ¿Ã·ÇÀ»¶§ ±×¸²ÀÚ È¿°ú  */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ ê¸€ì”¨ ì˜¬ë ·ì„ë•Œ ê·¸ë¦¼ì íš¨ê³¼  */
 .admin-list .board-table tbody tr:hover {
 	box-shadow: 1px 1px 10px #ddd;
 }
 
-/* admin.jsp  °ü¸®°Ô½ÃÆÇ Å×ÀÌºí tbody  */
+/* admin.jsp  ê´€ë¦¬ê²Œì‹œíŒ í…Œì´ë¸” tbody  */
 .admin-list .board-table tbody tr {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
-/* admin.jsp °ü¸®°Ô½ÃÆÇ Å×ÀÌºí thead  */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ í…Œì´ë¸” thead  */
 .admin-list .board-table thead tr {
 	box-shadow: 0 0 0px 1px black;
 	background-color: #ff8b34;
@@ -929,7 +905,7 @@
 	font-weight: 600;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ¹Ù·Î°¡±â¹öÆ° */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ ë°”ë¡œê°€ê¸°ë²„íŠ¼ */
 .admin-list .button input {
 	width: 90px;
 	height: 35px;
@@ -945,13 +921,13 @@
 	background-color: #fff;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ¹Ù·Î°¡±â¹öÆ° È£¹ö È¿°ú */
+/* admin.jsp ê´€ë¦¬ê²Œì‹œíŒ ë°”ë¡œê°€ê¸°ë²„íŠ¼ í˜¸ë²„ íš¨ê³¼ */
 .admin-list .button input:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* admin_mem.jsp Å¸ÀÌÆ²  */
+/* admin_mem.jsp íƒ€ì´í‹€  */
 .admin-mem .title-wrap .page-title {
 	padding-top: 10px;
 	padding-bottom: 20px;
@@ -961,30 +937,28 @@
 	font-weight: 600;
 }
 
-/* admin_mem.jsp Å×ÀÌºí ÄÃ·³ id  */
+/* admin_mem.jsp í…Œì´ë¸” ì»¬ëŸ¼ id  */
 .admin-mem .m-table .id {
 	width: 25%;
 }
 
-/* admin_mem.jsp Å×ÀÌºí ÄÃ·³ name  */
+/* admin_mem.jsp í…Œì´ë¸” ì»¬ëŸ¼ name  */
 .admin-mem .m-table .name {
 	width: 25%;
 }
 
-/* admin_mem.jsp Å×ÀÌºí ÄÃ·³ tel  */
+/* admin_mem.jsp í…Œì´ë¸” ì»¬ëŸ¼ tel  */
 .admin-mem .m-table .tel {
 	width: 25%;
 }
 
-/* admin_mem.jsp Å×ÀÌºí ÄÃ·³ email  */
+/* admin_mem.jsp í…Œì´ë¸” ì»¬ëŸ¼ email  */
 .admin-mem .m-table .email {
 	width: 25%;
 }
 
-/* admin_mem.jsp Å×ÀÌºí thead  */
+/* admin_mem.jsp í…Œì´ë¸” thead  */
 .admin-mem .m-table thead tr th {
-	/* box-shadow: 0 0 1px 0px black;
-	background-color: #ff8b34; */
 	border-bottom: 1px solid #eee;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -994,7 +968,7 @@
 	font-weight: 600;
 }
 
-/* admin_mem.jsp Å×ÀÌºí tbody*/
+/* admin_mem.jsp í…Œì´ë¸” tbody*/
 .admin-mem .m-table tbody tr td {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1003,14 +977,21 @@
 	font-size: 18px;
 }
 
-/* admin.jsp °ü¸®¸®½ºÆ® Å×ÀÌºí ¼öÆò¼± È¿°ú  */
+/* admin-mem.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” ìˆ˜í‰ì„  íš¨ê³¼  */
 .admin-mem .m-table tbody td {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ±Û¾¾ ¿Ã·ÇÀ»¶§ ±×¸²ÀÚ È¿°ú  */
+/* admin-mem.jsp ê´€ë¦¬ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” ìˆ˜í‰ì„  íš¨ê³¼  */
+.admin-mem .m-table tbody td {
+	cursor: pointer;
+	border-bottom: 1px solid #eee;
+	transition: all 0.25s ease;
+}
+
+/* admin-mem.jsp ê´€ë¦¬ê²Œì‹œíŒ ë²„íŠ¼  */
 .admin-mem .m-table tbody input {
 	width: 100px;
 	padding: 3px 5px;
@@ -1019,35 +1000,48 @@
 	transition: all 0.25s ease;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ±Û¾¾ ¿Ã·ÇÀ»¶§ ±×¸²ÀÚ È¿°ú  */
+/* admin-mem.jsp ê´€ë¦¬ê²Œì‹œíŒ ê¸€ì”¨ ì˜¬ë ·ì„ë•Œ ê·¸ë¦¼ì íš¨ê³¼  */
+.admin-mem .m-table tbody tr:hover {
+	box-shadow: 1px 1px 10px #ddd;
+}
+
+/* admin-mem.jsp ê´€ë¦¬ê²Œì‹œíŒ ë²„íŠ¼ ì˜¬ë ·ì„ë•Œ ê·¸ë¦¼ì íš¨ê³¼  */
 .admin-mem .m-table tbody input#hmdBtn:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-/* admin.jsp °ü¸®°Ô½ÃÆÇ ±Û¾¾ ¿Ã·ÇÀ»¶§ ±×¸²ÀÚ È¿°ú  */
+/* admin-mem.jsp ê´€ë¦¬ê²Œì‹œíŒ ë²„íŠ¼ ì˜¬ë ·ì„ë•Œ ê·¸ë¦¼ì íš¨ê³¼  */
 .admin-mem .m-table tbody input#hmdelBtn:hover {
 	background-color: #ff0000;
 	color: #fff;
 }
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd
 
-/* Á¶¼ºÇö ÀÛ¾÷ ³¡  */
+.news .title-wrap .title {
+	float: left;
+	font-size: 30px;
+	line-height: 30px;
+	font-weight: 600;
+	color: #162a48;
+}
+
+/* ì¡°ì„±í˜„ ì‘ì—… ë  */
 .board-write .btn-wrap a.update-done {
 	background-color: #ff8b34;
 	cursor: pointer;
 }
 
 .myreview .review-table .btns a {
-    width: 50%;
-    padding: 3px 5px;
-    border: 1px solid #ff8b34;
-    border-radius: 5px;
-    transition: all 0.25s ease;
+	width: 50%;
+	padding: 3px 5px;
+	border: 1px solid #ff8b34;
+	border-radius: 5px;
+	transition: all 0.25s ease;
 }
+
 a, a:hover {
-    text-decoration: none;
-    color: #333333;
+	text-decoration: none;
+	color: #333333;
 }
 
 /* ask-list */
@@ -1251,10 +1245,7 @@ a, a:hover {
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
-<<<<<<< HEAD
-=======
 
 .search-wrap .input-wrap button i {
 	font-size: 18px;
 }
->>>>>>> 87ee37b9eb5e5bb8fd36b5fdd70f1451b5a5e4cd

@@ -85,16 +85,6 @@ public class ReserveController extends HttpServlet {
 			req.setAttribute("map", map);
 			UtilEx.forward("reserve_detail.jsp", req, resp);
 		}
-		/*
-		 * else if(key.equals("category")) {
-		 * 
-		 * int seq = Integer.parseInt(req.getParameter("seq")); List<Member_Dto> list =
-		 * dao.getCate_list(cate, seq);
-		 * 
-		 * req.setAttribute("reslist", list); UtilEx.forward("reserve.jsp", req, resp);
-		 * 
-		 * }
-		 */
 	}
 
 	@Override
@@ -114,11 +104,9 @@ public class ReserveController extends HttpServlet {
 			list = dao.getUserReserveList("", "", id, auth);
 			resp.setContentType("application/x-json; charset=UTF-8");
 			if(list == null || list.size() == 0) {
-				System.out.println("못지나감");
 				resp.getWriter().print(list);
 			}
 			else {
-				System.out.println("지나감");
 				resp.getWriter().print(UtilEx.mapToJson(list.get(0)));
 			}
 		}

@@ -326,6 +326,7 @@ public class Member_Dao {
 				int i = 1;
 				dto = new Member_Dto(rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
 						rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
+				
 			}
 
 		} catch (Exception e) {
