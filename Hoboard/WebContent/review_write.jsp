@@ -7,6 +7,7 @@
 			<div class="col-12">
 				<c:forEach items="${ reserveDto }" var="item">
 					<form action="review" method="post">
+						<input type="hidden" id="seq" name="seq" value="${ param.seq }">
 						<input type="hidden" name="busi_id"
 							value="${ item.value.busi_id }"> <input type="hidden"
 							name="cate" value="${ item.value.cate }">
@@ -40,27 +41,30 @@
 					<a class="go-list" href="myreserve">예약내역</a> <a id="writeBtn"
 						class="write-done">작성완료</a>
 				</div>
-
-				<script type="text/javascript">
-					$('#writeBtn').on('click', function() {
-						$.ajax({
-							url : "review",
-							datatype : "json",
-							type : 'post',
-							data : {
-								hidden : "write",
-								data : $("form").serialize()
-							},
-							success : function(data) {
-								alert("후기 작성이 완료되었습니다 !");
-								if (data.done)
-									location.href = "myreview";
-							},
-							error : function(e) {
-								alert('후기 작성을 실패하였습니다 !');
-								console.log(e);
-							},
-						});
-					})
-				</script>
-				<%@ include file="module/footer.jsp"%>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#writeBtn').on('click', function() {
+		$.ajax({
+			url : "review",
+			datatype : "json",
+			type : 'post',
+			data : {
+				hidden : "write",
+				data : $("form").serialize()
+			},
+			success : function(data) {
+				alert("후기 작성이 완료되었습니다 !");
+				if (data.done)
+					location.href = "myreview";
+			},
+			error : function(e) {
+				alert('후기 작성을 실패하였습니다 !');
+				console.log(e);
+			},
+		});
+	})
+</script>
+<%@ include file="module/footer.jsp"%>

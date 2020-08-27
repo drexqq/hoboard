@@ -366,7 +366,7 @@ public class Reserve_Dao {
 		return count > 0 ? true : false;
 	}
 	
-	// UPDATE RESERVE STATUS
+	// UPDATE RESERVE STATUS = 2
 	public boolean updateReserve(int seq) {
 		String query = " UPDATE RESERVE SET STATUS = 2 WHERE RESERVE_SEQ = ? ";
 		Connection conn = null;
@@ -384,7 +384,26 @@ public class Reserve_Dao {
 			DBClose.close(psmt, conn, null);
 		}
 		return count > 0 ? true : false;
-		
+	}
+	
+	// UPDATE RESERVE STATUS = 3
+	public boolean doneReserve(int seq) {
+		String query = " UPDATE RESERVE SET STATUS = 3 WHERE RESERVE_SEQ = ? ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setInt(1, seq);
+			count = psmt.executeUpdate();
+			System.out.println("update complete");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		return count > 0 ? true : false;
 	}
 
 	// GET RESERVE
