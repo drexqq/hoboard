@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
     <div class="row justify-content-center">
         <div class="join-title">회원가입</div>
       <div class="form-wrap">
-        <form action="MEMBER" method="post">
+        <form action="member" method="post">
           <input type="hidden" name="auth" value="2" />
           <div class="input-wrap clearfix">
             <label for="name">병원 이름</label>

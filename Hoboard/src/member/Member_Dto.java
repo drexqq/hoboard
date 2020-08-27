@@ -3,8 +3,8 @@ package member;
 public class Member_Dto {
 
 	private int auth;
-	private String name;
 	private String id;
+	private String name;
 	private String pw;
 	private String email;
 	private String tel;
@@ -15,6 +15,17 @@ public class Member_Dto {
 	public Member_Dto() {
 	}
 
+	public Member_Dto(int auth, String id, String name, String tel, String email) {
+		super();
+		this.auth = auth;
+		this.id = id;
+		this.name = name;
+		this.tel = tel;
+		this.email = email;
+
+	}
+	
+	
 	public Member_Dto(String name, String tel, String address, String d_Address) {
 		super();
 		this.name = name;
@@ -47,12 +58,12 @@ public class Member_Dto {
 
 	}
 
-	public Member_Dto(int auth, String name, String id, String pw, String tel, String email, String post_Num,
+	public Member_Dto(int auth, String id, String name, String pw, String tel, String email, String post_Num,
 			String address, String d_Address) {
 		super();
 		this.auth = auth;
-		this.name = name;
 		this.id = id;
+		this.name = name;
 		this.pw = pw;
 		this.tel = tel;
 		this.email = email;

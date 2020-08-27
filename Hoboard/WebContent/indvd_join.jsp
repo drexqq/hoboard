@@ -7,7 +7,7 @@
 		<div class="row justify-content-center">
 				<div class="join-title">회원가입</div>
 			<div class="form-wrap">
-				<form action="MEMBER" method="post">
+				<form action="member" method="post">
 					<input type="hidden" name="auth" value="1" />
 					<div class="input-wrap clearfix">
 						<label for="name">이름</label> <input type="text" id="name"
@@ -41,6 +41,11 @@
 						<input type="text" id="post_Num" name="post_Num" class="textChk address" readonly="readonly" />
 						<input type="text" id="address" name="address" class="textChk address" readonly="readonly" />
 						<input type="text" id="d_Address" name="d_Address" class="textChk address" />
+					</div>
+					<div class=#>
+						<label for="">Hoboard 이용약관</label>
+						<input type="text" id="join_check" class="#" readonly="readonly"/>
+					
 					</div>
 				</form>
 			</div>

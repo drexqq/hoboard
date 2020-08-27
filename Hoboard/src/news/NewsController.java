@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Util.UtilEx;
 import net.sf.json.JSONObject;
@@ -22,6 +23,7 @@ public class NewsController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
+		
 		String work = req.getParameter("work");
 		News_Dao dao = News_Dao.getInstance();
 		News_COMM_Dao dao2 = News_COMM_Dao.getInstance();
@@ -58,6 +60,9 @@ public class NewsController extends HttpServlet {
 				req.setAttribute("choice", c);
 				req.setAttribute("searchWord", sW);
 			}
+			
+			
+			
 			// 보내줄 데이터
 			req.setAttribute("len", len);
 			req.setAttribute("pageNumber", pageNumber);
@@ -70,7 +75,8 @@ public class NewsController extends HttpServlet {
 			// 디테일
 		} else if (work.equals("detail")) { // update view로 이동
 			System.out.println("detail get");
-
+			
+			
 			int seq = Integer.parseInt(req.getParameter("seq"));
 			System.out.println("news_detail.seq =" + seq);
 
@@ -81,7 +87,8 @@ public class NewsController extends HttpServlet {
 
 			System.out.println(commDao.getComm(seq).toString());
 			boolean vc = dao.viewcount(seq);
-
+			
+			
 			req.setAttribute("comm", commDao.getComm(seq));
 			req.setAttribute("dto", dto);
 			

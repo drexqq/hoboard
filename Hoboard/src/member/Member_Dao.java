@@ -360,4 +360,112 @@ public class Member_Dao {
 		System.out.println("get busimember from member table done");
 		return list;
 	}
+	
+	public List<Member_Dto> getBusiMember_admin() {
+		
+		String query = " SELECT AUTH, ID, NAME, TEL, EMAIL, POST_NUM, ADDRESS, D_ADDRESS FROM MEMBER WHERE AUTH = 2 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				Member_Dto dto = new Member_Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("get busimember from member table done");
+		return list;
+	}
+	
+	public List<Member_Dto> getPMember_admin() {
+		
+		String query = " SELECT AUTH, ID, NAME, TEL, EMAIL FROM MEMBER WHERE AUTH = 1 ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<Member_Dto> list = new ArrayList<Member_Dto>();
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				Member_Dto dto = new Member_Dto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		System.out.println("get busimember from member table done");
+		return list;
+	}
+	
+	//회원 탈퇴 AUTH 3(개인)으로 관리
+	public Member_Dto DelIMember(String id) {
+		
+		String query = " UPDATE MEMBER SET AUTH = 3 WHERE ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		Member_Dto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+		System.out.println("auth 3 대기중 1/3");
+			rs = psmt.executeQuery();
+		System.out.println("auth 3 대기중 2/3");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		System.out.println("auth 3 success");
+		
+		return dto;
+
+	}
+	//회원 탈퇴 AUTH 4(병원)으로 관리
+	public Member_Dto DelBMember(String id) {
+		
+		String query = " UPDATE MEMBER SET AUTH = 4 WHERE ID = ? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		Member_Dto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, id);
+		System.out.println("auth 4 대기중 1/3");
+			rs = psmt.executeQuery();
+		System.out.println("auth 4 대기중 2/3");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, null);
+		}
+		System.out.println("auth 4 success");
+		
+		return dto;
+
+	}
+	
 }

@@ -20,6 +20,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import news.News_Dao;
 import news.News_Dto;
 
@@ -77,6 +79,10 @@ public class News_File_Controller extends HttpServlet {
 		// tomcat(server)
 		filePath = mConfig.getServletContext().getRealPath("/upload");
 		
+		
+		
+		
+		
 		// filePath = "d:\\tmp";
 
 		filePath = filePath + "\\" + filename;
@@ -116,8 +122,9 @@ public class News_File_Controller extends HttpServlet {
 
 //		if (key.equals("writecomplete")) {
 		// tomcat (server)
-		String fupload = req.getRealPath("/upload");
-		// String fupload = req.getSession().getServletContext().getRealPath("/");
+		//String fupload = req.getRealPath("/upload");
+		String fupload = req.getSession().getServletContext().getRealPath("/upload");
+		//String fupload = req.getServletContext().getRealPath("upload");
 
 		// 지정 폴더(client)
 		System.out.println("업로드 폴더:" + fupload);
@@ -132,6 +139,8 @@ public class News_File_Controller extends HttpServlet {
         String content = "";
 		// file
 		String filename = "";
+		
+		
 
 		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
 		News_Dto dto = null;
