@@ -429,10 +429,6 @@
   line-height: 30px;
   font-weight: 600;
   color: #162a48;
-<<<<<<< HEAD
-=======
-
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 }
 
 .board-write .title-wrap .util-wrap {
@@ -442,13 +438,6 @@
   float: left;
   font-size: 18px;
   line-height: 24px;
-<<<<<<< HEAD
-
-.board-write .title-wrap .util-wrap>div {
-	float: left;
-	font-size: 16px;
-=======
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 }
 
 .board-write .title-wrap .util-wrap .author {
@@ -463,10 +452,6 @@
 .board-write .title-wrap .util-wrap .score select {
   float: left;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .board-write .title-wrap .util-wrap .date {
 	margin-right: 10px;
 }
@@ -547,11 +532,7 @@
 	border-radius: 5px;
 }
 
-<<<<<<< HEAD
-/* news_detail 占쏙옙 占쏙옙占쏙옙占쏙옙튼 */
-=======
 /* news_detail �� ������ư */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .board-detail .btns input.updateBtn {
   width: 5%;
   padding: 3px 5px;
@@ -585,7 +566,6 @@
 }
 /*占쏙옙占� 占쏙옙占쏙옙占쏙옙튼 */
 .board-detail .btns input.replydelBtn {
-<<<<<<< HEAD
   width: 10%;
   padding: 3px 5px;
   border: 1px solid #ff8b34;
@@ -596,8 +576,6 @@
 }
 /*댓글 삭제버튼 */
 .board-detail .btns input.replydelBtn {
-=======
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 	width: 10%;
 	padding: 3px 5px;
 	border: 1px solid #ff8b34;
@@ -624,7 +602,6 @@
 }
 
 .board-detail .reply-wrap .reply form input.replyupdate:hover {
-<<<<<<< HEAD
 	width: 90px;
 	height: 35px;
 	padding: 1;
@@ -638,12 +615,6 @@
 	transition: all 0.25s ease;
 	background-color: #fff;
 }
-
-=======
-	background-color: #ff8b34;
-	color: #fff;
-}
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 
 /* news_comm_update 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌘로곤옙占쏙옙 占쏙옙튼  */
 .board-detail .reply-wrap .goList input {
@@ -659,7 +630,6 @@
   border-radius: 5px;
   transition: all 0.25s ease;
   background-color: #fff;
-<<<<<<< HEAD
 }
 
 /* news_detail 글목록으로가기 호버버튼  */
@@ -727,7 +697,6 @@
 
 /* news_write/ask  글작성하기 호버버튼  */
 .board-write input.s_write:hover {
-=======
 }
 
 /* news_detail �۸�����ΰ��� ȣ����ư  */
@@ -737,20 +706,16 @@
 }
 /* news_write  ���ۼ��ϱ� ȣ����ư  */
 .board-write input.news_write:hover {
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 /* news_write/ask 글삭제하기 호버버튼  */
 .board-write input.s_del:hover {
 	background-color: #ff0000;
 	color: #fff;
 }
 /* news_write/ask 리스트로가기 호버버튼   */
-.board-write input.s_list:hover {
-=======
 /* news_write �ۻ����ϱ� ȣ����ư  */
 .board-write input.news_del:hover {
 	background-color: #ff0000;
@@ -758,16 +723,11 @@
 }
 /* news_write  ����Ʈ�ΰ��� ȣ����ư   */
 .board-write input.news_list:hover {
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 	background-color: #3da0d7;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 /* news.jsp 글작성 버튼  */
-=======
-/* news.jsp ���ۼ� ��ư  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .news .auth_write button {
 	width: 120px;
 	height: 40px;
@@ -782,21 +742,13 @@
 	transition: all 0.25s ease;
 	background-color: #fff;
 }
-<<<<<<< HEAD
-/* news.jsp 글작성 호버버튼   */
-=======
 /* news.jsp ���ۼ� ȣ����ư   */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .news .auth_write button:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 타이틀  */
-=======
-/* admin.jsp �����Խ��� Ÿ��Ʋ  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .title-wrap .page-title {
 	padding-top: 30px;
 	padding-bottom: 20px;
@@ -805,52 +757,32 @@
 	line-height: 50px;
 	font-weight: 600;
 }
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 테이블 줄간격  */
-=======
-/* admin.jsp ��������Ʈ ���̺� �ٰ���  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .list-wrap .admin-table {
 	padding-bottom: 20px;
 	padding-left: 50px;
 	font-weight: 600;
 	margin: auto;
 }
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 관리  */
-=======
-/* admin.jsp ��������Ʈ ����  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table .admin {
 	width: 20%;
 	padding-bottom: 1%;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 정보  */
-=======
-/* admin.jsp ��������Ʈ ����  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table .now {
 	width: 30%;
 	text-align: left;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 버튼 */
-=======
-/* admin.jsp ��������Ʈ ��ư */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table .abtns {
 	width: 10%;
 	text-align: center;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 테이블 thead */
-=======
-/* admin.jsp ��������Ʈ ���̺� thead */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table thead tr th {
 	box-shadow: 0 0 0px 1px black;
 	background-color: #ff8b34;
@@ -861,11 +793,7 @@
 	font-size: 20px;
 	font-weight: 600;
 }
-<<<<<<< HEAD
 /* admin.jsp  관리리스트 테이블 tbody*/
-=======
-/* admin.jsp  ��������Ʈ ���̺� tbody*/
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table tbody tr td {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -874,31 +802,19 @@
 	font-size: 18px;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 글씨 올렷을때 그림자 효과  */
-=======
-/* admin.jsp ��������Ʈ �۾� �÷����� �׸��� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table tbody tr:hover {
 	box-shadow: 1px 1px 10px #ddd;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 테이블 수평선 효과  */
-=======
-/* admin.jsp ��������Ʈ ���̺� ���� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table tbody td {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 바로가기버튼 */
-=======
-/* admin.jsp ��������Ʈ �ٷΰ����ư */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table input {
 	width: 90px;
 	height: 35px;
@@ -914,21 +830,13 @@
 	background-color: #fff;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리리스트 바로가기버튼 호버 효과 */
-=======
-/* admin.jsp ��������Ʈ �ٷΰ����ư ȣ�� ȿ�� */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .admin-table input:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 타이틀  */
-=======
-/* admin.jsp �����Խ��� Ÿ��Ʋ  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-name {
 	padding-top: 3px;
 	padding-left: 35px;
@@ -936,33 +844,21 @@
 	font-weight: 600;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 테이블 줄간격 및 폰트굵기 */
-=======
-/* admin.jsp �����Խ��� ���̺� �ٰ��� �� ��Ʈ���� */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .list-wrap .board-table {
 	padding-bottom: 30px;
 	padding-left: 50px;
 	font-weight: 600;
 	margin: auto;
 }
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 작성일  */
-=======
-/* admin.jsp �����Խ��� �ۼ���  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table .date {
 	width: 240px;
 	padding: 20px;
 	padding-bottom: 1%;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 작성자 */
-=======
-/* admin.jsp �����Խ��� �ۼ��� */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table .id {
 	width: 30%;
 	padding: 20px;
@@ -970,22 +866,14 @@
 	text-align: left;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 기타 */
-=======
-/* admin.jsp �����Խ��� ��Ÿ */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table .etc {
 	width: 50%;
 	padding: 20px;
 	padding-left: 220px;
 	text-align: left;
 }
-<<<<<<< HEAD
 /* admin.jsp  관리게시판 테이블 tbody*/
-=======
-/* admin.jsp  �����Խ��� ���̺� tbody*/
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table tbody tr td {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -994,30 +882,18 @@
 	font-size: 18px;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 글씨 올렷을때 그림자 효과  */
-=======
-/* admin.jsp �����Խ��� �۾� �÷����� �׸��� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table tbody tr:hover {
 	box-shadow: 1px 1px 10px #ddd;
 }
 
-<<<<<<< HEAD
 /* admin.jsp  관리게시판 테이블 tbody  */
-=======
-/* admin.jsp  �����Խ��� ���̺� tbody  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table tbody tr {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 테이블 thead  */
-=======
-/* admin.jsp �����Խ��� ���̺� thead  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .board-table thead tr {
 	box-shadow: 0 0 0px 1px black;
 	background-color: #ff8b34;
@@ -1029,11 +905,7 @@
 	font-weight: 600;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 바로가기버튼 */
-=======
-/* admin.jsp �����Խ��� �ٷΰ����ư */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .button input {
 	width: 90px;
 	height: 35px;
@@ -1049,21 +921,13 @@
 	background-color: #fff;
 }
 
-<<<<<<< HEAD
 /* admin.jsp 관리게시판 바로가기버튼 호버 효과 */
-=======
-/* admin.jsp �����Խ��� �ٷΰ����ư ȣ�� ȿ�� */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-list .button input:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 타이틀  */
-=======
-/* admin_mem.jsp Ÿ��Ʋ  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .title-wrap .page-title {
 	padding-top: 10px;
 	padding-bottom: 20px;
@@ -1073,50 +937,28 @@
 	font-weight: 600;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 테이블 컬럼 id  */
-=======
-/* admin_mem.jsp ���̺� �÷� id  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table .id {
 	width: 25%;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 테이블 컬럼 name  */
-=======
-/* admin_mem.jsp ���̺� �÷� name  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table .name {
 	width: 25%;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 테이블 컬럼 tel  */
-=======
-/* admin_mem.jsp ���̺� �÷� tel  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table .tel {
 	width: 25%;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 테이블 컬럼 email  */
-=======
-/* admin_mem.jsp ���̺� �÷� email  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table .email {
 	width: 25%;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 테이블 thead  */
-=======
-/* admin_mem.jsp ���̺� thead  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table thead tr th {
-	/* box-shadow: 0 0 1px 0px black;
-	background-color: #ff8b34; */
 	border-bottom: 1px solid #eee;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1126,11 +968,7 @@
 	font-weight: 600;
 }
 
-<<<<<<< HEAD
 /* admin_mem.jsp 테이블 tbody*/
-=======
-/* admin_mem.jsp ���̺� tbody*/
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table tbody tr td {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1139,18 +977,13 @@
 	font-size: 18px;
 }
 
-<<<<<<< HEAD
 /* admin-mem.jsp 관리리스트 테이블 수평선 효과  */
-=======
-/* admin.jsp ��������Ʈ ���̺� ���� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table tbody td {
 	cursor: pointer;
 	border-bottom: 1px solid #eee;
 	transition: all 0.25s ease;
 }
 
-<<<<<<< HEAD
 /* admin-mem.jsp 관리리스트 테이블 수평선 효과  */
 .admin-mem .m-table tbody td {
 	cursor: pointer;
@@ -1159,9 +992,6 @@
 }
 
 /* admin-mem.jsp 관리게시판 버튼  */
-=======
-/* admin.jsp �����Խ��� �۾� �÷����� �׸��� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table tbody input {
 	width: 100px;
 	padding: 3px 5px;
@@ -1170,32 +1000,23 @@
 	transition: all 0.25s ease;
 }
 
-<<<<<<< HEAD
 /* admin-mem.jsp 관리게시판 글씨 올렷을때 그림자 효과  */
 .admin-mem .m-table tbody tr:hover {
 	box-shadow: 1px 1px 10px #ddd;
 }
 
 /* admin-mem.jsp 관리게시판 버튼 올렷을때 그림자 효과  */
-=======
-/* admin.jsp �����Խ��� �۾� �÷����� �׸��� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table tbody input#hmdBtn:hover {
 	background-color: #ff8b34;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 /* admin-mem.jsp 관리게시판 버튼 올렷을때 그림자 효과  */
-=======
-/* admin.jsp �����Խ��� �۾� �÷����� �׸��� ȿ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .admin-mem .m-table tbody input#hmdelBtn:hover {
 	background-color: #ff0000;
 	color: #fff;
 }
 
-<<<<<<< HEAD
 .news .title-wrap .title {
 	float: left;
 	font-size: 30px;
@@ -1205,9 +1026,6 @@
 }
 
 /* 조성현 작업 끝  */
-=======
-/* ������ �۾� ��  */
->>>>>>> 87202aca07fe71e146893bb5c5d1a0265b5e1bca
 .board-write .btn-wrap a.update-done {
 	background-color: #ff8b34;
 	cursor: pointer;
