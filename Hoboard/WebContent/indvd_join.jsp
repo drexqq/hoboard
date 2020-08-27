@@ -42,6 +42,11 @@
 						<input type="text" id="address" name="address" class="textChk address" readonly="readonly" />
 						<input type="text" id="d_Address" name="d_Address" class="textChk address" />
 					</div>
+					<div class=#>
+						<label for="">Hoboard 이용약관</label>
+						<input type="text" id="join_check" class="#" readonly="readonly"/>
+					
+					</div>
 				</form>
 			</div>
 		</div>

@@ -136,6 +136,9 @@
 				<div class="btn-wrap">
 					<button type="button" class="btn btn-lg" id="updateBtn">
 						수정완료</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-lg" id="delBtn" onclick="location.href='admin?adm=adminDel&id=${user.id}'">
+						회원탈퇴</button>
 				</div>
 			</div>
 		</div>
