@@ -276,6 +276,22 @@ public class NewsController extends HttpServlet {
 
 			//resp.sendRedirect("news?work=detail&b_seq"+b_seq);
 		} 
+		else if (work2.equals("update")) {
+			System.out.println("upda");
+			int seq = Integer.parseInt(req.getParameter("seq"));
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+
+			System.out.println("updateAf seq : " + seq);
+			System.out.println("title : " + title);
+			System.out.println("content :" + content);
+
+			boolean isS = dao.news_update(seq, title, content);
+			
+			req.setAttribute("isS", isS);
+			req.setAttribute("seq", seq);
+			resp.sendRedirect("news?work=detail&seq="+seq+"");
+		}
 	
 	}
 }

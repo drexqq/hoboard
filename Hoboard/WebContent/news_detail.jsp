@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<%-- <div><img alt="이미지 없음" src="/upload/"+${dto.news_file}></div> --%>
-				<div><img alt="이미지 없음" src="hoboard/upload/Member.jpg"></div>
+				<!-- <div><img alt="이미지 없음" src="hoboard/upload/Member.jpg"></div> -->
 				<div class="content-wrap"> ${dto.content} </div>
 				<br>
 				<c:if test="${ sessionID eq dto.id }">
@@ -74,12 +74,11 @@
 									<div class="down">${comm.content}</div>
 									<br> <br>
 									<c:if test="${comm.id == sessionScope.sessionID }">
-										<div class="btns">
-										<button class="updateBtn"
+										<div class="util-wrap">
+										<%-- <a class="btn"
 											onclick="window.open('news?work=c_update&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}&content=${comm.content}'
-											,'댓글 수정하기','width=700, height=500, left=600, top=400, location=no,status=no,scrollbars=no');">댓글 수정</button>
-										<input type="button" class="replydelBtn" name="delBtn" value="댓글 삭제"
-											onclick="location.href='news?work=c_del&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}'">
+											,'댓글 수정하기','width=700, height=500, left=600, top=400, location=no,status=no,scrollbars=no');">댓글 수정</a> --%>
+										<a class="btn" onclick="location.href='news?work=c_del&c_seq=${comm.c_seq}&b_seq=${comm.b_seq}'">삭제</a>
 										</div>
 									</c:if>
 								</div>

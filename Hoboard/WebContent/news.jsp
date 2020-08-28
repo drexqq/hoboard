@@ -39,11 +39,11 @@
 						</c:when>
 						<c:otherwise>
 							<br>
-							<div class="auth_write" align="left">
+							<%-- <div class="auth_write" align="left">
 								<c:if test="${ auth eq 0 }">
 									<button onclick="location.href='news_write.jsp'">글쓰기</button>
 								</c:if>
-							</div>
+							</div> --%>
 							<br> 
 							<c:forEach items="${ list }" var="list" varStatus="status"
 								begin="0" end="4">

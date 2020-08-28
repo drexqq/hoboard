@@ -50,6 +50,11 @@
 									<div class="date"><i class="ri-calendar-line"></i>${list.date}</div>
 								</div>
 								<div class="down">${list.content}</div>
+								<c:if test="${ sessionID eq list.id }">
+								<div class="util-wrap">
+									<a class="btn" href="reviewComment?key=deletecomment&seq=${ list.seq }&boardnum=${ param.d }">삭제</a>
+								</div>
+								</c:if>
 							</div>
 						</c:forEach>
 					</div>

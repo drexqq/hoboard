@@ -109,7 +109,7 @@ if(list.size() == 0){
 </table>
 
 <br><br>
-<a href="news_write.jsp">글쓰기</a>
+<!-- <a href="news_write.jsp">글쓰기</a> -->
 <br><br>
 
 <%

@@ -161,7 +161,7 @@ public class Reserve_Dao {
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
 			if (choice.equals("name"))
-				sqlWord = " AND " + name + " LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%" + searchWord.trim()
+				sqlWord = " AND " + name + " IN " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%" + searchWord.trim()
 						+ "%' )";
 			else if (choice.equals("cate"))
 				sqlWord = " AND CATE LIKE '%" + searchWord.trim() + "%' ";
@@ -171,6 +171,7 @@ public class Reserve_Dao {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		int count = 0;
+		System.out.println(query);
 		try {
 			conn = DBConnection.getConnection();
 			psmt = conn.prepareStatement(query);
@@ -200,7 +201,7 @@ public class Reserve_Dao {
 		String sqlWord = "";
 		if (choice != null || searchWord != null) {
 			if (choice.equals("name"))
-				sqlWord = " AND " + name + " LIKE " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%" + searchWord.trim()
+				sqlWord = " AND " + name + " IN " + "( SELECT ID FROM MEMBER WHERE NAME LIKE '%" + searchWord.trim()
 						+ "%' )";
 			else if (choice.equals("cate"))
 				sqlWord = " AND CATE LIKE '%" + searchWord.trim() + "%' ";

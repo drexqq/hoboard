@@ -130,7 +130,7 @@ public class Ask_Dao {
 		else sqlWord += " WHERE ID = '" + id + "' ";
 		System.out.println(sql+sqlWord);
 		sql += sqlWord;
-
+		System.out.println(sql);
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -153,14 +153,14 @@ public class Ask_Dao {
 		return len;
 	}
 
-	public List<Ask_Dto> getAskPagingList(String choice, String searchWord, int limit, int page) {
+	public List<Ask_Dto> getAskPagingList(String choice, String searchWord, int limit, int page, String id) {
 		/*
 		 * 1. row 번호 2. 검색 3. 정렬 4. 범위설정 1~10까지
 		 */
 		String sql = " SELECT SEQ, AUTH, ID, TITLE, CONTENT, COMM, WDATE " + " FROM ";
 
 		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY SEQ DESC) AS RNUM, " + " SEQ, AUTH, ID, TITLE, CONTENT, COMM, WDATE "
-				+ " FROM ASK_TABLE ";
+				+ " FROM ASK_TABLE WHERE ID = '"+id+"' ";
 
 		String sqlWord = "";
 		if (choice.equals("title")) {

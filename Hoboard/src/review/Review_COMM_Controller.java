@@ -63,11 +63,11 @@ public class Review_COMM_Controller extends HttpServlet {
 
 			if (delete) {
 				System.out.println("덧글 삭제 성공");
-				resp.sendRedirect("review?key=detail&seq=" + boardnum);
+				resp.sendRedirect("review?d=" + boardnum);
 
 			} else {
 				System.out.println("덧글 삭제 실패");
-				resp.sendRedirect("review?key=detail&seq=" + boardnum);
+				resp.sendRedirect("review?d=" + boardnum);
 			}
 		}
 	}

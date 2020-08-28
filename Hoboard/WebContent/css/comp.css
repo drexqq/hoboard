@@ -220,6 +220,7 @@
 	font-size: 22px;
 	line-height: 24px;
 	color: #1a2e3b;
+	    white-space: break-spaces; 	
 }
 
 .board-detail .content-wrap:before {
@@ -259,7 +260,6 @@
 }
 
 .board-detail .reply-wrap {
-	
 }
 
 .board-detail .reply-wrap .reply-title {
@@ -377,6 +377,21 @@
 	line-height: 24px;
 }
 
+.board-detail .reply-wrap .reply-items .item .util-wrap {
+	    position: absolute;
+    right: 15px;
+    top: 30px;
+}
+.board-detail .reply-wrap .reply-items .item .util-wrap .btn {
+	border: 1px solid #ff8b34;
+    padding: 3px 10px;
+    line-height: 18px;
+    transition: all 0.25s ease;
+}
+.board-detail .reply-wrap .reply-items .item .util-wrap .btn:hover {
+	color: #fff;
+	background-color: #ff8b34;
+}
 /* board-write */
 .board-write {
 	padding-top: 80px;
@@ -747,7 +762,10 @@
 	background-color: #ff8b34;
 	color: #fff;
 }
-
+.admin-list table {
+	width: 100%;
+	table-layout: fixed;
+}
 /* admin.jsp 관리게시판 타이틀  */
 .admin-list .title-wrap .page-title {
 	padding-top: 30px;

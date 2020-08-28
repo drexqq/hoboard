@@ -48,8 +48,8 @@
 											<td class="cont">${ list.content }</td>
 											<td class="date">${ list.wdate }</td>
 											<td class="yn">
-												<c:if test="${ list.comm eq 1 }">답변대기</c:if>
-												<c:if test="${ list.comm eq 0 }"><a class="done" href="ask?one=detail&seq=${ list.seq }">답변완료</a></c:if>
+												<c:if test="${ list.comm eq 0 }">답변대기</c:if>
+												<c:if test="${ list.comm eq 1 }"><a class="done" href="ask?one=detail&seq=${ list.seq }">답변완료</a></c:if>
 											</td>
 										</tr>
 									</c:forEach>

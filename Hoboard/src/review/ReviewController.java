@@ -25,6 +25,7 @@ public class ReviewController extends HttpServlet {
 	Reserve_Dao reserveDao = Reserve_Dao.getInstance();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		String d = req.getParameter("d");
 		JSONObject jsonData = new JSONObject();
 		
@@ -56,6 +57,8 @@ public class ReviewController extends HttpServlet {
 				req.setAttribute("choice", c);
 				req.setAttribute("searchWord", sW);
 			}
+			System.out.println(len);
+			System.out.println(list.toString());
 			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 			req.setAttribute("page", page - 1); // 총 페이지수
 			req.setAttribute("reviewlist", list); // 실제 데이터
@@ -70,6 +73,7 @@ public class ReviewController extends HttpServlet {
 			
 			// getCommentList
 			List<Review_COMM_Dto> commList = commDao.getComments(seq);
+			System.out.println(commList.toString());
 			req.setAttribute("seq", seq);
 			req.setAttribute("reviewDto", dto);
 			req.setAttribute("commList", commList);

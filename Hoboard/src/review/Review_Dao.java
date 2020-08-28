@@ -379,7 +379,6 @@ public class Review_Dao {
 
 		LinkedHashMap<Review_Dto, String> map = new LinkedHashMap<Review_Dto, String>();
 		List<LinkedHashMap<Review_Dto, String>> list = new ArrayList<LinkedHashMap<Review_Dto, String>>();
-
 		try {
 			conn = DBConnection.getConnection();
 

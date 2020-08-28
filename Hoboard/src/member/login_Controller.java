@@ -21,6 +21,7 @@ public class login_Controller extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		String context = req.getContextPath();
 		resp.setContentType("text/html; charset=UTF-8");
@@ -33,7 +34,6 @@ public class login_Controller extends HttpServlet {
 		String name = null;
 		mdto = mdao.getUser(id);
 		name = mdao.login(id, pw);
-
 		if (name != null) {
 			session.setAttribute("login", 1);
 			session.setAttribute("sessionID", mdto.getId());

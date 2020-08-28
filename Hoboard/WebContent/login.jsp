@@ -23,7 +23,7 @@
       </div>
       <div class="util-wrap clearfix">
         <a class="join" href="join.jsp">회원가입</a>
-        <a class="find" href="searchIDPW.jsp">아이디 / 비밀번호 찾기</a>
+        <!-- <a class="find" href="searchIDPW.jsp">아이디 / 비밀번호 찾기</a> -->
       </div>
     </form>
   </div>

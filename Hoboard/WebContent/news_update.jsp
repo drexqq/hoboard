@@ -6,9 +6,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<form action="news?work=update" method="get">
-					<input type="hidden" name="work" value="updateAf"> <input
-						type="hidden" name="seq" value="${ dto.getNews_seq() }>">
+				<form action="news?work2=update" method="post">
+					<input type="hidden" name="seq" value="${ dto.getNews_seq() }">
 					<div class="title-wrap">
 						<h1>건강 정보 수정 페이지</h1>
 						<div class="title">

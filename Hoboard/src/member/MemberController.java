@@ -21,11 +21,9 @@ public class MemberController extends HttpServlet {
 		Member_Dao dao = Member_Dao.getInstance();
 		JSONObject jsonData = new JSONObject();
 		if("id".equals(chk)) {
-			System.out.println("id chk");
 			jsonData.put("chk", dao.chkId(req.getParameter("check_kor")));
 		}
 		else if ("email".equals(chk)) {
-			System.out.println("email chk");
 			jsonData.put("chk", dao.chkEmail(req.getParameter("check_kor")));
 		}
 		resp.setContentType("application/x-json; charset=UTF-8");
@@ -50,16 +48,13 @@ public class MemberController extends HttpServlet {
 									req.getParameter("address"),
 									req.getParameter("d_Address")
 									);
-		System.out.println(dto.toString());
 		dao.addMember(dto);
 		if (auth == 1) {
-			System.out.println("개인회원가입하기 member controller");
 			INDVD_Member_Dao i_dao = INDVD_Member_Dao.getInstance();
 			
 			done = i_dao.addINDVD_Member(req.getParameter("id"));
 		}
 		else if (auth == 2) {
-			System.out.println("병원회원가입하기 member controller");
 			BUSI_Member_Dao b_dao = BUSI_Member_Dao.getInstance();
 			BUSI_Member_Dto b_dto = new BUSI_Member_Dto(
 											req.getParameter("id"),

@@ -10,10 +10,9 @@
               </div>
               <div class="menu-wrap">
                 <ul class="menu">
-                  <li class="menu-item"><a href="">sunghee's github</a></li>
-                  <li class="menu-item"><a href="">seyoung's github</a></li>
-                  <li class="menu-item"><a href="">sunghyun's github</a></li>
-                  <li class="menu-item"><a href="">ojae's github</a></li>
+                  <li class="menu-item"><a href="https://github.com/drexqq/">sunghee's github</a></li>
+                  <li class="menu-item"><a href="https://github.com/xe0e">seyoung's github</a></li>
+                  <li class="menu-item"><a href="https://github.com/syacooms">sunghyun's github</a></li>
                 </ul>
               </div>
             </div>

@@ -1,3 +1,16 @@
+/* 임시 */
+.fc .fc-daygrid-event-harness {
+	padding-bottom: 15px !important;
+}
+.fc .fc-daygrid-event-harness:last-child {
+	padding-bottom: 0px !important;
+}
+.fc .fc-daygrid-event {
+	align-items: baseline !important;
+}
+.fc-daygrid-dot-event .fc-event-title {
+	white-space: normal !important;
+}
 /* body */
 body {
   background-color: rgb(250, 250, 250);

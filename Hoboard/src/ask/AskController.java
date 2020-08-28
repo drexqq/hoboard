@@ -43,18 +43,19 @@ public class AskController extends HttpServlet {
 				page = page + 1; // -> 2
 			// 처음 들어왔을때
 			if (sW == null && c == null && pageNumber == 0)
-				list = dao.getAskPagingList("", "", limit, pageNumber);
+				list = dao.getAskPagingList("", "", limit, pageNumber, (String) session.getAttribute("sessionID"));
 			// 페이지만 바뀔때
 			else if (sW == null && c == null && req.getParameter("page") != null)
-				list = dao.getAskPagingList("", "", limit, pageNumber);
+				list = dao.getAskPagingList("", "", limit, pageNumber, (String) session.getAttribute("sessionID"));
 			// 검색후 페이지 바뀔때
 			else {
 				if (sW == null)
 					sW = "";
-				list = dao.getAskPagingList(c, sW, limit, pageNumber);
+				list = dao.getAskPagingList(c, sW, limit, pageNumber, (String) session.getAttribute("sessionID"));
 				req.setAttribute("choice", c);
 				req.setAttribute("searchWord", sW);
 			}
+			System.out.println("len = " + len);
 			req.setAttribute("len", len);
 			req.setAttribute("pageNumber", pageNumber); // 현재 페이지 넘버
 			req.setAttribute("page", page - 1); // 총 페이지수
@@ -134,7 +135,6 @@ public class AskController extends HttpServlet {
 				//String content = URLEncoder.encode(req.getParameter("content"), "utf-8");
 				System.out.println("title ="+title+", content= "+content);
 				
-				id="admin";
 				dao = Ask_Dao.getInstance();
 				Ask_Dto dto = new Ask_Dto(id,title,content);
 				boolean b = dao.ask_write(dto);

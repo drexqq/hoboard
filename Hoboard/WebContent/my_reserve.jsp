@@ -192,7 +192,7 @@ pageEncoding="UTF-8"%> <%@ include file="module/header.jsp"%>
             }
             var eventData = {
               id: v.reserve_seq,
-              title: k.substring(0, k.length - 13),
+              title: k.substring(0, k.length - 13)+", "+v.cate,
               className: eventStatus(v.status),
               start: v.reserve_time,
               end: v.reserve_time,
