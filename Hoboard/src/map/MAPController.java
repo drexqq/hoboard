@@ -21,9 +21,6 @@ public class MAPController extends HttpServlet {
 		
 		
 		List<String[]> list = m_dao.getBusiMember();
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(java.util.Arrays.toString(list.get(i)));
-		}
 		req.setAttribute("busiMembers", m_dao.getBusiMember());
 		UtilEx.forward("map.jsp", req, resp);
 	}

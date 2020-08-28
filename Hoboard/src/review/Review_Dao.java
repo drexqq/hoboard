@@ -369,7 +369,6 @@ public class Review_Dao {
 		sql += " ORDER BY REVIEW_SEQ DESC) ";
 		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
 		
-		System.out.println(sql);
 		int start, end;
 		start = 1 + limit * page; // 시작 글의 번호
 		end = limit + limit * page; // 끝 글의 번호
